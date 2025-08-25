@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Slot : MonoBehaviour
 {
@@ -10,6 +10,10 @@ public class Slot : MonoBehaviour
     public GameObject QuantityHolder;
     public TextMeshProUGUI Quantity;
 
+    public void SetImage(Sprite sprite)
+    {
+        Sprite.sprite = sprite;
+    }
     public void SetText(string Quantity)
     {
         QuantityHolder.SetActive(true);

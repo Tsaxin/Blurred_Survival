@@ -57,12 +57,9 @@ public class InventoryUIManager : MonoBehaviour
             GameObject slotGO = Instantiate(slotPrefab, slotParent);
             Debug.Log("Loop called");
 
-            // Set icon
-            // Image icon = slotGO.GetComponent<Image>();
-            // icon.sprite = item.data.itemIcon;
-
             // Set quantity display
             Slot slotComponent = slotGO.GetComponent<Slot>();
+            slotComponent.SetImage(item.data.itemIcon);
             if (item.quantity > 1)
             {
                 slotComponent.SetText(item.quantity.ToString());
