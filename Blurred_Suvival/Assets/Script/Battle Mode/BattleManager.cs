@@ -13,6 +13,11 @@ public class BattleManager : MonoBehaviour
         CalculateTotalXP();
     }
 
+    void OnDisable()
+    {
+        BloodPool.Instance.ClearBloodSplashes();
+    }
+
     public void CalculateTotalXP()
     {
         totalBattleXP = 0;

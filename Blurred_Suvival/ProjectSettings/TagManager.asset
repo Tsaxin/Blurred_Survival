@@ -56,6 +56,9 @@ TagManager:
   - name: Tiles
     uniqueID: 4109780995
     locked: 0
+  - name: Blood
+    uniqueID: 42990759
+    locked: 0
   - name: Shadow
     uniqueID: 3829176269
     locked: 0

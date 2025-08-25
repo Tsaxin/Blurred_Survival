@@ -181,6 +181,7 @@ public class Exploder : ZombieAIBase
         if (characterStats != null)
         {
             Debug.Log($"{name} dies in explosion.");
+            BloodPool.Instance.SpawnExplosion(this.transform);
             characterStats.Kill();
         }
         else

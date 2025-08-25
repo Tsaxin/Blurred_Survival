@@ -4,7 +4,15 @@ using System.Collections.Generic;
 public class BloodPool : MonoBehaviour
 {
     public static BloodPool Instance { get; private set; }
-    public List<GameObject> pooledObjects;
+
+    [Header("Pools")]
+    public List<GameObject> BloodPoolObjects;        // Blood particle effects
+    public List<GameObject> HugePoolObjects;         // Big particle effects
+    public List<GameObject> ExplosionPoolObjects;    // Explosion effects
+    public List<GameObject> BloodSplashObjects;      // <-- New: splatter decals
+
+    [Header("Offsets")]
+    public float MaxYOffset = 1f, MinYOffset = 0f;
 
     private void Awake()
     {
@@ -18,54 +26,107 @@ public class BloodPool : MonoBehaviour
     }
 
     /// <summary>
-    /// Gets the next available pooled object (or null if all are in use).
+    /// Internal helper: fetch an inactive object from a given pool.
     /// </summary>
-    private GameObject GetPooledObject()
+    private GameObject GetFromPool(List<GameObject> pool)
     {
-        foreach (GameObject obj in pooledObjects)
+        foreach (GameObject obj in pool)
         {
             if (!obj.activeInHierarchy)
-            {
                 return obj;
-            }
         }
-        return null; // Pool exhausted
+
+        // If all are active, recycle the first one
+        GameObject recycled = pool[0];
+        recycled.SetActive(false);
+        return recycled;
     }
 
     /// <summary>
-    /// Spawn blood effect at a target transform's position.
+    /// Core spawn logic for particle/FX objects.
     /// </summary>
-    public float MaxYOffset = 1f, MinYOffset = 0f;
-    public GameObject SpawnBlood(Transform target)
+    private GameObject SpawnFromPoolInternal(List<GameObject> pool, Transform target)
     {
-        GameObject blood = GetPooledObject();
-        if (blood != null)
+        GameObject effect = GetFromPool(pool);
+        if (effect != null)
         {
-            // Find sprite renderer in target's children
+            // Match sorting order just above target
             SpriteRenderer targetRenderer = target.GetComponentInChildren<SpriteRenderer>();
             if (targetRenderer != null)
             {
-                // Get blood's ParticleSystem renderer
-                ParticleSystemRenderer psr = blood.GetComponent<ParticleSystemRenderer>();
+                ParticleSystemRenderer psr = effect.GetComponent<ParticleSystemRenderer>();
                 if (psr != null)
-                {
                     psr.sortingOrder = targetRenderer.sortingOrder + 1;
-                }
             }
 
-            // Apply position with Y offset
-            Vector3 newPos = target.position;
-            // Bias factor: higher exponent = stronger bias toward MaxYOffset
-            float t = Random.value;              // uniform 0–1
-            t = Mathf.Pow(t, 0.3f);              // skew toward 1
+            // Randomized Y offset
+            float t = Mathf.Pow(Random.value, 0.3f);
             float offset = Mathf.Lerp(MinYOffset, MaxYOffset, t);
 
+            Vector3 newPos = target.position;
             newPos.y += offset;
 
-            blood.transform.position = newPos;
-
-            blood.SetActive(true);
+            effect.transform.position = newPos;
+            effect.SetActive(true);
         }
-        return blood;
+        return effect;
     }
+
+    /// <summary>
+    /// Core spawn logic for splatter decals.
+    /// </summary>
+    private GameObject SpawnSplashInternal(List<GameObject> pool, Transform target)
+    {
+        GameObject splash = GetFromPool(pool);
+        if (splash != null)
+        {
+            Vector3 newPos = target.position;
+            newPos.z = 0; // Make sure decal sits flat on world layer
+            splash.transform.position = newPos;
+
+            // Slight random scale
+            float scale = Random.Range(0.8f, 1.2f);
+            splash.transform.localScale = new Vector3(scale, scale, 1f);
+
+            splash.SetActive(true);
+        }
+        return splash;
+    }
+
+    // --- Public wrappers (only expose target parameter) ---
+    public GameObject SpawnBlood(Transform target)
+    {
+        // Spawn blood particle effect
+        GameObject fx = SpawnFromPoolInternal(BloodPoolObjects, target);
+
+        // Also spawn splatter decal
+        SpawnSplashInternal(BloodSplashObjects, target);
+
+        return fx;
+    }
+
+    public GameObject SpawnHuge(Transform target)
+    {
+        // Spawn blood particle effect
+        GameObject fx = SpawnFromPoolInternal(HugePoolObjects, target);
+
+        // Also spawn splatter decal
+        SpawnSplashInternal(BloodSplashObjects, target);
+
+        return fx;
+    }
+
+    public GameObject SpawnExplosion(Transform target) => SpawnFromPoolInternal(ExplosionPoolObjects, target);
+
+    public void ClearBloodSplashes()
+    {
+        foreach (GameObject blood in BloodSplashObjects)
+        {
+            if (blood.activeInHierarchy)
+            {
+                blood.SetActive(false);
+            }
+        }
+    }
+
 }

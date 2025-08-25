@@ -34,8 +34,7 @@ public class CharacterController : MonoBehaviour
             Debug.LogWarning("⚠️ No WeaponType found on character.");
     }
 
-
-    private void OnMouseDown()
+    public void OnClicked()
     {
         if (UIBlocker.IsPointerOverUI())
             return; // Don't process clicks if the pointer is over UI
@@ -93,14 +92,35 @@ public class CharacterController : MonoBehaviour
                 return;
             }
 
-            TileData tile = clicked.GetComponent<TileData>();
-            if (tile != null)
-                TryMoveToTile(tile);
+            HandleTileClicked(clicked);
         }
         else
         {
             Deselect();
         }
+    }
+
+    void HandleTileClicked(GameObject clicked)
+    {
+        TileData tile = clicked.GetComponent<TileData>();
+        if (tile != null)
+        {
+            // Check if tile has a character on it
+            if (tile.IsOccupied)
+            {
+                CharacterController character = tile.occupant.GetComponent<CharacterController>();
+                if (character != null && character.CompareTag("Player"))
+                {
+                    // Select this character if it's a player
+                    character.OnSelect();
+                    return;
+                }
+            }
+
+            // Otherwise, try moving current selected character
+            TryMoveToTile(tile);
+        }
+
     }
 
     private void HandleRangedAction()
@@ -120,6 +140,7 @@ public class CharacterController : MonoBehaviour
             // 📌 Check if clicked on an enemy
             if (clicked.CompareTag("Enemy"))
             {
+                clicked = GetEnemyObject(clicked);
                 CharacterStats enemyStats = clicked.GetComponent<CharacterStats>();
                 if (enemyStats != null)
                 {
@@ -153,12 +174,7 @@ public class CharacterController : MonoBehaviour
                 }
             }
 
-            // 📦 Check if clicked on a tile (move to it)
-            TileData tile = clicked.GetComponent<TileData>();
-            if (tile != null)
-            {
-                TryMoveToTile(tile);
-            }
+             HandleTileClicked(clicked);
         }
         else
         {
@@ -438,7 +454,7 @@ public class CharacterController : MonoBehaviour
     {
         if (hasMoved || isMoving) return;
 
-        if (!enemyObject.TryGetComponent(out ZombieAIBase enemyAI)) return;
+        ZombieAIBase enemyAI= GetEnemyObject(enemyObject).GetComponent<ZombieAIBase>();
 
         if (currentTileData == null || enemyAI.currentTileData == null)
             return;
@@ -502,6 +518,17 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    GameObject GetEnemyObject(GameObject Enemy)
+    {
+        if (Enemy.GetComponent<ZombieAIBase>() != null)
+        {
+            return Enemy;
+        }
+        else if (Enemy.transform.parent.GetComponent<ZombieAIBase>() != null)
+            return Enemy.transform.parent.gameObject;
+            
+        return null;
+    }
 
     IEnumerator MoveAndAttack(TileData targetTile, GameObject enemy)
     {
@@ -567,10 +594,12 @@ public class CharacterController : MonoBehaviour
         }
 
         Animator anim = GetComponent<Animator>();
-        if (GetComponent<GearEquipper>().equippedWeapon.type==WeaponData.Type.Range) {
+        if (GetComponent<GearEquipper>().equippedWeapon.type == WeaponData.Type.Range)
+        {
             anim.SetTrigger("Range");
         }
-        else {
+        else
+        {
             anim.SetTrigger("Melee");
         }
     }
@@ -657,19 +686,19 @@ public class CharacterController : MonoBehaviour
     public GameObject ButtonHolder;
     void SetButtonStatus(bool value)
     {
-        ButtonHolder.SetActive(value);
+        ButtonHolder.GetComponent<Animator>().SetBool("Show",value);
     }
     #endregion
 
     #region WeaponSprite
-    public SpriteRenderer Melee, Range,RangeFlash;
+    public SpriteRenderer Melee, Range, RangeFlash;
     public TrailRenderer TR;
     public void SetWeaponSL(int sortingOrder)
     {
         Melee.sortingOrder = sortingOrder + 2;
         TR.sortingOrder = sortingOrder + 1;
         Range.sortingOrder = sortingOrder + 2;
-        RangeFlash.sortingOrder=sortingOrder + 2;
+        RangeFlash.sortingOrder = sortingOrder + 2;
     }
 
     public void SetRangeWeapon(Sprite sprite)

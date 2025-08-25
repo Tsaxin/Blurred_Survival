@@ -107,12 +107,16 @@ public class CharacterStats : MonoBehaviour
             }
         }
 
+        bool isCrit = false; // 🔴 track crit state
+
         // 🌟 Handle crits
         if (attacker != null && attacker.CriticalChance > 0)
         {
             int critRoll = Random.Range(0, 100);
             if (critRoll < attacker.CriticalChance)
             {
+                isCrit = true; // 🔴 mark as crit
+
                 if (isZombie)
                 {
                     // Headshot zombie → insta-kill
@@ -126,8 +130,8 @@ public class CharacterStats : MonoBehaviour
                         UpdateHealthBarVisibility();
                     }
 
-                    // 🔴 Spawn blood on zombie headshot death
-                    BloodPool.Instance.SpawnBlood(this.transform);
+                    // 🔴 Huge blood for zombie headshot
+                    BloodPool.Instance.SpawnHuge(this.transform);
                     return;
                 }
                 else
@@ -155,17 +159,26 @@ public class CharacterStats : MonoBehaviour
         {
             _isDead = true;
 
-            // 🔴 Spawn blood on normal death
-            BloodPool.Instance.SpawnBlood(this.transform);
+            // 🔴 Huge blood on death
+            BloodPool.Instance.SpawnHuge(this.transform);
 
             Die(attacker);
         }
         else
         {
-            // 🔴 Optional: spawn blood on hit (not just on death)
-            BloodPool.Instance.SpawnBlood(this.transform);
+            if (isCrit)
+            {
+                // 🔴 Huge blood on crit
+                BloodPool.Instance.SpawnHuge(this.transform);
+            }
+            else
+            {
+                // Normal blood on regular hit
+                BloodPool.Instance.SpawnBlood(this.transform);
+            }
         }
     }
+
 
     public void Kill(CharacterStats killer = null)
     {
