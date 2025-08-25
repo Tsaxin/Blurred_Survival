@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - Item
+  - Region
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - BattleGround
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Map
+    uniqueID: 2928187565
+    locked: 0
+  - name: Player
+    uniqueID: 4233444069
+    locked: 0
+  - name: Interaction
+    uniqueID: 4125702455
+    locked: 0
+  - name: Tiles
+    uniqueID: 4109780995
+    locked: 0
+  - name: Shadow
+    uniqueID: 3829176269
+    locked: 0
+  - name: Character
+    uniqueID: 4016224737
+    locked: 0
+  - name: UI
+    uniqueID: 3006151569
+    locked: 0
