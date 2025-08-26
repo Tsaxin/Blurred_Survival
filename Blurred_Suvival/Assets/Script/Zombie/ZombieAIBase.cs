@@ -63,7 +63,7 @@ public abstract class ZombieAIBase : MonoBehaviour
 
         transform.position = end;
         SortingOrder(targetTile.gameObject);
-        
+
         currentTileData = targetTile;
         targetTile.AssignOccupant(gameObject);
 
@@ -89,8 +89,6 @@ public abstract class ZombieAIBase : MonoBehaviour
         if (sr != null)
             sr.sortingOrder = sortingOrder;
     }
-
-
     public void ScaleCharacter(TileData targetTile)
     {
         int ResultScale = TileManager.Instance.GetXDirection(currentTileData.transform, targetTile.transform);
@@ -100,6 +98,18 @@ public abstract class ZombieAIBase : MonoBehaviour
         if (childCanvas != null)
         {
             childCanvas.transform.localScale = new Vector3(-1 * ResultScale * Mathf.Abs(childCanvas.transform.localScale.x), childCanvas.transform.localScale.y, childCanvas.transform.localScale.z); // example scale
+        }
+    }
+    
+    public void ScaleCharacter(int Scale)   //minus value means facing right
+    {
+        Scale = -1 * Scale; 
+        transform.localScale = new Vector3(-1 * Scale, transform.localScale.y, transform.localScale.z);
+
+        Canvas childCanvas = GetComponentInChildren<Canvas>();
+        if (childCanvas != null)
+        {
+            childCanvas.transform.localScale = new Vector3(-1 * Scale * Mathf.Abs(childCanvas.transform.localScale.x), childCanvas.transform.localScale.y, childCanvas.transform.localScale.z); // example scale
         }
     }
 }

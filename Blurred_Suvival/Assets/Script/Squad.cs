@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.TextCore.Text;
-using System.Linq;
 
 public class Squad : MonoBehaviour
 {
@@ -16,14 +15,46 @@ public class Squad : MonoBehaviour
     public bool SelfEncounter = false;
 
     public GameObject SaveFormationButton;
+    public static Squad Instance;
+
+    [Header("Squad Attribute")]
+    public float RetreatChance = 25f;
+    public float AmbushChance = 25;
+    public float EncounterChance = 50f;
 
     private void OnEnable()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
+        CheckCharacterListAnamoly();
+
         region.loadBattleGround();
         PlaceCharactersInMatrix();
         if (!SelfEncounter)
         {
-            region.TrySpawnEnemies();
+            float roll = Random.Range(0f, 100f);
+
+            if (roll <= AmbushChance)
+            {
+                Debug.Log("Ambush Here");
+                turnManager.EncounterMode = 0;
+                region.TrySpawnAmbushEnemies();
+            }
+            else if (roll <= (AmbushChance + EncounterChance))
+            {
+                Debug.Log("Encounter here");
+                turnManager.EncounterMode = 1;
+                region.TrySpawnEnemies();
+            }
+            else
+            {
+                Debug.Log("Preemtive strike");
+                turnManager.EncounterMode = 2;
+                region.TrySpawnPreemtiveEnemies();
+            }
         }
         else
         {
@@ -46,6 +77,12 @@ public class Squad : MonoBehaviour
         SelfEncounter = false;
     }
 
+    void CheckCharacterListAnamoly()
+    {
+        Characters.RemoveAll(character => character == null);
+    }
+
+
     void PlaceCharactersInMatrix()
     {
         if (tileManager == null)
@@ -62,7 +99,7 @@ public class Squad : MonoBehaviour
         // 3x2 matrix: rows 0–3, cols 0–1
         for (int row = 0; row <= 3; row++)
         {
-            for (int col = 0; col <= 1; col++)
+            for (int col = 0; col <= 3; col++)
             {
                 Transform tile = tileManager.tiles[row, col];
                 if (tile != null)
@@ -105,7 +142,7 @@ public class Squad : MonoBehaviour
         {
             GameObject character = Characters[i];
             if (character == null) continue;
-
+            
             var (tile, row) = validTiles[i];
 
             // Compute sorting order with spacing
@@ -121,11 +158,12 @@ public class Squad : MonoBehaviour
             if (controller != null)
             {
                 controller.SetWeaponSL(sortingOrder);
-                controller.tileManager = tileManager;
                 controller.currentTileData = tile.GetComponent<TileData>();
                 controller.turnManager = turnManager;
+                controller.ResetScale();
             }
 
+            character.GetComponent<TurnIndicator>().SetIndicator(false);
             character.SetActive(true);
 
             // Assign tile occupant
@@ -152,8 +190,7 @@ public class Squad : MonoBehaviour
 
         if (turnManager != null)
         {
-            turnManager.InitializeCharacters();
-            turnManager.BeginPlayerTurn();
+            turnManager.StartBattle();
         }
     }
 
@@ -196,4 +233,54 @@ public class Squad : MonoBehaviour
             Debug.Log("All players are dead! Game Over panel activated.");
         }
     }
+
+    public void RemoveCharacter(GameObject character)
+    {
+        //Also removing from turnmanager
+        TurnManager.Instance.RemovePlayer(character.GetComponent<CharacterController>());
+        if (Characters.Contains(character))
+        {
+            Characters.Remove(character);
+            Debug.Log($"🗑 Removed {character.name} from squad list.");
+        }
+    }
+
+    public float GetRetreatChance()
+    {
+        float RetreatChance = this.RetreatChance / Characters.Count;
+
+        return RetreatChance;
+    }
+
+    public bool RetreatSuccess;
+    public void Retreat()
+    {
+        RetreatSuccess = false;
+        float retreatChance = GetRetreatChance(); // e.g., 25 means 25%
+
+        // Roll a random number between 0 and 100
+        float roll = Random.Range(0f, 100f);
+
+        if (roll < retreatChance)
+        {
+            Debug.Log("✅ Retreat successful!");
+            RetreatSuccess = true;
+        }
+        else
+        {
+            RetreatSuccess = false;
+        }
+    }
+
+    public void LoadRetreatAnimationForAll(GameObject TriggerObj)
+    {
+        foreach (GameObject obj in Characters)
+        {
+            if (obj != TriggerObj)
+            {
+                StartCoroutine(obj.GetComponent<CharacterController>().OnRetreatAll());
+            }
+        }
+    }
+
 }

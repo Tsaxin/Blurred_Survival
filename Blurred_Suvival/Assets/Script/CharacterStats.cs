@@ -266,6 +266,8 @@ public class CharacterStats : MonoBehaviour
             if (squad != null)
             {
                 squad.CheckIfAllPlayersDead();
+
+                squad.RemoveCharacter(this.gameObject);
             }
 
             // Notify TurnManager that this player is finished with their move

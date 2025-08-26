@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class CharacterController : MonoBehaviour
 {
-    public TileManager tileManager;
     public TileData currentTileData;
     public SpriteRenderer sr;
     public Color originalColor;
@@ -32,6 +31,11 @@ public class CharacterController : MonoBehaviour
         weaponEquipper = GetComponent<GearEquipper>();
         if (weaponEquipper == null)
             Debug.LogWarning("⚠️ No WeaponType found on character.");
+    }
+
+    void OnDisable()
+    {
+        ResetEverythingOnRetreat();
     }
 
     public void OnClicked()
@@ -174,7 +178,7 @@ public class CharacterController : MonoBehaviour
                 }
             }
 
-             HandleTileClicked(clicked);
+            HandleTileClicked(clicked);
         }
         else
         {
@@ -232,7 +236,7 @@ public class CharacterController : MonoBehaviour
         if (selectedCharacter == this)
         {
             SetSelectedVisual(false);
-            ClearHighlightedTiles();
+            TileManager.Instance.ClearHighlightedTiles();
             selectedCharacter = null;
             SetButtonStatus(false);
             TurnManager.Instance.SelectedUnit = null;
@@ -247,8 +251,9 @@ public class CharacterController : MonoBehaviour
 
     public void ShowAvailableMoveTiles()
     {
-        ClearHighlightedTiles();
-        if (tileManager == null || currentTileData == null) return;
+        TileManager.Instance.ClearHighlightedTiles(); // 👈 clear globally
+
+        if (TileManager.Instance == null || currentTileData == null) return;
 
         Vector2Int currentPos = GetTileIndices(currentTileData.transform);
         int moveRange = GetComponent<CharacterStats>()?.MovementRange ?? 1;
@@ -265,19 +270,18 @@ public class CharacterController : MonoBehaviour
 
                 if (!IsInBounds(newX, newY)) continue;
 
-                TileData tile = tileManager.tiles[newY, newX].GetComponent<TileData>();
+                TileData tile = TileManager.Instance.tiles[newY, newX].GetComponent<TileData>();
                 if (tile == null) continue;
 
-                if (!tile.IsOccupied || tile.occupant.CompareTag("Enemy"))
+                if (!tile.IsOccupied || (tile.occupant != null && tile.occupant.CompareTag("Enemy")))
                 {
-                    tile.ShowAsPossibleMove(); // normal move tile
-                    highlightedTiles.Add(tile);
+                    TileManager.Instance.HighlightTile(tile);
                 }
             }
         }
 
-        // 👇 Add this block
-        if (weaponEquipper?.equippedWeapon != null && weaponEquipper.equippedWeapon.type == WeaponData.Type.Range)
+        if (weaponEquipper?.equippedWeapon != null &&
+            weaponEquipper.equippedWeapon.type == WeaponData.Type.Range)
         {
             ShowRangedAttackTiles(currentPos, moveRange, weaponEquipper.equippedWeapon.rangeBoost);
         }
@@ -294,45 +298,33 @@ public class CharacterController : MonoBehaviour
                 if (dx == 0 && dy == 0) continue;
 
                 int dist = Mathf.Max(Mathf.Abs(dx), Mathf.Abs(dy));
-                if (dist <= moveRange || dist > attackRange)
-                    continue; // Skip inner tiles (movement area) and outer too far
+                if (dist <= moveRange || dist > attackRange) continue;
 
                 int x = origin.x + dx;
                 int y = origin.y + dy;
 
                 if (!IsInBounds(x, y)) continue;
 
-                TileData tile = tileManager.tiles[y, x].GetComponent<TileData>();
+                TileData tile = TileManager.Instance.tiles[y, x].GetComponent<TileData>();
                 if (tile != null)
-                {
-                    tile.ShowRangeColor(); // ✨ Show special range color
-                    highlightedTiles.Add(tile); // so it gets cleared later
-                }
+                    TileManager.Instance.HighlightTile(tile, isRange: true);
             }
         }
     }
 
+
     bool IsInBounds(int x, int y)
     {
         return x >= 0 && y >= 0 &&
-               y < tileManager.tiles.GetLength(0) &&
-               x < tileManager.tiles.GetLength(1);
-    }
-
-    void ClearHighlightedTiles()
-    {
-        foreach (TileData tile in highlightedTiles)
-        {
-            tile.ResetColor();
-        }
-        highlightedTiles.Clear();
+               y < TileManager.Instance.tiles.GetLength(0) &&
+               x < TileManager.Instance.tiles.GetLength(1);
     }
 
     void TryMoveToTile(TileData targetTile)
     {
         SetButtonStatus(false);
 
-        if (hasMoved || isMoving || tileManager == null || currentTileData == null)
+        if (hasMoved || isMoving || TileManager.Instance == null || currentTileData == null)
             return;
 
         if (targetTile.IsOccupied)
@@ -377,6 +369,21 @@ public class CharacterController : MonoBehaviour
         {
             childCanvas.transform.localScale = new Vector3(
                 ResultScale * Mathf.Abs(childCanvas.transform.localScale.x),
+                childCanvas.transform.localScale.y,
+                childCanvas.transform.localScale.z
+            );
+        }
+    }
+
+    public void ResetScale()
+    {
+        transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+        // also fix UI child scaling (so it doesn’t flip)
+        Canvas childCanvas = GetComponentInChildren<Canvas>();
+        if (childCanvas != null)
+        {
+            childCanvas.transform.localScale = new Vector3(
+                Mathf.Abs(childCanvas.transform.localScale.x),
                 childCanvas.transform.localScale.y,
                 childCanvas.transform.localScale.z
             );
@@ -446,7 +453,7 @@ public class CharacterController : MonoBehaviour
         Deselect();
 
         if (!skipTurnEnd)
-            turnManager?.OnPlayerFinishedMove(this);
+            FinishedTurn();
     }
 
 
@@ -454,7 +461,7 @@ public class CharacterController : MonoBehaviour
     {
         if (hasMoved || isMoving) return;
 
-        ZombieAIBase enemyAI= GetEnemyObject(enemyObject).GetComponent<ZombieAIBase>();
+        ZombieAIBase enemyAI = GetEnemyObject(enemyObject).GetComponent<ZombieAIBase>();
 
         if (currentTileData == null || enemyAI.currentTileData == null)
             return;
@@ -526,7 +533,7 @@ public class CharacterController : MonoBehaviour
         }
         else if (Enemy.transform.parent.GetComponent<ZombieAIBase>() != null)
             return Enemy.transform.parent.gameObject;
-            
+
         return null;
     }
 
@@ -539,6 +546,7 @@ public class CharacterController : MonoBehaviour
 
     void PerformAttack(GameObject enemyObject)
     {
+        enemyObject = GetEnemyObject(enemyObject);
         if (enemyObject.TryGetComponent(out CharacterStats enemyStats))
         {
             // 🧭 Face the enemy before attacking
@@ -547,29 +555,7 @@ public class CharacterController : MonoBehaviour
                 SetScale(enemyAI.currentTileData.transform);
             }
             StartAttack(enemyStats);
-            //StartCoroutine(PerformMultiAttack(enemyStats));
         }
-    }
-
-    IEnumerator PerformMultiAttack(CharacterStats targetStats)
-    {
-        CharacterStats myStats = GetComponent<CharacterStats>();
-
-        for (int i = 0; i < myStats.AttackCount; i++)
-        {
-            if (targetStats == null || targetStats.IsDead)
-            {
-                Debug.Log("☠️ Target is dead. Stopping further attacks.");
-                break;
-            }
-
-            int damage = myStats.attack;
-            targetStats.TakeDamage(damage, myStats);
-            Debug.Log($"{name} attacked {targetStats.name} ({i + 1}/{myStats.AttackCount}) for {damage} damage.");
-
-            yield return new WaitForSeconds(0.2f); // optional delay between attacks
-        }
-        FinishedTurn();
     }
 
     #region Actual attack Region
@@ -634,13 +620,18 @@ public class CharacterController : MonoBehaviour
 
     #endregion
 
+    private bool turnEnded = false;
+
     public void FinishedTurn()
     {
+        if (turnEnded) return; // prevent double calls
+        turnEnded = true;
+
         hasMoved = true;
         Deselect();
+        GetComponent<TurnIndicator>().SetIndicator(false);
         turnManager?.OnPlayerFinishedMove(this);
     }
-
 
     List<TileData> GetAdjacentTiles(Vector2Int pos)
     {
@@ -654,10 +645,10 @@ public class CharacterController : MonoBehaviour
                 int newX = pos.x + dx;
                 int newY = pos.y + dy;
 
-                if (newX < 0 || newY < 0 || newX >= tileManager.tiles.GetLength(1) || newY >= tileManager.tiles.GetLength(0))
+                if (newX < 0 || newY < 0 || newX >= TileManager.Instance.tiles.GetLength(1) || newY >= TileManager.Instance.tiles.GetLength(0))
                     continue;
 
-                TileData tile = tileManager.tiles[newY, newX].GetComponent<TileData>();
+                TileData tile = TileManager.Instance.tiles[newY, newX].GetComponent<TileData>();
                 if (tile != null)
                     result.Add(tile);
             }
@@ -666,11 +657,11 @@ public class CharacterController : MonoBehaviour
     }
     public Vector2Int GetTileIndices(Transform tile)
     {
-        for (int row = 0; row < tileManager.tiles.GetLength(0); row++)
+        for (int row = 0; row < TileManager.Instance.tiles.GetLength(0); row++)
         {
-            for (int col = 0; col < tileManager.tiles.GetLength(1); col++)
+            for (int col = 0; col < TileManager.Instance.tiles.GetLength(1); col++)
             {
-                if (tileManager.tiles[row, col] == tile)
+                if (TileManager.Instance.tiles[row, col] == tile)
                     return new Vector2Int(col, row);
             }
         }
@@ -680,13 +671,19 @@ public class CharacterController : MonoBehaviour
     public void BeginTurn()
     {
         hasMoved = false;
+        turnEnded = false; // reset flag
+        GetComponent<TurnIndicator>().SetIndicator(true);
     }
 
     #region Show Buttons
     public GameObject ButtonHolder;
     void SetButtonStatus(bool value)
     {
-        ButtonHolder.GetComponent<Animator>().SetBool("Show",value);
+        ButtonHolder.GetComponent<Animator>().SetBool("Show", value);
+        if (value)
+        {
+            GetComponent<CharacterButtons>().LoadTriggerText();
+        }
     }
     #endregion
 
@@ -721,4 +718,84 @@ public class CharacterController : MonoBehaviour
         Range.gameObject.SetActive(false);
     }
     #endregion
+
+    #region Retreat
+    public void OnRetreat()
+    {
+        Deselect();
+        SetButtonStatus(false);
+        // Force character to face left when retreating
+        transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
+        GetComponent<Animator>().SetBool("IsMoving", true);
+        StartCoroutine(TryAndRetreat());
+    }
+
+    IEnumerator TryAndRetreat()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if (Squad.Instance.RetreatSuccess)
+        {
+            Squad.Instance.LoadRetreatAnimationForAll(this.gameObject);
+
+            Vector3 start = transform.position;
+            Vector3 end = TileManager.Instance.RetreatTile.transform.position;
+            float distance = Vector3.Distance(start, end);
+            float moveSpeed = GetComponent<CharacterStats>()?.moveSpeed ?? 1f;
+            float duration = distance / Mathf.Max(moveSpeed, 0.01f);
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                float t = elapsed / duration;
+                t = t * t * (3f - 2f * t); // smoothstep
+                transform.position = Vector3.Lerp(start, end, t);
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+            SquadMover.Instance.ExitEncounter();
+        }
+        else
+        {
+            // Retreat failed → face back right and idle
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            GetComponent<Animator>().SetBool("IsMoving", false);
+            FinishedTurn();
+        }
+    }
+
+    void ResetEverythingOnRetreat()
+    {
+        transform.localScale = new Vector3(1f, 1f, 1f);
+        GetComponent<Animator>().SetBool("IsMoving", false);
+        Animator anim = GetComponent<Animator>();
+        anim.Rebind();
+        anim.Update(0f);
+    }
+
+    public IEnumerator OnRetreatAll()
+    {
+        transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
+        GetComponent<Animator>().SetBool("IsMoving", true);
+
+        Vector3 start = transform.position;
+        Vector3 end = TileManager.Instance.RetreatTile.transform.position;
+        float distance = Vector3.Distance(start, end);
+        float moveSpeed = GetComponent<CharacterStats>()?.moveSpeed ?? 1f;
+        float duration = distance / Mathf.Max(moveSpeed, 0.01f);
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            t = t * t * (3f - 2f * t); // smoothstep
+            transform.position = Vector3.Lerp(start, end, t);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+    }
+    #endregion
+
 }

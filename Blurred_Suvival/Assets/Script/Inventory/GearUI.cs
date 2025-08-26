@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GearUI : MonoBehaviour
 {
     public static GearUI Instance;
     public Transform HelmetParent, ArmorParent, PantParent, ShoeParent, WeaponParent;
+
+    public Image CharacterImage;
 
     void Awake()
     {
@@ -17,9 +20,10 @@ public class GearUI : MonoBehaviour
 
     public GameObject Panel;
     public GameObject Slot;
-    public void OnShowGear(GearEquipper gearEquipper)
+    public void OnShowGear(GearEquipper gearEquipper,Sprite sprite)
     {
-        DestroyChildren(HelmetParent);
+        CharacterImage.sprite =sprite;
+        DestroyChildren(WeaponParent);
         SetWeaponDetail();
         Panel.SetActive(true);
     }
@@ -48,6 +52,7 @@ public class GearUI : MonoBehaviour
             {
                 trigger.Initialize(gearEquipper.equippedWeapon.itemName, tooltipText);
             }
+            obj.GetComponent<Image>().sprite = gearEquipper.equippedWeapon.itemIcon;
         }
     }
 

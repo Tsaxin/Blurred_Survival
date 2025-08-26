@@ -631,7 +631,7 @@ GameObject:
   - component: {fileID: -1451929987428105528}
   m_Layer: 0
   m_Name: Knocker
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

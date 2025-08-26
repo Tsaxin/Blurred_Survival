@@ -22,6 +22,16 @@ public class SquadMover : MonoBehaviour
 
     public Transform EnemyHolder;
 
+    public static SquadMover Instance;
+
+    void Start()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
     void Update()
     {
         // Movement input
@@ -57,9 +67,6 @@ public class SquadMover : MonoBehaviour
                     float roll = Random.value;
                     if (roll <= encounterChance)
                     {
-                        // Instead of triggering encounter here, notify region
-                        // We'll add a delegate or event for region to listen
-                        squad.region = region;
                         TriggerEncounterUI();
                     }
                 }
@@ -82,7 +89,7 @@ public class SquadMover : MonoBehaviour
 
     public void TriggerEncounterUI()
     {
-        Debug.Log("💥 Random encounter triggered by Region!");
+        squad.region = region;
 
         if (interactionObject != null)
             interactionObject.SetActive(true);

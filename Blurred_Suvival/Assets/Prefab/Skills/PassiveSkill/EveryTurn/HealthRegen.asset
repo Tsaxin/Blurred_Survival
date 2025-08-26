@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Patch Up
   description: Generates HP every turn.
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 2c13f2f54a6d9084ebaab2c064e63d76, type: 3}
   IsUpgradable: 1
   regenAmount: 2
   Individual: 1

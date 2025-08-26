@@ -8,10 +8,32 @@ public class TileManager : MonoBehaviour
     public Transform[] flatTileList; // Drag tiles in column-major order: down rows, then right columns
     public Transform[,] tiles = new Transform[4, 16];
 
+    public Transform RetreatTile;
+
     void Start()
     {
         if (Instance == null)
             Instance = this;
+    }
+
+    private List<TileData> highlightedTiles = new List<TileData>();
+
+    public void HighlightTile(TileData tile, bool isRange = false)
+    {
+        if (isRange)
+            tile.ShowRangeColor();
+        else
+            tile.ShowAsPossibleMove();
+
+        if (!highlightedTiles.Contains(tile))
+            highlightedTiles.Add(tile);
+    }
+
+    public void ClearHighlightedTiles()
+    {
+        foreach (TileData tile in highlightedTiles)
+            tile.ResetColor();
+        highlightedTiles.Clear();
     }
 
     [ContextMenu("AutoTile")]

@@ -42,6 +42,8 @@ public class CharacterStatsUI : MonoBehaviour
     public StatSlider critStat;
     public StatSlider evasionStat;
 
+    public Image CharacterSprite;
+
     void Start()
     {
         if (Instance == null) Instance = this;
@@ -69,8 +71,9 @@ public class CharacterStatsUI : MonoBehaviour
         statUI.boostedSlider.value = boostedValue;
     }
 
-    public void OpenStatPanel(CharacterStats targetStats)
+    public void OpenStatPanel(CharacterStats targetStats,Sprite CharacterSprite)
     {
+        this.CharacterSprite.sprite = CharacterSprite;
         this.targetStats = targetStats;
         StatsPanel.SetActive(true);
         UpdateStatsUI(targetStats);
