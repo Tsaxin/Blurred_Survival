@@ -16,6 +16,7 @@ MonoBehaviour:
   itemType: 0
   itemIcon: {fileID: 21300000, guid: e942babc44128d145b0dcecdec07a4cf, type: 3}
   MaxQuantity: 1
+  lootPrefab: {fileID: 4545915707345495668, guid: 72a94a5254a2f6845a6a941e8697f06d, type: 3}
   attackBoost: 2
   attackCountBoost: 1
   defenseBoost: 0
@@ -24,5 +25,4 @@ MonoBehaviour:
   rangeBoost: 0
   criticalBoost: 2
   evasionBoost: 0
-  weaponPrefab: {fileID: 0}
   type: 0

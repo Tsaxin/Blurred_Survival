@@ -30,7 +30,7 @@ public class TurnManager : MonoBehaviour
     public CanvasGroup EncounterModeCanvasGroup;
     public TextMeshProUGUI EncounterTypeText, EncounterDescription;
     public float EncounterPanelFadeSpeed, EncounterPanelStaySpeed;
-    public int EncounterMode; //0=Ambush,1=Encounter,2=Pre emtive
+    public int EncounterMode; //0=Ambush,1=Encounter,2=Pre emtive,3=Camp mode
     private bool preemptiveExtraTurnPending = false;
 
     void Awake()
@@ -83,6 +83,9 @@ public class TurnManager : MonoBehaviour
             case 2: // Preemptive → Player gets 2 turns before enemy
                 CoroutineRunner.Instance.StartCoroutine(HandlePreemptiveTurn());
                 break;
+            case 3:
+                CoroutineRunner.Instance.StartCoroutine(HandleCamp());
+                break;
         }
     }
 
@@ -118,6 +121,11 @@ public class TurnManager : MonoBehaviour
         yield return BeginEnemyTurn();
     }
 
+    IEnumerator HandleCamp()
+    {
+        yield return LoadCanvasGroup("Survivor Camp", "Survivors can do what they want!");
+        BeginPlayerTurn();
+    }
     public void BeginPlayerTurn()
     {
         playerTurn = true;

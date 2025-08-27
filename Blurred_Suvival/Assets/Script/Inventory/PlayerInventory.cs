@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class PlayerInventory : MonoBehaviour
     public int maxInventorySize = 10; // You can tweak this in the Inspector
 
     public List<ItemInstance> collectedItems = new List<ItemInstance>();
+
+    public Transform TextGenerationPoint;
 
     private void Awake()
     {
@@ -34,6 +37,15 @@ public class PlayerInventory : MonoBehaviour
         if (newItem == null || quantity <= 0)
             return false;
 
+        if (newItem.itemType == ItemType.Ration)
+        {
+            RationData ration = newItem as RationData;
+            HungerManager.Instance.RestoreHunger(ration.RationRestoreAmount);
+            EnqueueCollectedText($"{quantity}x ration collected.", FloatingTextType.Heal);
+
+            return true;
+        }
+
         bool isStackable = newItem.itemType != ItemType.Weapon; // Only weapons don't stack
         int remaining = quantity;
 
@@ -51,7 +63,6 @@ public class PlayerInventory : MonoBehaviour
 
                     if (remaining <= 0)
                     {
-                        Debug.Log($"Added {quantity}x {newItem.itemName} to existing stacks.");
                         return true;
                     }
                 }
@@ -63,7 +74,7 @@ public class PlayerInventory : MonoBehaviour
         {
             if (collectedItems.Count >= maxInventorySize)
             {
-                Debug.LogWarning($"Inventory full! Could not add all {newItem.itemName}. Leftover: {remaining}");
+                EnqueueCollectedText("Inventory Full!!", FloatingTextType.Damage);
                 return false; // inventory full, some items not added
             }
 
@@ -71,31 +82,106 @@ public class PlayerInventory : MonoBehaviour
             collectedItems.Add(new ItemInstance(newItem, toAdd));
             remaining -= toAdd;
         }
-        Debug.Log($"Collected: {newItem.itemName} x{quantity}");
+        EnqueueCollectedText($"{newItem.itemName} collected.", FloatingTextType.Heal);
         return true;
     }
-
 
     /// <summary>
     /// Removes a certain quantity of an item from the inventory.
     /// If quantity is zero or less, removes the whole stack.
     /// </summary>
-    public bool RemoveItem(ItemData item, int quantity = 1)
+    public bool RemoveItem(ItemData item)
     {
         ItemInstance instance = collectedItems.Find(i => i.data == item);
         if (instance == null)
-            return false;
-
-        if (instance.quantity > quantity)
         {
-            instance.quantity -= quantity;
+            return false;   
+        }
+
+        // Remove ALL quantity
+        collectedItems.Remove(instance);
+
+        // ✅ Drop item back on tile
+        TileData dropTile = TileManager.Instance.GetBestTileForDrop();
+        if (dropTile != null)
+        {
+            if (item.lootPrefab != null)
+            {
+                GameObject loot = GameObject.Instantiate(item.lootPrefab);
+                if (item.itemType != ItemType.Weapon)
+                {
+                    EnqueueCollectedText($"{instance.quantity}x {item.itemName} dropped!", FloatingTextType.Damage);
+                }
+                else
+                {
+                    EnqueueCollectedText($"{item.itemName} dropped!", FloatingTextType.Damage);
+                }
+                dropTile.PlaceLoot(loot);
+            }
+            else
+            {
+                Debug.LogWarning($"Item {item.name} has no loot prefab assigned!");
+            }
         }
         else
         {
-            collectedItems.Remove(instance);
+            Debug.LogWarning("No available tile found for item drop.");
         }
 
         InventoryUIManager.Instance.RefreshInventory();
         return true;
     }
+
+
+    #region Notification Message
+    public enum FloatingTextType
+    {
+        Damage,
+        Heal, // for things like "Inventory Full"
+    }
+    [Header("Notification Message")]
+    private Queue<(string message, FloatingTextType type)> floatingTextQueue
+    = new Queue<(string, FloatingTextType)>();
+
+    private string NoSpaceInInventory = "";
+    private bool isShowingText = false;
+
+    public float MessageInterval = 1f;
+
+    public void EnqueueCollectedText(string msg, FloatingTextType type)
+    {
+        floatingTextQueue.Enqueue((msg, type));
+
+        if (!isShowingText)
+            StartCoroutine(ProcessFloatingTextQueue());
+    }
+
+    private IEnumerator ProcessFloatingTextQueue()
+    {
+        isShowingText = true;
+        Vector3 basePosition = TextGenerationPoint.position;
+
+        while (floatingTextQueue.Count > 0)
+        {
+            var entry = floatingTextQueue.Dequeue();
+            Vector3 spawnPos = basePosition + Vector3.up;
+
+            switch (entry.type)
+            {
+                case FloatingTextType.Damage:
+                    DamageTextManager.Instance.ShowDamage(spawnPos, entry.message, false);
+                    break;
+
+                case FloatingTextType.Heal:
+                    DamageTextManager.Instance.ShowHeal(spawnPos, entry.message);
+                    break;
+            }
+
+            yield return new WaitForSeconds(MessageInterval);
+        }
+
+        isShowingText = false;
+    }
+
+    #endregion
 }

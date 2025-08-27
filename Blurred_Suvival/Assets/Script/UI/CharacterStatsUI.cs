@@ -42,6 +42,10 @@ public class CharacterStatsUI : MonoBehaviour
     public StatSlider critStat;
     public StatSlider evasionStat;
 
+    [Header("TextMeshProUGUI")]
+    public TextMeshProUGUI AttackValue;
+    public TextMeshProUGUI HPValue, DefenseValue, CriticalValue, EvasionValue;
+
     public Image CharacterSprite;
 
     void Start()
@@ -55,23 +59,35 @@ public class CharacterStatsUI : MonoBehaviour
         
         targetStats.RecalculateStats();
 
-        SetStat(attackStat, targetStats.MainAttack, targetStats.attack);
-        SetStat(hpStat, targetStats.MainMaxHealth, targetStats.maxHealth);
-        SetStat(defenseStat, (int)targetStats.MainDefense, (int)targetStats.Defense);
-        SetStat(critStat, (int)targetStats.MainCriticalChance, (int)targetStats.CriticalChance);
-        SetStat(evasionStat, (int)targetStats.MainEvasionChance, (int)targetStats.EvasionChance);
+        SetStat(attackStat, targetStats.MainAttack, targetStats.attack,AttackValue);
+        SetStat(hpStat, targetStats.MainMaxHealth, targetStats.maxHealth,HPValue);
+        SetStat(defenseStat, targetStats.MainDefense, targetStats.Defense,DefenseValue);
+        SetStat(critStat, targetStats.MainCriticalChance, targetStats.CriticalChance,CriticalValue);
+        SetStat(evasionStat, targetStats.MainEvasionChance, targetStats.EvasionChance,EvasionValue);
     }
 
-    private void SetStat(StatSlider statUI, int baseValue, int boostedValue)
+    private void SetStat(StatSlider statUI, int baseValue, int boostedValue, TextMeshProUGUI ValueHolder)
     {
         statUI.baseSlider.maxValue = statUI.maxValue;
         statUI.boostedSlider.maxValue = statUI.maxValue;
 
         statUI.baseSlider.value = baseValue;
         statUI.boostedSlider.value = boostedValue;
+
+        ValueHolder.text = boostedValue.ToString();
+    }
+    private void SetStat(StatSlider statUI, float baseValue, float boostedValue, TextMeshProUGUI ValueHolder)
+    {
+        statUI.baseSlider.maxValue = statUI.maxValue;
+        statUI.boostedSlider.maxValue = statUI.maxValue;
+
+        statUI.baseSlider.value = baseValue;
+        statUI.boostedSlider.value = boostedValue;
+
+        ValueHolder.text = boostedValue.ToString()+"%";
     }
 
-    public void OpenStatPanel(CharacterStats targetStats,Sprite CharacterSprite)
+    public void OpenStatPanel(CharacterStats targetStats, Sprite CharacterSprite)
     {
         this.CharacterSprite.sprite = CharacterSprite;
         this.targetStats = targetStats;

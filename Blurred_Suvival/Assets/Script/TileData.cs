@@ -71,11 +71,22 @@ public class TileData : MonoBehaviour
         loot.transform.localPosition = new Vector3(offsetX, offsetY, 0);
     }
 
-    public List<GameObject> CollectAllLoot()
+    public void TryCollectLoot()
     {
-        List<GameObject> collected = new List<GameObject>(lootOnTile);
-        lootOnTile.Clear();
-        return collected;
+        // Use ToArray to avoid modifying list while iterating
+        foreach (var loot in lootOnTile.ToArray())
+        {
+            ItemPickUp pickup = loot.GetComponent<ItemPickUp>();
+            if (pickup != null)
+            {
+                bool added = PlayerInventory.Instance.AddItem(pickup.itemData);
+                if (added)
+                {
+                    lootOnTile.Remove(loot); // remove from tile
+                    Destroy(loot);           // cleanup
+                }
+            }
+        }
     }
 
     public void DestroyAllLoot()

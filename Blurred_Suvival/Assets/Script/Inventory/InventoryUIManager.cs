@@ -115,6 +115,7 @@ public class InventoryUIManager : MonoBehaviour
                 }
 
                 gearEquipper.EquipWeapon((WeaponData)clickedItem.data);
+                PlayerInventory.Instance.EnqueueCollectedText($"{clickedItem.data.itemName} Equipped!", PlayerInventory.FloatingTextType.Heal);
                 break;
 
             case ItemType.Consumable:
@@ -172,26 +173,6 @@ public class InventoryUIManager : MonoBehaviour
             desc += $"\n<b>Quantity:</b> {itemInstance.quantity}";
 
         return desc.TrimEnd();
-    }
-
-    public void DeleteWeaponSlot(GameObject slotGO)
-    {
-        int index = currentSlots.IndexOf(slotGO);
-        if (index >= 0 && index < playerInventory.collectedItems.Count)
-        {
-            // Remove weapon from inventory
-            playerInventory.collectedItems.RemoveAt(index);
-
-            // Remove and destroy slot
-            currentSlots.RemoveAt(index);
-            Destroy(slotGO);
-
-            Debug.Log("Item deleted from inventory.");
-        }
-        else
-        {
-            Debug.LogWarning("Slot not found in currentSlots list.");
-        }
     }
 
     public GameObject GearPanel;

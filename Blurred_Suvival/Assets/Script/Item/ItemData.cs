@@ -4,6 +4,7 @@ public enum ItemType
 {
     Weapon,
     Consumable,
+    Ration
     // Add more types if needed later (e.g. Armor, KeyItems, etc.)
 }
 
@@ -13,7 +14,8 @@ public abstract class ItemData : ScriptableObject
     public ItemType itemType;
     public Sprite itemIcon;
 
-    public int MaxQuantity=20;
+    public int MaxQuantity = 20;
+    public GameObject lootPrefab; 
 }
 
 [System.Serializable]

@@ -39,25 +39,23 @@ public class Squad : MonoBehaviour
 
             if (roll <= AmbushChance)
             {
-                Debug.Log("Ambush Here");
                 turnManager.EncounterMode = 0;
                 region.TrySpawnAmbushEnemies();
             }
             else if (roll <= (AmbushChance + EncounterChance))
             {
-                Debug.Log("Encounter here");
                 turnManager.EncounterMode = 1;
                 region.TrySpawnEnemies();
             }
             else
             {
-                Debug.Log("Preemtive strike");
                 turnManager.EncounterMode = 2;
                 region.TrySpawnPreemtiveEnemies();
             }
         }
         else
         {
+            turnManager.EncounterMode = 3;
             // if (SquadFormationManager.Instance.CheckBornLeader(Characters))
             // {
             //     SaveFormationButton.SetActive(true);
@@ -243,6 +241,8 @@ public class Squad : MonoBehaviour
             Characters.Remove(character);
             Debug.Log($"🗑 Removed {character.name} from squad list.");
         }
+
+        //Removing character from hunger manager as well
     }
 
     public float GetRetreatChance()

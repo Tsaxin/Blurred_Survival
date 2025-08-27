@@ -372,8 +372,10 @@ public class CharacterStats : MonoBehaviour
 
     public void RecalculateStats()
     {
+        float debuff = HungerManager.Instance.DebuffAmount;
         gearEquipper?.LoadWeaponSprite();
 
+        // Base stats + gear
         int weaponAtk = gearEquipper?.equippedWeapon?.attackBoost ?? 0;
         int weaponRange = gearEquipper?.equippedWeapon?.rangeBoost ?? 0;
         int MovementBoost = gearEquipper?.equippedWeapon?.movementBoost ?? 0;
@@ -383,15 +385,40 @@ public class CharacterStats : MonoBehaviour
         float CriticalBoost = gearEquipper?.equippedWeapon?.criticalBoost ?? 0;
         float EvasionBoost = gearEquipper?.equippedWeapon?.evasionBoost ?? 0;
 
-        attack = MainAttack + Mathf.RoundToInt(weaponAtk);
-        range = MainRange + Mathf.RoundToInt(weaponRange);
-        Defense = MainDefense + Mathf.RoundToInt(DefenseBoost);
-        AttackCount = MainAttackCount + Mathf.RoundToInt(AttackCountBoost);
-        maxHealth = MainMaxHealth + Mathf.RoundToInt(HealthBoost);
-        MovementRange = MainMovementRange + Mathf.RoundToInt(MovementBoost);
-        CriticalChance = MainCriticalChance + Mathf.RoundToInt(CriticalBoost);
-        EvasionChance = MainEvasionChance + Mathf.RoundToInt(EvasionBoost);
+        // Always recalc from original stats
+        attack = Mathf.Max(1, Mathf.CeilToInt((MainAttack + weaponAtk) * debuff));
+        range = MainRange + weaponRange;
+        Defense = (MainDefense + DefenseBoost) * debuff;
+        AttackCount = MainAttackCount + AttackCountBoost;
+        maxHealth = Mathf.Max(1, Mathf.CeilToInt((MainMaxHealth + HealthBoost) * debuff));
+        MovementRange = MainMovementRange + MovementBoost;
+        CriticalChance = MainCriticalChance + CriticalBoost;
+        EvasionChance = (MainEvasionChance + EvasionBoost) * debuff;
+
+        // Keep current health proportional
+        float healthPercent = (float)_currentHealth / Mathf.Max(1, healthSlider?.maxValue ?? MainMaxHealth);
+        _currentHealth = Mathf.Clamp(Mathf.CeilToInt(maxHealth * healthPercent), 1, maxHealth);
 
         UpdateHealthSlider();
     }
+
+
+    public void ModifyStats(float multiplier)
+    {
+        if (multiplier <= 1 || HungerManager.Instance.isDebuffed)
+        {
+            // Keep the current health % before scaling
+            float healthPercent = (float)_currentHealth / maxHealth;
+
+            attack = Mathf.Max(1, Mathf.CeilToInt(attack * multiplier));
+            maxHealth = Mathf.Max(1, Mathf.CeilToInt(maxHealth * multiplier));
+
+            // Restore health proportionally
+            _currentHealth = Mathf.Max(1, Mathf.CeilToInt(maxHealth * healthPercent));
+
+            Defense *= multiplier;
+            EvasionChance *= multiplier;
+        }
+    }
+
 }

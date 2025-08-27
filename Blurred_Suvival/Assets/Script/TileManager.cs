@@ -168,7 +168,7 @@ public class TileManager : MonoBehaviour
         return 1; // same column
     }
 
-    public float PaddingX, PaddingY,RowSkewX,RowSkewY;
+    public float PaddingX, PaddingY, RowSkewX, RowSkewY;
     public Transform TileParent;
     [ContextMenu("Auto Space")]
     [ContextMenu("Auto Space")]
@@ -213,5 +213,47 @@ public class TileManager : MonoBehaviour
 
         Debug.Log("✅ AutoSpace with row offset complete.");
     }
+
+    public TileData GetBestTileForDrop()
+    {
+        List<TileData> candidates = new List<TileData>();
+
+        int minLoot = int.MaxValue;
+
+        for (int row = 0; row < tiles.GetLength(0); row++)
+        {
+            for (int col = 0; col < tiles.GetLength(1); col++)
+            {
+                Transform t = tiles[row, col];
+                if (t == null) continue;
+
+                TileData td = t.GetComponent<TileData>();
+                if (td == null) continue;
+
+                if (td.IsOccupied) continue; // skip occupied tiles
+
+                int lootCount = td.lootOnTile.Count;
+                if (lootCount < minLoot)
+                {
+                    // Found a new "least loot" tile → reset candidate list
+                    minLoot = lootCount;
+                    candidates.Clear();
+                    candidates.Add(td);
+                }
+                else if (lootCount == minLoot)
+                {
+                    // Same as current best → add to candidates
+                    candidates.Add(td);
+                }
+            }
+        }
+
+        if (candidates.Count == 0)
+            return null; // no valid tile
+
+        // Pick random among best candidates
+        return candidates[Random.Range(0, candidates.Count)];
+    }
+
 
 }

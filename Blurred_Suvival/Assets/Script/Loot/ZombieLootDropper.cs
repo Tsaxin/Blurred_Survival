@@ -5,7 +5,7 @@ public class ZombieLootDropper : MonoBehaviour
     [Header("Loot Table")]
     public LootEntry[] lootTable;
 
-    public void DropLoot(Vector3 position,TileData tile)
+    public void DropLoot(Vector3 position, TileData tile)
     {
         foreach (LootEntry entry in lootTable)
         {
@@ -25,7 +25,6 @@ public class ZombieLootDropper : MonoBehaviour
                 //return; // Only one item drop max; remove this line if you want multiple drops
             }
         }
-
         //Debug.Log("No loot dropped.");
     }
 }

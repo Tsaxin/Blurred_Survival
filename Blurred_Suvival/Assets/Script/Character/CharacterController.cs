@@ -68,6 +68,7 @@ public class CharacterController : MonoBehaviour
 
     void OnSelect()
     {
+        GetComponentInChildren<Canvas>().sortingOrder++;
         selectedCharacter = this;
         selectionJustHappened = true;
         SetButtonStatus(true);
@@ -235,6 +236,7 @@ public class CharacterController : MonoBehaviour
     {
         if (selectedCharacter == this)
         {
+            GetComponentInChildren<Canvas>().sortingOrder--;
             SetSelectedVisual(false);
             TileManager.Instance.ClearHighlightedTiles();
             selectedCharacter = null;
@@ -437,19 +439,8 @@ public class CharacterController : MonoBehaviour
         TileData tile = targetTile.GetComponent<TileData>();
         if (tile.HasLoot)
         {
-            List<GameObject> lootItems = tile.CollectAllLoot();
-            foreach (var loot in lootItems)
-            {
-                ItemPickUp pickup = loot.GetComponent<ItemPickUp>();
-                if (pickup != null)
-                {
-                    PlayerInventory.Instance.AddItem(pickup.itemData);
-                    Destroy(loot);
-                }
-            }
+            tile.TryCollectLoot();
         }
-
-
         Deselect();
 
         if (!skipTurnEnd)

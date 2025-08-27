@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,6 +9,7 @@ public class DraggableSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private Vector3 originalPosition;
     private Transform originalParent;
     private Canvas canvas;
+    int index;
 
     void Start()
     {
@@ -18,6 +20,7 @@ public class DraggableSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        index = transform.GetSiblingIndex();
         originalPosition = rectTransform.position;
         originalParent = transform.parent;
         canvasGroup.blocksRaycasts = false;
@@ -35,9 +38,17 @@ public class DraggableSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         GameObject hovered = eventData.pointerEnter;
         if (hovered != null && hovered.GetComponent<DeleteRegion>() != null)
-        {
-            // Call InventoryUIManager to remove the item
-            InventoryUIManager.Instance.DeleteWeaponSlot(gameObject);
+        {// or however you track slots
+            if (index >= 0 && index < PlayerInventory.Instance.collectedItems.Count)
+            {
+                ItemData itemToRemove = PlayerInventory.Instance.collectedItems[index].data;
+
+                // ✅ Directly call PlayerInventory
+                PlayerInventory.Instance.RemoveItem(itemToRemove);
+
+                // Destroy the UI slot
+                Destroy(gameObject);
+            }
         }
         else
         {
@@ -46,4 +57,5 @@ public class DraggableSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             rectTransform.position = originalPosition;
         }
     }
+
 }

@@ -11,9 +11,6 @@ public class WeaponData : ItemData
     public int rangeBoost;
     public int criticalBoost;
     public int evasionBoost;
-
-    public GameObject weaponPrefab;
-
     public enum Type
     {
         Melee,
