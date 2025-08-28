@@ -153,7 +153,6 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-
     public void OnPlayerFinishedMove(CharacterController character)
     {
         if (!activePlayerCharacters.Contains(character)) return;
@@ -177,11 +176,8 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-
-
     [Header("Turn Timing")]
     public float delayBeforeEnemyTurn = 0.1f;   // 👈 New field
-
     IEnumerator BeginEnemyTurn()
     {
         playerTurn = false;
@@ -316,5 +312,47 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Event Trigger 
+    public void StartEventTrigger(Event EventData)
+    {
+        CoroutineRunner.Instance.StartCoroutine(LoadEventTriggerDetails(EventData));
+    }
+
+    IEnumerator LoadEventTriggerDetails(Event EventData)
+    {
+        yield return LoadCanvasGroup("Interaction", "Survivor must make a choice!");
+        DialogueManager.Instance.InitiateDialouge(EventData, enemyParent.transform.GetChild(Random.Range(0, enemyParent.transform.childCount)).gameObject);
+    }
+
+    public void SetNPCAsEnemy(ChoiceOutcome.TurnOrder firstToMove)
+    {
+        enemyCharacters = new List<ZombieAIBase>(enemyParent.GetComponentsInChildren<ZombieAIBase>());
+
+        Enemy enemy = enemyParent.GetComponent<Enemy>();
+        foreach (GameObject child in enemy.spawnedEnemies)
+        {
+            if (child.GetComponent<CharacterController>() != null) child.GetComponent<CharacterController>().enabled = false;
+            child.gameObject.tag = "Enemy";
+            child.GetComponentInChildren<SpriteRenderer>().gameObject.tag = "Enemy";
+
+            if (child.GetComponent<ZombieAIBase>() != null)
+            {
+                child.GetComponent<ZombieAIBase>().characterStats = child.GetComponent<CharacterStats>();
+                child.GetComponent<ZombieAIBase>().ScaleForZombie = -1;
+                child.GetComponent<ZombieAIBase>().ScaleCharacter(-1);
+            }
+        }
+
+        if (firstToMove == ChoiceOutcome.TurnOrder.PlayerFirst)
+        {
+            BeginPlayerTurn();
+        }
+        else
+        {
+            StartCoroutine(BeginEnemyTurn());
+        }
+    }
     #endregion
 }

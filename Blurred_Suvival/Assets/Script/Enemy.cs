@@ -14,6 +14,17 @@ public class Enemy : MonoBehaviour
 
     public int MaxIndividualCount;
     public Transform ZombiePool;
+
+    public static Enemy Instance;
+
+    void Start()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
     [ContextMenu("Generate Zombies")]
     public void SpawnZombie()
     {
@@ -40,7 +51,7 @@ public class Enemy : MonoBehaviour
     {
         foreach (GameObject child in Zombies)
         {
-            if (child.GetComponent<ZombieAIBase>().ZombieName == ZombieName)
+            if (child.GetComponent<CharacterStats>().CharacterName == ZombieName)
             {
                 GameObject Object = Instantiate(child, ZombiePool.transform.position, Quaternion.identity);
                 Object.transform.SetParent(ZombiePool.transform);
@@ -61,7 +72,7 @@ public class Enemy : MonoBehaviour
             ZombieAIBase ai = child.GetComponent<MonoBehaviour>() as ZombieAIBase;
             if (ai != null && ai.EnemyManager != null)
             {
-                ai.EnemyManager.SpawnZombie(ai.ZombieName);
+                ai.EnemyManager.SpawnZombie(ai.GetComponent<CharacterStats>().CharacterName);
             }
             else
             {
@@ -74,5 +85,12 @@ public class Enemy : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+
+        CheckSpawnListAnamoly();
+    }
+
+    void CheckSpawnListAnamoly()
+    {
+        spawnedEnemies.RemoveAll(child => child == null);
     }
 }

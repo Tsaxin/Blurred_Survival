@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Exploder : ZombieAIBase
 {
-    public CharacterStats characterStats;
-
     [Tooltip("Number of adjacent units (players or zombies) needed to trigger explosion.")]
     public int ExplodeIfSurroundedBy = 3;
 

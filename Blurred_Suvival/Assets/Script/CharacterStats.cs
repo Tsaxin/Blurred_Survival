@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class CharacterStats : MonoBehaviour
 {
+    public string CharacterName;
     [Header("Base Stats")]
     public int MainMaxHealth = 10;
     public int MainAttack = 2;
@@ -253,7 +254,7 @@ public class CharacterStats : MonoBehaviour
                 tm.RemoveEnemy(GetComponent<ZombieAIBase>());
             }
 
-            GetComponent<ZombieAIBase>().EnemyManager.SpawnZombie(GetComponent<ZombieAIBase>().ZombieName);
+            GetComponent<ZombieAIBase>().EnemyManager.SpawnZombie(CharacterName);
             if (GetComponent<ZombieLootDropper>() != null)
             {
                 GetComponent<ZombieLootDropper>().DropLoot(transform.position, GetComponent<ZombieAIBase>().currentTileData);

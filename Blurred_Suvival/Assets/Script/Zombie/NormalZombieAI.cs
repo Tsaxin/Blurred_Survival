@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class NormalZombieAI : ZombieAIBase
 {
-    public CharacterStats characterStats;
-
     public override IEnumerator TakeTurn()
     {
         Debug.Log($"{name} is thinking...");

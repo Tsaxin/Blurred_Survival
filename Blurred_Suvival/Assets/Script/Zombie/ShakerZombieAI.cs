@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ShakerZombieAI : ZombieAIBase
 {
-    public CharacterStats characterStats;
-
     public override IEnumerator TakeTurn()
     {
         Debug.Log($"{name} (Shaker) is taking its turn...");

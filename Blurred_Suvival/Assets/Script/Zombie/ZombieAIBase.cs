@@ -5,13 +5,14 @@ public abstract class ZombieAIBase : MonoBehaviour
 {
     public TileManager tileManager;
     public TileData currentTileData;
-
     public abstract IEnumerator TakeTurn();
-
-    public string ZombieName;
     public Enemy EnemyManager;
 
+    public CharacterStats characterStats;
+
     public TrailRenderer trailRenderer;
+
+    public float ScaleForZombie=1;
 
     public virtual Vector2Int GetTileIndices(Transform tileTransform)
     {
@@ -92,12 +93,12 @@ public abstract class ZombieAIBase : MonoBehaviour
     public void ScaleCharacter(TileData targetTile)
     {
         int ResultScale = TileManager.Instance.GetXDirection(currentTileData.transform, targetTile.transform);
-        transform.localScale = new Vector3(-1 * ResultScale, transform.localScale.y, transform.localScale.z);
+        transform.localScale = new Vector3(-1 *ScaleForZombie* ResultScale, transform.localScale.y, transform.localScale.z);
 
         Canvas childCanvas = GetComponentInChildren<Canvas>();
         if (childCanvas != null)
         {
-            childCanvas.transform.localScale = new Vector3(-1 * ResultScale * Mathf.Abs(childCanvas.transform.localScale.x), childCanvas.transform.localScale.y, childCanvas.transform.localScale.z); // example scale
+            childCanvas.transform.localScale = new Vector3(-1 *ScaleForZombie* ResultScale * Mathf.Abs(childCanvas.transform.localScale.x), childCanvas.transform.localScale.y, childCanvas.transform.localScale.z); // example scale
         }
     }
     

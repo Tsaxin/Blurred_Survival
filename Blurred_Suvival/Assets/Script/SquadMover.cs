@@ -38,7 +38,7 @@ public class SquadMover : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (UIBlocker.IsPointerOverUI())
-            return; 
+                return;
 
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0;
@@ -67,10 +67,21 @@ public class SquadMover : MonoBehaviour
                     float roll = Random.value;
                     if (roll <= encounterChance)
                     {
-                        TriggerEncounterUI();
+                        EnableEncounter(false, null);
                     }
                 }
             }
+        }
+    }
+
+    public void EnableEncounter(bool IsEvent, EventTrigger eventTrigger)
+    {
+        Event eventData = eventTrigger.newEvent;
+        Destroy(eventTrigger.gameObject);
+        if (region != null)
+        {
+            TriggerEncounterUI();
+            squad.InitiateBattle(IsEvent, eventData, region);
         }
     }
 
@@ -89,8 +100,6 @@ public class SquadMover : MonoBehaviour
 
     public void TriggerEncounterUI()
     {
-        squad.region = region;
-
         if (interactionObject != null)
             interactionObject.SetActive(true);
 

@@ -10,8 +10,6 @@ public class Squad : MonoBehaviour
     public TurnManager turnManager; // 👈 Assign in Inspector
 
     public GameObject gameOverPanel;
-    public Region region;
-
     public bool SelfEncounter = false;
 
     public GameObject SaveFormationButton;
@@ -22,17 +20,37 @@ public class Squad : MonoBehaviour
     public float AmbushChance = 25;
     public float EncounterChance = 50f;
 
+    Region region;
+
     private void OnEnable()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+    }
 
+    public void InitiateBattle(bool IsEvent,Event eventData,Region region)
+    {
+        this.region = region;
         CheckCharacterListAnamoly();
 
         region.loadBattleGround();
         PlaceCharactersInMatrix();
+
+        if (IsEvent)
+        {
+            region.TrySpawnEventTriggerEnemies(eventData.Survivors);
+            TurnManager.Instance.StartEventTrigger(eventData);
+        }
+        else
+        {
+            EncounterWithEnemy();
+        }
+    }
+
+    void EncounterWithEnemy()
+    {
         if (!SelfEncounter)
         {
             float roll = Random.Range(0f, 100f);
@@ -50,7 +68,7 @@ public class Squad : MonoBehaviour
             else
             {
                 turnManager.EncounterMode = 2;
-                region.TrySpawnPreemtiveEnemies();
+                region.TrySpawnPreemptiveEnemies();
             }
         }
         else
@@ -79,8 +97,6 @@ public class Squad : MonoBehaviour
     {
         Characters.RemoveAll(character => character == null);
     }
-
-
     void PlaceCharactersInMatrix()
     {
         if (tileManager == null)
@@ -140,7 +156,7 @@ public class Squad : MonoBehaviour
         {
             GameObject character = Characters[i];
             if (character == null) continue;
-            
+
             var (tile, row) = validTiles[i];
 
             // Compute sorting order with spacing
@@ -245,14 +261,15 @@ public class Squad : MonoBehaviour
         //Removing character from hunger manager as well
     }
 
+    #region Retreat Region
+    public bool RetreatSuccess;
+
     public float GetRetreatChance()
     {
         float RetreatChance = this.RetreatChance / Characters.Count;
 
         return RetreatChance;
     }
-
-    public bool RetreatSuccess;
     public void Retreat()
     {
         RetreatSuccess = false;
@@ -282,5 +299,5 @@ public class Squad : MonoBehaviour
             }
         }
     }
-
+    #endregion
 }

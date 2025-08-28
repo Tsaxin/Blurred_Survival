@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class KnockerZombieAI : ZombieAIBase
 {
-    public CharacterStats characterStats;
     [Tooltip("How far to knock back the target (in tiles).")]
     public int knockbackRange = 2;
 

@@ -441,6 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dfc01e4c178a1145bad86d9308591d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CharacterName: Runner
   MainMaxHealth: 10
   MainAttack: 2
   MainRange: 1

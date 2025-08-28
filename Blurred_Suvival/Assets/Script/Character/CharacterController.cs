@@ -358,40 +358,6 @@ public class CharacterController : MonoBehaviour
         StartCoroutine(MoveToTile(targetTile, targetPos));
     }
 
-    void SetScale(Transform targetTransform)
-    {
-        if (currentTileData == null) return;
-
-        int ResultScale = TileManager.Instance.GetXDirection(currentTileData.transform, targetTransform);
-        transform.localScale = new Vector3(ResultScale, transform.localScale.y, transform.localScale.z);
-
-        // also fix UI child scaling (so it doesn’t flip)
-        Canvas childCanvas = GetComponentInChildren<Canvas>();
-        if (childCanvas != null)
-        {
-            childCanvas.transform.localScale = new Vector3(
-                ResultScale * Mathf.Abs(childCanvas.transform.localScale.x),
-                childCanvas.transform.localScale.y,
-                childCanvas.transform.localScale.z
-            );
-        }
-    }
-
-    public void ResetScale()
-    {
-        transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
-        // also fix UI child scaling (so it doesn’t flip)
-        Canvas childCanvas = GetComponentInChildren<Canvas>();
-        if (childCanvas != null)
-        {
-            childCanvas.transform.localScale = new Vector3(
-                Mathf.Abs(childCanvas.transform.localScale.x),
-                childCanvas.transform.localScale.y,
-                childCanvas.transform.localScale.z
-            );
-        }
-    }
-
     public IEnumerator MoveToTile(TileData targetTile, Vector2Int targetPos, bool skipTurnEnd = false)
     {
         Deselect();
@@ -609,6 +575,59 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Scale
+    void SetScale(Transform targetTransform)
+    {
+        if (currentTileData == null) return;
+
+        int ResultScale = TileManager.Instance.GetXDirection(currentTileData.transform, targetTransform);
+        transform.localScale = new Vector3(ResultScale, transform.localScale.y, transform.localScale.z);
+
+        // also fix UI child scaling (so it doesn’t flip)
+        Canvas childCanvas = GetComponentInChildren<Canvas>();
+        if (childCanvas != null)
+        {
+            childCanvas.transform.localScale = new Vector3(
+                ResultScale * Mathf.Abs(childCanvas.transform.localScale.x),
+                childCanvas.transform.localScale.y,
+                childCanvas.transform.localScale.z
+            );
+        }
+    }
+
+    public void SetScale(float scaleX)
+    {
+        // Apply scale to this object
+        transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
+
+        // Fix UI child scaling so it doesn’t flip
+        Canvas childCanvas = GetComponentInChildren<Canvas>();
+        if (childCanvas != null)
+        {
+            childCanvas.transform.localScale = new Vector3(
+                scaleX * Mathf.Abs(childCanvas.transform.localScale.x),
+                childCanvas.transform.localScale.y,
+                childCanvas.transform.localScale.z
+            );
+        }
+    }
+
+    public void ResetScale()
+    {
+        transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+        // also fix UI child scaling (so it doesn’t flip)
+        Canvas childCanvas = GetComponentInChildren<Canvas>();
+        if (childCanvas != null)
+        {
+            childCanvas.transform.localScale = new Vector3(
+                Mathf.Abs(childCanvas.transform.localScale.x),
+                childCanvas.transform.localScale.y,
+                childCanvas.transform.localScale.z
+            );
+        }
+    }
     #endregion
 
     private bool turnEnded = false;
