@@ -67,21 +67,24 @@ public class SquadMover : MonoBehaviour
                     float roll = Random.value;
                     if (roll <= encounterChance)
                     {
-                        EnableEncounter(false, null);
+                        EnableEncounter(false, null,false);
                     }
                 }
             }
         }
     }
 
-    public void EnableEncounter(bool IsEvent, EventTrigger eventTrigger)
+    public void EnableEncounter(bool IsEvent, EventTrigger eventTrigger,bool SelfEncounter)
     {
-        Event eventData = eventTrigger.newEvent;
-        Destroy(eventTrigger.gameObject);
+        Event eventData = eventTrigger?.newEvent;
+        if (eventTrigger != null)
+        {
+            Destroy(eventTrigger.gameObject);
+        }
         if (region != null)
         {
             TriggerEncounterUI();
-            squad.InitiateBattle(IsEvent, eventData, region);
+            squad.InitiateBattle(IsEvent, eventData, region,SelfEncounter);
         }
     }
 
@@ -111,8 +114,7 @@ public class SquadMover : MonoBehaviour
 
     public void InitiateSelfEncounter()
     {
-        squad.SelfEncounter = true;
-        TriggerEncounterUI();
+        EnableEncounter(false,null,true);
     }
 
     public void ExitEncounter()

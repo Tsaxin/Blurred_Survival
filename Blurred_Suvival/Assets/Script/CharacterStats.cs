@@ -394,7 +394,7 @@ public class CharacterStats : MonoBehaviour
         maxHealth = Mathf.Max(1, Mathf.CeilToInt((MainMaxHealth + HealthBoost) * debuff));
         MovementRange = MainMovementRange + MovementBoost;
         CriticalChance = MainCriticalChance + CriticalBoost;
-        EvasionChance = (MainEvasionChance + EvasionBoost) * debuff;
+        EvasionChance = Mathf.Max(0f, (MainEvasionChance + EvasionBoost) * debuff);
 
         // Keep current health proportional
         float healthPercent = (float)_currentHealth / Mathf.Max(1, healthSlider?.maxValue ?? MainMaxHealth);

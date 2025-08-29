@@ -21,11 +21,8 @@ public class ZombieLootDropper : MonoBehaviour
                 {
                     tile.PlaceLoot(loot);
                 }
-
-                //return; // Only one item drop max; remove this line if you want multiple drops
             }
         }
-        //Debug.Log("No loot dropped.");
     }
 }
 

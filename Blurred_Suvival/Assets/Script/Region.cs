@@ -15,6 +15,7 @@ public class Region : MonoBehaviour
     public SquadMover squadMover;
 
     private void SpawnEnemiesInternal(
+    TurnManager turnManager,
     int startCol,
     bool isPreemptive,
     System.Func<(Transform tile, int row), Transform> getEnemy)
@@ -74,6 +75,13 @@ public class Region : MonoBehaviour
             // Place zombie at tile position
             zombie.position = tile.position;
 
+            //Also if has playercontroller then
+            if (zombie.GetComponent<CharacterController>()!=null) {
+                CharacterController CC = zombie.GetComponent<CharacterController>();
+                CC.currentTileData = tile.GetComponent<TileData>();
+                CC.turnManager = turnManager;
+            }
+
             // Apply sorting order from ZombieAIBase
             var ai = zombie.GetComponent<ZombieAIBase>();
             if (ai != null)
@@ -89,7 +97,7 @@ public class Region : MonoBehaviour
         }
     }
 
-    public void TrySpawnEnemies()
+    public void TrySpawnEnemies(TurnManager turnManager)
     {
         int ZombieLevel = ZombieLevelScaler.Instance.ScaleZombieLevel(squadMover.gameObject);
 
@@ -98,6 +106,7 @@ public class Region : MonoBehaviour
             int spawnCount = Random.Range(enemyInZone.minCount, enemyInZone.maxCount + 1);
 
             SpawnEnemiesInternal(
+                turnManager,
                 startCol: 4,
                 isPreemptive: false,
                 getEnemy: (tileRow) =>
@@ -108,7 +117,7 @@ public class Region : MonoBehaviour
         }
     }
 
-    public void TrySpawnAmbushEnemies()
+    public void TrySpawnAmbushEnemies(TurnManager turnManager)
     {
         int ZombieLevel = ZombieLevelScaler.Instance.ScaleZombieLevel(squadMover.gameObject);
 
@@ -117,6 +126,7 @@ public class Region : MonoBehaviour
             int spawnCount = Random.Range(enemyInZone.minCount, enemyInZone.maxCount + 1);
 
             SpawnEnemiesInternal(
+                turnManager,
                 startCol: 3,
                 isPreemptive: false,
                 getEnemy: (tileRow) =>
@@ -127,7 +137,7 @@ public class Region : MonoBehaviour
         }
     }
 
-    public void TrySpawnPreemptiveEnemies()
+    public void TrySpawnPreemptiveEnemies(TurnManager turnManager)
     {
         int ZombieLevel = ZombieLevelScaler.Instance.ScaleZombieLevel(squadMover.gameObject);
 
@@ -136,6 +146,7 @@ public class Region : MonoBehaviour
             int spawnCount = Random.Range(enemyInZone.minCount, enemyInZone.maxCount + 1);
 
             SpawnEnemiesInternal(
+                turnManager,
                 startCol: 4,
                 isPreemptive: true,
                 getEnemy: (tileRow) =>
@@ -146,11 +157,12 @@ public class Region : MonoBehaviour
         }
     }
 
-    public void TrySpawnEventTriggerEnemies(List<GameObject> objects)
+    public void TrySpawnEventTriggerEnemies(TurnManager turnManager,List<GameObject> objects)
     {
         int index = 0;
 
         SpawnEnemiesInternal(
+            turnManager,
             startCol: 4,
             isPreemptive: false,
             getEnemy: (tileRow) =>

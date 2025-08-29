@@ -1,79 +1,83 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class ChoiceButton : MonoBehaviour
 {
-    public ChoiceOutcome choiceOutcome;
-    public TextMeshProUGUI ResponseDialouge;
+    [Header("References")]
+    public ChoiceOutcome outcomeData;   // Central responses
+    public ChoiceOutcome.ChoiceType choiceType; // This button’s unique action
+    public TextMeshProUGUI responseText;
+
+    [Header("Player Responses")]
+    [TextArea]
+    public List<string> PlayerResponses = new List<string>();
 
     void OnEnable()
     {
-        ResponseDialouge.text = ChoiceHelper.GetRandomPlayerResponse(choiceOutcome);
+        if (responseText != null)
+            responseText.text = PlayerResponses[UnityEngine.Random.Range(0, PlayerResponses.Count)];
     }
 
-    public void OnFirstThreatClick()
+    public void OnClick()
     {
-        // 1️⃣ Pick one of the enabled ChoiceTypes randomly
-        ChoiceOutcome.ChoiceType selectedChoice = ChoiceHelper.GetRandomChoice(choiceOutcome);
+        // ✅ If multiple ChoiceTypes are set, pick one at random
+        ChoiceOutcome.ChoiceType selectedChoice = GetRandomChoiceFromFlags(choiceType);
 
-        // 2️⃣ Call the function based on ChoiceType
+        // Get enemy line for the selected choice
+        string enemyLine = outcomeData.GetEnemyResponse(selectedChoice);
+        Debug.Log(selectedChoice);
+
         switch (selectedChoice)
         {
             case ChoiceOutcome.ChoiceType.Runaway:
-                HandleRunaway();
+                DialogueManager.Instance.StartDialogue(new string[] { enemyLine }, false, () =>
+                {
+                    TurnManager.Instance.NPCRunAway();
+                });
                 break;
 
             case ChoiceOutcome.ChoiceType.DropLoot:
-                HandleDropLoot();
+                DialogueManager.Instance.StartDialogue(new string[] { enemyLine }, false, () =>
+                {
+                    TurnManager.Instance.NPCDropLootAndRunAway();
+                });
                 break;
 
             case ChoiceOutcome.ChoiceType.Join:
-                HandleJoin();
+                DialogueManager.Instance.StartDialogue(new string[] { enemyLine }, false, () =>
+                {
+                    TurnManager.Instance.NPCJoin();
+                });
                 break;
 
             case ChoiceOutcome.ChoiceType.Fight:
-                HandleFight();
-                break;
-
-            default:
-                Debug.LogWarning("No valid ChoiceType selected!");
+                DialogueManager.Instance.StartDialogue(new string[] { enemyLine }, false, () =>
+                {
+                    TurnManager.Instance.SetNPCAsEnemy();
+                });
                 break;
         }
     }
 
-    // 3️⃣ Separate functions for each ChoiceType
-    private void HandleRunaway()
+    // ✅ Helper to pick a random enabled flag from a Flags enum
+    private ChoiceOutcome.ChoiceType GetRandomChoiceFromFlags(ChoiceOutcome.ChoiceType flags)
     {
-        string enemyLine = ChoiceHelper.GetEnemyResponse(choiceOutcome, ChoiceOutcome.ChoiceType.Runaway);
-        DialogueManager.Instance.StartDialogue(new string[] { enemyLine }, false);
+        List<ChoiceOutcome.ChoiceType> enabledFlags = new List<ChoiceOutcome.ChoiceType>();
+
+        foreach (ChoiceOutcome.ChoiceType value in Enum.GetValues(typeof(ChoiceOutcome.ChoiceType)))
+        {
+            if (value == ChoiceOutcome.ChoiceType.None) continue;
+
+            if (flags.HasFlag(value))
+                enabledFlags.Add(value);
+        }
+
+        if (enabledFlags.Count == 0)
+            return ChoiceOutcome.ChoiceType.None;
+
+        return enabledFlags[UnityEngine.Random.Range(0, enabledFlags.Count)];
     }
 
-    private void HandleDropLoot()
-    {
-        string enemyLine = ChoiceHelper.GetEnemyResponse(choiceOutcome, ChoiceOutcome.ChoiceType.DropLoot);
-        DialogueManager.Instance.StartDialogue(new string[] { enemyLine }, false);
-    }
-
-    private void HandleJoin()
-    {
-        string enemyLine = ChoiceHelper.GetEnemyResponse(choiceOutcome, ChoiceOutcome.ChoiceType.Join);
-        DialogueManager.Instance.StartDialogue(new string[] { enemyLine }, false);
-    }
-
-    private void HandleFight()
-    {
-        string enemyLine = ChoiceHelper.GetEnemyResponse(choiceOutcome, ChoiceOutcome.ChoiceType.Fight);
-        DialogueManager.Instance.StartDialogue(
-            new string[] { enemyLine },
-            false, // do not show choices again
-            () =>
-            {
-                // Randomly select EnemyFirst or PlayerFirst
-                ChoiceOutcome.TurnOrder firstToMove =
-                    (Random.value < 0.5f) ? ChoiceOutcome.TurnOrder.EnemyFirst : ChoiceOutcome.TurnOrder.PlayerFirst;
-
-                TurnManager.Instance.SetNPCAsEnemy(firstToMove);
-            }
-        );
-    }
 }

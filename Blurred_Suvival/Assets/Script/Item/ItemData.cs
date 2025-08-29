@@ -14,6 +14,8 @@ public abstract class ItemData : ScriptableObject
     public ItemType itemType;
     public Sprite itemIcon;
 
+    public Sprite itemIconIU;
+
     public int MaxQuantity = 20;
     public GameObject lootPrefab; 
 }

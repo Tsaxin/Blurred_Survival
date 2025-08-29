@@ -52,7 +52,7 @@ public class GearUI : MonoBehaviour
             {
                 trigger.Initialize(gearEquipper.equippedWeapon.itemName, tooltipText);
             }
-            obj.GetComponent<Image>().sprite = gearEquipper.equippedWeapon.itemIcon;
+            obj.GetComponent<Image>().sprite = gearEquipper.equippedWeapon.itemIconIU;
         }
     }
 

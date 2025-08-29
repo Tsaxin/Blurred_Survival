@@ -9,7 +9,7 @@ public class EventTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player")) // Make sure your squad is tagged as "Player"
         {
-            SquadMover.Instance.EnableEncounter(true,this);
+            SquadMover.Instance.EnableEncounter(true,this,false);
         }
     }
 }

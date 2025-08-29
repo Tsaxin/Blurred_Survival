@@ -8,13 +8,34 @@ public class TileManager : MonoBehaviour
     public Transform[] flatTileList; // Drag tiles in column-major order: down rows, then right columns
     public Transform[,] tiles = new Transform[4, 16];
 
-    public Transform RetreatTile;
+    public Transform LeftRetreatTile,RightRetreatTile;
 
     void Start()
     {
         if (Instance == null)
             Instance = this;
     }
+
+    
+    public void ClearTileOccupants()
+    {
+        for (int row = 0; row < 4; row++)
+        {
+            for (int col = 0; col < 16; col++)
+            {
+                Transform tile = tiles[row, col];
+                if (tile != null)
+                {
+                    TileData data = tile.GetComponent<TileData>();
+                    if (data != null)
+                    {
+                        data.ClearOccupant();
+                    }
+                }
+            }
+        }
+    }
+
 
     private List<TileData> highlightedTiles = new List<TileData>();
 

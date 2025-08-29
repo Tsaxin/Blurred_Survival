@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.TextCore.Text;
+using System.Linq;
 
 public class Squad : MonoBehaviour
 {
@@ -10,7 +11,6 @@ public class Squad : MonoBehaviour
     public TurnManager turnManager; // 👈 Assign in Inspector
 
     public GameObject gameOverPanel;
-    public bool SelfEncounter = false;
 
     public GameObject SaveFormationButton;
     public static Squad Instance;
@@ -19,6 +19,8 @@ public class Squad : MonoBehaviour
     public float RetreatChance = 25f;
     public float AmbushChance = 25;
     public float EncounterChance = 50f;
+
+    public int MaxSurvivorCountInGroup = 12;
 
     Region region;
 
@@ -30,7 +32,7 @@ public class Squad : MonoBehaviour
         }
     }
 
-    public void InitiateBattle(bool IsEvent,Event eventData,Region region)
+    public void InitiateBattle(bool IsEvent,Event eventData,Region region, bool SelfEncounter)
     {
         this.region = region;
         CheckCharacterListAnamoly();
@@ -40,16 +42,16 @@ public class Squad : MonoBehaviour
 
         if (IsEvent)
         {
-            region.TrySpawnEventTriggerEnemies(eventData.Survivors);
+            region.TrySpawnEventTriggerEnemies(turnManager,eventData.Survivors);
             TurnManager.Instance.StartEventTrigger(eventData);
         }
         else
         {
-            EncounterWithEnemy();
+            EncounterWithEnemy(SelfEncounter);
         }
     }
 
-    void EncounterWithEnemy()
+    void EncounterWithEnemy(bool SelfEncounter)
     {
         if (!SelfEncounter)
         {
@@ -58,17 +60,17 @@ public class Squad : MonoBehaviour
             if (roll <= AmbushChance)
             {
                 turnManager.EncounterMode = 0;
-                region.TrySpawnAmbushEnemies();
+                region.TrySpawnAmbushEnemies(turnManager);
             }
             else if (roll <= (AmbushChance + EncounterChance))
             {
                 turnManager.EncounterMode = 1;
-                region.TrySpawnEnemies();
+                region.TrySpawnEnemies(turnManager);
             }
             else
             {
                 turnManager.EncounterMode = 2;
-                region.TrySpawnPreemptiveEnemies();
+                region.TrySpawnPreemptiveEnemies(turnManager);
             }
         }
         else
@@ -89,13 +91,20 @@ public class Squad : MonoBehaviour
         {
             Debug.LogError("❌ TurnManager not assigned!");
         }
-
-        SelfEncounter = false;
     }
 
     void CheckCharacterListAnamoly()
     {
         Characters.RemoveAll(character => character == null);
+    }
+
+    public void InitializeCharacters()
+    {
+        Characters.Clear();
+        foreach (Transform child in transform)
+        {
+            Characters.Add(child.gameObject);
+        }
     }
     void PlaceCharactersInMatrix()
     {
@@ -105,7 +114,7 @@ public class Squad : MonoBehaviour
             return;
         }
 
-        ClearTileOccupants();
+        tileManager.ClearTileOccupants();
         tileManager.AutoTile();
 
         List<(Transform tile, int row)> validTiles = new List<(Transform, int)>();
@@ -195,7 +204,6 @@ public class Squad : MonoBehaviour
                 sr.sortingOrder = sortingOrder;
             }
         }
-
     }
 
     private IEnumerator DelayedTurnInitialization()
@@ -207,26 +215,6 @@ public class Squad : MonoBehaviour
             turnManager.StartBattle();
         }
     }
-
-    void ClearTileOccupants()
-    {
-        for (int row = 0; row < 4; row++)
-        {
-            for (int col = 0; col < 16; col++)
-            {
-                Transform tile = tileManager.tiles[row, col];
-                if (tile != null)
-                {
-                    TileData data = tile.GetComponent<TileData>();
-                    if (data != null)
-                    {
-                        data.ClearOccupant();
-                    }
-                }
-            }
-        }
-    }
-
     public void CheckIfAllPlayersDead()
     {
         foreach (GameObject character in Characters)
@@ -295,7 +283,7 @@ public class Squad : MonoBehaviour
         {
             if (obj != TriggerObj)
             {
-                StartCoroutine(obj.GetComponent<CharacterController>().OnRetreatAll());
+                StartCoroutine(obj.GetComponent<CharacterController>().OnRetreatAll(true));
             }
         }
     }

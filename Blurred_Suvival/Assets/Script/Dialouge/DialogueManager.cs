@@ -29,6 +29,13 @@ public class DialogueManager : MonoBehaviour
     // ✅ Callback for when dialogue finishes
     private Action onDialogueFinished;
 
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && dialoguePanel.activeSelf)
+        {
+            OnClickDialogue();
+        }
+    }
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -92,9 +99,10 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(typeSpeed);
         }
 
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-        NextLine();
+        // Coroutine ends naturally when line is fully typed
+        typingCoroutine = null;
     }
+
 
     private void NextLine()
     {
@@ -122,6 +130,23 @@ public class DialogueManager : MonoBehaviour
             onDialogueFinished?.Invoke();
         }
     }
+
+    public void OnClickDialogue()
+    {
+        if (typingCoroutine != null)
+        {
+            // Stop the typewriter and instantly show full line
+            StopCoroutine(typingCoroutine);
+            dialogueText.text = currentDialogue[currentLine];
+            typingCoroutine = null;
+        }
+        else
+        {
+            // Move to next line if fully displayed
+            NextLine();
+        }
+    }
+
 
     #region ChoiceButton
     public void Onclick()

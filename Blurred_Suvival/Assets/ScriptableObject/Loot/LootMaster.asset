@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b22447ded4627f4f8f8155bfe942062, type: 3}
+  m_Name: LootMaster
+  m_EditorClassIdentifier: 
+  commonLoot:
+  - loot: {fileID: 4545915707345495668, guid: 72a94a5254a2f6845a6a941e8697f06d, type: 3}
+    dropChance: 0.25
+  - loot: {fileID: 4545915707345495668, guid: 6082a785747429e41b63c1f06c6b7cec, type: 3}
+    dropChance: 1
+  rareLoot:
+  - loot: {fileID: 4545915707345495668, guid: f5f2d7f732159764986143bed4b082c1, type: 3}
+    dropChance: 0.25
+  epicLoot: []
+  legendaryLoot: []

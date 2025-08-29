@@ -7,8 +7,6 @@ public class TurnManager : MonoBehaviour
 {
     public GameObject playerParent; // 👈 Assign this in Inspector
     public GameObject enemyParent;  // 👈 Assign this in Inspector
-
-    public List<CharacterController> playerCharacters;
     public List<ZombieAIBase> enemyCharacters;
 
     private int currentCharacterIndex = 0;
@@ -20,7 +18,7 @@ public class TurnManager : MonoBehaviour
     [Header("Post-Battle Settings")]
     public GameObject PostBattlePanel;
 
-    private List<CharacterController> activePlayerCharacters = new List<CharacterController>();
+    public List<CharacterController> activePlayerCharacters = new List<CharacterController>();
 
     public static TurnManager Instance;
 
@@ -49,7 +47,7 @@ public class TurnManager : MonoBehaviour
     {
         if (playerParent != null)
         {
-            playerCharacters = new List<CharacterController>(playerParent.GetComponentsInChildren<CharacterController>());
+            playerParent.GetComponent<Squad>().InitializeCharacters();
         }
         else
         {
@@ -131,11 +129,8 @@ public class TurnManager : MonoBehaviour
         playerTurn = true;
         currentCharacterIndex = 0;
 
-        // Remove null or destroyed player references
-        playerCharacters.RemoveAll(p => p == null);
-
+        activePlayerCharacters = new List<CharacterController>(playerParent.GetComponentsInChildren<CharacterController>());
         // Get only alive, existing players
-        activePlayerCharacters = playerCharacters.FindAll(p => p != null && !p.GetComponent<CharacterStats>().IsDead);
 
         LoadEveryTurnPassive(activePlayerCharacters);
 
@@ -326,9 +321,9 @@ public class TurnManager : MonoBehaviour
         DialogueManager.Instance.InitiateDialouge(EventData, enemyParent.transform.GetChild(Random.Range(0, enemyParent.transform.childCount)).gameObject);
     }
 
-    public void SetNPCAsEnemy(ChoiceOutcome.TurnOrder firstToMove)
+    public void SetNPCAsEnemy()
     {
-        enemyCharacters = new List<ZombieAIBase>(enemyParent.GetComponentsInChildren<ZombieAIBase>());
+        InitializeCharacters();
 
         Enemy enemy = enemyParent.GetComponent<Enemy>();
         foreach (GameObject child in enemy.spawnedEnemies)
@@ -344,8 +339,8 @@ public class TurnManager : MonoBehaviour
                 child.GetComponent<ZombieAIBase>().ScaleCharacter(-1);
             }
         }
-
-        if (firstToMove == ChoiceOutcome.TurnOrder.PlayerFirst)
+        int rand = Random.Range(0, 2);   //0 being player moves first
+        if (rand == 0)
         {
             BeginPlayerTurn();
         }
@@ -353,6 +348,59 @@ public class TurnManager : MonoBehaviour
         {
             StartCoroutine(BeginEnemyTurn());
         }
+    }
+
+    public void NPCRunAway()
+    {
+        TurnExploreModeOn();
+        Enemy enemy = enemyParent.GetComponent<Enemy>();
+        foreach (GameObject child in enemy.spawnedEnemies)
+        {
+            PostBattlePanel.SetActive(true);
+            CoroutineRunner.Instance.StartCoroutine(child.GetComponent<CharacterController>().OnRetreatAll(false));
+        }
+    }
+
+    public void NPCDropLootAndRunAway()
+    {
+        TurnExploreModeOn();
+
+        Enemy enemy = enemyParent.GetComponent<Enemy>();
+        foreach (GameObject child in enemy.spawnedEnemies)
+        {
+            LootMasterManager.Instance.DropRandomLoots(child.GetComponent<ZombieAIBase>().currentTileData);
+            CoroutineRunner.Instance.StartCoroutine(child.GetComponent<CharacterController>().OnRetreatAll(false));
+        }
+    }
+
+    public void NPCJoin()
+    {
+        if ((playerParent.transform.childCount + enemyParent.transform.childCount) <= playerParent.GetComponent<Squad>().MaxSurvivorCountInGroup)
+        {
+            for (int i = enemyParent.transform.childCount - 1; i >= 0; i--)
+            {
+                enemyParent.transform.GetChild(i).SetParent(playerParent.transform);
+            }
+
+            InitializeCharacters();
+            TurnExploreModeOn();
+            BeginPlayerTurn();
+        }
+        else
+        {
+            DialogueManager.Instance.StartDialogue(new string[] { "But looks like you already got so many people. I don't think you can accomodate more of us. Thanks for the offer. It means a lot. Goodbye" }, false, () =>
+            {
+                TurnManager.Instance.NPCRunAway();
+            });
+        }
+    }
+
+    void TurnExploreModeOn()
+    {
+        playerParent.GetComponent<Squad>().InitializeCharacters();
+        TileManager.Instance.ClearTileOccupants();
+        PostBattlePanel.SetActive(true);
+        BeginPlayerTurn();
     }
     #endregion
 }

@@ -59,7 +59,7 @@ public class InventoryUIManager : MonoBehaviour
 
             // Set quantity display
             Slot slotComponent = slotGO.GetComponent<Slot>();
-            slotComponent.SetImage(item.data.itemIcon);
+            slotComponent.SetImage(item.data.itemIconIU);
             if (item.quantity > 1)
             {
                 slotComponent.SetText(item.quantity.ToString());

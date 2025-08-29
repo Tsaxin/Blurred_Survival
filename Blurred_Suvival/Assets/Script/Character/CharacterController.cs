@@ -60,6 +60,8 @@ public class CharacterController : MonoBehaviour
             return;
         }
 
+        if (!this.enabled) return;
+
         if (selectedCharacter != null)
             selectedCharacter.Deselect();
 
@@ -537,9 +539,16 @@ public class CharacterController : MonoBehaviour
         }
 
         Animator anim = GetComponent<Animator>();
-        if (GetComponent<GearEquipper>().equippedWeapon.type == WeaponData.Type.Range)
+        if (GetComponent<GearEquipper>().equippedWeapon != null)
         {
-            anim.SetTrigger("Range");
+            if (GetComponent<GearEquipper>().equippedWeapon.type == WeaponData.Type.Range)
+            {
+                anim.SetTrigger("Range");
+            }
+            else
+            {
+                anim.SetTrigger("Melee");
+            }
         }
         else
         {
@@ -750,7 +759,7 @@ public class CharacterController : MonoBehaviour
             Squad.Instance.LoadRetreatAnimationForAll(this.gameObject);
 
             Vector3 start = transform.position;
-            Vector3 end = TileManager.Instance.RetreatTile.transform.position;
+            Vector3 end = TileManager.Instance.LeftRetreatTile.transform.position;
             float distance = Vector3.Distance(start, end);
             float moveSpeed = GetComponent<CharacterStats>()?.moveSpeed ?? 1f;
             float duration = distance / Mathf.Max(moveSpeed, 0.01f);
@@ -784,14 +793,23 @@ public class CharacterController : MonoBehaviour
         anim.Update(0f);
     }
 
-    public IEnumerator OnRetreatAll()
+    public IEnumerator OnRetreatAll(bool IsLeft)
     {
         transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
 
         GetComponent<Animator>().SetBool("IsMoving", true);
 
         Vector3 start = transform.position;
-        Vector3 end = TileManager.Instance.RetreatTile.transform.position;
+        Vector3 end = new Vector3();
+        if (IsLeft)
+        {
+            end = TileManager.Instance.LeftRetreatTile.transform.position;
+        }
+        else
+        {
+            SetScale(1);
+            end = TileManager.Instance.RightRetreatTile.transform.position;
+        }
         float distance = Vector3.Distance(start, end);
         float moveSpeed = GetComponent<CharacterStats>()?.moveSpeed ?? 1f;
         float duration = distance / Mathf.Max(moveSpeed, 0.01f);
