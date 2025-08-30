@@ -7,12 +7,6 @@ public class BattleManager : MonoBehaviour
     public GameObject enemiesParent; // Assign your 'Enemies' GameObject in Inspector
     public Transform CharacterHolder;
     public int totalBattleXP = 0;
-
-    private void OnEnable()
-    {
-        CalculateTotalXP();
-    }
-
     void OnDisable()
     {
         BloodPool.Instance.ClearBloodSplashes();

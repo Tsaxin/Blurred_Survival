@@ -114,9 +114,6 @@ public class TurnManager : MonoBehaviour
 
         // Wait until second player phase finishes
         yield return new WaitUntil(() => playerTurn == false);
-
-        // Now enemies move
-        yield return BeginEnemyTurn();
     }
 
     IEnumerator HandleCamp()
@@ -166,6 +163,7 @@ public class TurnManager : MonoBehaviour
             }
             else
             {
+                Debug.Log("This triggered");
                 CoroutineRunner.Instance.StartCoroutine(BeginEnemyTurn());
             }
         }
@@ -318,7 +316,14 @@ public class TurnManager : MonoBehaviour
     IEnumerator LoadEventTriggerDetails(Event EventData)
     {
         yield return LoadCanvasGroup("Interaction", "Survivor must make a choice!");
-        DialogueManager.Instance.InitiateDialouge(EventData, enemyParent.transform.GetChild(Random.Range(0, enemyParent.transform.childCount)).gameObject);
+        List<GameObject> enemyChildren = new List<GameObject>();
+        for (int i = 0; i < enemyParent.transform.childCount; i++)
+        {
+            enemyChildren.Add(enemyParent.transform.GetChild(i).gameObject);
+        }
+
+        // Pass the full list to the dialogue manager
+        DialogueManager.Instance.InitiateDialogue(EventData, enemyChildren);
     }
 
     public void SetNPCAsEnemy()

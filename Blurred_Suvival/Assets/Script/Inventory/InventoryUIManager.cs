@@ -50,12 +50,9 @@ public class InventoryUIManager : MonoBehaviour
         }
         currentSlots.Clear();
 
-        Debug.Log("Function called");
-
         foreach (ItemInstance item in playerInventory.collectedItems)
         {
             GameObject slotGO = Instantiate(slotPrefab, slotParent);
-            Debug.Log("Loop called");
 
             // Set quantity display
             Slot slotComponent = slotGO.GetComponent<Slot>();
@@ -79,74 +76,12 @@ public class InventoryUIManager : MonoBehaviour
             Button btn = slotGO.GetComponent<Button>();
             btn.onClick.AddListener(() =>
             {
-                Debug.Log($"Clicked on {item.data.itemName}");
-                OnItemSlotClicked(item);
+                InventoryItemClickHandler.Instance.OnItemSlotClicked(item,TurnManager.Instance.SelectedUnit);
             });
 
             currentSlots.Add(slotGO);
         }
     }
-
-    private void OnItemSlotClicked(ItemInstance clickedItem)
-    {
-        var selectedCharacter = TurnManager.Instance.SelectedUnit;
-        if (selectedCharacter == null)
-        {
-            Debug.LogWarning("No character selected!");
-            return;
-        }
-
-        switch (clickedItem.data.itemType)
-        {
-            case ItemType.Weapon:
-                var gearEquipper = selectedCharacter.GetComponent<GearEquipper>();
-                if (gearEquipper == null)
-                {
-                    Debug.LogWarning("Selected character has no WeaponEquipper.");
-                    return;
-                }
-
-                // Remove one weapon instance
-                playerInventory.collectedItems.Remove(clickedItem);
-
-                if (gearEquipper.equippedWeapon != null)
-                {
-                    playerInventory.collectedItems.Add(new ItemInstance(gearEquipper.equippedWeapon));
-                }
-
-                gearEquipper.EquipWeapon((WeaponData)clickedItem.data);
-                PlayerInventory.Instance.EnqueueCollectedText($"{clickedItem.data.itemName} Equipped!", PlayerInventory.FloatingTextType.Heal);
-                break;
-
-            case ItemType.Consumable:
-                var consumableData = (ConsumableData)clickedItem.data;
-                var characterStats = selectedCharacter.GetComponent<CharacterStats>();
-                if (characterStats == null)
-                {
-                    Debug.LogWarning("Selected character has no CharacterStats.");
-                    return;
-                }
-
-                // Heal the character
-                characterStats.Heal(consumableData.healthRestoreAmount);
-
-                // Reduce quantity or remove item
-                clickedItem.quantity--;
-                if (clickedItem.quantity <= 0)
-                {
-                    playerInventory.collectedItems.Remove(clickedItem);
-                }
-                break;
-
-                // Add more item type cases here
-        }
-
-        RefreshInventory();
-        selectedCharacter.ShowAvailableMoveTiles();
-        TurnManager.Instance.SelectedUnit.FinishedTurn();
-        CloseInventory();
-    }
-
     public string GenerateTooltipText(ItemInstance itemInstance)
     {
         var item = itemInstance.data;

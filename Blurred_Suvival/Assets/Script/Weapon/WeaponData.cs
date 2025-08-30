@@ -20,9 +20,19 @@ public class WeaponData : ItemData
 
     public Type type;
 
-    private void OnEnable()
+    public StatModifier GetModifier()
     {
-        itemType = ItemType.Weapon;
+        return new StatModifier
+        {
+            attack = attackBoost,
+            range = rangeBoost,
+            defense = defenseBoost,
+            attackCount = attackCountBoost,
+            health = healthBoost,
+            movement = movementBoost,
+            critical = criticalBoost,
+            evasion = evasionBoost
+        };
     }
 }
 

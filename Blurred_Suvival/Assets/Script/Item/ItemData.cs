@@ -4,7 +4,12 @@ public enum ItemType
 {
     Weapon,
     Consumable,
-    Ration
+    Ration,
+
+    Helmet,
+    Vest,
+    Trouser,
+    Shoe,
     // Add more types if needed later (e.g. Armor, KeyItems, etc.)
 }
 

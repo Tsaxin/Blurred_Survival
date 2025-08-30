@@ -22,6 +22,9 @@ public class Squad : MonoBehaviour
 
     public int MaxSurvivorCountInGroup = 12;
 
+    public Enemy enemy;
+    public BattleManager battleManager;
+
     Region region;
 
     private void OnEnable()
@@ -32,23 +35,26 @@ public class Squad : MonoBehaviour
         }
     }
 
-    public void InitiateBattle(bool IsEvent,Event eventData,Region region, bool SelfEncounter)
+    public void InitiateBattle(bool IsEvent, Event eventData, Region region, bool SelfEncounter)
     {
         this.region = region;
         CheckCharacterListAnamoly();
+        enemy.CheckSpawnListAnamoly();
 
         region.loadBattleGround();
         PlaceCharactersInMatrix();
 
         if (IsEvent)
         {
-            region.TrySpawnEventTriggerEnemies(turnManager,eventData.Survivors);
+            region.TrySpawnEventTriggerEnemies(turnManager, eventData.Survivors);
             TurnManager.Instance.StartEventTrigger(eventData);
         }
         else
         {
             EncounterWithEnemy(SelfEncounter);
         }
+        
+        battleManager.CalculateTotalXP();
     }
 
     void EncounterWithEnemy(bool SelfEncounter)
@@ -180,7 +186,7 @@ public class Squad : MonoBehaviour
             CharacterController controller = character.GetComponent<CharacterController>();
             if (controller != null)
             {
-                controller.SetWeaponSL(sortingOrder);
+                controller.GetComponent<GearEquipper>()?.SetWeaponSL(sortingOrder);
                 controller.currentTileData = tile.GetComponent<TileData>();
                 controller.turnManager = turnManager;
                 controller.ResetScale();

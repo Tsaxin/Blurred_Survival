@@ -17,12 +17,18 @@ public class EventTrigger : MonoBehaviour
 [System.Serializable]
 public class Event
 {
+    public int SurvivorCount;
     [TextArea]
     public string[] dialouge;
+
+    public Sprite Icon;
+    [HideInInspector]
     public List<GameObject> Survivors;
 
+    [HideInInspector]
     public List<GameObject> Vehicles;
 
+    [HideInInspector]
     public List<GameObject> LootableObjects;
 
 }

@@ -380,7 +380,7 @@ public class CharacterController : MonoBehaviour
 
         SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
         if (sr != null) sr.sortingOrder = sortingOrder;
-        SetWeaponSL(sortingOrder);
+        GetComponent<GearEquipper>()?.SetWeaponSL(sortingOrder);
 
         float distance = Vector3.Distance(start, end);
         float moveSpeed = GetComponent<CharacterStats>()?.moveSpeed ?? 1f;
@@ -706,45 +706,13 @@ public class CharacterController : MonoBehaviour
     }
     #endregion
 
-    #region WeaponSprite
-    public SpriteRenderer Melee, Range, RangeFlash;
-    public TrailRenderer TR;
-    public void SetWeaponSL(int sortingOrder)
-    {
-        Melee.sortingOrder = sortingOrder + 2;
-        TR.sortingOrder = sortingOrder + 1;
-        Range.sortingOrder = sortingOrder + 2;
-        RangeFlash.sortingOrder = sortingOrder + 2;
-    }
-
-    public void SetRangeWeapon(Sprite sprite)
-    {
-        Melee.gameObject.SetActive(false);
-        Range.gameObject.SetActive(true);
-        Range.sprite = sprite;
-    }
-    public void SetMeleeWeapon(Sprite sprite)
-    {
-        Melee.enabled = true;
-        Melee.gameObject.SetActive(true);
-        Range.gameObject.SetActive(false);
-        Melee.sprite = sprite;
-    }
-    public void SetFist()
-    {
-        Melee.enabled = false;
-        Melee.gameObject.SetActive(true);
-        Range.gameObject.SetActive(false);
-    }
-    #endregion
-
     #region Retreat
     public void OnRetreat()
     {
         Deselect();
         SetButtonStatus(false);
         // Force character to face left when retreating
-        transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        SetScale(-1);
 
         GetComponent<Animator>().SetBool("IsMoving", true);
         StartCoroutine(TryAndRetreat());
@@ -778,7 +746,7 @@ public class CharacterController : MonoBehaviour
         else
         {
             // Retreat failed → face back right and idle
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            SetScale(1);
             GetComponent<Animator>().SetBool("IsMoving", false);
             FinishedTurn();
         }
@@ -795,7 +763,7 @@ public class CharacterController : MonoBehaviour
 
     public IEnumerator OnRetreatAll(bool IsLeft)
     {
-        transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        SetScale(-1);
 
         GetComponent<Animator>().SetBool("IsMoving", true);
 

@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class DialogueManager : MonoBehaviour
     // ✅ Callback for when dialogue finishes
     private Action onDialogueFinished;
 
+    // ✅ List of survivors
+    private List<GameObject> Survivors;
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && dialoguePanel.activeSelf)
@@ -36,6 +40,7 @@ public class DialogueManager : MonoBehaviour
             OnClickDialogue();
         }
     }
+
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -46,28 +51,27 @@ public class DialogueManager : MonoBehaviour
         ChoicePanel.SetActive(false);
     }
 
-    public void InitiateDialouge(Event EventData, GameObject obj)
+    /// <summary>
+    /// Initiate dialogue with a list of survivors
+    /// </summary>
+    public void InitiateDialogue(Event EventData, List<GameObject> survivors)
     {
-        SetSpeakerDetails(
-            obj.GetComponentInChildren<SpriteRenderer>().sprite,
-            obj.GetComponent<CharacterStats>().CharacterName
-        );
-
+        Survivors = survivors;
         StartDialogue(EventData.dialouge);
     }
 
     public void SetSpeakerDetails(Sprite characterSprite, string characterName)
     {
-        this.CharacterImage.sprite = characterSprite;
-        this.CharacterName.text = characterName;
+        CharacterImage.sprite = characterSprite;
+        CharacterName.text = characterName;
 
-        this.CharacterImage.SetNativeSize();
+        CharacterImage.SetNativeSize();
 
-        RectTransform rt = this.CharacterImage.GetComponent<RectTransform>();
+        RectTransform rt = CharacterImage.GetComponent<RectTransform>();
         rt.sizeDelta = rt.sizeDelta * 1.4f;
     }
 
-    // ✅ Updated StartDialogue with optional callback
+    // ✅ StartDialogue with optional callback
     public void StartDialogue(string[] dialogue, bool showChoices = true, Action onFinish = null)
     {
         currentDialogue = dialogue;
@@ -86,6 +90,18 @@ public class DialogueManager : MonoBehaviour
     {
         string line = currentDialogue[currentLine];
 
+        // Determine which survivor speaks
+        if (Survivors != null && Survivors.Count > 0)
+        {
+            int speakerIndex = currentLine % Survivors.Count;
+            GameObject speaker = Survivors[speakerIndex];
+
+            SetSpeakerDetails(
+                speaker.GetComponentInChildren<SpriteRenderer>().sprite,
+                speaker.GetComponent<CharacterStats>().CharacterName
+            );
+        }
+
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
         typingCoroutine = StartCoroutine(TypeText(line));
     }
@@ -99,10 +115,8 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(typeSpeed);
         }
 
-        // Coroutine ends naturally when line is fully typed
         typingCoroutine = null;
     }
-
 
     private void NextLine()
     {
@@ -126,7 +140,6 @@ public class DialogueManager : MonoBehaviour
             ChoicePanel.SetActive(false);
             MainPanel.SetActive(false);
 
-            // ✅ Invoke callback when dialogue fully ends
             onDialogueFinished?.Invoke();
         }
     }
@@ -135,18 +148,15 @@ public class DialogueManager : MonoBehaviour
     {
         if (typingCoroutine != null)
         {
-            // Stop the typewriter and instantly show full line
             StopCoroutine(typingCoroutine);
             dialogueText.text = currentDialogue[currentLine];
             typingCoroutine = null;
         }
         else
         {
-            // Move to next line if fully displayed
             NextLine();
         }
     }
-
 
     #region ChoiceButton
     public void Onclick()

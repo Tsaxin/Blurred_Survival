@@ -676,10 +676,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileManager: {fileID: 0}
   currentTileData: {fileID: 0}
-  ZombieName: Roamer
   EnemyManager: {fileID: 0}
-  trailRenderer: {fileID: 1152518368814713772}
   characterStats: {fileID: -1332772838664599718}
+  trailRenderer: {fileID: 1152518368814713772}
+  ScaleForZombie: 1
 --- !u!114 &-1332772838664599718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -737,9 +737,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootTable:
-  - loot: {fileID: 4545915707345495668, guid: 72a94a5254a2f6845a6a941e8697f06d, type: 3}
+  - loot: {fileID: 4545915707345495668, guid: 26ae5b2078ca0f546a6dd08046bb18cb, type: 3}
     dropChance: 1
-  - loot: {fileID: 4545915707345495668, guid: 6082a785747429e41b63c1f06c6b7cec, type: 3}
+  - loot: {fileID: 4545915707345495668, guid: 3ffc687304adf2b4eab545d34313f375, type: 3}
+    dropChance: 1
+  - loot: {fileID: 4545915707345495668, guid: fd855fcd2d81a9a4e902ee4b9b228ad5, type: 3}
+    dropChance: 1
+  - loot: {fileID: 4545915707345495668, guid: e6cc25a1dc9dee04fba85e5041a9dcfa, type: 3}
+    dropChance: 1
+  - loot: {fileID: 4545915707345495668, guid: 3a9e2df856db5c54296bc922cdbadfe3, type: 3}
+    dropChance: 1
+  - loot: {fileID: 4545915707345495668, guid: 65dcf6d94ac25b644b0b67401d2b1753, type: 3}
+    dropChance: 1
+  - loot: {fileID: 4545915707345495668, guid: 0dcfcbc5458e0a341889735a4d5d3af5, type: 3}
+    dropChance: 1
+  - loot: {fileID: 4545915707345495668, guid: 3f3ef55251f1da74087d7eecaf510859, type: 3}
+    dropChance: 1
+  - loot: {fileID: 4545915707345495668, guid: 6b98e18738352bd43b2b86151523af13, type: 3}
     dropChance: 1
 --- !u!95 &4624903711036126842
 Animator:

@@ -1,0 +1,413 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c1bdecead6eb5947802e53397da8690, type: 3}
+  m_Name: MasterEvent
+  m_EditorClassIdentifier: 
+  Survivors: []
+  Vehicles: []
+  events:
+  - SurvivorCount: 2
+    dialouge:
+    - "I told you, we should\u2019ve hit the pharmacy first. We can\u2019t survive
+      on canned beans forever."
+    - "Pharmacy\u2019s too risky. There\u2019s that horde near the street corner.
+      We stick to the supermarket and hope for the best."
+    - "Hey! Who\u2019s there? You\u2026 you\u2019re not one of them, are you?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "Did anyone hear from Marcus? He went out before sunrise\u2026 he never comes
+      back this late."
+    - "Let\u2019s not panic yet. He knows these streets better than anyone\u2026
+      probably found something useful."
+    - "Wait\u2026 you! Where did you come from?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "You\u2019re reckless! You can\u2019t just wander into that street full of
+      deads!"
+    - "And you\u2019re cowardly! If we don\u2019t take risks, we starve. Simple as
+      that."
+    - "Uh\u2026 you there! Step back! Are you\u2026 alone?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "Remember life before\u2026 before all this? Feels like a dream now."
+    - "Yeah\u2026 dreams you\u2019d rather forget. Now all we have is tonight, and
+      maybe tomorrow."
+    - "Hey! Who\u2019s out there?! Don\u2019t sneak up on us like that!"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I heard there\u2019s a building on 5th that\u2019s safe\u2026 untouched. No
+      zombies, no raiders."
+    - Stop repeating rumors. Every building has a story. Some dead, some worse.
+    - "Hold on\u2026 who\u2019s that? Don\u2019t come closer!"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I found some food in that abandoned house. Should we\u2026 share it with the
+      others?"
+    - "Or hoard it. Only the strong survive. That\u2019s the law now."
+    - "Wait\u2026 who\u2019s there? Are you armed?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - We need to get across the river. The bridge might be clear at night.
+    - "Night\u2019s riskier. They move slower, but we move slower too. Still, no
+      choice."
+    - Stop! Who goes there? Show yourself!
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I\u2026 I saw them. Our kids\u2026 I thought they were alive. But\u2026"
+    - "\u2026don\u2019t say it. Don\u2019t remind me. We\u2019ve lost too much already."
+    - "Someone\u2019s here\u2026"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I can trade you two cans for a medkit. No way I\u2019m giving more."
+    - "Fine, but next time don\u2019t think you can cheat me. Resources are scarce,
+      but trust matters too."
+    - "Hey! Who are you? Looking to trade, or\u2026 trouble?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "Something\u2019s off. The usual groans\u2026 they\u2019re quieter. Too quiet."
+    - "Yeah\u2026 like they\u2019re waiting. Or worse, watching."
+    - "Who\u2019s there?! Show yourself! Don\u2019t make me regret asking!"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - That stash is mine!
+    - No, I found it first!
+    - "Uh\u2026 hey, you. Don\u2019t get in the middle of this."
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I used to sit in the park\u2026 watch the sun on the swings, kids laughing.
+      Can\u2019t remember if I smiled back then."
+    - "It\u2019s cruel, remembering happiness when all we see now is decay."
+    - "Uh\u2026 hey, don\u2019t sneak up like that."
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "That trader yesterday\u2026 he looked fine, but something felt off."
+    - Trust no one. People are worse than the dead.
+    - "Hey\u2026 who\u2019s that? You with him or alone?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "If the bridge collapses, we\u2019re trapped. We need another route\u2026 maybe
+      sewers, but worse things than walkers lurk there."
+    - "Yeah\u2026 but staying isn\u2019t an option either. Hunger, sickness\u2026
+      we can\u2019t wait."
+    - "Wait! Who\u2019s out there?! Don\u2019t move too fast!"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - We should follow Mia. She knows how to survive.
+    - Or we die following her plan! My gut says otherwise.
+    - "Uh\u2026 hey, wait! Who are you?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "Tom won\u2019t make it without this medkit."
+    - "We barely have enough\u2026"
+    - "Hey! Who\u2019s there?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I remember Saturday mornings\u2026 cartoons on TV, pancakes, and nobody worrying
+      about whether they\u2019d survive the day."
+    - "Yeah\u2026 my sister used to hide in my bed, pretending the world outside
+      wasn\u2019t there. Now\u2026"
+    - "Now\u2026 every sound could be the last one we hear."
+    - "Hey\u2026 wait\u2026 who\u2019s there?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I think they\u2019re coming."
+    - Barricade! Fast!
+    - "Hey\u2026 wait\u2026 who\u2019s there?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I\u2019ve got a few beans\u2026 want some?"
+    - "Half? That\u2019s risky\u2026 you\u2019ll starve."
+    - Better to share a little than hoard it all.
+    - "Wait\u2026 who\u2019s that? You looking for food too?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "Be careful in the alley\u2026 someone set spikes. Not walkers. I saw a kid
+      get caught last week. Never walked the same again."
+    - "Yeah\u2026 people are worse than the decayed. You gotta watch everything."
+    - "Wait\u2026 who\u2019s that? You looking for food too?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "My little brother\u2026 he loved drawing. I left his sketches on the fridge.
+      Don\u2019t even know if the house is still there."
+    - "I remember my sister used to hide in closets, thinking it would keep her safe.
+      Didn\u2019t work."
+    - "Wait\u2026 who\u2019s that? Don\u2019t come any closer!"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I stayed up all night once\u2026 thought I heard something scratching at the
+      door. Turned out to be just the wind\u2026 or maybe not. I can\u2019t tell
+      anymore."
+    - "I\u2019d rather face the decayed than face that silence. Makes your mind play
+      tricks."
+    - "Uh\u2026 hey. Who\u2019s there? Don\u2019t sneak up on us."
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "Whoa! You\u2026 you\u2019re not one of them, right?"
+    - "Uh\u2026 hey. Who\u2019s there? Don\u2019t sneak up on us."
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "We lost Jenna last week. Thought she\u2019d be safe\u2026 she said she\u2019d
+      scout ahead, never came back. I still hear her voice sometimes."
+    - "I saw her shadow near the old pharmacy\u2026 my mind must be playing tricks."
+    - "I don\u2019t know anymore. Every corner makes me think someone\u2019s gone
+      forever\u2026 and then maybe not."
+    - "Hey! Wait! Who\u2019s out there?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "We can\u2019t trust anyone. Last week, that guy tried to steal our supplies."
+    - "And what? Shoot him? We can\u2019t do that, not anymore. That\u2019s what
+      made us human."
+    - "Hey! Wait! Who\u2019s out there?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I heard there\u2019s a safe zone east\u2026 no walkers."
+    - "Hey! Wait! Who\u2019s out there?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I left my parents behind\u2026 thought I\u2019d be back in an hour. Never
+      got there."
+    - "I lost my dog on the first day\u2026 it\u2019s silly, but I still remember
+      its bark."
+    - "Nothing feels the same anymore. Everything\u2019s just\u2026 gone."
+    - "Someone\u2019s there\u2026 who are you?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "Remember when we thought a zombie was funny? Hah\u2026 not anymore."
+    - "Nothing feels the same anymore. Everything\u2019s just\u2026 gone."
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - I found a few bottles of water. Should we share or keep them?
+    - Keep them. Only the desperate ask for help these days.
+    - Hey! You there! Looking for water too?
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "Last month, a guy tried sneaking past the horde near the warehouse\u2026 didn\u2019t
+      make it. The things didn\u2019t even notice him at first.\u201D"
+    - "Yeah\u2026 the quiet ones are the worst. You hear nothing, then it\u2019s
+      too late."
+    - "Whoa! Who\u2019s there?! Don\u2019t move too fast."
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I hate night\u2026 it\u2019s like the world forgets you exist. Silence, shadows,
+      and the groans too far to track."
+    - "Whoa! Who\u2019s there?! Don\u2019t move too fast."
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "We found them in the street\u2026 family of three. Thought we were alone for
+      a minute\u2026 but then\u2026"
+    - "I don\u2019t want to remember. My own memories are enough."
+    - I still see their faces when I close my eyes.
+    - "Uh\u2026 hey! Who\u2019s that?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I hear them\u2026 coming closer."
+    - I still see their faces when I close my eyes.
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "If we get past the river, there\u2019s a town with lights. Maybe people\u2026
+      maybe not."
+    - "Lights could mean safety\u2026 or a trap."
+    - "Hey! You! Don\u2019t come closer!"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "We used to hide in the old subway tunnels\u2026 made a little home. Someone
+      found us once, but they left. We were lucky."
+    - "Lucky or na\xEFve. Most people would\u2019ve killed us for food."
+    - "I still sleep with one eye open. Can\u2019t trust anyone\u2026 not really."
+    - "Whoa\u2026 who\u2019s there?! Don\u2019t move."
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "Don\u2019t go down that alley."
+    - Hey! You! Step back!
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I got trapped once\u2026 cornered by them. Thought it was the end. Barely
+      got out."
+    - "I know that feeling\u2026 heart racing, thinking every shadow\u2019s death."
+    - "Wait\u2026 you. Who are you?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I swear\u2026 these things have no sense of fashion. Just ripped clothes and
+      drool."
+    - "Uh\u2026 hey! Don\u2019t come closer!"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "I remember the first week\u2026 nothing to eat. Every alley, every house\u2026
+      nothing. People fought over scraps."
+    - "I still have nightmares of hands grabbing the last can of beans. I thought
+      I\u2019d die before I ate."
+    - "Whoa! Who\u2019s that?! You alone?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []
+  - SurvivorCount: 2
+    dialouge:
+    - "Some nights, I hear them whispering\u2026 not groaning, just\u2026 quiet.
+      Makes me think we\u2019re next."
+    - "Whoa! Who\u2019s that?! You alone?"
+    Icon: {fileID: 0}
+    Survivors: []
+    Vehicles: []
+    LootableObjects: []

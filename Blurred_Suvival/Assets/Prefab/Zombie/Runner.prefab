@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: -1332772838664599718}
   - component: {fileID: 3551415007293984231}
   - component: {fileID: -8362081194654763321}
+  - component: {fileID: -3953302137994236104}
   m_Layer: 0
   m_Name: Runner
   m_TagString: Enemy
@@ -425,10 +426,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileManager: {fileID: 0}
   currentTileData: {fileID: 0}
-  ZombieName: Runner
   EnemyManager: {fileID: 0}
-  trailRenderer: {fileID: 3568950313171186948}
   characterStats: {fileID: -1332772838664599718}
+  trailRenderer: {fileID: 3568950313171186948}
+  ScaleForZombie: 1
 --- !u!114 &-1332772838664599718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,6 +509,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxScale: 0
   MinScale: 0
+--- !u!114 &-3953302137994236104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3736395949588290747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8dcbe3eab033c46a5c372996388e61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootTable:
+  - loot: {fileID: 4545915707345495668, guid: d3b983b7d73350a43b8dcc9e5a8a42f1, type: 3}
+    dropChance: 1
+  - loot: {fileID: 4545915707345495668, guid: 63d64fe196995dd4d99c3dd7c1e6ee0a, type: 3}
+    dropChance: 1
 --- !u!1 &7043163217621592945
 GameObject:
   m_ObjectHideFlags: 0

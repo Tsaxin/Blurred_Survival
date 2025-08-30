@@ -170,7 +170,7 @@ public class KnockerZombieAI : ZombieAIBase
 
             SpriteRenderer sr = target.GetComponentInChildren<SpriteRenderer>();
             if (sr != null) sr.sortingOrder = sortingOrder;
-            target.GetComponent<CharacterController>().SetWeaponSL(sortingOrder);
+            target.GetComponent<GearEquipper>()?.SetWeaponSL(sortingOrder);
 
 
             float distance = Vector3.Distance(start, end);
@@ -223,12 +223,12 @@ public class KnockerZombieAI : ZombieAIBase
     {
         if (_targetStats == null || _targetStats.IsDead) return;
 
-        _targetStats.TakeDamage(characterStats.attack);
+       int damage= _targetStats.TakeDamage(characterStats.attack);
 
         Debug.Log($"{name} dealt {characterStats.attack} damage to {_targetStats.name}");
 
         // ✅ Start knockback if still alive
-        if (!_targetStats.IsDead && !_isKnockingBack)
+        if (!_targetStats.IsDead && !_isKnockingBack && damage>0)
             StartCoroutine(AttemptKnockback(_targetStats.gameObject));
     }
 

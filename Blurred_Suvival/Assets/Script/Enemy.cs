@@ -89,7 +89,7 @@ public class Enemy : MonoBehaviour
         CheckSpawnListAnamoly();
     }
 
-    void CheckSpawnListAnamoly()
+    public void CheckSpawnListAnamoly()
     {
         spawnedEnemies.RemoveAll(child => child == null);
     }

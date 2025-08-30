@@ -1111,10 +1111,6 @@ MonoBehaviour:
   turnManager: {fileID: 0}
   hasMoved: 0
   ButtonHolder: {fileID: 7312597323277048223}
-  Melee: {fileID: 2875128306071795277}
-  Range: {fileID: 8854192830837582029}
-  RangeFlash: {fileID: 2600864207773053009}
-  TR: {fileID: 3874295363928198052}
 --- !u!114 &761904330531867994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1129,7 +1125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: 
   MainMaxHealth: 10
-  MainAttack: 5
+  MainAttack: 1
   MainRange: 1
   MainDefense: 1
   MainAttackCount: 1
@@ -1142,7 +1138,7 @@ MonoBehaviour:
   AttackCount: 1
   CriticalChance: 0
   EvasionChance: 0
-  MainMovementRange: 3
+  MainMovementRange: 1
   MovementRange: 0
   chaseRange: 5
   knockTile: 1
@@ -1172,6 +1168,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equippedWeapon: {fileID: 0}
+  equippedHelmet: {fileID: 0}
+  equippedVest: {fileID: 0}
+  equippedTrouser: {fileID: 0}
+  equippedShoe: {fileID: 0}
+  Melee: {fileID: 2875128306071795277}
+  Range: {fileID: 8854192830837582029}
+  RangeFlash: {fileID: 2600864207773053009}
+  TR: {fileID: 3874295363928198052}
 --- !u!114 &4265864754060388997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1184,10 +1188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e2a7b3bb5af444da214d5e9a3603e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveSkills:
-  - passiveSkill: {fileID: 11400000, guid: f64cbab223e097c46b2b797eeef949f6, type: 2}
-    Level: 1
-    LevelUpFactor: 1
+  passiveSkills: []
 --- !u!114 &7046880778212801613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1268,8 +1269,9 @@ MonoBehaviour:
   tileManager: {fileID: 0}
   currentTileData: {fileID: 0}
   EnemyManager: {fileID: 0}
-  trailRenderer: {fileID: 0}
   characterStats: {fileID: 0}
+  trailRenderer: {fileID: 0}
+  ScaleForZombie: 1
 --- !u!1 &4743023035046903053
 GameObject:
   m_ObjectHideFlags: 0

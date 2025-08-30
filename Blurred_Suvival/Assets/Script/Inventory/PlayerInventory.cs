@@ -41,7 +41,7 @@ public class PlayerInventory : MonoBehaviour
         {
             RationData ration = newItem as RationData;
             HungerManager.Instance.RestoreHunger(ration.RationRestoreAmount);
-            EnqueueCollectedText($"{quantity}x ration collected.", FloatingTextType.Heal);
+            EnqueueCollectedText($"{ration.RationRestoreAmount}x ration collected.", FloatingTextType.Heal);
 
             return true;
         }

@@ -20,11 +20,12 @@ public class GearUI : MonoBehaviour
 
     public GameObject Panel;
     public GameObject Slot;
-    public void OnShowGear(GearEquipper gearEquipper,Sprite sprite)
+
+    public void OnShowGear(GearEquipper gearEquipper, Sprite sprite)
     {
-        CharacterImage.sprite =sprite;
-        DestroyChildren(WeaponParent);
-        SetWeaponDetail();
+        CharacterImage.sprite = sprite;
+        DestroyAllChildren();
+        SetGearDetails(gearEquipper);
         Panel.SetActive(true);
     }
 
@@ -33,30 +34,40 @@ public class GearUI : MonoBehaviour
         Panel.SetActive(false);
     }
 
-    void SetWeaponDetail()
+    private void SetGearDetails(GearEquipper gearEquipper)
     {
-        var gearEquipper = TurnManager.Instance.SelectedUnit.GetComponent<GearEquipper>();
-
-        if (gearEquipper.equippedWeapon != null)
-        {
-            // Create UI slot
-            GameObject obj = Instantiate(Slot, WeaponParent.position, Quaternion.identity, WeaponParent);
-
-            // Prepare tooltip data
-            ItemInstance tempInstance = new ItemInstance(gearEquipper.equippedWeapon, 1);
-            string tooltipText = InventoryUIManager.Instance.GenerateTooltipText(tempInstance);
-
-            // Assign tooltip trigger
-            TooltipTrigger trigger = obj.GetComponent<TooltipTrigger>();
-            if (trigger != null)
-            {
-                trigger.Initialize(gearEquipper.equippedWeapon.itemName, tooltipText);
-            }
-            obj.GetComponent<Image>().sprite = gearEquipper.equippedWeapon.itemIconIU;
-        }
+        AddGearSlot(gearEquipper.equippedWeapon, WeaponParent);
+        AddGearSlot(gearEquipper.equippedHelmet, HelmetParent);
+        AddGearSlot(gearEquipper.equippedVest, ArmorParent);
+        AddGearSlot(gearEquipper.equippedTrouser, PantParent);
+        AddGearSlot(gearEquipper.equippedShoe, ShoeParent);
     }
 
-    void DestroyAllChildren()
+    /// <summary>
+    /// Creates a UI slot for the given gear if it's equipped.
+    /// </summary>
+    private void AddGearSlot(WeaponData gearData, Transform parent)
+    {
+        if (gearData == null) return;
+
+        // Create UI slot
+        GameObject obj = Instantiate(Slot, parent.position, Quaternion.identity, parent);
+
+        // Prepare tooltip data
+        ItemInstance tempInstance = new ItemInstance(gearData, 1);
+        string tooltipText = InventoryUIManager.Instance.GenerateTooltipText(tempInstance);
+
+        // Assign tooltip trigger
+        TooltipTrigger trigger = obj.GetComponent<TooltipTrigger>();
+        if (trigger != null)
+        {
+            trigger.Initialize(gearData.itemName, tooltipText);
+        }
+
+        obj.GetComponent<Image>().sprite = gearData.itemIconIU;
+    }
+
+    private void DestroyAllChildren()
     {
         DestroyChildren(HelmetParent);
         DestroyChildren(ArmorParent);
@@ -65,7 +76,7 @@ public class GearUI : MonoBehaviour
         DestroyChildren(WeaponParent);
     }
 
-    void DestroyChildren(Transform parent)
+    private void DestroyChildren(Transform parent)
     {
         for (int i = parent.childCount - 1; i >= 0; i--)
         {

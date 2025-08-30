@@ -91,21 +91,18 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int amount, CharacterStats attacker = null)
+    public int TakeDamage(int amount, CharacterStats attacker = null)
     {
-        if (_isDead) return;
+        if (_isDead) return 0;
 
         // 🌟 Evasion check
-        if (EvasionChance > 0)
+        float evasionRoll = Random.Range(0, 100f);
+        if (evasionRoll < EvasionChance)
         {
-            int evasionRoll = Random.Range(0, 100);
-            if (evasionRoll < EvasionChance)
-            {
-                Debug.Log($"{name} evaded the attack!");
-                if (DamageTextManager.Instance != null)
-                    DamageTextManager.Instance.ShowDamage(transform.position, "Miss", true);
-                return;
-            }
+            Debug.Log($"{name} evaded the attack!");
+            if (DamageTextManager.Instance != null)
+                DamageTextManager.Instance.ShowDamage(transform.position, "Miss", true);
+            return 0;
         }
 
         bool isCrit = false; // 🔴 track crit state
@@ -133,7 +130,6 @@ public class CharacterStats : MonoBehaviour
 
                     // 🔴 Huge blood for zombie headshot
                     BloodPool.Instance.SpawnHuge(this.transform);
-                    return;
                 }
                 else
                 {
@@ -142,7 +138,11 @@ public class CharacterStats : MonoBehaviour
             }
         }
 
-        int damageTaken = (int)Mathf.Max(1f, amount - Defense); // Minimum 1
+        // Assuming Defense is a percentage value from 0 to 100
+        float defensePercent = Defense / 100f;          // convert to 0-1
+        float reducedAmount = amount * (1f - defensePercent);  // reduce by percent
+        int damageTaken = Mathf.Max(1, Mathf.RoundToInt(reducedAmount)); // minimum 1
+
         _currentHealth -= damageTaken;
 
         if (damageTaken > 0 && DamageTextManager.Instance != null)
@@ -178,6 +178,7 @@ public class CharacterStats : MonoBehaviour
                 BloodPool.Instance.SpawnBlood(this.transform);
             }
         }
+        return amount;
     }
 
 
@@ -374,27 +375,26 @@ public class CharacterStats : MonoBehaviour
     public void RecalculateStats()
     {
         float debuff = HungerManager.Instance.DebuffAmount;
-        gearEquipper?.LoadWeaponSprite();
 
-        // Base stats + gear
-        int weaponAtk = gearEquipper?.equippedWeapon?.attackBoost ?? 0;
-        int weaponRange = gearEquipper?.equippedWeapon?.rangeBoost ?? 0;
-        int MovementBoost = gearEquipper?.equippedWeapon?.movementBoost ?? 0;
-        float DefenseBoost = gearEquipper?.equippedWeapon?.defenseBoost ?? 0;
-        int AttackCountBoost = gearEquipper?.equippedWeapon?.attackCountBoost ?? 0;
-        int HealthBoost = gearEquipper?.equippedWeapon?.healthBoost ?? 0;
-        float CriticalBoost = gearEquipper?.equippedWeapon?.criticalBoost ?? 0;
-        float EvasionBoost = gearEquipper?.equippedWeapon?.evasionBoost ?? 0;
+        // Collect total modifiers from all equipped gear
+        StatModifier totalModifier = new StatModifier();
+        if (gearEquipper != null)
+        {
+            foreach (var mod in gearEquipper.GetAllModifiers())
+            {
+                totalModifier += mod;
+            }
+        }
 
-        // Always recalc from original stats
-        attack = Mathf.Max(1, Mathf.CeilToInt((MainAttack + weaponAtk) * debuff));
-        range = MainRange + weaponRange;
-        Defense = (MainDefense + DefenseBoost) * debuff;
-        AttackCount = MainAttackCount + AttackCountBoost;
-        maxHealth = Mathf.Max(1, Mathf.CeilToInt((MainMaxHealth + HealthBoost) * debuff));
-        MovementRange = MainMovementRange + MovementBoost;
-        CriticalChance = MainCriticalChance + CriticalBoost;
-        EvasionChance = Mathf.Max(0f, (MainEvasionChance + EvasionBoost) * debuff);
+        // Base stats + gear + debuff
+        attack = Mathf.Max(1, Mathf.CeilToInt((MainAttack + totalModifier.attack) * debuff));
+        range = MainRange + totalModifier.range;
+        Defense = (MainDefense + totalModifier.defense) * debuff;
+        AttackCount = MainAttackCount + totalModifier.attackCount;
+        maxHealth = Mathf.Max(1, Mathf.CeilToInt((MainMaxHealth + totalModifier.health) * debuff));
+        MovementRange = MainMovementRange + totalModifier.movement;
+        CriticalChance = MainCriticalChance + totalModifier.critical;
+        EvasionChance = Mathf.Max(0f, (MainEvasionChance + totalModifier.evasion) * debuff);
 
         // Keep current health proportional
         float healthPercent = (float)_currentHealth / Mathf.Max(1, healthSlider?.maxValue ?? MainMaxHealth);
@@ -402,7 +402,6 @@ public class CharacterStats : MonoBehaviour
 
         UpdateHealthSlider();
     }
-
 
     public void ModifyStats(float multiplier)
     {
