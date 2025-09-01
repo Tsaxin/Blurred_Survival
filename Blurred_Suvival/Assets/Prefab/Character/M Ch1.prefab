@@ -1069,8 +1069,9 @@ GameObject:
   - component: {fileID: 2329322443299614392}
   - component: {fileID: 4771386806844751260}
   - component: {fileID: 6975025493375525940}
+  - component: {fileID: 5689529075099732248}
   m_Layer: 0
-  m_Name: Character 1
+  m_Name: M Ch1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1272,6 +1273,19 @@ MonoBehaviour:
   characterStats: {fileID: 0}
   trailRenderer: {fileID: 0}
   ScaleForZombie: 1
+--- !u!114 &5689529075099732248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4536060065368327761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b6d4dc385d0db46a9f5caed9060a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gender: 0
 --- !u!1 &4743023035046903053
 GameObject:
   m_ObjectHideFlags: 0
@@ -2177,8 +2191,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.42, y: 4.1}
+    pivot: {x: 0.44462883, y: 0.4987723}
+    oldSize: {x: 2, y: 4.1}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

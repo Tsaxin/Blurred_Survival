@@ -17,6 +17,7 @@ public class TurnManager : MonoBehaviour
 
     [Header("Post-Battle Settings")]
     public GameObject PostBattlePanel;
+    public GameObject CampButton;
 
     public List<CharacterController> activePlayerCharacters = new List<CharacterController>();
 
@@ -66,6 +67,7 @@ public class TurnManager : MonoBehaviour
 
     public void StartBattle()
     {
+        CampButton.SetActive(false);
         InitializeCharacters();
 
         switch (EncounterMode)
@@ -210,17 +212,21 @@ public class TurnManager : MonoBehaviour
     public BattleManager BattleManager;
     public void RemoveEnemy(ZombieAIBase enemy)
     {
+        // Remove the enemy if it's in the list
         if (enemyCharacters.Contains(enemy))
         {
             enemyCharacters.Remove(enemy);
         }
 
-        // Check if all enemies are dead
+        // Clean up any null/missing entries
+        enemyCharacters.RemoveAll(e => e == null);
+
+        // Check if all enemies are gone
         if (enemyCharacters.Count == 0)
         {
             Debug.Log("🎉 All enemies defeated! Preparing to exit encounter...");
 
-            // ✅ Distribute XP
+            // Distribute XP
             if (BattleManager != null)
             {
                 BattleManager.DistributeXPToAlivePlayers();
@@ -230,7 +236,7 @@ public class TurnManager : MonoBehaviour
                 Debug.LogWarning("⚠️ BattleManager not found when trying to distribute XP.");
             }
 
-            // ✅ Show post battle UI
+            // Show post battle UI
             PostBattlePanel.SetActive(true);
         }
     }
@@ -361,9 +367,10 @@ public class TurnManager : MonoBehaviour
         Enemy enemy = enemyParent.GetComponent<Enemy>();
         foreach (GameObject child in enemy.spawnedEnemies)
         {
-            PostBattlePanel.SetActive(true);
             CoroutineRunner.Instance.StartCoroutine(child.GetComponent<CharacterController>().OnRetreatAll(false));
         }
+
+        PostBattlePanel.SetActive(true);
     }
 
     public void NPCDropLootAndRunAway()
@@ -386,10 +393,10 @@ public class TurnManager : MonoBehaviour
             {
                 enemyParent.transform.GetChild(i).SetParent(playerParent.transform);
             }
-
             InitializeCharacters();
             TurnExploreModeOn();
             BeginPlayerTurn();
+            enemyParent.GetComponent<Enemy>().ClearSpawnedEnemy();
         }
         else
         {

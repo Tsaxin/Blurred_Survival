@@ -100,3 +100,119 @@ MonoBehaviour:
     - "I\u2019ve been looking for a reason to keep going\u2026 this works."
     - "I don\u2019t know if I can say no\u2026 let\u2019s do this."
     - "No time to waste. Let\u2019s move."
+  - choiceType: 16
+    Responses:
+    - "Oh yeah? That\u2019s cute. How about you drop your supplies and walk away
+      before I change my mind."
+    - "Oh, you think you\u2019re in a position to bargain? Funny. Here\u2019s the
+      deal: you give me everything, and maybe you keep breathing."
+    - "Oh, I hear you\u2026 but I\u2019ve got a better idea. You leave all your gear
+      here, and you leave with your life."
+    - "Oh, sure\u2026 sounds nice. But you know what sounds nicer? You handing me
+      your pack before things get ugly."
+    - "Oh, I get it, you\u2019re trying to play nice. I used to fall for that. Not
+      anymore. Empty your bag."
+    - "Oh, bargains? We tried that once. Trusted a guy\u2014he shot my cousin and
+      took everything. So here\u2019s how this one goes: drop your supplies and run,
+      before I put you in the ground too."
+    - Oh yeah? Supplies. Now.
+    - "Oh, that\u2019s adorable. You think you\u2019ve got a choice. Only choice
+      you\u2019ve got is how fast you drop your pack."
+    - "Oh, I\u2019ve heard that before. You know what comes next? A knife in the
+      back. Not this time. Give me your gear."
+    - "Oh, I don\u2019t want to argue. I don\u2019t even care what you said. I just
+      want your supplies."
+    - Ahhhh.. how about you hand over your stuff before I stop laughing.
+    - "Oh, I used to talk like you. Believed in deals, in helping each other out.
+      Then one winter, a man traded me canned food\u2014turned out they were empty
+      tins, sealed with rocks. My brother starved. So forgive me if I don\u2019t
+      bargain anymore. Drop your supplies, now."
+    - "Oh, you sound just like the last guy. You know where he is now? Probably shambling
+      around as one of them. You don\u2019t wanna join him\u2014so leave the bag
+      and walk."
+    - 'Oh yeah? How about this: your supplies, or your blood. Your choice.'
+    - "Oh, I get it\u2026 I really do. But you don\u2019t understand\u2014I need
+      what you\u2019ve got. My sister\u2019s sick. I can\u2019t let you walk away
+      with food while she wastes away. Drop the bag\u2026 please, just drop it."
+    - "Oh, sure, sure\u2026 I hear you. But here\u2019s the thing\u2014I don\u2019t
+      care. Supplies. All of them. On the ground. NOW!"
+    - "Oh yeah? You think you\u2019re the first who came talking about fairness?
+      I had a group once\u2014we trusted a stranger. He waited till night, slit our
+      throats in our sleep, took everything. I lived. They didn\u2019t. So forgive
+      me if I don\u2019t play nice. Supplies, or else."
+    - Oh. Cute speech. Supplies, now.
+    - "Oh\u2026 I hate doing this. Once upon a time I would\u2019ve shared. But kindness
+      doesn\u2019t keep you alive out here. Supplies. Please."
+  - choiceType: 32
+    Responses:
+    - "Join you? No thanks. I don\u2019t trust strangers with my back."
+    - "I used to run with people. Watched every single one of them get eaten alive.
+      I\u2019m not making that mistake again."
+    - "Join you? Ha! You\u2019d slow me down. I survive just fine on my own."
+    - "Look at me\u2026 I can barely walk. I\u2019d just be dead weight to you."
+    - "That\u2019s exactly what a raider would say before stabbing me in the night.
+      Not falling for it."
+    - "Can\u2019t. Got a kid hidden nearby. My job\u2019s keeping them safe, not
+      running around with you."
+    - "What\u2019s the point? Gropu, no group\u2026 it all ends the same. In teeth
+      and screams."
+    - Why me? You want me as bait or something? No deal.
+    - "If you\u2019d found me a month ago, maybe. But now\u2026 I don\u2019t have
+      the strength left."
+    - The last squad I joined left me to die. You want me to do that again? Forget
+      it.
+    - "The Lord put me here, alone. That\u2019s how I\u2019ll stay."
+    - "Join you? Sure\u2014right up until I end up on your dinner plate when rations
+      run dry."
+    - "I don\u2019t need numbers. Numbers get noticed. I move like a shadow. That\u2019s
+      how I\u2019m still alive."
+    - "You\u2019ve got your path, I\u2019ve got mine. Don\u2019t cross them again."
+    - "I\u2019ve got business of my own. Things you don\u2019t need to know. So no,
+      I won\u2019t join you."
+    - "Where were you last winter, when I was starving in a cellar? You didn\u2019t
+      help me then. I don\u2019t need you now."
+    - "oin you? Ha! I barely survive with me, myself, and I. That\u2019s already
+      three mouths to feed."
+    - "Every time I trusted someone, they took from me\u2014supplies, hope, even
+      my dog. Trust is gone. So am I."
+    - "I\u2019ve lost enough people already. If I don\u2019t get close, I don\u2019t
+      get hurt."
+    - "Your squad means more mouths, more noise, more risk. Doesn\u2019t sound like
+      survival to me."
+    - "I\u2019ve made it this far without help. Don\u2019t insult me by offering
+      pity."
+    - "Last time I joined a group, they tied me up and left me for the dead. So no,
+      I\u2019m good."
+    - "The world\u2019s over. Being in group don\u2019t change that. I\u2019ll take
+      my chances alone."
+    - "I don\u2019t have time for your little pop band. I\u2019m looking for someone.
+      Until I find them, nothing else matters."
+    - "You seem decent. But trust takes more than a five-minute chat. I\u2019ll stay
+      on my own for now."
+  - choiceType: 64
+    Responses:
+    - "Not today. I\u2019ve got places to be."
+    - "You look like trouble. I\u2019ll pass."
+    - I travel alone. Always have.
+    - "Sorry, stranger. Can\u2019t stick around."
+    - "I don\u2019t trust anyone anymore\u2026 goodbye."
+    - Thanks for the chat. But I walk my own path.
+    - "I\u2019ve lost enough people already. Don\u2019t want to lose more."
+    - So long. Stranger.
+    - "Don\u2019t follow me. I move faster alone."
+    - "I don\u2019t need a squad. I just need to survive."
+    - "You seem decent. That\u2019s why I\u2019m leaving before it goes bad."
+    - "Stick to your fight. I\u2019ll stick to mine."
+    - Nothing personal. Just safer this way.
+    - You want company. I want distance.
+    - "I\u2019ve walked with people before. Didn\u2019t end well."
+    - The more people, the louder the noise. No thanks.
+    - "Stay safe, stranger. I\u2019ll take my chances elsewhere."
+    - "Your group sounds nice. But I don\u2019t do \u2018nice\u2019 anymore."
+    - "Don\u2019t take it wrong. I just don\u2019t stay put."
+    - "I\u2019m not cut out for groups. Never was."
+    - "One step closer to people, two steps closer to death. I\u2019ll walk away."
+    - "You\u2019ve got your path. I\u2019ve got mine. Mine doesn\u2019t stop here."
+    - "Trust is expensive. I can\u2019t afford it."
+    - "We\u2019ve both survived this long apart. Let\u2019s keep it that way."
+    - I leave before ties get heavy. This is goodbye.

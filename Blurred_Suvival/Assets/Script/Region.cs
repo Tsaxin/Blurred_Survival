@@ -11,7 +11,7 @@ public class Region : MonoBehaviour
 
     public float EncounterChance = 0.15f;
     public int MaxEnemyCount = 4;
-
+    public int EnemyStartColumn=3,EnemyEndColumn=15;
     public SquadMover squadMover;
 
     private void SpawnEnemiesInternal(
@@ -33,7 +33,7 @@ public class Region : MonoBehaviour
 
         for (int row = 0; row < 4; row++)
         {
-            for (int col = startCol; col <= 15; col++)
+            for (int col = startCol; col <= EnemyEndColumn; col++)
             {
                 var tile = tiles[row, col];
                 if (tile == null) continue;
@@ -99,60 +99,54 @@ public class Region : MonoBehaviour
 
     public void TrySpawnEnemies(TurnManager turnManager)
     {
-        int ZombieLevel = ZombieLevelScaler.Instance.ScaleZombieLevel(squadMover.gameObject);
-
         foreach (var enemyInZone in enemies)
         {
             int spawnCount = Random.Range(enemyInZone.minCount, enemyInZone.maxCount + 1);
 
             SpawnEnemiesInternal(
                 turnManager,
-                startCol: 4,
+                startCol: EnemyStartColumn,
                 isPreemptive: false,
                 getEnemy: (tileRow) =>
                 {
                     if (spawnCount-- <= 0) return null;
-                    return GetZombieFromPool(enemyInZone.ZombieName, ZombieLevel);
+                    return GetZombieFromPool(enemyInZone.ZombieName);
                 });
         }
     }
 
     public void TrySpawnAmbushEnemies(TurnManager turnManager)
     {
-        int ZombieLevel = ZombieLevelScaler.Instance.ScaleZombieLevel(squadMover.gameObject);
-
         foreach (var enemyInZone in enemies)
         {
             int spawnCount = Random.Range(enemyInZone.minCount, enemyInZone.maxCount + 1);
 
             SpawnEnemiesInternal(
                 turnManager,
-                startCol: 3,
+                startCol: EnemyStartColumn,
                 isPreemptive: false,
                 getEnemy: (tileRow) =>
                 {
                     if (spawnCount-- <= 0) return null;
-                    return GetZombieFromPool(enemyInZone.ZombieName, ZombieLevel);
+                    return GetZombieFromPool(enemyInZone.ZombieName);
                 });
         }
     }
 
     public void TrySpawnPreemptiveEnemies(TurnManager turnManager)
     {
-        int ZombieLevel = ZombieLevelScaler.Instance.ScaleZombieLevel(squadMover.gameObject);
-
         foreach (var enemyInZone in enemies)
         {
             int spawnCount = Random.Range(enemyInZone.minCount, enemyInZone.maxCount + 1);
 
             SpawnEnemiesInternal(
                 turnManager,
-                startCol: 4,
+                startCol: EnemyStartColumn,
                 isPreemptive: true,
                 getEnemy: (tileRow) =>
                 {
                     if (spawnCount-- <= 0) return null;
-                    return GetZombieFromPool(enemyInZone.ZombieName, ZombieLevel);
+                    return GetZombieFromPool(enemyInZone.ZombieName);
                 });
         }
     }
@@ -163,7 +157,7 @@ public class Region : MonoBehaviour
 
         SpawnEnemiesInternal(
             turnManager,
-            startCol: 4,
+            startCol: EnemyStartColumn,
             isPreemptive: false,
             getEnemy: (tileRow) =>
             {
@@ -178,14 +172,14 @@ public class Region : MonoBehaviour
                 return instance.transform;
             });
     }
-    private Transform GetZombieFromPool(string zombieName, int ZombieLevel)
+    private Transform GetZombieFromPool(string zombieName)
     {
         foreach (Transform zombie in EnemyManager.ZombiePool)
         {
             var ai = zombie.GetComponent<ZombieAIBase>();
             if (ai != null && ai.GetComponent<CharacterStats>().CharacterName == zombieName)
             {
-                zombie.GetComponent<CharacterStats>().Level = ZombieLevel;
+                zombie.GetComponent<CharacterStats>().Level = GetComponent<ZombieLevelScaler>().GetZombieLevel();
                 return zombie;
             }
         }

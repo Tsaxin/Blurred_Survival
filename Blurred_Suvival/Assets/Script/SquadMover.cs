@@ -24,12 +24,15 @@ public class SquadMover : MonoBehaviour
 
     public static SquadMover Instance;
 
+    public GameObject CampButton;
+
     void Start()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+        squad.SetSquadNumberText();
     }
 
     void Update()
@@ -67,17 +70,17 @@ public class SquadMover : MonoBehaviour
                     float roll = Random.value;
                     if (roll <= encounterChance)
                     {
-                        EnableEncounter(false, null,false);
+                        EnableEncounter(false, null,false,false);
                     }
                 }
             }
         }
     }
 
-    public void EnableEncounter(bool IsEvent, EventTrigger eventTrigger,bool SelfEncounter)
+    public void EnableEncounter(bool IsEvent, EventTrigger eventTrigger,bool SelfEncounter,bool CanBeDestroyed)
     {
         Event eventData = eventTrigger?.newEvent;
-        if (eventTrigger != null)
+        if (CanBeDestroyed)
         {
             Destroy(eventTrigger.gameObject);
         }
@@ -109,12 +112,14 @@ public class SquadMover : MonoBehaviour
         if (mapObject != null)
             mapObject.SetActive(false);
 
+        CoroutineRunner.Instance.StartCoroutine(CutsceneManager.Instance.Fade(0));   //Forcing fade out for cutscene manager
+
         StopMovementOnEncounter();
     }
 
     public void InitiateSelfEncounter()
     {
-        EnableEncounter(false,null,true);
+        EnableEncounter(false,null,true,false);
     }
 
     public void ExitEncounter()
@@ -134,6 +139,7 @@ public class SquadMover : MonoBehaviour
 
         EnemyHolder.GetComponent<Enemy>().DestroyAllChildren();
         BattleGroundManager.Instance.RemoveMap();
+        CampButton.SetActive(true);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

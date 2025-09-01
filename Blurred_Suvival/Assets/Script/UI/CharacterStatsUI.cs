@@ -90,9 +90,14 @@ public class CharacterStatsUI : MonoBehaviour
     public void OpenStatPanel(CharacterStats targetStats, Sprite CharacterSprite)
     {
         this.CharacterSprite.sprite = CharacterSprite;
+        this.CharacterSprite.SetNativeSize();
+
+        RectTransform rt = this.CharacterSprite.GetComponent<RectTransform>();
+        rt.sizeDelta = rt.sizeDelta /2.1f;
         this.targetStats = targetStats;
         StatsPanel.SetActive(true);
         UpdateStatsUI(targetStats);
+        CharacterName.text = targetStats.CharacterName;
         Level.text = "Level " + targetStats.Level.ToString();
         UpdatePointsUI();
     }

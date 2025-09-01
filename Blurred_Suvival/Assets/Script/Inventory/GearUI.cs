@@ -24,6 +24,7 @@ public class GearUI : MonoBehaviour
     public void OnShowGear(GearEquipper gearEquipper, Sprite sprite)
     {
         CharacterImage.sprite = sprite;
+        CharacterImage.SetNativeSize();
         DestroyAllChildren();
         SetGearDetails(gearEquipper);
         Panel.SetActive(true);

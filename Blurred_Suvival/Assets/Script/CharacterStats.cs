@@ -285,6 +285,11 @@ public class CharacterStats : MonoBehaviour
         }
         else
         {
+            TurnManager tm = FindObjectOfType<TurnManager>();
+            if (tm != null)
+            {
+                tm.RemoveEnemy(GetComponent<ZombieAIBase>());
+            }
             // ✅ Handle generic enemies (non-zombie, non-player)
             Debug.Log($"{name} is a generic NPC and is now dead. Destroying.");
         }

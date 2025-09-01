@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.TextCore.Text;
 using System.Linq;
+using TMPro;
 
 public class Squad : MonoBehaviour
 {
@@ -27,12 +28,19 @@ public class Squad : MonoBehaviour
 
     Region region;
 
+    public TextMeshProUGUI SquadNumberText;
+
     private void OnEnable()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+    }
+
+    public void SetSquadNumberText()
+    {
+        SquadNumberText.text = $"{transform.childCount}/{MaxSurvivorCountInGroup}";
     }
 
     public void InitiateBattle(bool IsEvent, Event eventData, Region region, bool SelfEncounter)
@@ -42,6 +50,8 @@ public class Squad : MonoBehaviour
         enemy.CheckSpawnListAnamoly();
 
         region.loadBattleGround();
+
+        InitializeCharacters();
         PlaceCharactersInMatrix();
 
         if (IsEvent)
@@ -53,7 +63,7 @@ public class Squad : MonoBehaviour
         {
             EncounterWithEnemy(SelfEncounter);
         }
-        
+
         battleManager.CalculateTotalXP();
     }
 
@@ -111,6 +121,8 @@ public class Squad : MonoBehaviour
         {
             Characters.Add(child.gameObject);
         }
+
+        SetSquadNumberText();
     }
     void PlaceCharactersInMatrix()
     {
@@ -176,6 +188,8 @@ public class Squad : MonoBehaviour
 
             // Compute sorting order with spacing
             int sortingOrder = 10 + row * spacing;
+            character.GetComponent<CharacterController>().turnManager = turnManager;
+            character.GetComponent<CharacterController>().currentTileData = tile.GetComponent<TileData>();
 
             // Assign world position (z-depth for pseudo-3D layering)
             Vector3 tilePos = tile.position;
@@ -249,10 +263,11 @@ public class Squad : MonoBehaviour
         if (Characters.Contains(character))
         {
             Characters.Remove(character);
-            Debug.Log($"🗑 Removed {character.name} from squad list.");
         }
 
         //Removing character from hunger manager as well
+
+        SetSquadNumberText();
     }
 
     #region Retreat Region

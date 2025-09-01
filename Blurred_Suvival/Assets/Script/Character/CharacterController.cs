@@ -761,15 +761,19 @@ public class CharacterController : MonoBehaviour
         anim.Update(0f);
     }
 
-    public IEnumerator OnRetreatAll(bool IsLeft)
+    public IEnumerator OnRetreatAll(bool isLeft)
     {
+        if (this == null) yield break; // safety check at start
+
         SetScale(-1);
 
-        GetComponent<Animator>().SetBool("IsMoving", true);
+        Animator anim = GetComponent<Animator>();
+        if (anim != null) anim.SetBool("IsMoving", true);
 
         Vector3 start = transform.position;
-        Vector3 end = new Vector3();
-        if (IsLeft)
+        Vector3 end;
+
+        if (isLeft)
         {
             end = TileManager.Instance.LeftRetreatTile.transform.position;
         }
@@ -778,6 +782,7 @@ public class CharacterController : MonoBehaviour
             SetScale(1);
             end = TileManager.Instance.RightRetreatTile.transform.position;
         }
+
         float distance = Vector3.Distance(start, end);
         float moveSpeed = GetComponent<CharacterStats>()?.moveSpeed ?? 1f;
         float duration = distance / Mathf.Max(moveSpeed, 0.01f);
@@ -785,13 +790,22 @@ public class CharacterController : MonoBehaviour
 
         while (elapsed < duration)
         {
+            // Check if destroyed mid-run
+            if (this == null || transform == null) yield break;
+
             float t = elapsed / duration;
             t = t * t * (3f - 2f * t); // smoothstep
             transform.position = Vector3.Lerp(start, end, t);
+
             elapsed += Time.deltaTime;
             yield return null;
         }
+
+        // optional: final snap to end position (with safety)
+        if (this != null && transform != null)
+            transform.position = end;
     }
+
     #endregion
 
 }

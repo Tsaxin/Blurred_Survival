@@ -12,9 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1bdecead6eb5947802e53397da8690, type: 3}
   m_Name: MasterEvent
   m_EditorClassIdentifier: 
-  Survivors: []
+  NormalIcon:
+  - {fileID: 21300000, guid: 78f83d1134ef2404c9f2e74d0a96e156, type: 3}
+  - {fileID: 21300000, guid: eabf3cf2d027f554bbb5deedf0553aad, type: 3}
+  - {fileID: 21300000, guid: 4267a14ce39e2514ea35b1f6f42fc074, type: 3}
+  - {fileID: 21300000, guid: d04e2d6230b5246488a15c05963b39b3, type: 3}
+  - {fileID: 21300000, guid: 2872cc38458ae054cb0aadacf269caab, type: 3}
+  Survivors:
+  - {fileID: 9200530703817233753, guid: cb87d32dda97ffc4bb55ce4291e1ffdb, type: 3}
+  - {fileID: 4077031628795978870, guid: 84ec5e13ef4c4ce46839d09092556e88, type: 3}
+  - {fileID: 7603693025749048937, guid: bccdcc27446b3e64d8c44893f26d0240, type: 3}
+  - {fileID: 7441000921677630084, guid: 5b34f23181d08d445b469f08095c62fe, type: 3}
+  - {fileID: 1042544255454963484, guid: 9ce01d2208b8a5f46a6fc3bae6346d0c, type: 3}
+  - {fileID: 4536060065368327761, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
+  - {fileID: 4543795819597959861, guid: 0b0a2ab40f14f174cb494cb64173f505, type: 3}
+  - {fileID: 750897079123205016, guid: 908ae7e899b4cb248932d53b80b27382, type: 3}
+  - {fileID: 106117728334227358, guid: d891864755d568d4cae2dd3d87251f04, type: 3}
+  - {fileID: 4432471361555323814, guid: b1a988c7d6962324997e82b89131bcc0, type: 3}
+  - {fileID: 8710011502957677686, guid: 7ba973e03b558ac489a127a90950564a, type: 3}
+  - {fileID: 5279418514720354316, guid: 5eb933848ef90c4498146bb82657d333, type: 3}
+  - {fileID: 2932959252752737315, guid: bfd8009b194684e439eca70f47d2137c, type: 3}
+  - {fileID: 3816641826279779961, guid: 71d2c79699aa9964a9969210235f8fd1, type: 3}
+  - {fileID: 8300768595004691836, guid: e38420df97d61bd46ba7a8d010fb3645, type: 3}
   Vehicles: []
-  events:
+  event2survivor:
   - SurvivorCount: 2
     dialouge:
     - "I told you, we should\u2019ve hit the pharmacy first. We can\u2019t survive
@@ -75,7 +96,9 @@ MonoBehaviour:
     - "Or hoard it. Only the strong survive. That\u2019s the law now."
     - "Wait\u2026 who\u2019s there? Are you armed?"
     Icon: {fileID: 0}
-    Survivors: []
+    Survivors:
+    - {fileID: 3816641826279779961, guid: 71d2c79699aa9964a9969210235f8fd1, type: 3}
+    - {fileID: 4536060065368327761, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
     Vehicles: []
     LootableObjects: []
   - SurvivorCount: 2
@@ -201,7 +224,9 @@ MonoBehaviour:
     - Better to share a little than hoard it all.
     - "Wait\u2026 who\u2019s that? You looking for food too?"
     Icon: {fileID: 0}
-    Survivors: []
+    Survivors:
+    - {fileID: 8710011502957677686, guid: 7ba973e03b558ac489a127a90950564a, type: 3}
+    - {fileID: 7603693025749048937, guid: bccdcc27446b3e64d8c44893f26d0240, type: 3}
     Vehicles: []
     LootableObjects: []
   - SurvivorCount: 2
@@ -264,7 +289,9 @@ MonoBehaviour:
       made us human."
     - "Hey! Wait! Who\u2019s out there?"
     Icon: {fileID: 0}
-    Survivors: []
+    Survivors:
+    - {fileID: 750897079123205016, guid: 908ae7e899b4cb248932d53b80b27382, type: 3}
+    - {fileID: 4077031628795978870, guid: 84ec5e13ef4c4ce46839d09092556e88, type: 3}
     Vehicles: []
     LootableObjects: []
   - SurvivorCount: 2
@@ -312,7 +339,9 @@ MonoBehaviour:
       too late."
     - "Whoa! Who\u2019s there?! Don\u2019t move too fast."
     Icon: {fileID: 0}
-    Survivors: []
+    Survivors:
+    - {fileID: 7603693025749048937, guid: bccdcc27446b3e64d8c44893f26d0240, type: 3}
+    - {fileID: 9200530703817233753, guid: cb87d32dda97ffc4bb55ce4291e1ffdb, type: 3}
     Vehicles: []
     LootableObjects: []
   - SurvivorCount: 2
@@ -332,7 +361,9 @@ MonoBehaviour:
     - I still see their faces when I close my eyes.
     - "Uh\u2026 hey! Who\u2019s that?"
     Icon: {fileID: 0}
-    Survivors: []
+    Survivors:
+    - {fileID: 4077031628795978870, guid: 84ec5e13ef4c4ce46839d09092556e88, type: 3}
+    - {fileID: 7603693025749048937, guid: bccdcc27446b3e64d8c44893f26d0240, type: 3}
     Vehicles: []
     LootableObjects: []
   - SurvivorCount: 2
@@ -369,7 +400,9 @@ MonoBehaviour:
     - "Don\u2019t go down that alley."
     - Hey! You! Step back!
     Icon: {fileID: 0}
-    Survivors: []
+    Survivors:
+    - {fileID: 3816641826279779961, guid: 71d2c79699aa9964a9969210235f8fd1, type: 3}
+    - {fileID: 7603693025749048937, guid: bccdcc27446b3e64d8c44893f26d0240, type: 3}
     Vehicles: []
     LootableObjects: []
   - SurvivorCount: 2
@@ -411,3 +444,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+  MaleName: 'Liam,Noah,Oliver,Elijah,Lucas,Mason,Ethan,Logan,James,Aiden,Jackson,Leo,Oscar,Kai,Hugo,Ezra,Axel,Arlo,Nico,Rafael,Rio,Theo,Silas,Adrian,Victor,Julian,Micah,Emil,Enzo,Max,Felix,Leo,Finn,Jonah,Asher,Dante,Griffin,Atlas,Orion,Caius,Jasper,Malik,Zane,Ezio,Kairos,Lucian,Alaric,Rowan,Ryder,Caspian,Blaise,Callum,Damien,Everett,Gideon,Hendrix,Ignatius,Jett,Kaiyan,Leander,Maverick,Nash,Odin,Phineas,Quentin,Ronan,Stellan,Thaddeus,Ulysses,Vincent,Weston,Xander,Yannick,Zayden,Apollo,Balthazar,Cai,Drake,Ezekiel,Finnian,Gael,Hector,Isaias,Jovan,Kian,Lysander,Matteo,Neo,Oberon,Phoenix,Quillon,Rafferty,Samson,Tobias,Urijah,Valerian,Wesley,Xavian,Yorick,Zev
+
+'
+  FemaleName: 'Ava,Emma,Olivia,Sophia,Isabella,Mia,Amelia,Harper,Evelyn,Abigail,Emily,Ella,Scarlett,Grace,Chloe,Lily,Hannah,Aurora,Sofia,Aria,Penelope,Zoey,Nora,Ruby,Eden,Luna,Ivy,Clara,Elise,Freya,Sadie,Violet,Maya,Serena,Isla,Juliet,Amara,Alina,Kaia,Selena,Nadia,Lila,Elara,Celeste,Marina,Sienna,Estelle,Anya,Leona,Arwen,Calla,Rowan,Indira,Odessa,Thalia,Carys,Danica,Eulalia,Faye,Giselle,Harlow,Iris,Juniper,Kael,Leilani,Maren,Noelle,Ophelia,Paloma,Quinn,Rhea,Saskia,Talia,Uma,Valeria,Willa,Xanthe,Yara,Zara,Ariadne,Briar,Celina,Daphne,Elowen,Fiora,Gwyneth,Haven,Isolde,Juno,Kira,Liv,Melina,Nyx,Orianna,Phoebe,Roxanne,Selah,Tess,Uma,Vera,Willow,Xena,Yvette,Zinnia
+
+'

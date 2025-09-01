@@ -693,8 +693,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterName: Roamer
-  MainMaxHealth: 10
-  MainAttack: 2
+  MainMaxHealth: 3
+  MainAttack: 1
   MainRange: 1
   MainDefense: 1
   MainAttackCount: 1
@@ -712,7 +712,7 @@ MonoBehaviour:
   chaseRange: 5
   knockTile: 1
   experience: 0
-  xpPerKill: 8
+  xpPerKill: 4
   Level: 1
   xpToLevelUp: 20
   XPSlider: {fileID: 0}

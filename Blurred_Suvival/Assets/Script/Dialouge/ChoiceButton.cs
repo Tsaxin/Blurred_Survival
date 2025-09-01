@@ -58,6 +58,24 @@ public class ChoiceButton : MonoBehaviour
                     TurnManager.Instance.SetNPCAsEnemy();
                 });
                 break;
+            case ChoiceOutcome.ChoiceType.Threaten:
+                DialogueManager.Instance.StartDialogue(new string[] { enemyLine }, false, () =>
+                {
+                    TurnManager.Instance.SetNPCAsEnemy();
+                });
+                break;
+            case ChoiceOutcome.ChoiceType.RejectJoin:
+                DialogueManager.Instance.StartDialogue(new string[] { enemyLine }, false, () =>
+                {
+                    TurnManager.Instance.NPCRunAway();
+                });
+                break;
+            case ChoiceOutcome.ChoiceType.OfferTruce:
+                DialogueManager.Instance.StartDialogue(new string[] { enemyLine }, false, () =>
+                {
+                    TurnManager.Instance.NPCRunAway();
+                });
+                break;
         }
     }
 

@@ -12,7 +12,10 @@ public class ChoiceOutcome : ScriptableObject
         Runaway = 1 << 0,
         DropLoot = 1 << 1,
         Join = 1 << 2,
-        Fight = 1 << 3
+        Fight = 1 << 3,
+        Threaten = 1 << 4, // 16
+        RejectJoin = 1 << 5,  // 32
+        OfferTruce = 1 << 6  // 32
     }
 
     [System.Serializable]

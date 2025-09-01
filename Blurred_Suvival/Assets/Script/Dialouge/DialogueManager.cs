@@ -56,8 +56,11 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void InitiateDialogue(Event EventData, List<GameObject> survivors)
     {
+        TemporaryEvent = EventData;
+
+        showChoicesAtEnd = EventData.ShowChoiceButtonAtEndOfDialouge;
         Survivors = survivors;
-        StartDialogue(EventData.dialouge);
+        StartDialogue(EventData.dialouge, showChoicesAtEnd);
     }
 
     public void SetSpeakerDetails(Sprite characterSprite, string characterName)
@@ -137,6 +140,10 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+            if (!TemporaryEvent.ShowChoiceButtonAtEndOfDialouge)
+            {
+                SetPrimaryOutcome();
+            }
             ChoicePanel.SetActive(false);
             MainPanel.SetActive(false);
 
@@ -163,6 +170,42 @@ public class DialogueManager : MonoBehaviour
     {
         ChoicePanel.SetActive(false);
         MainPanel.SetActive(false);
+    }
+    #endregion
+
+    #region Primary Outcome
+    Event TemporaryEvent;
+
+    public void SetPrimaryOutcome()
+    {
+        switch (TemporaryEvent.PrimaryChoiceType)
+        {
+            case ChoiceOutcome.ChoiceType.Runaway:
+                TurnManager.Instance.NPCRunAway();
+                Debug.Log("Tryue");
+                break;
+
+            case ChoiceOutcome.ChoiceType.DropLoot:
+                TurnManager.Instance.NPCDropLootAndRunAway();
+                break;
+
+            case ChoiceOutcome.ChoiceType.Join:
+                TurnManager.Instance.NPCJoin();
+                break;
+
+            case ChoiceOutcome.ChoiceType.Fight:
+                TurnManager.Instance.SetNPCAsEnemy();
+                break;
+            case ChoiceOutcome.ChoiceType.Threaten:
+                TurnManager.Instance.SetNPCAsEnemy();
+                break;
+            case ChoiceOutcome.ChoiceType.RejectJoin:
+                TurnManager.Instance.NPCRunAway();
+                break;
+            case ChoiceOutcome.ChoiceType.OfferTruce:
+                TurnManager.Instance.NPCRunAway();
+                break;
+        }
     }
     #endregion
 }

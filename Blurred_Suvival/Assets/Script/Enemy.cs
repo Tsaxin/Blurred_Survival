@@ -93,4 +93,9 @@ public class Enemy : MonoBehaviour
     {
         spawnedEnemies.RemoveAll(child => child == null);
     }
+
+    public void ClearSpawnedEnemy()
+    {
+        spawnedEnemies.Clear();
+    }
 }
