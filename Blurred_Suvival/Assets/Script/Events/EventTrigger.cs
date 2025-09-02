@@ -8,8 +8,9 @@ public class EventTrigger : MonoBehaviour
 
     public bool EventCompleted = false;
     public bool CanBeDestroyed = true;
-
+    public GameObject BattleField;
     public GameObject UnlockedEventTrigger;
+    public string PlayCutSceneIdOnFinish;
     public Event newEvent;
 
     void OnTriggerEnter2D(Collider2D other)
@@ -21,17 +22,20 @@ public class EventTrigger : MonoBehaviour
                 if (!EventCompleted)
                 {
                     EventCompleted = true;
-                    SquadMover.Instance.EnableEncounter(true, this, false, CanBeDestroyed);
+                    SquadMover.Instance.EnableEncounter(true, this, false, CanBeDestroyed,BattleField);
                 }
                 else
                 {
-                    SquadMover.Instance.EnableEncounter(false, this, false, CanBeDestroyed);
+                    SquadMover.Instance.EnableEncounter(false, this, false, CanBeDestroyed,BattleField);
                 }
                 
                 if (UnlockedEventTrigger != null)
                 {
                     UnlockedEventTrigger.SetActive(true);
                 }
+
+                CutsceneManager.Instance.cutsceneID =PlayCutSceneIdOnFinish;
+                PlayCutSceneIdOnFinish = "0";
 
                 other.GetComponent<EventTriggerData>().RecentEventTriggerData = this.gameObject;
             }

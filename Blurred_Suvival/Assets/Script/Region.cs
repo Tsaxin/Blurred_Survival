@@ -11,7 +11,7 @@ public class Region : MonoBehaviour
 
     public float EncounterChance = 0.15f;
     public int MaxEnemyCount = 4;
-    public int EnemyStartColumn=3,EnemyEndColumn=15;
+    public int EnemyStartColumn = 3, EnemyEndColumn = 15;
     public SquadMover squadMover;
 
     private void SpawnEnemiesInternal(
@@ -76,7 +76,8 @@ public class Region : MonoBehaviour
             zombie.position = tile.position;
 
             //Also if has playercontroller then
-            if (zombie.GetComponent<CharacterController>()!=null) {
+            if (zombie.GetComponent<CharacterController>() != null)
+            {
                 CharacterController CC = zombie.GetComponent<CharacterController>();
                 CC.currentTileData = tile.GetComponent<TileData>();
                 CC.turnManager = turnManager;
@@ -151,7 +152,7 @@ public class Region : MonoBehaviour
         }
     }
 
-    public void TrySpawnEventTriggerEnemies(TurnManager turnManager,List<GameObject> objects)
+    public void TrySpawnEventTriggerEnemies(TurnManager turnManager, List<GameObject> objects)
     {
         int index = 0;
 
@@ -188,12 +189,19 @@ public class Region : MonoBehaviour
 
     public List<GameObject> battleGrounds;
 
-    public void loadBattleGround()
+    public void loadBattleGround(GameObject BattleGround)
     {
         if (battleGrounds == null || battleGrounds.Count == 0)
             return;
-        int Rand = Random.Range(0, battleGrounds.Count);
+        if (BattleGround == null)
+        {
+            int Rand = Random.Range(0, battleGrounds.Count);
 
-        BattleGroundManager.Instance.LoadMap(battleGrounds[Rand]);
+            BattleGroundManager.Instance.LoadMap(battleGrounds[Rand]);
+        }
+        else
+        {
+            BattleGroundManager.Instance.LoadMap(BattleGround);
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class CutsceneManager : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class CutsceneManager : MonoBehaviour
 
     public GameObject EventAfterCutScene;
 
+    public string cutsceneID;
+
     private void Start()
     {
         if (Instance == null)
@@ -33,7 +36,7 @@ public class CutsceneManager : MonoBehaviour
             Instance = this;
         }
         originalPosition = displayImage.rectTransform.localPosition;
-        PlayCutsceneByID("1");
+        PlayCutsceneByID();
     }
 
     /// <summary>Call this from your UI Button (OnClick)</summary>
@@ -48,8 +51,13 @@ public class CutsceneManager : MonoBehaviour
         StartCoroutine(SkipSequence());
     }
 
-    public void PlayCutsceneByID(string cutsceneID,GameObject EventAfterCutScene=null)
+    //This function is also called by battlemanager on 
+    public void PlayCutsceneByID(GameObject EventAfterCutScene = null)
     {
+        if (cutsceneID == "0")
+        {
+            return;     //meaning no cutscene after the fight
+        }
         if (EventAfterCutScene != null)
         {
             this.EventAfterCutScene = EventAfterCutScene;
@@ -64,7 +72,11 @@ public class CutsceneManager : MonoBehaviour
 
     private IEnumerator PlayCutscene(List<CutsceneEntry> entries)
     {
+        cutsceneID = "0";
         fadeOverlay.gameObject.SetActive(true);
+        Color alpha = fadeOverlay.color;
+        alpha.a = 1f;
+        fadeOverlay.color = alpha;
 
         for (int i = 0; i < entries.Count; i++)
         {
@@ -174,7 +186,14 @@ public class CutsceneManager : MonoBehaviour
 
     private void OnDialougeEnd()
     {
-        EventAfterCutScene.SetActive(true);
+        if (EventAfterCutScene != null)
+        {
+            EventAfterCutScene.SetActive(true);
+        }
+        else
+        {
+            StartCoroutine(Fade(0));
+        }
         MapObject.SetActive(true);
         CutScenePanel.SetActive(false);
     }

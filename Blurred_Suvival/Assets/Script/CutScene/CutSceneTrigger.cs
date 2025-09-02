@@ -12,7 +12,8 @@ public class CutSceneTrigger : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             SquadMover.Instance.StopMovementOnEncounter();
-            CutsceneManager.Instance.PlayCutsceneByID(CutsceneID, EventAfterCutScene);
+            CutsceneManager.Instance.cutsceneID=CutsceneID;
+            CutsceneManager.Instance.PlayCutsceneByID(EventAfterCutScene);
             Destroy(this.gameObject);
         }
     }

@@ -8,7 +8,7 @@ public class TileManager : MonoBehaviour
     public Transform[] flatTileList; // Drag tiles in column-major order: down rows, then right columns
     public Transform[,] tiles = new Transform[4, 16];
 
-    public Transform LeftRetreatTile,RightRetreatTile;
+    public Transform LeftRetreatTile, RightRetreatTile;
 
     void Start()
     {
@@ -16,7 +16,7 @@ public class TileManager : MonoBehaviour
             Instance = this;
     }
 
-    
+
     public void ClearTileOccupants()
     {
         for (int row = 0; row < 4; row++)
@@ -274,6 +274,29 @@ public class TileManager : MonoBehaviour
 
         // Pick random among best candidates
         return candidates[Random.Range(0, candidates.Count)];
+    }
+
+    public Transform GetRandomTile(int minColumnIndex = 0)
+    {
+        List<Transform> validTiles = new List<Transform>();
+
+        for (int row = 0; row < tiles.GetLength(0); row++)
+        {
+            for (int col = minColumnIndex; col < tiles.GetLength(1); col++)
+            {
+                Transform t = tiles[row, col];
+                if (t != null)
+                    validTiles.Add(t);
+            }
+        }
+
+        if (validTiles.Count == 0)
+        {
+            Debug.LogWarning($"No valid tiles found with minColumnIndex {minColumnIndex}");
+            return null;
+        }
+
+        return validTiles[Random.Range(0, validTiles.Count)];
     }
 
 

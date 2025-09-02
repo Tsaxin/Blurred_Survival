@@ -77,17 +77,22 @@ public class SquadMover : MonoBehaviour
         }
     }
 
-    public void EnableEncounter(bool IsEvent, EventTrigger eventTrigger,bool SelfEncounter,bool CanBeDestroyed)
+    public void EnableEncounter(bool IsEvent, EventTrigger eventTrigger,bool SelfEncounter,bool CanBeDestroyed,GameObject BattleField=null)
     {
         Event eventData = eventTrigger?.newEvent;
         if (CanBeDestroyed)
         {
             Destroy(eventTrigger.gameObject);
         }
-        if (region != null)
+        
+        TriggerEncounterUI();
+        if (BattleField != null)
         {
-            TriggerEncounterUI();
-            squad.InitiateBattle(IsEvent, eventData, region,SelfEncounter);
+            squad.InitiateBattle(IsEvent, eventData, region, SelfEncounter, BattleField);
+        }
+        else if (region != null)
+        {
+            squad.InitiateBattle(IsEvent, eventData, region, SelfEncounter);
         }
     }
 
@@ -140,6 +145,7 @@ public class SquadMover : MonoBehaviour
         EnemyHolder.GetComponent<Enemy>().DestroyAllChildren();
         BattleGroundManager.Instance.RemoveMap();
         CampButton.SetActive(true);
+        CutsceneManager.Instance.PlayCutsceneByID();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

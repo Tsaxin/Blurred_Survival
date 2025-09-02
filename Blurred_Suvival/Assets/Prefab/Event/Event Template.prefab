@@ -192,6 +192,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EvenTypeIndicator: {fileID: 2381669493914227672}
   EventSprite: {fileID: 1973389049853246859}
+  EventCompleted: 0
+  CanBeDestroyed: 1
+  BattleField: {fileID: 0}
+  UnlockedEventTrigger: {fileID: 0}
+  PlayCutSceneIdOnFinish: 
   newEvent:
     SurvivorCount: 0
     dialouge:
@@ -209,6 +214,8 @@ MonoBehaviour:
     - {fileID: 4536060065368327761, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    PrimaryChoiceType: 0
 --- !u!1 &6699155620122888497
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +327,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.007, y: -0.016, z: 0}
-  m_LocalScale: {x: 0.146445, y: 0.146445, z: 0.29289}
+  m_LocalScale: {x: 0.12526706, y: 0.12526706, z: 0.25053412}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6202525697557057572}

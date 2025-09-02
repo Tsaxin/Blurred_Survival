@@ -43,13 +43,13 @@ public class Squad : MonoBehaviour
         SquadNumberText.text = $"{transform.childCount}/{MaxSurvivorCountInGroup}";
     }
 
-    public void InitiateBattle(bool IsEvent, Event eventData, Region region, bool SelfEncounter)
+    public void InitiateBattle(bool IsEvent, Event eventData, Region region, bool SelfEncounter,GameObject BattleField=null)
     {
         this.region = region;
         CheckCharacterListAnamoly();
         enemy.CheckSpawnListAnamoly();
 
-        region.loadBattleGround();
+        region.loadBattleGround(BattleField);
 
         InitializeCharacters();
         PlaceCharactersInMatrix();
