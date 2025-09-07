@@ -60,10 +60,17 @@ public class TileData : MonoBehaviour
 
     public bool HasLoot => lootOnTile.Count > 0;
 
-    public void PlaceLoot(GameObject loot)
+    public void PlaceLoot(GameObject loot,Transform parent=null)
     {
         lootOnTile.Add(loot);
-        loot.transform.SetParent(transform);
+        if (parent == null)
+        {
+            loot.transform.SetParent(transform);
+        }
+        else
+        {
+            loot.transform.SetParent(parent);
+        }
 
         // Optional: Apply slight random offset for visual separation
         float offsetX = Random.Range(MinLootOffsetX, MaxLootOffsetX);

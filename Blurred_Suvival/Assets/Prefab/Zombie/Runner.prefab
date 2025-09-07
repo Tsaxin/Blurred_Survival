@@ -522,10 +522,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootTable:
-  - loot: {fileID: 4545915707345495668, guid: d3b983b7d73350a43b8dcc9e5a8a42f1, type: 3}
-    dropChance: 1
-  - loot: {fileID: 4545915707345495668, guid: 63d64fe196995dd4d99c3dd7c1e6ee0a, type: 3}
-    dropChance: 1
+  - loot: {fileID: 4545915707345495668, guid: 6082a785747429e41b63c1f06c6b7cec, type: 3}
+    dropChance: 0.25
+  - loot: {fileID: 4545915707345495668, guid: ebbad636255d4794abd3ab19a4069b1b, type: 3}
+    dropChance: 0.15
+  - loot: {fileID: 4545915707345495668, guid: 72a94a5254a2f6845a6a941e8697f06d, type: 3}
+    dropChance: 0.05
+  - loot: {fileID: 4545915707345495668, guid: 3ffc687304adf2b4eab545d34313f375, type: 3}
+    dropChance: 0.01
+  - loot: {fileID: 4545915707345495668, guid: 0dcfcbc5458e0a341889735a4d5d3af5, type: 3}
+    dropChance: 0.01
+  - loot: {fileID: 4545915707345495668, guid: 65dcf6d94ac25b644b0b67401d2b1753, type: 3}
+    dropChance: 0.01
+  - loot: {fileID: 4545915707345495668, guid: 92e03f5d79d8a064fb1d0edb2bfc2f53, type: 3}
+    dropChance: 0.01
 --- !u!1 &7043163217621592945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,7 +1224,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 20}
+  m_SizeDelta: {x: 100, y: 5.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5983689551626340369
 MonoBehaviour:

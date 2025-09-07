@@ -26,12 +26,3 @@ public class ZombieLootDropper : MonoBehaviour
     }
 }
 
-
-[System.Serializable]
-public class LootEntry
-{
-    public GameObject loot;
-    [Range(0f, 1f)]
-    public float dropChance; // e.g., 0.2 = 20% chance
-}
-

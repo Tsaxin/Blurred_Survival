@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8de2e008d5b0a6743a524fd9fa50d487, type: 3}
-  m_Name: First aid kit
+  m_Name: Bandage
   m_EditorClassIdentifier: 
-  itemName: First aid kit
+  itemName: Bandage
   itemType: 1
-  itemIcon: {fileID: 21300000, guid: a18162b0f6bff8e41b21df3b243d505b, type: 3}
-  itemIconIU: {fileID: 21300000, guid: a18162b0f6bff8e41b21df3b243d505b, type: 3}
+  itemIcon: {fileID: 21300000, guid: fccce562e11fb584ea5a573a24ba8745, type: 3}
+  itemIconIU: {fileID: 21300000, guid: fccce562e11fb584ea5a573a24ba8745, type: 3}
   MaxQuantity: 20
-  lootPrefab: {fileID: 4545915707345495668, guid: 0be33655334a1c14587875361cb403b8, type: 3}
-  healthRestoreAmount: 25
+  lootPrefab: {fileID: 4545915707345495668, guid: ebbad636255d4794abd3ab19a4069b1b, type: 3}
+  healthRestoreAmount: 5

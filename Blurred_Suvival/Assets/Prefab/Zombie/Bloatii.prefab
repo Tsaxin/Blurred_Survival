@@ -474,6 +474,7 @@ GameObject:
   - component: {fileID: -1332772838664599718}
   - component: {fileID: 6556793421166142210}
   - component: {fileID: 7783510281087613405}
+  - component: {fileID: 6754468949298575231}
   m_Layer: 0
   m_Name: Bloatii
   m_TagString: Enemy
@@ -512,10 +513,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileManager: {fileID: 0}
   currentTileData: {fileID: 0}
-  ZombieName: Bloater
   EnemyManager: {fileID: 0}
-  trailRenderer: {fileID: 6518923659219268843}
   characterStats: {fileID: -1332772838664599718}
+  trailRenderer: {fileID: 6518923659219268843}
+  ScaleForZombie: 1
 --- !u!114 &-1332772838664599718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,6 +596,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxScale: 0
   MinScale: 0
+--- !u!114 &6754468949298575231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3736395949588290747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8dcbe3eab033c46a5c372996388e61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootTable:
+  - loot: {fileID: 4545915707345495668, guid: f3d79bd8e30d5524a8aa88d7b8dfeb25, type: 3}
+    dropChance: 0.25
+  - loot: {fileID: 4545915707345495668, guid: d615b30dce5328f4a93e5f322e30d437, type: 3}
+    dropChance: 0.15
+  - loot: {fileID: 4545915707345495668, guid: 728031350833c014ba00d35f1be396b5, type: 3}
+    dropChance: 0.05
+  - loot: {fileID: 4545915707345495668, guid: 26ae5b2078ca0f546a6dd08046bb18cb, type: 3}
+    dropChance: 0.01
+  - loot: {fileID: 4545915707345495668, guid: 6b98e18738352bd43b2b86151523af13, type: 3}
+    dropChance: 0.01
+  - loot: {fileID: 4545915707345495668, guid: e6cc25a1dc9dee04fba85e5041a9dcfa, type: 3}
+    dropChance: 0.01
+  - loot: {fileID: 4545915707345495668, guid: 92e03f5d79d8a064fb1d0edb2bfc2f53, type: 3}
+    dropChance: 0.01
 --- !u!1 &6902403274421299848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,7 +1177,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 20}
+  m_SizeDelta: {x: 100, y: 5.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5983689551626340369
 MonoBehaviour:

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8de2e008d5b0a6743a524fd9fa50d487, type: 3}
-  m_Name: First aid kit
+  m_Name: Painkillers
   m_EditorClassIdentifier: 
-  itemName: First aid kit
+  itemName: Painkillers
   itemType: 1
-  itemIcon: {fileID: 21300000, guid: a18162b0f6bff8e41b21df3b243d505b, type: 3}
-  itemIconIU: {fileID: 21300000, guid: a18162b0f6bff8e41b21df3b243d505b, type: 3}
+  itemIcon: {fileID: 21300000, guid: 7fff8d07375687d40abc36e76aa7a2d7, type: 3}
+  itemIconIU: {fileID: 21300000, guid: 7fff8d07375687d40abc36e76aa7a2d7, type: 3}
   MaxQuantity: 20
-  lootPrefab: {fileID: 4545915707345495668, guid: 0be33655334a1c14587875361cb403b8, type: 3}
-  healthRestoreAmount: 25
+  lootPrefab: {fileID: 4545915707345495668, guid: d615b30dce5328f4a93e5f322e30d437, type: 3}
+  healthRestoreAmount: 10

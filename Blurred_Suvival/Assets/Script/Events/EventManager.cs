@@ -17,8 +17,16 @@ public class EventManager : MonoBehaviour
     [Header("Spawn Area")]
     public float MaxY = 3.6f;
     public float MinY = -4.5f, MaxX = 8.46f, MinX = -8.52f;
+    public static EventManager Instance;
 
     float timer;
+    void Start()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     void Update()
     {

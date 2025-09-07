@@ -17,36 +17,30 @@ public class EventTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player")) // Make sure your squad is tagged as "Player"
         {
-            if (other.GetComponent<EventTriggerData>()?.RecentEventTriggerData != this.gameObject)
+            var recent = other.GetComponent<EventTriggerData>()?.RecentEventTriggerData;
+            if (recent == null || !ReferenceEquals(recent, this.gameObject))
             {
+                Debug.Log("Still triggers");
                 if (!EventCompleted)
                 {
                     EventCompleted = true;
-                    SquadMover.Instance.EnableEncounter(true, this, false, CanBeDestroyed,BattleField);
+                    SquadMover.Instance.EnableEncounter(true, this, false, CanBeDestroyed, BattleField);
                 }
                 else
                 {
-                    SquadMover.Instance.EnableEncounter(false, this, false, CanBeDestroyed,BattleField);
+                    SquadMover.Instance.EnableEncounter(false, this, false, CanBeDestroyed, BattleField);
                 }
-                
+
                 if (UnlockedEventTrigger != null)
                 {
                     UnlockedEventTrigger.SetActive(true);
                 }
 
-                CutsceneManager.Instance.cutsceneID =PlayCutSceneIdOnFinish;
+                CutsceneManager.Instance.cutsceneID = PlayCutSceneIdOnFinish;
                 PlayCutSceneIdOnFinish = "0";
 
                 other.GetComponent<EventTriggerData>().RecentEventTriggerData = this.gameObject;
             }
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            other.GetComponent<EventTriggerData>().RecentEventTriggerData = null;
         }
     }
 }

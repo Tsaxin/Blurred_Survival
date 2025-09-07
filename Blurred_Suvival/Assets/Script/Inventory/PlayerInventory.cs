@@ -63,6 +63,7 @@ public class PlayerInventory : MonoBehaviour
 
                     if (remaining <= 0)
                     {
+                        EnqueueCollectedText($"{stack.data.itemName} collected.", FloatingTextType.Heal);
                         return true;
                     }
                 }

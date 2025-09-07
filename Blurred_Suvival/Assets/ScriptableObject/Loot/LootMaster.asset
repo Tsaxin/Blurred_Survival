@@ -14,11 +14,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   commonLoot:
   - loot: {fileID: 4545915707345495668, guid: 72a94a5254a2f6845a6a941e8697f06d, type: 3}
-    dropChance: 0.25
+    dropChance: 0.15
   - loot: {fileID: 4545915707345495668, guid: 6082a785747429e41b63c1f06c6b7cec, type: 3}
-    dropChance: 1
+    dropChance: 0.75
+  - loot: {fileID: 4545915707345495668, guid: ebbad636255d4794abd3ab19a4069b1b, type: 3}
+    dropChance: 0.15
+  - loot: {fileID: 4545915707345495668, guid: 72a94a5254a2f6845a6a941e8697f06d, type: 3}
+    dropChance: 0.15
+  - loot: {fileID: 4545915707345495668, guid: 92e03f5d79d8a064fb1d0edb2bfc2f53, type: 3}
+    dropChance: 0.15
+  - loot: {fileID: 4545915707345495668, guid: 3ffc687304adf2b4eab545d34313f375, type: 3}
+    dropChance: 0.15
+  - loot: {fileID: 4545915707345495668, guid: 65dcf6d94ac25b644b0b67401d2b1753, type: 3}
+    dropChance: 0.15
+  - loot: {fileID: 4545915707345495668, guid: 0dcfcbc5458e0a341889735a4d5d3af5, type: 3}
+    dropChance: 0.15
   rareLoot:
   - loot: {fileID: 4545915707345495668, guid: f5f2d7f732159764986143bed4b082c1, type: 3}
-    dropChance: 0.25
-  epicLoot: []
-  legendaryLoot: []
+    dropChance: 0.2
+  - loot: {fileID: 4545915707345495668, guid: 728031350833c014ba00d35f1be396b5, type: 3}
+    dropChance: 0.2
+  - loot: {fileID: 4545915707345495668, guid: d615b30dce5328f4a93e5f322e30d437, type: 3}
+    dropChance: 0.2
+  - loot: {fileID: 4545915707345495668, guid: 26ae5b2078ca0f546a6dd08046bb18cb, type: 3}
+    dropChance: 0.2
+  - loot: {fileID: 4545915707345495668, guid: e6cc25a1dc9dee04fba85e5041a9dcfa, type: 3}
+    dropChance: 0.2
+  - loot: {fileID: 4545915707345495668, guid: 6b98e18738352bd43b2b86151523af13, type: 3}
+    dropChance: 0.2
+  epicLoot:
+  - loot: {fileID: 4545915707345495668, guid: d3b983b7d73350a43b8dcc9e5a8a42f1, type: 3}
+    dropChance: 0.15
+  - loot: {fileID: 4545915707345495668, guid: 574439418e4cf154babd2bab35eb398b, type: 3}
+    dropChance: 0.15
+  - loot: {fileID: 4545915707345495668, guid: 0be33655334a1c14587875361cb403b8, type: 3}
+    dropChance: 0.15
+  - loot: {fileID: 4545915707345495668, guid: fd855fcd2d81a9a4e902ee4b9b228ad5, type: 3}
+    dropChance: 0.15
+  - loot: {fileID: 4545915707345495668, guid: 3a9e2df856db5c54296bc922cdbadfe3, type: 3}
+    dropChance: 0.15
+  - loot: {fileID: 4545915707345495668, guid: 3f3ef55251f1da74087d7eecaf510859, type: 3}
+    dropChance: 0.15
+  legendaryLoot:
+  - loot: {fileID: 4545915707345495668, guid: 7821f171f0475ba4187c624bbd7439d9, type: 3}
+    dropChance: 0.15
+  - loot: {fileID: 4545915707345495668, guid: ed2b20fb3e7c08d479d81bff30e68da6, type: 3}
+    dropChance: 0.15

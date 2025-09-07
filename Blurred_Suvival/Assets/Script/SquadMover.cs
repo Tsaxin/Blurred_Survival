@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,12 +27,15 @@ public class SquadMover : MonoBehaviour
 
     public GameObject CampButton;
 
+    float InitialScale;
+
     void Start()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+        InitialScale = transform.localScale.x;
         squad.SetSquadNumberText();
     }
 
@@ -52,11 +56,21 @@ public class SquadMover : MonoBehaviour
 
         if (isMoving)
         {
+            if (targetPosition.x >= transform.position.x)
+            {
+                transform.localScale = new Vector2(InitialScale, InitialScale);
+            }
+            else
+            {
+                transform.localScale = new Vector2(-InitialScale, InitialScale);
+            }
+            GetComponent<Animator>()?.SetFloat("Moving",1f);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
             if (Vector3.Distance(transform.position, targetPosition) < 0.01f)
             {
                 isMoving = false;
+                GetComponent<Animator>()?.SetFloat("Moving",0f);
                 encounterTimer = 0f; // Reset timer when movement stops
             }
 
@@ -67,7 +81,7 @@ public class SquadMover : MonoBehaviour
                 if (encounterTimer >= CheckEncounterTime) // fixed interval
                 {
                     encounterTimer = 0f;
-                    float roll = Random.value;
+                    float roll = UnityEngine.Random.value;
                     if (roll <= encounterChance)
                     {
                         EnableEncounter(false, null,false,false);
@@ -88,11 +102,11 @@ public class SquadMover : MonoBehaviour
         TriggerEncounterUI();
         if (BattleField != null)
         {
-            squad.InitiateBattle(IsEvent, eventData, region, SelfEncounter, BattleField);
+            squad.RequestBattle(IsEvent, eventData, region, SelfEncounter, BattleField);
         }
         else if (region != null)
         {
-            squad.InitiateBattle(IsEvent, eventData, region, SelfEncounter);
+            squad.RequestBattle(IsEvent, eventData, region, SelfEncounter);
         }
     }
 
@@ -129,6 +143,7 @@ public class SquadMover : MonoBehaviour
 
     public void ExitEncounter()
     {
+        BattleQueueManager.Instance.EndBattle();
         if (TurnManager.Instance.SelectedUnit != null)
         {
             TurnManager.Instance.SelectedUnit.Deselect();

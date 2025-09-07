@@ -298,6 +298,4 @@ public class TileManager : MonoBehaviour
 
         return validTiles[Random.Range(0, validTiles.Count)];
     }
-
-
 }
