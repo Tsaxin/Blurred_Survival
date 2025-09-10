@@ -103,9 +103,9 @@ public class InventoryItemClickHandler : MonoBehaviour
         // Equip the new item
         equipAction(gearEquipper, (WeaponData)clickedItem.data);
 
-        PlayerInventory.Instance.EnqueueCollectedText(
+        TextNotification.Instance.EnqueueCollectedText(
             $"{clickedItem.data.itemName} Equipped!", 
-            PlayerInventory.FloatingTextType.Heal);
+            TextNotification.FloatingTextType.Heal);
     }
 
     /// <summary>

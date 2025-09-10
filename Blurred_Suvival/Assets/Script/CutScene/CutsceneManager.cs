@@ -28,6 +28,7 @@ public class CutsceneManager : MonoBehaviour
     public GameObject EventAfterCutScene;
 
     public string cutsceneID;
+    public GameObject GameWinObject;
 
     private void Start()
     {
@@ -57,6 +58,10 @@ public class CutsceneManager : MonoBehaviour
         if (cutsceneID == "0")
         {
             return;     //meaning no cutscene after the fight
+        }
+        else if (cutsceneID == "Game won")
+        {
+            EventAfterCutScene = GameWinObject;
         }
         if (EventAfterCutScene != null)
         {

@@ -42,4 +42,64 @@ public class TooltipUI : MonoBehaviour
     {
         TooltipHolder.SetActive(false);
     }
+
+    public string GenerateTooltipText(ItemInstance itemInstance)
+    {
+        var item = itemInstance.data;
+        string desc = "";
+
+        switch (item.itemType)
+        {
+            case ItemType.Weapon:
+            case ItemType.Shoe:
+            case ItemType.Vest:
+            case ItemType.Trouser:
+            case ItemType.Helmet:
+                desc += BuildStatDescription((WeaponData)item);
+                break;
+
+            case ItemType.Consumable:
+                var c = (ConsumableData)item;
+                desc += $"<b>Heals:</b> {c.healthRestoreAmount} HP\n";
+                break;
+        }
+
+        if (itemInstance.quantity > 1)
+            desc += $"\n<b>Quantity:</b> {itemInstance.quantity}";
+
+        return desc.TrimEnd();
+    }
+
+    private string BuildStatDescription(WeaponData w)
+    {
+        string desc = "";
+
+        if (w.attackBoost != 0)
+            desc += $"<b>Attack:</b> +{w.attackBoost}\n";
+
+        if (w.attackCountBoost != 0)
+            desc += $"<b>Attack Count:</b> +{w.attackCountBoost}\n";
+
+        if (w.defenseBoost != 0)
+            desc += $"<b>Defense:</b> +{w.defenseBoost}%\n";
+
+        if (w.movementBoost != 0)
+            desc += $"<b>Movement:</b> +{w.movementBoost} tiles\n";
+
+        if (w.healthBoost != 0)
+            desc += $"<b>Health:</b> +{w.healthBoost}\n";
+
+        if (w.rangeBoost != 0)
+            desc += $"<b>Range:</b> +{w.rangeBoost} tiles\n";
+
+        if (w.criticalBoost != 0)
+            desc += $"<b>Critical:</b> +{w.criticalBoost}%\n";
+
+        if (w.evasionBoost != 0)
+            desc += $"<b>Evasion:</b> +{w.evasionBoost}%\n";
+
+        desc += $"\n\nNote: Click to equip. Equipping will cost one turn per survivor.";
+
+        return desc;
+    }
 }

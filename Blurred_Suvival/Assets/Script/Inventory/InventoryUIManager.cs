@@ -69,47 +69,19 @@ public class InventoryUIManager : MonoBehaviour
             // Tooltip
             TooltipTrigger trigger = slotGO.GetComponent<TooltipTrigger>();
             string name = item.data.itemName;
-            string desc = GenerateTooltipText(item);
+            string desc = TooltipUI.Instance.GenerateTooltipText(item);
             trigger.Initialize(name, desc);
 
             // Button click
             Button btn = slotGO.GetComponent<Button>();
             btn.onClick.AddListener(() =>
             {
-                InventoryItemClickHandler.Instance.OnItemSlotClicked(item,TurnManager.Instance.SelectedUnit);
+                InventoryItemClickHandler.Instance.OnItemSlotClicked(item, TurnManager.Instance.SelectedUnit);
             });
 
             currentSlots.Add(slotGO);
         }
     }
-    public string GenerateTooltipText(ItemInstance itemInstance)
-    {
-        var item = itemInstance.data;
-        string desc = "";
-
-        switch (item.itemType)
-        {
-            case ItemType.Weapon:
-                var w = (WeaponData)item;
-                if (w.attackBoost != 0)
-                    desc += $"<b>Attack:</b> +{w.attackBoost}\n";
-                // (Add other weapon stats similarly)
-                desc += $"<b>Type:</b> Weapon";
-                break;
-
-            case ItemType.Consumable:
-                var c = (ConsumableData)item;
-                desc += $"<b>Heals:</b> {c.healthRestoreAmount} HP\n";
-                desc += $"<b>Type:</b> Consumable";
-                break;
-        }
-
-        if (itemInstance.quantity > 1)
-            desc += $"\n<b>Quantity:</b> {itemInstance.quantity}";
-
-        return desc.TrimEnd();
-    }
-
     public GameObject GearPanel;
     public void ShowGear()
     {

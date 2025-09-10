@@ -65,7 +65,10 @@ public class Event
 
     public bool ShowChoiceButtonAtEndOfDialouge = true;
 
+    public int DialougeChangeFrequency = 1;
+
     [Header("ShowChoiceButtonAtEndOfDialouge=False")]
     public ChoiceOutcome.ChoiceType PrimaryChoiceType;
 
+    public bool AllowRetreat=true;
 }

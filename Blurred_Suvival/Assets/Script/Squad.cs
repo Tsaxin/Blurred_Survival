@@ -63,6 +63,7 @@ public class Squad : MonoBehaviour
 
         if (IsEvent)
         {
+            RetreatHandler.CanRetreat = eventData.AllowRetreat;
             region.TrySpawnEventTriggerEnemies(turnManager, eventData.Survivors);
             TurnManager.Instance.StartEventTrigger(eventData);
         }
@@ -233,8 +234,14 @@ public class Squad : MonoBehaviour
             }
         }
 
-        gameOverPanel?.SetActive(true);
-        Debug.Log("All players are dead! Game Over panel activated.");
+        StartCoroutine(LoadGameOverScreen());
+    }
+
+    IEnumerator LoadGameOverScreen()
+    {
+        yield return new WaitForSeconds(1.5f);
+        CutsceneManager.Instance.cutsceneID = "Game over";
+        CutsceneManager.Instance.PlayCutsceneByID(gameOverPanel);
     }
 
     public void RemoveCharacter(GameObject character)
@@ -254,7 +261,14 @@ public class Squad : MonoBehaviour
 
     public void Retreat()
     {
-        RetreatSuccess = UnityEngine.Random.Range(0f, 100f) < GetRetreatChance();
+        if (RetreatHandler.CanRetreat)
+        {
+            RetreatSuccess = UnityEngine.Random.Range(0f, 100f) < GetRetreatChance();
+        }
+        else
+        {
+            RetreatSuccess = false;
+        }
         Debug.Log(RetreatSuccess ? "✅ Retreat successful!" : "❌ Retreat failed!");
     }
 
@@ -266,6 +280,5 @@ public class Squad : MonoBehaviour
                 StartCoroutine(obj.GetComponent<CharacterController>().OnRetreatAll(true));
         }
     }
-
     #endregion
 }

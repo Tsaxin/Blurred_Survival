@@ -35,3 +35,22 @@ MonoBehaviour:
       text: What was that?
     - image: {fileID: 21300000, guid: 6f4a23d602b27e14789d26cf82dec756, type: 3}
       text: 
+  - cutsceneID: Game won
+    entries:
+    - image: {fileID: 21300000, guid: 8911cd36df87e354ea9962026ddedfa6, type: 3}
+      text: "\u2014hello? \u2026anyone th\u2014 \u2026to anyone listen\u2026 we\u2026
+        we still have h\u2013hope. "
+    - image: {fileID: 21300000, guid: 74e470bcdc1217645ab4af4adc06e3f9, type: 3}
+      text: "We f\u2026found a c\u2013cure. But \u2026don\u2019t think we\u2019ll\u2026
+        survive much l\u2014. Runn\u2026 running out of food\u2026 supplies\u2026"
+    - image: {fileID: 21300000, guid: 4a1b243696fc7714eac2fdb0769f93d0, type: 3}
+      text: "We\u2019ll\u2026 send you co\u2013ordinates\u2026 if you can hear\u2014"
+  - cutsceneID: Game over
+    entries:
+    - image: {fileID: 21300000, guid: da8cbd6076f713d4da0b1484b702e013, type: 3}
+      text: Their journey ended here, beneath the weight of a merciless world. But
+        the nightmare rages on.
+    - image: {fileID: 21300000, guid: fc4e73c747968a04a99803c150cfb95f, type: 3}
+      text: Awaiting the next desperate soul.
+    - image: {fileID: 21300000, guid: 0c8c4c544014aa64fa4760493c5814a8, type: 3}
+      text: The story of survival never truly ends.

@@ -25,7 +25,14 @@ public class CharacterButtons : MonoBehaviour
     public void LoadTriggerText()
     {
         SetSkillTriggerText();
-        Retreat.GetComponent<TooltipTrigger>().SetTriggerText("Retreat", Squad.Instance.GetRetreatChance() + "% chance of retreating from the battlefield.\n\n Higher number of survivor in group means less chance of retreating.");
+        string retreatChance;
+        if (RetreatHandler.CanRetreat)
+            retreatChance = Squad.Instance.GetRetreatChance().ToString("F2");
+        else
+        {
+            retreatChance = 0f.ToString("F2");
+        }
+        Retreat.GetComponent<TooltipTrigger>().SetTriggerText("Retreat", retreatChance + "% chance of retreating from the battlefield.\n\n Higher number of survivor in group means less chance of retreating.");
         Inventory.GetComponent<TooltipTrigger>().SetTriggerText("Inventory", "Can view and equip collected items. Each action consumes survivor's turn.");
         Gear.GetComponent<TooltipTrigger>().SetTriggerText("Gear", "View survivor's current outfit and gears.");
         CharacterStat.GetComponent<TooltipTrigger>().SetTriggerText("Survivor's stat", "View and Upgrade survivor's stat. Each level up gives 1 attribute point.");

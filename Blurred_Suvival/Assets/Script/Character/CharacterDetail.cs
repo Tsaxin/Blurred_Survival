@@ -14,6 +14,11 @@ public class CharacterDetail : MonoBehaviour
 
     public void SetDetail(string CharacterName)
     {
-        GetComponent<CharacterStats>().CharacterName = CharacterName;
+        if (GetComponent<CharacterStats>().CharacterName == "")
+        {
+            GetComponent<CharacterStats>().CharacterName = CharacterName;
+        }
+        
+        Debug.Log($"Name is {CharacterName}");
     }
 }

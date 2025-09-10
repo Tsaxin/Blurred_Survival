@@ -11,8 +11,6 @@ public class PlayerInventory : MonoBehaviour
 
     public List<ItemInstance> collectedItems = new List<ItemInstance>();
 
-    public Transform TextGenerationPoint;
-
     private void Awake()
     {
         // Singleton pattern
@@ -41,7 +39,7 @@ public class PlayerInventory : MonoBehaviour
         {
             RationData ration = newItem as RationData;
             HungerManager.Instance.RestoreHunger(ration.RationRestoreAmount);
-            EnqueueCollectedText($"{ration.RationRestoreAmount}x ration collected.", FloatingTextType.Heal);
+            TextNotification.Instance.EnqueueCollectedText($"{ration.RationRestoreAmount}x ration collected.", TextNotification.FloatingTextType.Heal);
 
             return true;
         }
@@ -63,7 +61,7 @@ public class PlayerInventory : MonoBehaviour
 
                     if (remaining <= 0)
                     {
-                        EnqueueCollectedText($"{stack.data.itemName} collected.", FloatingTextType.Heal);
+                        TextNotification.Instance.EnqueueCollectedText($"{stack.data.itemName} collected.", TextNotification.FloatingTextType.Heal);
                         return true;
                     }
                 }
@@ -75,7 +73,7 @@ public class PlayerInventory : MonoBehaviour
         {
             if (collectedItems.Count >= maxInventorySize)
             {
-                EnqueueCollectedText("Inventory Full!!", FloatingTextType.Damage);
+                TextNotification.Instance.EnqueueCollectedText("Inventory Full!!", TextNotification.FloatingTextType.Damage);
                 return false; // inventory full, some items not added
             }
 
@@ -83,7 +81,7 @@ public class PlayerInventory : MonoBehaviour
             collectedItems.Add(new ItemInstance(newItem, toAdd));
             remaining -= toAdd;
         }
-        EnqueueCollectedText($"{newItem.itemName} collected.", FloatingTextType.Heal);
+        TextNotification.Instance.EnqueueCollectedText($"{newItem.itemName} collected.", TextNotification.FloatingTextType.Heal);
         return true;
     }
 
@@ -111,11 +109,11 @@ public class PlayerInventory : MonoBehaviour
                 GameObject loot = GameObject.Instantiate(item.lootPrefab);
                 if (item.itemType != ItemType.Weapon)
                 {
-                    EnqueueCollectedText($"{instance.quantity}x {item.itemName} dropped!", FloatingTextType.Damage);
+                    TextNotification.Instance.EnqueueCollectedText($"{instance.quantity}x {item.itemName} dropped!", TextNotification.FloatingTextType.Damage);
                 }
                 else
                 {
-                    EnqueueCollectedText($"{item.itemName} dropped!", FloatingTextType.Damage);
+                    TextNotification.Instance.EnqueueCollectedText($"{item.itemName} dropped!", TextNotification.FloatingTextType.Damage);
                 }
                 dropTile.PlaceLoot(loot);
             }
@@ -132,57 +130,4 @@ public class PlayerInventory : MonoBehaviour
         InventoryUIManager.Instance.RefreshInventory();
         return true;
     }
-
-
-    #region Notification Message
-    public enum FloatingTextType
-    {
-        Damage,
-        Heal, // for things like "Inventory Full"
-    }
-    [Header("Notification Message")]
-    private Queue<(string message, FloatingTextType type)> floatingTextQueue
-    = new Queue<(string, FloatingTextType)>();
-
-    private string NoSpaceInInventory = "";
-    private bool isShowingText = false;
-
-    public float MessageInterval = 1f;
-
-    public void EnqueueCollectedText(string msg, FloatingTextType type)
-    {
-        floatingTextQueue.Enqueue((msg, type));
-
-        if (!isShowingText)
-            StartCoroutine(ProcessFloatingTextQueue());
-    }
-
-    private IEnumerator ProcessFloatingTextQueue()
-    {
-        isShowingText = true;
-        Vector3 basePosition = TextGenerationPoint.position;
-
-        while (floatingTextQueue.Count > 0)
-        {
-            var entry = floatingTextQueue.Dequeue();
-            Vector3 spawnPos = basePosition + Vector3.up;
-
-            switch (entry.type)
-            {
-                case FloatingTextType.Damage:
-                    DamageTextManager.Instance.ShowDamage(spawnPos, entry.message, false);
-                    break;
-
-                case FloatingTextType.Heal:
-                    DamageTextManager.Instance.ShowHeal(spawnPos, entry.message);
-                    break;
-            }
-
-            yield return new WaitForSeconds(MessageInterval);
-        }
-
-        isShowingText = false;
-    }
-
-    #endregion
 }

@@ -56,6 +56,7 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void InitiateDialogue(Event EventData, List<GameObject> survivors)
     {
+        this.changeFrequency = EventData.DialougeChangeFrequency;
         TemporaryEvent = EventData;
 
         showChoicesAtEnd = EventData.ShowChoiceButtonAtEndOfDialouge;
@@ -89,6 +90,9 @@ public class DialogueManager : MonoBehaviour
         ShowLine();
     }
 
+    [Header("Dialogue Settings")]
+    [SerializeField] private int changeFrequency = 1; // default 1 = change every line
+
     private void ShowLine()
     {
         string line = currentDialogue[currentLine];
@@ -96,7 +100,7 @@ public class DialogueManager : MonoBehaviour
         // Determine which survivor speaks
         if (Survivors != null && Survivors.Count > 0)
         {
-            int speakerIndex = currentLine % Survivors.Count;
+            int speakerIndex = (currentLine / changeFrequency) % Survivors.Count;
             GameObject speaker = Survivors[speakerIndex];
 
             SetSpeakerDetails(
@@ -108,6 +112,7 @@ public class DialogueManager : MonoBehaviour
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
         typingCoroutine = StartCoroutine(TypeText(line));
     }
+
 
     private IEnumerator TypeText(string text)
     {

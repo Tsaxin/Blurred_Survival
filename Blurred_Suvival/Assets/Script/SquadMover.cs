@@ -143,6 +143,7 @@ public class SquadMover : MonoBehaviour
 
     public void ExitEncounter()
     {
+        RetreatHandler.CanRetreat = true;
         BattleQueueManager.Instance.EndBattle();
         if (TurnManager.Instance.SelectedUnit != null)
         {

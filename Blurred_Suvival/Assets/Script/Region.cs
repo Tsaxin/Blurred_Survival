@@ -10,7 +10,6 @@ public class Region : MonoBehaviour
     public Enemy EnemyManager;
 
     public float EncounterChance = 0.15f;
-    public int MaxEnemyCount = 4;
     public int EnemyStartColumn = 3, EnemyEndColumn = 15;
     public SquadMover squadMover;
 
@@ -20,14 +19,6 @@ public class Region : MonoBehaviour
     bool isPreemptive,
     System.Func<(Transform tile, int row), Transform> getEnemy)
     {
-        if (EnemyManager == null)
-        {
-            Debug.LogWarning("Missing EnemyManager.");
-            return;
-        }
-
-        EnemyManager.DestroyAllChildren();
-
         var validTiles = new List<(Transform tile, int row)>();
         var tiles = EnemyManager.tileManager.tiles;
 
@@ -100,6 +91,14 @@ public class Region : MonoBehaviour
 
     public void TrySpawnEnemies(TurnManager turnManager)
     {
+        if (EnemyManager == null)
+        {
+            Debug.LogWarning("Missing EnemyManager.");
+            return;
+        }
+
+        EnemyManager.DestroyAllChildren();
+
         foreach (var enemyInZone in enemies)
         {
             int spawnCount = Random.Range(enemyInZone.minCount, enemyInZone.maxCount + 1);
@@ -118,6 +117,14 @@ public class Region : MonoBehaviour
 
     public void TrySpawnAmbushEnemies(TurnManager turnManager)
     {
+        if (EnemyManager == null)
+        {
+            Debug.LogWarning("Missing EnemyManager.");
+            return;
+        }
+
+        EnemyManager.DestroyAllChildren();
+
         foreach (var enemyInZone in enemies)
         {
             int spawnCount = Random.Range(enemyInZone.minCount, enemyInZone.maxCount + 1);
@@ -136,6 +143,14 @@ public class Region : MonoBehaviour
 
     public void TrySpawnPreemptiveEnemies(TurnManager turnManager)
     {
+        if (EnemyManager == null)
+        {
+            Debug.LogWarning("Missing EnemyManager.");
+            return;
+        }
+
+        EnemyManager.DestroyAllChildren();
+
         foreach (var enemyInZone in enemies)
         {
             int spawnCount = Random.Range(enemyInZone.minCount, enemyInZone.maxCount + 1);
@@ -154,6 +169,14 @@ public class Region : MonoBehaviour
 
     public void TrySpawnEventTriggerEnemies(TurnManager turnManager, List<GameObject> objects)
     {
+        if (EnemyManager == null)
+        {
+            Debug.LogWarning("Missing EnemyManager.");
+            return;
+        }
+
+        EnemyManager.DestroyAllChildren();
+        
         int index = 0;
 
         SpawnEnemiesInternal(
@@ -177,15 +200,19 @@ public class Region : MonoBehaviour
     {
         foreach (Transform zombie in EnemyManager.ZombiePool)
         {
-            var ai = zombie.GetComponent<ZombieAIBase>();
-            if (ai != null && ai.GetComponent<CharacterStats>().CharacterName == zombieName)
+            if (!zombie.gameObject.activeInHierarchy) // ✅ only grab unused ones
             {
-                zombie.GetComponent<CharacterStats>().Level = GetComponent<ZombieLevelScaler>().GetZombieLevel();
-                return zombie;
+                var stats = zombie.GetComponent<CharacterStats>();
+                if (stats != null && stats.CharacterName == zombieName)
+                {
+                    stats.Level = GetComponent<ZombieLevelScaler>().GetZombieLevel();
+                    return zombie;
+                }
             }
         }
         return null;
     }
+
 
     public List<GameObject> battleGrounds;
 

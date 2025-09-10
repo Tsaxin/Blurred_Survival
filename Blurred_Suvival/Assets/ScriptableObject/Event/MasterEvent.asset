@@ -19,21 +19,14 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d04e2d6230b5246488a15c05963b39b3, type: 3}
   - {fileID: 21300000, guid: 2872cc38458ae054cb0aadacf269caab, type: 3}
   Survivors:
-  - {fileID: 9200530703817233753, guid: cb87d32dda97ffc4bb55ce4291e1ffdb, type: 3}
   - {fileID: 4077031628795978870, guid: 84ec5e13ef4c4ce46839d09092556e88, type: 3}
-  - {fileID: 7603693025749048937, guid: bccdcc27446b3e64d8c44893f26d0240, type: 3}
   - {fileID: 7441000921677630084, guid: 5b34f23181d08d445b469f08095c62fe, type: 3}
   - {fileID: 1042544255454963484, guid: 9ce01d2208b8a5f46a6fc3bae6346d0c, type: 3}
-  - {fileID: 4536060065368327761, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
-  - {fileID: 4543795819597959861, guid: 0b0a2ab40f14f174cb494cb64173f505, type: 3}
   - {fileID: 750897079123205016, guid: 908ae7e899b4cb248932d53b80b27382, type: 3}
   - {fileID: 106117728334227358, guid: d891864755d568d4cae2dd3d87251f04, type: 3}
   - {fileID: 4432471361555323814, guid: b1a988c7d6962324997e82b89131bcc0, type: 3}
-  - {fileID: 8710011502957677686, guid: 7ba973e03b558ac489a127a90950564a, type: 3}
   - {fileID: 5279418514720354316, guid: 5eb933848ef90c4498146bb82657d333, type: 3}
-  - {fileID: 2932959252752737315, guid: bfd8009b194684e439eca70f47d2137c, type: 3}
   - {fileID: 3816641826279779961, guid: 71d2c79699aa9964a9969210235f8fd1, type: 3}
-  - {fileID: 8300768595004691836, guid: e38420df97d61bd46ba7a8d010fb3645, type: 3}
   Vehicles: []
   event2survivor:
   - SurvivorCount: 2
@@ -47,6 +40,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "Did anyone hear from Marcus? He went out before sunrise\u2026 he never comes
@@ -58,6 +54,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "You\u2019re reckless! You can\u2019t just wander into that street full of
@@ -69,6 +68,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "Remember life before\u2026 before all this? Feels like a dream now."
@@ -79,6 +81,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I heard there\u2019s a building on 5th that\u2019s safe\u2026 untouched. No
@@ -89,6 +94,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I found some food in that abandoned house. Should we\u2026 share it with the
@@ -101,6 +109,9 @@ MonoBehaviour:
     - {fileID: 4536060065368327761, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - We need to get across the river. The bridge might be clear at night.
@@ -111,6 +122,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I\u2026 I saw them. Our kids\u2026 I thought they were alive. But\u2026"
@@ -120,6 +134,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I can trade you two cans for a medkit. No way I\u2019m giving more."
@@ -130,6 +147,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "Something\u2019s off. The usual groans\u2026 they\u2019re quieter. Too quiet."
@@ -139,6 +159,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - That stash is mine!
@@ -148,6 +171,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I used to sit in the park\u2026 watch the sun on the swings, kids laughing.
@@ -158,6 +184,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "That trader yesterday\u2026 he looked fine, but something felt off."
@@ -167,6 +196,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "If the bridge collapses, we\u2019re trapped. We need another route\u2026 maybe
@@ -178,6 +210,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - We should follow Mia. She knows how to survive.
@@ -187,6 +222,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "Tom won\u2019t make it without this medkit."
@@ -196,6 +234,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I remember Saturday mornings\u2026 cartoons on TV, pancakes, and nobody worrying
@@ -208,6 +249,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I think they\u2019re coming."
@@ -217,6 +261,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I\u2019ve got a few beans\u2026 want some?"
@@ -229,6 +276,9 @@ MonoBehaviour:
     - {fileID: 7603693025749048937, guid: bccdcc27446b3e64d8c44893f26d0240, type: 3}
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "Be careful in the alley\u2026 someone set spikes. Not walkers. I saw a kid
@@ -239,6 +289,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "My little brother\u2026 he loved drawing. I left his sketches on the fridge.
@@ -250,6 +303,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I stayed up all night once\u2026 thought I heard something scratching at the
@@ -259,9 +315,14 @@ MonoBehaviour:
       tricks."
     - "Uh\u2026 hey. Who\u2019s there? Don\u2019t sneak up on us."
     Icon: {fileID: 0}
-    Survivors: []
+    Survivors:
+    - {fileID: 750897079123205016, guid: 908ae7e899b4cb248932d53b80b27382, type: 3}
+    - {fileID: 7441000921677630084, guid: 5b34f23181d08d445b469f08095c62fe, type: 3}
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "Whoa! You\u2026 you\u2019re not one of them, right?"
@@ -270,6 +331,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "We lost Jenna last week. Thought she\u2019d be safe\u2026 she said she\u2019d
@@ -282,6 +346,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "We can\u2019t trust anyone. Last week, that guy tried to steal our supplies."
@@ -290,10 +357,13 @@ MonoBehaviour:
     - "Hey! Wait! Who\u2019s out there?"
     Icon: {fileID: 0}
     Survivors:
-    - {fileID: 750897079123205016, guid: 908ae7e899b4cb248932d53b80b27382, type: 3}
+    - {fileID: 7441000921677630084, guid: 5b34f23181d08d445b469f08095c62fe, type: 3}
     - {fileID: 4077031628795978870, guid: 84ec5e13ef4c4ce46839d09092556e88, type: 3}
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I heard there\u2019s a safe zone east\u2026 no walkers."
@@ -302,6 +372,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I left my parents behind\u2026 thought I\u2019d be back in an hour. Never
@@ -314,6 +387,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "Remember when we thought a zombie was funny? Hah\u2026 not anymore."
@@ -322,6 +398,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - I found a few bottles of water. Should we share or keep them?
@@ -331,6 +410,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "Last month, a guy tried sneaking past the horde near the warehouse\u2026 didn\u2019t
@@ -344,6 +426,9 @@ MonoBehaviour:
     - {fileID: 9200530703817233753, guid: cb87d32dda97ffc4bb55ce4291e1ffdb, type: 3}
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I hate night\u2026 it\u2019s like the world forgets you exist. Silence, shadows,
@@ -353,6 +438,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "We found them in the street\u2026 family of three. Thought we were alone for
@@ -366,6 +454,9 @@ MonoBehaviour:
     - {fileID: 7603693025749048937, guid: bccdcc27446b3e64d8c44893f26d0240, type: 3}
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I hear them\u2026 coming closer."
@@ -374,6 +465,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "If we get past the river, there\u2019s a town with lights. Maybe people\u2026
@@ -384,6 +478,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "We used to hide in the old subway tunnels\u2026 made a little home. Someone
@@ -395,6 +492,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "Don\u2019t go down that alley."
@@ -405,6 +505,9 @@ MonoBehaviour:
     - {fileID: 7603693025749048937, guid: bccdcc27446b3e64d8c44893f26d0240, type: 3}
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I got trapped once\u2026 cornered by them. Thought it was the end. Barely
@@ -415,6 +518,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I swear\u2026 these things have no sense of fashion. Just ripped clothes and
@@ -424,6 +530,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "I remember the first week\u2026 nothing to eat. Every alley, every house\u2026
@@ -435,6 +544,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   - SurvivorCount: 2
     dialouge:
     - "Some nights, I hear them whispering\u2026 not groaning, just\u2026 quiet.
@@ -444,6 +556,9 @@ MonoBehaviour:
     Survivors: []
     Vehicles: []
     LootableObjects: []
+    ShowChoiceButtonAtEndOfDialouge: 1
+    DialougeChangeFrequency: 1
+    PrimaryChoiceType: 0
   MaleName: 'Liam,Noah,Oliver,Elijah,Lucas,Mason,Ethan,Logan,James,Aiden,Jackson,Leo,Oscar,Kai,Hugo,Ezra,Axel,Arlo,Nico,Rafael,Rio,Theo,Silas,Adrian,Victor,Julian,Micah,Emil,Enzo,Max,Felix,Leo,Finn,Jonah,Asher,Dante,Griffin,Atlas,Orion,Caius,Jasper,Malik,Zane,Ezio,Kairos,Lucian,Alaric,Rowan,Ryder,Caspian,Blaise,Callum,Damien,Everett,Gideon,Hendrix,Ignatius,Jett,Kaiyan,Leander,Maverick,Nash,Odin,Phineas,Quentin,Ronan,Stellan,Thaddeus,Ulysses,Vincent,Weston,Xander,Yannick,Zayden,Apollo,Balthazar,Cai,Drake,Ezekiel,Finnian,Gael,Hector,Isaias,Jovan,Kian,Lysander,Matteo,Neo,Oberon,Phoenix,Quillon,Rafferty,Samson,Tobias,Urijah,Valerian,Wesley,Xavian,Yorick,Zev
 
 '
