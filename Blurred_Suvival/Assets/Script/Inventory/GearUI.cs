@@ -56,7 +56,7 @@ public class GearUI : MonoBehaviour
 
         // Prepare tooltip data
         ItemInstance tempInstance = new ItemInstance(gearData, 1);
-        string tooltipText = InventoryUIManager.Instance.GenerateTooltipText(tempInstance);
+        string tooltipText = TooltipUI.Instance.GenerateTooltipText(tempInstance);
 
         // Assign tooltip trigger
         TooltipTrigger trigger = obj.GetComponent<TooltipTrigger>();

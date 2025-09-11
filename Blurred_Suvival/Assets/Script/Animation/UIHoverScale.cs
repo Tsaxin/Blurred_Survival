@@ -25,6 +25,10 @@ public class UIHoverScale : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerEnter(PointerEventData eventData)
     {
         targetScale = originalScale * hoverScale;
+
+        // Play hover sound once
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.PlayHoverSound();
     }
 
     public void OnPointerExit(PointerEventData eventData)
