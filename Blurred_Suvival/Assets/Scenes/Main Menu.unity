@@ -1824,11 +1824,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac032999d82f2548a637fa1247a41ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeDuration: 1.5
+  fadeDuration: 0.5
   AmbientClip: {fileID: 8300000, guid: 666bccd4fb6731c4487fbf8ab4784075, type: 3}
   CombatClip: {fileID: 8300000, guid: cc4090a23d86bb64c8ab7c0eb6ad53e5, type: 3}
   DramaticClip: {fileID: 8300000, guid: d23d84af0046fb34691f9f7a2f5d6a18, type: 3}
   HoverAudio: {fileID: 8300000, guid: 8159f33f861153e4d9eca40dfee02b14, type: 3}
+  SelectClip: {fileID: 8300000, guid: fe2e2060958b0c34e91d7a75fca6af56, type: 3}
   audioSource: {fileID: 433754206}
   UIAudioSource: {fileID: 863962471}
 --- !u!4 &1553083572

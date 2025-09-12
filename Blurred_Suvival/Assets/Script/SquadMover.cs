@@ -145,6 +145,9 @@ public class SquadMover : MonoBehaviour
     {
         RetreatHandler.CanRetreat = true;
         BattleQueueManager.Instance.EndBattle();
+        ZombieSoundManager.Instance.StopZombieSound();
+        MusicManager.Instance.PlayAmbientMusic();
+
         if (TurnManager.Instance.SelectedUnit != null)
         {
             TurnManager.Instance.SelectedUnit.Deselect();

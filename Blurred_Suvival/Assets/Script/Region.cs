@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Region : MonoBehaviour
@@ -86,6 +87,13 @@ public class Region : MonoBehaviour
             if (stats != null) stats.ScaleStatsByLevel();
 
             EnemyManager.spawnedEnemies.Add(zombie.gameObject);
+
+            // Convert GameObject list to ZombieAIBase list
+            var zombieList = EnemyManager.spawnedEnemies
+                .Select(go => go.GetComponent<ZombieAIBase>())
+                .Where(z => z != null) // filter out anything that doesn’t have ZombieAIBase
+                .ToList();
+            ZombieSoundManager.Instance.StartZombieSound(zombieList); //Add sounds
         }
     }
 
@@ -176,7 +184,7 @@ public class Region : MonoBehaviour
         }
 
         EnemyManager.DestroyAllChildren();
-        
+
         int index = 0;
 
         SpawnEnemiesInternal(

@@ -19436,10 +19436,10 @@ RectTransform:
   - {fileID: 2083332587}
   m_Father: {fileID: 506351149}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 845, y: 464}
-  m_SizeDelta: {x: 193.5, y: 79}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -95, y: -59}
+  m_SizeDelta: {x: 145.125, y: 59.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &101298037
 MonoBehaviour:
@@ -26150,6 +26150,7 @@ GameObject:
   - component: {fileID: 114531653}
   - component: {fileID: 114531655}
   - component: {fileID: 114531656}
+  - component: {fileID: 114531657}
   m_Layer: 5
   m_Name: Choice 1
   m_TagString: Untagged
@@ -26284,7 +26285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outcomeData: {fileID: 11400000, guid: 5c8fbb47286e4d3459d7fd16089de6c2, type: 2}
-  choiceType: 27
+  choiceType: 91
   responseText: {fileID: 369083105}
   PlayerResponses:
   - "I don\u2019t have all day. Hand it over your supplise before I change my mind."
@@ -26316,6 +26317,20 @@ MonoBehaviour:
   - "I\u2019ll trade you\u2014your supplies for me not stabbing you. Fair deal, right?"
   - 'Good news: you get to live. Bad news: you get to live hungry.'
   - "Smile! You\u2019re making my day easier by handing me your bag."
+--- !u!114 &114531657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114531651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5fb3f67c7ec8504f9b92824f458d028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: 1.3
+  speed: 20
 --- !u!1 &116624507
 GameObject:
   m_ObjectHideFlags: 0
@@ -84579,7 +84594,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4285624689
+    rgba: 4282335039
   m_fontColor: {r: 0.24705882, g: 0.24705882, b: 0.24705882, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -174779,6 +174794,7 @@ GameObject:
   - component: {fileID: 784782239}
   - component: {fileID: 784782238}
   - component: {fileID: 784782237}
+  - component: {fileID: 784782241}
   m_Layer: 5
   m_Name: Choice 1 (1)
   m_TagString: Untagged
@@ -174819,7 +174835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outcomeData: {fileID: 11400000, guid: 5c8fbb47286e4d3459d7fd16089de6c2, type: 2}
-  choiceType: 25
+  choiceType: 89
   responseText: {fileID: 855265431}
   PlayerResponses:
   - "Walk away now\u2026 or things get ugly for everyone."
@@ -174939,6 +174955,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 784782235}
   m_CullTransparentMesh: 1
+--- !u!114 &784782241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784782235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5fb3f67c7ec8504f9b92824f458d028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: 1.3
+  speed: 20
 --- !u!1 &787322869
 GameObject:
   m_ObjectHideFlags: 0
@@ -223445,7 +223475,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931721989}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
@@ -224125,7 +224155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &938509409
 RectTransform:
   m_ObjectHideFlags: 0
@@ -241365,6 +241395,63 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1057398369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1057398370}
+  - component: {fileID: 1057398371}
+  m_Layer: 0
+  m_Name: SFX Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1057398370
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057398369}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1135607435}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1057398371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057398369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a5aa6ecb8199b44ab97f2fc1383ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeSlashClips:
+  - {fileID: 8300000, guid: 3f5cde29c4bc34447b0f6d76ecdb6bc7, type: 3}
+  - {fileID: 8300000, guid: 7ad97deb307feec4195af61215a99dd2, type: 3}
+  - {fileID: 8300000, guid: 470bf22501b80b54bab5e36eae136ade, type: 3}
+  missClips: []
+  FootStepClips:
+  - {fileID: 8300000, guid: 48a5d15369dcb674db1c0b116310f1b5, type: 3}
+  - {fileID: 8300000, guid: ad3fbaf44a9eaa246bc3c4f50d34fdaa, type: 3}
+  - {fileID: 8300000, guid: 92477a2780e9b974f9101f737b5d702b, type: 3}
+  - {fileID: 8300000, guid: 3428f9aba159c434f986b2ab6a132566, type: 3}
+  baseVolume: 1
+  minPitch: 0.95
+  maxPitch: 1.05
 --- !u!1 &1058492286
 GameObject:
   m_ObjectHideFlags: 0
@@ -262858,6 +262945,8 @@ Transform:
   - {fileID: 1343642522}
   - {fileID: 2026066034}
   - {fileID: 661522435}
+  - {fileID: 1713957423}
+  - {fileID: 1057398370}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1135607436
@@ -319907,7 +319996,7 @@ MonoBehaviour:
   displayText: {fileID: 1432231008}
   fadeOverlay: {fileID: 2034121158}
   fadeDuration: 1
-  imageDuration: 2
+  imageDuration: 3
   moveDistance: 50
   EventAfterCutScene: {fileID: 1300142085}
   cutsceneID: 1
@@ -367382,6 +367471,7 @@ GameObject:
   - component: {fileID: 1620022760}
   - component: {fileID: 1620022759}
   - component: {fileID: 1620022758}
+  - component: {fileID: 1620022762}
   m_Layer: 5
   m_Name: Choice 1 (3)
   m_TagString: Untagged
@@ -367422,7 +367512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outcomeData: {fileID: 11400000, guid: 5c8fbb47286e4d3459d7fd16089de6c2, type: 2}
-  choiceType: 36
+  choiceType: 52
   responseText: {fileID: 1561475157}
   PlayerResponses:
   - "You either join us or survive on your own\u2026 your choice."
@@ -367542,6 +367632,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620022756}
   m_CullTransparentMesh: 1
+--- !u!114 &1620022762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620022756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5fb3f67c7ec8504f9b92824f458d028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: 1.3
+  speed: 20
 --- !u!1 &1620653072
 GameObject:
   m_ObjectHideFlags: 0
@@ -381353,6 +381457,68 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1713957422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1713957423}
+  - component: {fileID: 1713957424}
+  m_Layer: 0
+  m_Name: Zombie Sound Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1713957423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713957422}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1135607435}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1713957424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713957422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb885def3b00414d9d875de2bcca35c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleClips:
+  - {fileID: 8300000, guid: d7278dab338213d4fbaa6a3da4e04403, type: 3}
+  - {fileID: 8300000, guid: 85b0cc40e48673e4c88f28a49eeaabd0, type: 3}
+  - {fileID: 8300000, guid: 4349b6904a4aaf1408be0a017d794246, type: 3}
+  - {fileID: 8300000, guid: 9063082b0ea66de449f5503ac78f2699, type: 3}
+  - {fileID: 8300000, guid: ee08e4653822c5243acf6577781dc46c, type: 3}
+  - {fileID: 8300000, guid: 780c0ac873689a94eb360aa7b03b2a6f, type: 3}
+  - {fileID: 8300000, guid: 141d517cd84833145adf6e682b2f8c14, type: 3}
+  - {fileID: 8300000, guid: fae50d1bdff58b74fb7e0bc6955c40da, type: 3}
+  - {fileID: 8300000, guid: 0cd0132f2e9967d4bb46eae9164c924a, type: 3}
+  - {fileID: 8300000, guid: e95a31ca3faef4342b7ee634439cbde0, type: 3}
+  maxSimultaneous: 3
+  minDelay: 2
+  maxDelay: 6
+  minPitch: 0.9
+  maxPitch: 1.1
+  idleBaseVolume: 0.3
+  audioSourcePoolSize: 5
 --- !u!1 &1714319283
 GameObject:
   m_ObjectHideFlags: 0
@@ -472104,6 +472270,7 @@ GameObject:
   - component: {fileID: 2057401165}
   - component: {fileID: 2057401166}
   - component: {fileID: 2057401167}
+  - component: {fileID: 2057401168}
   m_Layer: 6
   m_Name: Squad Summary
   m_TagString: Player
@@ -472273,6 +472440,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6085976231546e74b9ddb0823a6aa2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2057401168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057401159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab4bb1cd0c07bc498a6c46d932ce1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2057509210
@@ -484922,8 +485101,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.4131, y: -3}
-  m_SizeDelta: {x: -30.1494, y: -21.1987}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2083332588
 MonoBehaviour:
@@ -484972,8 +485151,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -488054,6 +488233,7 @@ GameObject:
   - component: {fileID: 2120630190}
   - component: {fileID: 2120630189}
   - component: {fileID: 2120630188}
+  - component: {fileID: 2120630192}
   m_Layer: 5
   m_Name: Choice 1 (2)
   m_TagString: Untagged
@@ -488094,7 +488274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outcomeData: {fileID: 11400000, guid: 5c8fbb47286e4d3459d7fd16089de6c2, type: 2}
-  choiceType: 80
+  choiceType: 89
   responseText: {fileID: 584965523}
   PlayerResponses:
   - ..........
@@ -488192,6 +488372,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120630186}
   m_CullTransparentMesh: 1
+--- !u!114 &2120630192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120630186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5fb3f67c7ec8504f9b92824f458d028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: 1.3
+  speed: 20
 --- !u!1 &2120677906
 GameObject:
   m_ObjectHideFlags: 0

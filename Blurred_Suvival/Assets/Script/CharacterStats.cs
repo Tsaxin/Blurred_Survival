@@ -106,6 +106,7 @@ public class CharacterStats : MonoBehaviour
         }
 
         bool isCrit = false; // 🔴 track crit state
+        SFXManager.Instance.PlayDamageSFX();
 
         // 🌟 Handle crits
         if (attacker != null && attacker.CriticalChance > 0)

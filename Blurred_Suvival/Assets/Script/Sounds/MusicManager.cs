@@ -7,7 +7,7 @@ public class MusicManager : MonoBehaviour
     public float fadeDuration = 1.5f; // how long fades take
     private Coroutine currentRoutine;
 
-    public AudioClip AmbientClip, CombatClip, DramaticClip,HoverAudio;
+    public AudioClip AmbientClip, CombatClip, DramaticClip, HoverAudio, SelectClip;
 
     public AudioSource audioSource, UIAudioSource;
 
@@ -17,13 +17,27 @@ public class MusicManager : MonoBehaviour
         else Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
-        PlayMusic(DramaticClip);
+        PlayDramaticMusic();
     }
 
     /// <summary>
     /// Plays a new track with fade out/in, at the given max volume.
     /// </summary>
-    public void PlayMusic(AudioClip newClip, float maxVolume = 0.3f)
+    public void PlayDramaticMusic()
+    {
+        PlayMusic(DramaticClip);
+    }
+
+    public void PlayAmbientMusic()
+    {
+        PlayMusic(AmbientClip);
+    }
+
+    public void PlayBattleMusic()
+    {
+        PlayMusic(CombatClip);
+    }
+    public void PlayMusic(AudioClip newClip, float maxVolume = 1f)
     {
         if (currentRoutine != null) StopCoroutine(currentRoutine);
         currentRoutine = StartCoroutine(FadeMusic(newClip, maxVolume));
@@ -59,7 +73,21 @@ public class MusicManager : MonoBehaviour
 
     public void PlayHoverSound()
     {
-        UIAudioSource.clip = HoverAudio;
-        UIAudioSource.Play();
+        PlayUISound(HoverAudio);
+    }
+
+    public void PlaySelectSound()
+    {
+        PlayUISound(SelectClip);
+    }
+
+    public void PlayUISound(AudioClip audioClip)
+    {
+        if (audioClip != null)
+        {
+            UIAudioSource.clip = audioClip;
+            UIAudioSource.Play();
+        }
+        else Debug.Log("audioClip is missing");
     }
 }

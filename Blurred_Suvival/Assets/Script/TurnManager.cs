@@ -334,6 +334,8 @@ public class TurnManager : MonoBehaviour
 
     public void SetNPCAsEnemy()
     {
+        MusicManager.Instance.PlayBattleMusic();
+
         InitializeCharacters();
 
         Enemy enemy = enemyParent.GetComponent<Enemy>();

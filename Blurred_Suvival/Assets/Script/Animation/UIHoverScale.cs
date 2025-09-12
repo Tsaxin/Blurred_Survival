@@ -26,6 +26,9 @@ public class UIHoverScale : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         targetScale = originalScale * hoverScale;
 
+        // Move to top of sibling hierarchy so it renders above others
+        transform.SetAsLastSibling();
+
         // Play hover sound once
         if (MusicManager.Instance != null)
             MusicManager.Instance.PlayHoverSound();

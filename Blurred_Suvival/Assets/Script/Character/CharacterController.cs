@@ -784,13 +784,23 @@ public class CharacterController : MonoBehaviour
         }
 
         float distance = Vector3.Distance(start, end);
+
+        // 👉 If the target is very close, snap and exit immediately
+        if (distance < 0.1f)
+        {
+            if (this != null && transform != null)
+                transform.position = end;
+
+            if (anim != null) anim.SetBool("IsMoving", false);
+            yield break;
+        }
+
         float moveSpeed = GetComponent<CharacterStats>()?.moveSpeed ?? 1f;
         float duration = distance / Mathf.Max(moveSpeed, 0.01f);
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
-            // Check if destroyed mid-run
             if (this == null || transform == null) yield break;
 
             float t = elapsed / duration;
@@ -798,12 +808,18 @@ public class CharacterController : MonoBehaviour
             transform.position = Vector3.Lerp(start, end, t);
 
             elapsed += Time.deltaTime;
+
+            // 👉 Also break out if we get close enough mid-way
+            if (Vector3.Distance(transform.position, end) < 0.1f)
+                break;
+
             yield return null;
         }
 
-        // optional: final snap to end position (with safety)
         if (this != null && transform != null)
             transform.position = end;
+
+        if (anim != null) anim.SetBool("IsMoving", false);
     }
 
     #endregion

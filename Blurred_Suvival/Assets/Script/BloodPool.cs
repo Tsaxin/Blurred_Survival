@@ -120,13 +120,20 @@ public class BloodPool : MonoBehaviour
 
     public void ClearBloodSplashes()
     {
-        foreach (GameObject blood in BloodSplashObjects)
+        for (int i = BloodSplashObjects.Count - 1; i >= 0; i--)
         {
+            GameObject blood = BloodSplashObjects[i];
+
+            if (blood == null)
+            {
+                BloodSplashObjects.RemoveAt(i); // cleanup destroyed references
+                continue;
+            }
+
             if (blood.activeInHierarchy)
             {
                 blood.SetActive(false);
             }
         }
     }
-
 }
