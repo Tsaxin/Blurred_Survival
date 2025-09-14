@@ -125,6 +125,7 @@ public class TurnManager : MonoBehaviour
     }
     public void BeginPlayerTurn()
     {
+        GetComponent<GlobalTurnIndicator>().GlobalTurnIndicatorState(true, "Player's turn");
         playerTurn = true;
         currentCharacterIndex = 0;
 
@@ -175,6 +176,7 @@ public class TurnManager : MonoBehaviour
     public float delayBeforeEnemyTurn = 0.1f;   // 👈 New field
     IEnumerator BeginEnemyTurn()
     {
+        GetComponent<GlobalTurnIndicator>().GlobalTurnIndicatorState(true,"Enemy's turn");
         playerTurn = false;
         Debug.Log("⏳ Waiting before enemy turn...");
         yield return new WaitForSeconds(delayBeforeEnemyTurn);
@@ -334,7 +336,7 @@ public class TurnManager : MonoBehaviour
 
     public void SetNPCAsEnemy()
     {
-        MusicManager.Instance.PlayBattleMusic();
+        MusicManager.Instance?.PlayBattleMusic();
 
         InitializeCharacters();
 

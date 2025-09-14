@@ -7,7 +7,7 @@ public class MusicManager : MonoBehaviour
     public float fadeDuration = 1.5f; // how long fades take
     private Coroutine currentRoutine;
 
-    public AudioClip AmbientClip, CombatClip, DramaticClip, HoverAudio, SelectClip;
+    public AudioClip AmbientClip, CombatClip, DramaticClip, HoverAudio, SelectClip,EquipSound,InventorySound,PickUpSound;
 
     public AudioSource audioSource, UIAudioSource;
 
@@ -79,6 +79,18 @@ public class MusicManager : MonoBehaviour
     public void PlaySelectSound()
     {
         PlayUISound(SelectClip);
+    }
+    public void PlayInventorySound()
+    {
+        PlayUISound(InventorySound);
+    }
+    public void PlayEquipSound()
+    {
+        PlayUISound(EquipSound);
+    }
+    public void PlayPickUpSound()
+    {
+        PlayUISound(PickUpSound);
     }
 
     public void PlayUISound(AudioClip audioClip)

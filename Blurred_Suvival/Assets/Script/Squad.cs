@@ -63,9 +63,9 @@ public class Squad : MonoBehaviour
 
         if (IsEvent)
         {
-            MusicManager.Instance.PlayDramaticMusic();
+            MusicManager.Instance?.PlayDramaticMusic();
             RetreatHandler.CanRetreat = eventData.AllowRetreat;
-            region.TrySpawnEventTriggerEnemies(turnManager, eventData.Survivors);
+            region.TrySpawnEventTriggerEnemies(turnManager, eventData.Survivors,eventData);
             TurnManager.Instance.StartEventTrigger(eventData);
         }
         else
@@ -82,7 +82,7 @@ public class Squad : MonoBehaviour
     {
         if (!SelfEncounter)
         {
-            MusicManager.Instance.PlayBattleMusic();
+            MusicManager.Instance?.PlayBattleMusic();
             float roll = UnityEngine.Random.Range(0f, 100f);
 
             if (roll <= AmbushChance)
@@ -103,7 +103,7 @@ public class Squad : MonoBehaviour
         }
         else
         {
-            MusicManager.Instance.PlayDramaticMusic();
+            MusicManager.Instance?.PlayDramaticMusic();
             turnManager.EncounterMode = 3;
         }
 
@@ -243,7 +243,7 @@ public class Squad : MonoBehaviour
     IEnumerator LoadGameOverScreen()
     {
         yield return new WaitForSeconds(1.5f);
-        MusicManager.Instance.PlayDramaticMusic();
+        MusicManager.Instance?.PlayDramaticMusic();
 
         CutsceneManager.Instance.cutsceneID = "Game over";
         CutsceneManager.Instance.PlayCutsceneByID(gameOverPanel);

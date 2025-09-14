@@ -16,6 +16,7 @@ public class ChoiceButton : MonoBehaviour
 
     void OnEnable()
     {
+        Debug.Log($"ChoiceType on {gameObject.name}: {choiceType} ({(int)choiceType})");
         if (responseText != null)
             responseText.text = PlayerResponses[UnityEngine.Random.Range(0, PlayerResponses.Count)];
     }
@@ -77,6 +78,7 @@ public class ChoiceButton : MonoBehaviour
                 });
                 break;
         }
+
     }
 
     // ✅ Helper to pick a random enabled flag from a Flags enum

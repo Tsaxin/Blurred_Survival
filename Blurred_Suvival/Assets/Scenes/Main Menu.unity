@@ -1830,6 +1830,9 @@ MonoBehaviour:
   DramaticClip: {fileID: 8300000, guid: d23d84af0046fb34691f9f7a2f5d6a18, type: 3}
   HoverAudio: {fileID: 8300000, guid: 8159f33f861153e4d9eca40dfee02b14, type: 3}
   SelectClip: {fileID: 8300000, guid: fe2e2060958b0c34e91d7a75fca6af56, type: 3}
+  EquipSound: {fileID: 8300000, guid: ec373b7cc266dca4c894edcafb86b9ea, type: 3}
+  InventorySound: {fileID: 8300000, guid: 45225e7ba14d178448ddf734c771484f, type: 3}
+  PickUpSound: {fileID: 8300000, guid: 88aefa7f1f48e3a40914b52508babd9c, type: 3}
   audioSource: {fileID: 433754206}
   UIAudioSource: {fileID: 863962471}
 --- !u!4 &1553083572

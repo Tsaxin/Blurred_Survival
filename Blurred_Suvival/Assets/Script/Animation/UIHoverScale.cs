@@ -10,6 +10,8 @@ public class UIHoverScale : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private Vector3 originalScale;
     private Vector3 targetScale;
 
+    public bool ScaleToTop = true;
+
     void Awake()
     {
         originalScale = transform.localScale;
@@ -27,11 +29,11 @@ public class UIHoverScale : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         targetScale = originalScale * hoverScale;
 
         // Move to top of sibling hierarchy so it renders above others
-        transform.SetAsLastSibling();
+        if(ScaleToTop)transform.SetAsLastSibling();
 
         // Play hover sound once
         if (MusicManager.Instance != null)
-            MusicManager.Instance.PlayHoverSound();
+            MusicManager.Instance?.PlayHoverSound();
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -18,6 +18,7 @@ public class Region : MonoBehaviour
     TurnManager turnManager,
     int startCol,
     bool isPreemptive,
+    Event eventData,
     System.Func<(Transform tile, int row), Transform> getEnemy)
     {
         var validTiles = new List<(Transform tile, int row)>();
@@ -115,6 +116,7 @@ public class Region : MonoBehaviour
                 turnManager,
                 startCol: EnemyStartColumn,
                 isPreemptive: false,
+                null,
                 getEnemy: (tileRow) =>
                 {
                     if (spawnCount-- <= 0) return null;
@@ -141,6 +143,7 @@ public class Region : MonoBehaviour
                 turnManager,
                 startCol: EnemyStartColumn,
                 isPreemptive: false,
+                null,
                 getEnemy: (tileRow) =>
                 {
                     if (spawnCount-- <= 0) return null;
@@ -167,6 +170,7 @@ public class Region : MonoBehaviour
                 turnManager,
                 startCol: EnemyStartColumn,
                 isPreemptive: true,
+                null,
                 getEnemy: (tileRow) =>
                 {
                     if (spawnCount-- <= 0) return null;
@@ -175,7 +179,7 @@ public class Region : MonoBehaviour
         }
     }
 
-    public void TrySpawnEventTriggerEnemies(TurnManager turnManager, List<GameObject> objects)
+    public void TrySpawnEventTriggerEnemies(TurnManager turnManager, List<GameObject> objects,Event eventData)
     {
         if (EnemyManager == null)
         {
@@ -191,12 +195,14 @@ public class Region : MonoBehaviour
             turnManager,
             startCol: EnemyStartColumn,
             isPreemptive: false,
+            eventData,
             getEnemy: (tileRow) =>
             {
                 if (index >= objects.Count) return null;
 
                 // Instantiate prefab at runtime
                 GameObject instance = GameObject.Instantiate(objects[index++]);
+                instance.GetComponent<CharacterStats>().ScaleStatsByLevel(eventData.NPCLevel);
 
                 instance.GetComponent<TurnIndicator>()?.SetIndicator(false);
                 instance.GetComponent<CharacterController>()?.SetScale(-1f); //face left side

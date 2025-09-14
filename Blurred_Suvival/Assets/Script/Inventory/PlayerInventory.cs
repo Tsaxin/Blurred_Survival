@@ -35,6 +35,8 @@ public class PlayerInventory : MonoBehaviour
         if (newItem == null || quantity <= 0)
             return false;
 
+        MusicManager.Instance?.PlayPickUpSound();
+
         if (newItem.itemType == ItemType.Ration)
         {
             RationData ration = newItem as RationData;

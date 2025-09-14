@@ -70,5 +70,7 @@ public class Event
     [Header("ShowChoiceButtonAtEndOfDialouge=False")]
     public ChoiceOutcome.ChoiceType PrimaryChoiceType;
 
-    public bool AllowRetreat=true;
+    public bool AllowRetreat = true;
+
+    public int NPCLevel = 1;
 }

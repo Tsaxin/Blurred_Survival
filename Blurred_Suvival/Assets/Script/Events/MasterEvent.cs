@@ -9,6 +9,8 @@ public class MasterEvent : ScriptableObject
     public List<GameObject> Vehicles;
     public List<Event> event2survivor = new List<Event>();
 
+    public int MinLevel=1, MaxLevel = 20;
+
     public Event GetRandomEvent(SpriteRenderer MapIcon)
     {
         return GetRandomEventFromEvent2Survivor(MapIcon);
@@ -31,7 +33,7 @@ public class MasterEvent : ScriptableObject
         }
 
         newEvent.Survivors = new List<GameObject>(SelectedSurvivor);
-
+        newEvent.NPCLevel = Random.Range(MinLevel, MaxLevel);
         return newEvent;
     }
 

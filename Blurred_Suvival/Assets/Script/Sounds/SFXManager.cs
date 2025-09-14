@@ -10,6 +10,8 @@ public class SFXManager : MonoBehaviour
     public List<AudioClip> missClips;
     public List<AudioClip> FootStepClips;
 
+    public List<AudioClip> MeleeSwing;
+
     public float baseVolume = 1f;
     public float minPitch = 0.95f;
     public float maxPitch = 1.05f;
@@ -46,6 +48,15 @@ public class SFXManager : MonoBehaviour
     public void PlayFootStep()
     {
         PlaySFX(FootStepClips);
+    }
+
+    public void PlayWeaponSound(List<AudioClip> clips)
+    {
+        PlaySFX(clips);
+    }
+    public void PlayWeaponSound()
+    {
+        PlaySFX(MeleeSwing);
     }
 
     public void PlaySFX(List<AudioClip> clips)

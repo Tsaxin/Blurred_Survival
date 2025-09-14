@@ -27,6 +27,8 @@ public class SquadMover : MonoBehaviour
 
     public GameObject CampButton;
 
+    public GlobalTurnIndicator globalTurnIndicator;
+
     float InitialScale;
 
     void Start()
@@ -143,10 +145,11 @@ public class SquadMover : MonoBehaviour
 
     public void ExitEncounter()
     {
+        globalTurnIndicator.GlobalTurnIndicatorState(false);
         RetreatHandler.CanRetreat = true;
         BattleQueueManager.Instance.EndBattle();
         ZombieSoundManager.Instance.StopZombieSound();
-        MusicManager.Instance.PlayAmbientMusic();
+        MusicManager.Instance?.PlayAmbientMusic();
 
         if (TurnManager.Instance.SelectedUnit != null)
         {

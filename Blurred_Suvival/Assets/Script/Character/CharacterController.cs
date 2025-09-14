@@ -541,6 +541,7 @@ public class CharacterController : MonoBehaviour
         Animator anim = GetComponent<Animator>();
         if (GetComponent<GearEquipper>().equippedWeapon != null)
         {
+            anim.speed=GetComponent<GearEquipper>().equippedWeapon.AttackSpeed;
             if (GetComponent<GearEquipper>().equippedWeapon.type == WeaponData.Type.Range)
             {
                 anim.SetTrigger("Range");
@@ -644,6 +645,7 @@ public class CharacterController : MonoBehaviour
     public void FinishedTurn()
     {
         if (turnEnded) return; // prevent double calls
+        GetComponent<Animator>().speed = 1f;
         turnEnded = true;
 
         hasMoved = true;

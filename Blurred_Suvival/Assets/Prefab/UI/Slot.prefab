@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fb553c9682d7d4c8477b85c81c078a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolTipShowSecond: 1
+  ToolTipShowSecond: 0
 --- !u!114 &3451150064269424643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,6 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverScale: 1.3
   speed: 20
+  ScaleToTop: 0
 --- !u!1 &6706626786537822569
 GameObject:
   m_ObjectHideFlags: 0

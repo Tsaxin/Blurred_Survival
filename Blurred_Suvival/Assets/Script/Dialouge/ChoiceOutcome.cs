@@ -15,7 +15,7 @@ public class ChoiceOutcome : ScriptableObject
         Fight = 1 << 3,
         Threaten = 1 << 4, // 16
         RejectJoin = 1 << 5,  // 32
-        OfferTruce = 1 << 6  // 32
+        OfferTruce = 1 << 6  // 64
     }
 
     [System.Serializable]

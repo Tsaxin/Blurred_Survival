@@ -352,8 +352,12 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
-    public void ScaleStatsByLevel()
+    public void ScaleStatsByLevel(int level=0)
     {
+        if (level != 0)
+        {
+            Level = level;
+        }
         MainAttack += (Level - 1) * 1;
         MainMaxHealth += (Level - 1) * 3;
         MainDefense += Mathf.FloorToInt((Level - 1) * 0.3f); // Slower scaling

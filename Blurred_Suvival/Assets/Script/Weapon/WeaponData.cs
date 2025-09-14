@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Items/Weapon")]
@@ -11,6 +12,8 @@ public class WeaponData : ItemData
     public int rangeBoost;
     public int criticalBoost;
     public int evasionBoost;
+
+    public float AttackSpeed=1;
     public enum Type
     {
         Melee,
@@ -19,6 +22,8 @@ public class WeaponData : ItemData
     }
 
     public Type type;
+
+    public List<AudioClip> audioClip;
 
     public StatModifier GetModifier()
     {

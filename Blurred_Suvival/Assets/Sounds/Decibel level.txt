@@ -1,0 +1,6 @@
+effect and sfx= 0db
+footstep = -6db
+combat= -6db
+dramatic=-8db
+Ambience=-12db
+UI clicks=-8db

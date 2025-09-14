@@ -30,8 +30,6 @@ public class HungerManager : MonoBehaviour
     void Start()
     {
         if (Instance == null) Instance = this;
-
-        currentHunger = maxHunger;
         squadMover = GetComponent<SquadMover>();
 
         DebuffAmount = 1f;

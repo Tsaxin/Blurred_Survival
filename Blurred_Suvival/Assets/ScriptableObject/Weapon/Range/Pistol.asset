@@ -26,4 +26,9 @@ MonoBehaviour:
   rangeBoost: 3
   criticalBoost: 0
   evasionBoost: 0
+  AttackSpeed: 1
   type: 1
+  audioClip:
+  - {fileID: 8300000, guid: 71ca78e3a3481d0468b633e68e7ae625, type: 3}
+  - {fileID: 8300000, guid: b7c89f35178c1594a8eef643e7d40169, type: 3}
+  - {fileID: 8300000, guid: 812c56d8b9728bb478310e17603a6144, type: 3}
