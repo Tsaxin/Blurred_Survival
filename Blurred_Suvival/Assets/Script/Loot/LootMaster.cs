@@ -10,6 +10,12 @@ public class LootMaster : ScriptableObject
     public List<LootEntry> epicLoot = new List<LootEntry>();
     public List<LootEntry> legendaryLoot = new List<LootEntry>();
 
+    [Header("Rarity Weights")]
+    [Range(0f, 1f)] public float commonWeight = 0.6f;    // 60% chance
+    [Range(0f, 1f)] public float rareWeight = 0.25f;     // 25% chance
+    [Range(0f, 1f)] public float epicWeight = 0.1f;      // 10% chance
+    [Range(0f, 1f)] public float legendaryWeight = 0.05f; // 5% chance
+
     /// <summary>
     /// Get a random loot prefab from a specified rarity list based on drop chance
     /// </summary>
@@ -33,6 +39,26 @@ public class LootMaster : ScriptableObject
         }
 
         return null; // Nothing dropped this roll
+    }
+
+    /// <summary>
+    /// Pick a random rarity based on configured weights
+    /// </summary>
+    public LootRarity GetRandomRarity()
+    {
+        float roll = Random.value; // 0 to 1
+        float cumulative = 0f;
+
+        cumulative += commonWeight;
+        if (roll < cumulative) return LootRarity.Common;
+
+        cumulative += rareWeight;
+        if (roll < cumulative) return LootRarity.Rare;
+
+        cumulative += epicWeight;
+        if (roll < cumulative) return LootRarity.Epic;
+
+        return LootRarity.Legendary; // default if all else fails
     }
 
     public LootEntry GetLootByName(string lootName)

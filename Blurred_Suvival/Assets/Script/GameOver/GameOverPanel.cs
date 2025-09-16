@@ -44,7 +44,7 @@ public class GameOverPanel : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        SceneManager.LoadScene(0); // Loads the scene at index 0 (your main menu)
+        LoadingManager.Instance.LoadScene(0); // Loads the scene at index 0 (your main menu)
     }
 
     public void KeepPlaying()
@@ -55,6 +55,6 @@ public class GameOverPanel : MonoBehaviour
 
     public void Retry()
     {
-        SceneManager.LoadScene(1);
+        LoadingManager.Instance.LoadScene(1);
     }
 }

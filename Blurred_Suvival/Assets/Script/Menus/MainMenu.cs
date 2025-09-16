@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour
         MusicManager.Instance.PlaySelectSound();
         MusicManager.Instance.PlayAmbientMusic();
 
-        SceneManager.LoadScene(1);
+        LoadingManager.Instance.LoadScene(1);
     }
 
     public void OnCreditClick()

@@ -8,6 +8,7 @@ TagManager:
   - Item
   - Region
   - Tile Manager
+  - NPC Decision Maker
   layers:
   - Default
   - TransparentFX

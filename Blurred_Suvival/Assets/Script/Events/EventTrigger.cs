@@ -13,6 +13,55 @@ public class EventTrigger : MonoBehaviour
     public string PlayCutSceneIdOnFinish;
     public Event newEvent;
 
+    [Header("Life time")]
+    public bool HasLife = true;
+    public float Lifetime = 120f;     // how long this event should live
+    private float _timeRemaining;     // countdown timer
+
+    void Update()
+    {
+        if (HasLife && _timeRemaining > 0f)
+        {
+            _timeRemaining -= Time.deltaTime;
+
+            if (_timeRemaining <= 0f)
+            {
+                // life ended
+                OnLifeEnded();
+            }
+        }
+    }
+
+    public void Instantiate()
+    {
+        if (HasLife)
+        {
+            _timeRemaining = Lifetime; // reset timer
+        }
+
+        // You can also randomize appearance here if needed:
+        // Example: flip EventSprite horizontally
+        if (EventSprite != null)
+        {
+            Vector3 scale = EventSprite.transform.localScale;
+            scale.x = Random.value < 0.5f ? -1f : 1f;
+            EventSprite.transform.localScale = scale;
+        }
+    }
+
+    private void OnLifeEnded()
+    {
+        if (CanBeDestroyed)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            // Just deactivate if not destroyable
+            gameObject.SetActive(false);
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player")) // Make sure your squad is tagged as "Player"

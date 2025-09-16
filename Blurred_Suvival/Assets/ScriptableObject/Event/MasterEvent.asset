@@ -13,11 +13,16 @@ MonoBehaviour:
   m_Name: MasterEvent
   m_EditorClassIdentifier: 
   NormalIcon:
-  - {fileID: 21300000, guid: 78f83d1134ef2404c9f2e74d0a96e156, type: 3}
-  - {fileID: 21300000, guid: eabf3cf2d027f554bbb5deedf0553aad, type: 3}
-  - {fileID: 21300000, guid: 4267a14ce39e2514ea35b1f6f42fc074, type: 3}
-  - {fileID: 21300000, guid: d04e2d6230b5246488a15c05963b39b3, type: 3}
-  - {fileID: 21300000, guid: 2872cc38458ae054cb0aadacf269caab, type: 3}
+  - {fileID: 21300000, guid: b65d909c0e9e0054fad21a5bc48396ef, type: 3}
+  - {fileID: 21300000, guid: 1a315705b146dc140bceb92cb563ff12, type: 3}
+  - {fileID: 21300000, guid: 4970679fc1552504e8882481ab6a4240, type: 3}
+  - {fileID: 21300000, guid: 2cfaa01368e462d40afc71fa59fa0e60, type: 3}
+  - {fileID: 21300000, guid: bb7643718bfea504ca9028d365ed3c99, type: 3}
+  - {fileID: 21300000, guid: 0d9915228c13d9f429dbf0d8aa08428f, type: 3}
+  - {fileID: 21300000, guid: bf133f1ac7ae7934db8bd28e54e4ac2e, type: 3}
+  - {fileID: 21300000, guid: 69e5bdeb38f7d444283dac90d5708073, type: 3}
+  - {fileID: 21300000, guid: ada32c0bb0dce054eaa18a53265869e5, type: 3}
+  - {fileID: 21300000, guid: a674bb48c1318d74a97d748917491a5f, type: 3}
   Survivors:
   - {fileID: 4077031628795978870, guid: 84ec5e13ef4c4ce46839d09092556e88, type: 3}
   - {fileID: 7441000921677630084, guid: 5b34f23181d08d445b469f08095c62fe, type: 3}
@@ -43,6 +48,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "Did anyone hear from Marcus? He went out before sunrise\u2026 he never comes
@@ -51,12 +58,16 @@ MonoBehaviour:
       probably found something useful."
     - "Wait\u2026 you! Where did you come from?"
     Icon: {fileID: 0}
-    Survivors: []
+    Survivors:
+    - {fileID: 7441000921677630084, guid: 5b34f23181d08d445b469f08095c62fe, type: 3}
+    - {fileID: 1042544255454963484, guid: 9ce01d2208b8a5f46a6fc3bae6346d0c, type: 3}
     Vehicles: []
     LootableObjects: []
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 14
   - SurvivorCount: 2
     dialouge:
     - "You\u2019re reckless! You can\u2019t just wander into that street full of
@@ -71,6 +82,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "Remember life before\u2026 before all this? Feels like a dream now."
@@ -84,6 +97,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "I heard there\u2019s a building on 5th that\u2019s safe\u2026 untouched. No
@@ -97,6 +112,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "I found some food in that abandoned house. Should we\u2026 share it with the
@@ -112,6 +129,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - We need to get across the river. The bridge might be clear at night.
@@ -125,6 +144,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "I\u2026 I saw them. Our kids\u2026 I thought they were alive. But\u2026"
@@ -137,6 +158,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "I can trade you two cans for a medkit. No way I\u2019m giving more."
@@ -150,6 +173,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "Something\u2019s off. The usual groans\u2026 they\u2019re quieter. Too quiet."
@@ -162,18 +187,24 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - That stash is mine!
     - No, I found it first!
     - "Uh\u2026 hey, you. Don\u2019t get in the middle of this."
     Icon: {fileID: 0}
-    Survivors: []
+    Survivors:
+    - {fileID: 4432471361555323814, guid: b1a988c7d6962324997e82b89131bcc0, type: 3}
+    - {fileID: 3816641826279779961, guid: 71d2c79699aa9964a9969210235f8fd1, type: 3}
     Vehicles: []
     LootableObjects: []
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 13
   - SurvivorCount: 2
     dialouge:
     - "I used to sit in the park\u2026 watch the sun on the swings, kids laughing.
@@ -187,6 +218,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "That trader yesterday\u2026 he looked fine, but something felt off."
@@ -199,6 +232,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "If the bridge collapses, we\u2019re trapped. We need another route\u2026 maybe
@@ -213,6 +248,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - We should follow Mia. She knows how to survive.
@@ -225,6 +262,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "Tom won\u2019t make it without this medkit."
@@ -237,6 +276,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "I remember Saturday mornings\u2026 cartoons on TV, pancakes, and nobody worrying
@@ -252,6 +293,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "I think they\u2019re coming."
@@ -264,6 +307,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "I\u2019ve got a few beans\u2026 want some?"
@@ -272,13 +317,15 @@ MonoBehaviour:
     - "Wait\u2026 who\u2019s that? You looking for food too?"
     Icon: {fileID: 0}
     Survivors:
-    - {fileID: 8710011502957677686, guid: 7ba973e03b558ac489a127a90950564a, type: 3}
-    - {fileID: 7603693025749048937, guid: bccdcc27446b3e64d8c44893f26d0240, type: 3}
+    - {fileID: 7441000921677630084, guid: 5b34f23181d08d445b469f08095c62fe, type: 3}
+    - {fileID: 3816641826279779961, guid: 71d2c79699aa9964a9969210235f8fd1, type: 3}
     Vehicles: []
     LootableObjects: []
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 7
   - SurvivorCount: 2
     dialouge:
     - "Be careful in the alley\u2026 someone set spikes. Not walkers. I saw a kid
@@ -292,6 +339,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "My little brother\u2026 he loved drawing. I left his sketches on the fridge.
@@ -306,6 +355,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "I stayed up all night once\u2026 thought I heard something scratching at the
@@ -323,6 +374,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "Whoa! You\u2026 you\u2019re not one of them, right?"
@@ -334,6 +387,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "We lost Jenna last week. Thought she\u2019d be safe\u2026 she said she\u2019d
@@ -349,6 +404,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "We can\u2019t trust anyone. Last week, that guy tried to steal our supplies."
@@ -364,17 +421,23 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "I heard there\u2019s a safe zone east\u2026 no walkers."
     - "Hey! Wait! Who\u2019s out there?"
     Icon: {fileID: 0}
-    Survivors: []
+    Survivors:
+    - {fileID: 3816641826279779961, guid: 71d2c79699aa9964a9969210235f8fd1, type: 3}
+    - {fileID: 5279418514720354316, guid: 5eb933848ef90c4498146bb82657d333, type: 3}
     Vehicles: []
     LootableObjects: []
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "I left my parents behind\u2026 thought I\u2019d be back in an hour. Never
@@ -390,6 +453,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "Remember when we thought a zombie was funny? Hah\u2026 not anymore."
@@ -401,6 +466,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - I found a few bottles of water. Should we share or keep them?
@@ -413,6 +480,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "Last month, a guy tried sneaking past the horde near the warehouse\u2026 didn\u2019t
@@ -429,6 +498,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "I hate night\u2026 it\u2019s like the world forgets you exist. Silence, shadows,
@@ -441,6 +512,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "We found them in the street\u2026 family of three. Thought we were alone for
@@ -450,13 +523,15 @@ MonoBehaviour:
     - "Uh\u2026 hey! Who\u2019s that?"
     Icon: {fileID: 0}
     Survivors:
-    - {fileID: 4077031628795978870, guid: 84ec5e13ef4c4ce46839d09092556e88, type: 3}
-    - {fileID: 7603693025749048937, guid: bccdcc27446b3e64d8c44893f26d0240, type: 3}
+    - {fileID: 7441000921677630084, guid: 5b34f23181d08d445b469f08095c62fe, type: 3}
+    - {fileID: 106117728334227358, guid: d891864755d568d4cae2dd3d87251f04, type: 3}
     Vehicles: []
     LootableObjects: []
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 9
   - SurvivorCount: 2
     dialouge:
     - "I hear them\u2026 coming closer."
@@ -468,6 +543,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "If we get past the river, there\u2019s a town with lights. Maybe people\u2026
@@ -481,6 +558,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "We used to hide in the old subway tunnels\u2026 made a little home. Someone
@@ -495,6 +574,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "Don\u2019t go down that alley."
@@ -508,6 +589,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "I got trapped once\u2026 cornered by them. Thought it was the end. Barely
@@ -521,6 +604,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "I swear\u2026 these things have no sense of fashion. Just ripped clothes and
@@ -533,6 +618,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "I remember the first week\u2026 nothing to eat. Every alley, every house\u2026
@@ -547,6 +634,8 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
   - SurvivorCount: 2
     dialouge:
     - "Some nights, I hear them whispering\u2026 not groaning, just\u2026 quiet.
@@ -559,6 +648,10 @@ MonoBehaviour:
     ShowChoiceButtonAtEndOfDialouge: 1
     DialougeChangeFrequency: 1
     PrimaryChoiceType: 0
+    AllowRetreat: 1
+    NPCLevel: 1
+  MinLevel: 1
+  MaxLevel: 20
   MaleName: 'Liam,Noah,Oliver,Elijah,Lucas,Mason,Ethan,Logan,James,Aiden,Jackson,Leo,Oscar,Kai,Hugo,Ezra,Axel,Arlo,Nico,Rafael,Rio,Theo,Silas,Adrian,Victor,Julian,Micah,Emil,Enzo,Max,Felix,Leo,Finn,Jonah,Asher,Dante,Griffin,Atlas,Orion,Caius,Jasper,Malik,Zane,Ezio,Kairos,Lucian,Alaric,Rowan,Ryder,Caspian,Blaise,Callum,Damien,Everett,Gideon,Hendrix,Ignatius,Jett,Kaiyan,Leander,Maverick,Nash,Odin,Phineas,Quentin,Ronan,Stellan,Thaddeus,Ulysses,Vincent,Weston,Xander,Yannick,Zayden,Apollo,Balthazar,Cai,Drake,Ezekiel,Finnian,Gael,Hector,Isaias,Jovan,Kian,Lysander,Matteo,Neo,Oberon,Phoenix,Quillon,Rafferty,Samson,Tobias,Urijah,Valerian,Wesley,Xavian,Yorick,Zev
 
 '

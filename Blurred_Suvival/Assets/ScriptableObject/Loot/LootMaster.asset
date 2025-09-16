@@ -60,3 +60,7 @@ MonoBehaviour:
     dropChance: 0.15
   - loot: {fileID: 4545915707345495668, guid: ed2b20fb3e7c08d479d81bff30e68da6, type: 3}
     dropChance: 0.15
+  commonWeight: 0.6
+  rareWeight: 0.25
+  epicWeight: 0.1
+  legendaryWeight: 0.05

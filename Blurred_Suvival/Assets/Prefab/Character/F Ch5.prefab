@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 761904330531867994, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
+      propertyPath: CharacterName
+      value: Anya
+      objectReference: {fileID: 0}
     - target: {fileID: 1829727347570553999, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -880,7 +884,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

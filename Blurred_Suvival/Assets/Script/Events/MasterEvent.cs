@@ -9,7 +9,7 @@ public class MasterEvent : ScriptableObject
     public List<GameObject> Vehicles;
     public List<Event> event2survivor = new List<Event>();
 
-    public int MinLevel=1, MaxLevel = 20;
+    public int MinLevel = 1, MaxLevel = 20;
 
     public Event GetRandomEvent(SpriteRenderer MapIcon)
     {
@@ -19,6 +19,15 @@ public class MasterEvent : ScriptableObject
     public Event GetRandomEventFromEvent2Survivor(SpriteRenderer MapIcon)
     {
         MapIcon.sprite = NormalIcon[Random.Range(0, NormalIcon.Count)];
+
+        // Get current scale
+        Vector3 scale = MapIcon.transform.localScale;
+
+        // Randomly pick -1 or 1
+        scale.x = Random.value < 0.5f ? -1f : 1f;
+
+        MapIcon.transform.localScale = scale;
+
         Event newEvent = event2survivor[Random.Range(0, event2survivor.Count)];
 
         List<GameObject> TempSurvivor = new List<GameObject>(Survivors);

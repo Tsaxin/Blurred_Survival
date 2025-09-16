@@ -15,11 +15,11 @@ public class LootMasterManager : MonoBehaviour
     {
         LootEntry lootEntry = lootMaster.GetRandomLoot(rarity);
         Debug.Log(lootEntry);
-        
+
         if (tile == null || lootMaster == null || lootEntry == null) return;
 
         float SpawnChance = lootEntry.dropChance;
-        if (Random.value<SpawnChance)
+        if (Random.value < SpawnChance)
         {
             GameObject lootPrefab = lootEntry.loot;
             if (lootPrefab == null) return;
@@ -59,5 +59,33 @@ public class LootMasterManager : MonoBehaviour
             DropRandomLoot(LootRarity.Legendary, tile);
     }
 
+    public void DropLootWithLevel(TileData tile, int lootCount, int level)
+    {
+        if (tile == null || lootMaster == null) return;
+
+        // Level adds +1% per level
+        float levelBonus = level * 0.01f; // convert to percentage odds
+
+        for (int i = 0; i < lootCount; i++)
+        {
+            // Pick a random rarity to roll from LootMaster
+            LootRarity rarity = lootMaster.GetRandomRarity(); // <-- You need a method for this OR decide rarity logic
+            LootEntry lootEntry = lootMaster.GetRandomLoot(rarity);
+
+            if (lootEntry == null || lootEntry.loot == null) continue;
+
+            // Apply level-based chance modifier
+            float adjustedChance = lootEntry.dropChance + levelBonus;
+
+            // Ensure chance does not exceed 100%
+            adjustedChance = Mathf.Clamp01(adjustedChance);
+
+            if (Random.value < adjustedChance)
+            {
+                GameObject loot = Instantiate(lootEntry.loot, tile.transform.position, Quaternion.identity);
+                tile.PlaceLoot(loot);
+            }
+        }
+    }
 
 }

@@ -1071,6 +1071,7 @@ GameObject:
   - component: {fileID: 6975025493375525940}
   - component: {fileID: 5689529075099732248}
   - component: {fileID: 1683625113516199691}
+  - component: {fileID: -2426910943657793601}
   m_Layer: 0
   m_Name: M Ch1
   m_TagString: Player
@@ -1300,6 +1301,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gearEquipper: {fileID: 3532999169455306552}
+--- !u!114 &-2426910943657793601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4536060065368327761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43c9528cfdeb61a4989f280d1a928956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4743023035046903053
 GameObject:
   m_ObjectHideFlags: 0

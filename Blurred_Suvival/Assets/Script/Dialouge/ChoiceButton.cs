@@ -16,7 +16,7 @@ public class ChoiceButton : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log($"ChoiceType on {gameObject.name}: {choiceType} ({(int)choiceType})");
+        transform.localScale = Vector2.one;
         if (responseText != null)
             responseText.text = PlayerResponses[UnityEngine.Random.Range(0, PlayerResponses.Count)];
     }
@@ -97,7 +97,45 @@ public class ChoiceButton : MonoBehaviour
         if (enabledFlags.Count == 0)
             return ChoiceOutcome.ChoiceType.None;
 
+        // --- Check if Runaway, Threaten, and Fight are ALL present ---
+        bool hasRunaway = enabledFlags.Contains(ChoiceOutcome.ChoiceType.Runaway);
+        bool hasThreaten = enabledFlags.Contains(ChoiceOutcome.ChoiceType.Threaten);
+        bool hasFight = enabledFlags.Contains(ChoiceOutcome.ChoiceType.Fight);
+
+        if (hasRunaway && hasThreaten && hasFight)
+        {
+            // Find NPCDecisionMaker in scene
+            NPCDecisionMaker npcDecision = GameObject.FindGameObjectWithTag("NPC Decision Maker")
+                                                     ?.GetComponent<NPCDecisionMaker>();
+
+            if (npcDecision != null)
+            {
+                int decision = npcDecision.MakeDecision();
+
+                if (decision == 1)
+                {
+                    // Random between Fight and Threaten
+                    ChoiceOutcome.ChoiceType[] fightOrThreaten = {
+                    ChoiceOutcome.ChoiceType.Fight,
+                    ChoiceOutcome.ChoiceType.Threaten
+                };
+                    return fightOrThreaten[UnityEngine.Random.Range(0, fightOrThreaten.Length)];
+                }
+                else
+                {
+                    // Pick randomly from all EXCEPT Fight & Threaten
+                    List<ChoiceOutcome.ChoiceType> withoutFightThreaten =
+                        new List<ChoiceOutcome.ChoiceType>(enabledFlags);
+
+                    withoutFightThreaten.Remove(ChoiceOutcome.ChoiceType.Fight);
+                    withoutFightThreaten.Remove(ChoiceOutcome.ChoiceType.Threaten);
+
+                    return withoutFightThreaten[UnityEngine.Random.Range(0, withoutFightThreaten.Count)];
+                }
+            }
+        }
+
+        // --- Default random pick if condition not met ---
         return enabledFlags[UnityEngine.Random.Range(0, enabledFlags.Count)];
     }
-
 }

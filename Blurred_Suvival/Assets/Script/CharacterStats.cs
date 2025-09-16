@@ -293,6 +293,7 @@ public class CharacterStats : MonoBehaviour
             }
             // ✅ Handle generic enemies (non-zombie, non-player)
             Debug.Log($"{name} is a generic NPC and is now dead. Destroying.");
+            GetComponent<NPCLootDropper>()?.DropLoot(GetComponent<ZombieAIBase>()?.currentTileData,Level);
         }
 
         Destroy(gameObject);

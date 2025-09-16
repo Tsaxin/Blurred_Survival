@@ -20,12 +20,16 @@ public class EventManager : MonoBehaviour
     public static EventManager Instance;
 
     float timer;
+
     void Start()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+
+        // wait for cooldown before first spawn
+        timer = EventGeneratorCD;
     }
 
     void Update()
@@ -36,7 +40,8 @@ public class EventManager : MonoBehaviour
         // When timer hits 0, check if we need to spawn
         if (timer <= 0f)
         {
-            timer = EventGeneratorCD; // reset timer
+            // Reset timer before spawning
+            timer = EventGeneratorCD;
 
             // Check if we have fewer events than max allowed
             if (EventHolder.childCount < MaxEvent)
@@ -55,6 +60,8 @@ public class EventManager : MonoBehaviour
         // Instantiate event prefab as child of EventHolder
         GameObject newEvent = Instantiate(EventTemplate, spawnPos, Quaternion.identity, EventHolder);
 
-        newEvent.GetComponent<EventTrigger>().newEvent=masterEvent.GetRandomEvent(newEvent.GetComponent<EventTrigger>().EventSprite);
+        newEvent.GetComponent<EventTrigger>().newEvent = 
+            masterEvent.GetRandomEvent(newEvent.GetComponent<EventTrigger>().EventSprite);
+        newEvent.GetComponent<EventTrigger>().Instantiate();
     }
 }

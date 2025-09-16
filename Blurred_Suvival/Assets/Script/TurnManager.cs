@@ -69,6 +69,8 @@ public class TurnManager : MonoBehaviour
     {
         CampButton.SetActive(false);
         InitializeCharacters();
+        SetHasMoveState(playerParent.transform,true);
+        SetHasMoveState(enemyParent.transform,true);
 
         switch (EncounterMode)
         {
@@ -86,6 +88,17 @@ public class TurnManager : MonoBehaviour
             case 3:
                 CoroutineRunner.Instance.StartCoroutine(HandleCamp());
                 break;
+        }
+    }
+
+    void SetHasMoveState(Transform parent,bool State)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.GetComponent<CharacterController>() != null)
+            {
+                child.GetComponent<CharacterController>().hasMoved = State;
+            }
         }
     }
 
@@ -318,6 +331,8 @@ public class TurnManager : MonoBehaviour
     #region Event Trigger 
     public void StartEventTrigger(Event EventData)
     {
+        SetHasMoveState(playerParent.transform,true);
+        SetHasMoveState(enemyParent.transform,true);
         CoroutineRunner.Instance.StartCoroutine(LoadEventTriggerDetails(EventData));
     }
 

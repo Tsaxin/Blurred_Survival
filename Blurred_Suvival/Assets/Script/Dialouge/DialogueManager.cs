@@ -49,7 +49,6 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(false);
         MainPanel.SetActive(false);
         ChoicePanel.SetActive(false);
-        ResetChoicePanelScale();
     }
 
     /// <summary>
@@ -172,14 +171,6 @@ public class DialogueManager : MonoBehaviour
     }
 
     #region ChoiceButton
-
-    void ResetChoicePanelScale()
-    {
-        foreach (Transform child in ChoicePanel.transform)
-        {
-            child.transform.localScale = Vector3.one;
-        }
-    }
     public void Onclick()
     {
         ChoicePanel.SetActive(false);
