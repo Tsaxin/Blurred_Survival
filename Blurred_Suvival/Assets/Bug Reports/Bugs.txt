@@ -1,0 +1,2 @@
+-pause menu to main menu not working. it freezes the time
+-zombie algorithm lines up all the zombies in straight line

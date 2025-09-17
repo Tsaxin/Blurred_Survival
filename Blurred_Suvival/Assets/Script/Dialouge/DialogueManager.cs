@@ -33,6 +33,8 @@ public class DialogueManager : MonoBehaviour
     // ✅ List of survivors
     private List<GameObject> Survivors;
 
+    public float soundCooldown = 0.1f;
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && dialoguePanel.activeSelf)
@@ -117,14 +119,25 @@ public class DialogueManager : MonoBehaviour
     private IEnumerator TypeText(string text)
     {
         dialogueText.text = "";
-        foreach (char c in text.ToCharArray())
+        float lastSoundTime = -soundCooldown;
+
+        foreach (char c in text)
         {
             dialogueText.text += c;
+
+            // Play keystroke sound if enough time has passed
+            if (Time.time - lastSoundTime >= soundCooldown)
+            {
+                SFXManager.Instance.PlayKeyStroke();
+                lastSoundTime = Time.time;
+            }
+
             yield return new WaitForSeconds(typeSpeed);
         }
 
         typingCoroutine = null;
     }
+
 
     private void NextLine()
     {

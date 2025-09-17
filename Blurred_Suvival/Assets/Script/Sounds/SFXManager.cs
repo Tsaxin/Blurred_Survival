@@ -9,6 +9,8 @@ public class SFXManager : MonoBehaviour
     public List<AudioClip> meleeSlashClips;  // assign in Inspector
     public List<AudioClip> missClips;
     public List<AudioClip> FootStepClips;
+    public List<AudioClip> KeyStrokes;
+
 
     public List<AudioClip> MeleeSwing;
 
@@ -59,6 +61,11 @@ public class SFXManager : MonoBehaviour
         PlaySFX(MeleeSwing);
     }
 
+    public void PlayKeyStroke()
+    {
+        PlaySFX(KeyStrokes);
+    }
+
     public void PlaySFX(List<AudioClip> clips)
     {
         if (clips.Count == 0) return;
@@ -68,5 +75,12 @@ public class SFXManager : MonoBehaviour
         sfxSource.pitch = Random.Range(minPitch, maxPitch);
         sfxSource.volume = baseVolume * Random.Range(0.9f, 1.1f);
         sfxSource.PlayOneShot(clip);
+    }
+
+    public void PlaySFX(AudioClip audioClip)
+    {
+        sfxSource.pitch = Random.Range(minPitch, maxPitch);
+        sfxSource.volume = baseVolume * Random.Range(0.9f, 1.1f);
+        sfxSource.PlayOneShot(audioClip);
     }
 }

@@ -23,6 +23,7 @@ public abstract class ItemData : ScriptableObject
 
     public int MaxQuantity = 20;
     public GameObject lootPrefab; 
+    public AudioClip useSound;
 }
 
 [System.Serializable]

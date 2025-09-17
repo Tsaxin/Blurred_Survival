@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewChoiceOutcome", menuName = "Dialogue/ChoiceOutcome")]
 public class ChoiceOutcome : ScriptableObject
 {
+    // --- Flags enum (bitmask) ---
     [System.Flags]
     public enum ChoiceType
     {
@@ -13,27 +14,43 @@ public class ChoiceOutcome : ScriptableObject
         DropLoot = 1 << 1,
         Join = 1 << 2,
         Fight = 1 << 3,
-        Threaten = 1 << 4, // 16
-        RejectJoin = 1 << 5,  // 32
-        OfferTruce = 1 << 6  // 64
+        Threaten = 1 << 4,
+        RejectJoin = 1 << 5,
+        OfferTruce = 1 << 6
     }
 
     [System.Serializable]
     public class EnemyResponseSet
     {
-        public ChoiceType choiceType;
-        [TextArea] public List<string> Responses = new List<string>();
+        // Use int-backed property to safely serialize in Unity
+        [SerializeField] private int choiceTypeValue = 0;
+
+        public ChoiceType choiceType
+        {
+            get => (ChoiceType)choiceTypeValue;
+            set => choiceTypeValue = (int)value;
+        }
+
+        [TextArea]
+        public List<string> Responses = new List<string>();
     }
 
     public List<EnemyResponseSet> EnemyResponses = new List<EnemyResponseSet>();
 
+    /// <summary>
+    /// Returns a random enemy response for the given choice type
+    /// </summary>
     public string GetEnemyResponse(ChoiceType choiceType)
     {
         foreach (var set in EnemyResponses)
         {
-            if (set.choiceType == choiceType && set.Responses.Count > 0)
+            // Check if this set contains the requested flag
+            if (set.Responses.Count > 0 && (set.choiceType & choiceType) != 0)
+            {
                 return set.Responses[UnityEngine.Random.Range(0, set.Responses.Count)];
+            }
         }
+
         return "The enemy has no response...";
     }
 }

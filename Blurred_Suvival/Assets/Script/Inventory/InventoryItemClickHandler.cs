@@ -115,6 +115,7 @@ public class InventoryItemClickHandler : MonoBehaviour
     /// </summary>
     private void HandleConsumableClick(ItemInstance clickedItem, CharacterController selectedUnit)
     {
+        SFXManager.Instance.PlaySFX(clickedItem.data.useSound);
         var consumableData = (ConsumableData)clickedItem.data;
         var characterStats = selectedUnit.GetComponent<CharacterStats>();
         if (characterStats == null)

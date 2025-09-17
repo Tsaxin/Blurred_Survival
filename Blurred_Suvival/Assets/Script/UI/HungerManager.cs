@@ -27,8 +27,11 @@ public class HungerManager : MonoBehaviour
 
     public Animator DebuffPanel;
 
+    public bool IsPaused;
+
     void Start()
     {
+        IsPaused = false;
         if (Instance == null) Instance = this;
         squadMover = GetComponent<SquadMover>();
 
@@ -43,39 +46,42 @@ public class HungerManager : MonoBehaviour
 
     void Update()
     {
-        // Tooltip info
-        hungerBarSlider.GetComponent<TooltipTrigger>().SetTriggerText(
-            "Supplies",
-            $"Rations: {currentHunger}/{maxHunger.ToSafeString()}\n" +
-            $"Decay Rate: {CalculateDecayRate()}\n" +
-            $"Movement Decay Rate:{(int)(baseDecayRate*squad.Characters.Count*movementDecayMultiplier)}\n\n"+
-            $"Ration decay rate increases with squad size."
-        );
-
-        if (currentHunger <= 0f)
+        if (!IsPaused)
         {
-            if (!isDebuffed)
+            // Tooltip info
+            hungerBarSlider.GetComponent<TooltipTrigger>().SetTriggerText(
+                "Supplies",
+                $"Rations: {(int)currentHunger}/{maxHunger.ToSafeString()}\n" +
+                $"Decay Rate: {CalculateDecayRate()}\n" +
+                $"Movement Decay Rate:{(int)(baseDecayRate * squad.Characters.Count * movementDecayMultiplier)}\n\n" +
+                $"Ration decay rate increases with squad size."
+            );
+
+            if (currentHunger <= 0f)
             {
-                ApplyDebuff();
+                if (!isDebuffed)
+                {
+                    ApplyDebuff();
+                }
+                return;
             }
-            return;
-        }
 
-        float actualDecayRate = CalculateDecayRate();
+            float actualDecayRate = CalculateDecayRate();
 
-        // Apply hunger decay
-        currentHunger -= actualDecayRate * Time.deltaTime / 60f;
-        currentHunger = Mathf.Clamp(currentHunger, 0f, maxHunger);
+            // Apply hunger decay
+            currentHunger -= actualDecayRate * Time.deltaTime / 60f;
+            currentHunger = Mathf.Clamp(currentHunger, 0f, maxHunger);
 
-        if (hungerBarSlider != null)
-        {
-            hungerBarSlider.value = currentHunger;
+            if (hungerBarSlider != null)
+            {
+                hungerBarSlider.value = currentHunger;
+            }
         }
     }
 
     void ApplyDebuff()
     {
-        DebuffPanel.SetBool("Show",true);
+        DebuffPanel.SetBool("Show", true);
         isDebuffed = true;
         DebuffAmount = MainDebuffAmount;
         ApplyDebufToAll();
@@ -94,7 +100,7 @@ public class HungerManager : MonoBehaviour
 
     void RemoveDebuff()
     {
-        DebuffPanel.SetBool("Show",false);
+        DebuffPanel.SetBool("Show", false);
         DebuffAmount = 1f;
         ApplyDebufToAll();
         isDebuffed = false;
