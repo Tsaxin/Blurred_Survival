@@ -35,7 +35,7 @@ public class PlayerInventory : MonoBehaviour
         if (newItem == null || quantity <= 0)
             return false;
 
-        MusicManager.Instance?.PlayPickUpSound();
+        SFXManager.Instance?.PlayPickUpSound();
 
         if (newItem.itemType == ItemType.Ration)
         {

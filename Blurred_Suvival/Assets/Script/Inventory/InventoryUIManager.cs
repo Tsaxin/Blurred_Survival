@@ -32,7 +32,7 @@ public class InventoryUIManager : MonoBehaviour
 
     public void OpenInventory()
     {
-        MusicManager.Instance?.PlayInventorySound();
+        SFXManager.Instance?.PlayInventorySound();
         RefreshInventory();
         UI.gameObject.SetActive(true);
     }

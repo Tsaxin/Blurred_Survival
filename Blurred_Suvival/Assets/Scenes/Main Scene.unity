@@ -164671,6 +164671,10 @@ PrefabInstance:
       propertyPath: CharacterName
       value: Nem Ales
       objectReference: {fileID: 0}
+    - target: {fileID: 761904330531867994, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
+      propertyPath: MainMaxHealth
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 864693450606347817, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
       propertyPath: ToolTipShowSecond
       value: 0
@@ -242581,6 +242585,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 93ed1156cfa1f624884807b45435b1e0, type: 3}
   - {fileID: 8300000, guid: 3e4b5ba3c1b8eb148968fdb8d82d0939, type: 3}
   MeleeSwing: []
+  EquipSound: {fileID: 8300000, guid: ec373b7cc266dca4c894edcafb86b9ea, type: 3}
+  InventorySound: {fileID: 8300000, guid: 45225e7ba14d178448ddf734c771484f, type: 3}
+  PickUpSound: {fileID: 8300000, guid: 88aefa7f1f48e3a40914b52508babd9c, type: 3}
   baseVolume: 1
   minPitch: 0.95
   maxPitch: 1.05
@@ -491872,11 +491879,11 @@ RectTransform:
   - {fileID: 1892824461}
   - {fileID: 174256310}
   - {fileID: 760430169}
+  - {fileID: 1795887337}
   - {fileID: 1485049169}
   - {fileID: 1694359593}
   - {fileID: 532883926}
   - {fileID: 2034121157}
-  - {fileID: 1795887337}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

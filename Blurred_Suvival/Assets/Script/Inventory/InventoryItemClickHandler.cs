@@ -90,7 +90,7 @@ public class InventoryItemClickHandler : MonoBehaviour
             return;
         }
 
-        MusicManager.Instance?.PlayEquipSound();
+        SFXManager.Instance?.PlayEquipSound();
 
         // Remove the clicked item from inventory
         playerInventory.collectedItems.Remove(clickedItem);

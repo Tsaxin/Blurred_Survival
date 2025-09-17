@@ -14,6 +14,8 @@ public class SFXManager : MonoBehaviour
 
     public List<AudioClip> MeleeSwing;
 
+    public AudioClip EquipSound, InventorySound, PickUpSound;
+
     public float baseVolume = 1f;
     public float minPitch = 0.95f;
     public float maxPitch = 1.05f;
@@ -64,6 +66,19 @@ public class SFXManager : MonoBehaviour
     public void PlayKeyStroke()
     {
         PlaySFX(KeyStrokes);
+    }
+
+    public void PlayInventorySound()
+    {
+        PlaySFX(InventorySound);
+    }
+    public void PlayEquipSound()
+    {
+        PlaySFX(EquipSound);
+    }
+    public void PlayPickUpSound()
+    {
+        PlaySFX(PickUpSound);
     }
 
     public void PlaySFX(List<AudioClip> clips)

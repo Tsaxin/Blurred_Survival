@@ -18,4 +18,5 @@ MonoBehaviour:
   itemIconIU: {fileID: 21300000, guid: 7fff8d07375687d40abc36e76aa7a2d7, type: 3}
   MaxQuantity: 20
   lootPrefab: {fileID: 4545915707345495668, guid: d615b30dce5328f4a93e5f322e30d437, type: 3}
+  useSound: {fileID: 8300000, guid: dbf079d9c8dc5a24a9c6a1431522cbd7, type: 3}
   healthRestoreAmount: 10

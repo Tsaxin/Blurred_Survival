@@ -1,2 +1,2 @@
--pause menu to main menu not working. it freezes the time
+-equip sound and pickup sound not working
 -zombie algorithm lines up all the zombies in straight line
