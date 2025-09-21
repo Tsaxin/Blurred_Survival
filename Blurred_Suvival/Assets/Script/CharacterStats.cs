@@ -259,7 +259,7 @@ public class CharacterStats : MonoBehaviour
             GetComponent<ZombieAIBase>().EnemyManager.SpawnZombie(CharacterName);
             if (GetComponent<ZombieLootDropper>() != null)
             {
-                GetComponent<ZombieLootDropper>().DropLoot(transform.position, GetComponent<ZombieAIBase>().currentTileData);
+                GetComponent<ZombieLootDropper>().DropLoot(transform.position, GetComponent<Tile>().CurrentTileData);
             }
         }
         else if (gameObject.CompareTag("Player"))
@@ -293,7 +293,7 @@ public class CharacterStats : MonoBehaviour
             }
             // ✅ Handle generic enemies (non-zombie, non-player)
             Debug.Log($"{name} is a generic NPC and is now dead. Destroying.");
-            GetComponent<NPCLootDropper>()?.DropLoot(GetComponent<ZombieAIBase>()?.currentTileData,Level);
+            GetComponent<NPCLootDropper>()?.DropLoot(GetComponent<Tile>()?.CurrentTileData,Level);
         }
 
         Destroy(gameObject);

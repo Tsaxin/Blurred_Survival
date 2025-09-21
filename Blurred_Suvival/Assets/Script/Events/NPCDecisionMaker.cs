@@ -37,10 +37,21 @@ public class NPCDecisionMaker : MonoBehaviour
         return decision;
     }
 
+    /// <summary>
+    /// Decides if NPCs should join the player's squad.
+    /// Returns true if the NPC's highest level <= player's highest level.
+    /// </summary>
+    public bool MakeJoinDecision()
+    {
+        int playerHighest = GetHighestLevel(Squad);
+        int npcHighest = GetHighestLevel(EnemySquad);
+
+        return npcHighest <= playerHighest;
+    }
+
     private float CalculateSquadPower(Transform squad)
     {
         float total = 0f;
-
         foreach (Transform child in squad)
         {
             CharacterStats stats = child.GetComponent<CharacterStats>();
@@ -49,8 +60,20 @@ public class NPCDecisionMaker : MonoBehaviour
                 total += stats.Level; // Or more complex formula
             }
         }
-
         return total;
     }
-}
 
+    private int GetHighestLevel(Transform squad)
+    {
+        int highest = 0;
+        foreach (Transform child in squad)
+        {
+            CharacterStats stats = child.GetComponent<CharacterStats>();
+            if (stats != null && stats.Level > highest)
+            {
+                highest = stats.Level;
+            }
+        }
+        return highest;
+    }
+}

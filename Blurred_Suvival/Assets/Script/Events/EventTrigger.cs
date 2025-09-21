@@ -69,7 +69,6 @@ public class EventTrigger : MonoBehaviour
             var recent = other.GetComponent<EventTriggerData>()?.RecentEventTriggerData;
             if (recent == null || !ReferenceEquals(recent, this.gameObject))
             {
-                Debug.Log("Still triggers");
                 if (!EventCompleted)
                 {
                     EventCompleted = true;

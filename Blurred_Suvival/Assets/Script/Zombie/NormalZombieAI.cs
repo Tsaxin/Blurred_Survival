@@ -25,8 +25,8 @@ public class NormalZombieAI : ZombieAIBase
                 // Check again after move
                 if (attackTarget != null && !attackTarget.IsDead)
                 {
-                    Vector2Int playerPos = GetTileIndices(attackTarget.GetComponent<CharacterController>().currentTileData.transform);
-                    Vector2Int currentPos = GetTileIndices(currentTileData.transform);
+                    Vector2Int playerPos = GetTileIndices(attackTarget.GetComponent<Tile>().CurrentTileData.transform);
+                    Vector2Int currentPos = GetTileIndices(GetComponent<Tile>().CurrentTileData.transform);
                     int distToPlayer = Mathf.Max(Mathf.Abs(currentPos.x - playerPos.x), Mathf.Abs(currentPos.y - playerPos.y));
 
                     if (distToPlayer <= 1)
@@ -48,7 +48,7 @@ public class NormalZombieAI : ZombieAIBase
 
     CharacterStats FindAdjacentPlayer()
     {
-        Vector2Int index = GetTileIndices(currentTileData.transform);
+        Vector2Int index = GetTileIndices(GetComponent<Tile>().CurrentTileData.transform);
         int[,] directions = new int[,]
         {
             { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 },
@@ -124,7 +124,7 @@ public class NormalZombieAI : ZombieAIBase
         _remainingAttacks = Mathf.Max(1, _myStats.AttackCount);
 
         // Face the player before starting
-        TileData targetTile = target.GetComponent<CharacterController>()?.currentTileData;
+        TileData targetTile = target.GetComponent<Tile>().CurrentTileData;
         if (targetTile != null)
             ScaleCharacter(targetTile);
 

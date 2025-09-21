@@ -28,10 +28,10 @@ public class SquadFormationManager : MonoBehaviour
         foreach (Transform child in transform)
         {
             CharacterController controller = child.GetComponent<CharacterController>();
-            if (controller != null && controller.currentTileData != null)
+            if (controller != null && controller.GetComponent<Tile>().CurrentTileData != null)
             {
-                savedFormation[child.name] = controller.currentTileData;
-                Debug.Log($"Saved {child.name} at tile {controller.currentTileData.name}");
+                savedFormation[child.name] = controller.GetComponent<Tile>().CurrentTileData;
+                Debug.Log($"Saved {child.name} at tile {controller.GetComponent<Tile>().CurrentTileData.name}");
             }
         }
     }

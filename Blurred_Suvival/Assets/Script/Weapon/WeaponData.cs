@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Items/Weapon")]
@@ -13,13 +14,27 @@ public class WeaponData : ItemData
     public int criticalBoost;
     public int evasionBoost;
 
-    public float AttackSpeed=1;
+    public float AttackSpeed = 1;
+
+    [Header("Splash Setting")]
+    public float SplashAccuracy;
+    public int SplashDamage;
+
     public enum Type
     {
         Melee,
         Range,
         Throwable
     }
+
+    public enum AttackPattern
+    {
+        SingleTarget,
+        SlingshotSplash,
+        // Later: Cone, Line, Pierce, etc.
+    }
+
+    public AttackPattern attackPattern;
 
     public Type type;
 

@@ -25,7 +25,7 @@ public class CharacterStatsUI : MonoBehaviour
 
     public static CharacterStatsUI Instance;
 
-    CharacterStats targetStats;
+    public CharacterStats targetStats;
 
     [System.Serializable]
     public class StatSlider
@@ -118,11 +118,11 @@ public class CharacterStatsUI : MonoBehaviour
     private void CheckStatButtons()
     {
         bool canUpgrade = targetStats.statPoints > 0;
-        attackButton.interactable = canUpgrade;
-        hpButton.interactable = canUpgrade;
-        defenseButton.interactable = canUpgrade;
-        critButton.interactable = canUpgrade;
-        evasionButton.interactable = canUpgrade;
+        attackButton.gameObject.SetActive(canUpgrade);
+        hpButton.gameObject.SetActive(canUpgrade);
+        defenseButton.gameObject.SetActive(canUpgrade);
+        critButton.gameObject.SetActive(canUpgrade);
+        evasionButton.gameObject.SetActive(canUpgrade);
     }
 
     // ✅ Functions to be linked to buttons in Inspector

@@ -197,7 +197,7 @@ public class Squad : MonoBehaviour
             if (controller != null)
             {
                 controller.turnManager = turnManager;
-                controller.currentTileData = tile.GetComponent<TileData>();
+                controller.GetComponent<Tile>().CurrentTileData = tile.GetComponent<TileData>();
                 controller.ResetScale();
                 controller.GetComponent<GearEquipper>()?.SetWeaponSL(sortingOrder);
             }

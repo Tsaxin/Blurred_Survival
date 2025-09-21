@@ -72,7 +72,7 @@ public class Region : MonoBehaviour
             if (zombie.GetComponent<CharacterController>() != null)
             {
                 CharacterController CC = zombie.GetComponent<CharacterController>();
-                CC.currentTileData = tile.GetComponent<TileData>();
+                CC.GetComponent<Tile>().CurrentTileData = tile.GetComponent<TileData>();
                 CC.turnManager = turnManager;
             }
 
@@ -202,7 +202,7 @@ public class Region : MonoBehaviour
 
                 // Instantiate prefab at runtime
                 GameObject instance = GameObject.Instantiate(objects[index++]);
-                instance.GetComponent<CharacterStats>().ScaleStatsByLevel(eventData.NPCLevel);
+                instance.GetComponent<RandomStat>().GenerateRandomStat(eventData.NPCLevel);
 
                 instance.GetComponent<TurnIndicator>()?.SetIndicator(false);
                 instance.GetComponent<CharacterController>()?.SetScale(-1f); //face left side

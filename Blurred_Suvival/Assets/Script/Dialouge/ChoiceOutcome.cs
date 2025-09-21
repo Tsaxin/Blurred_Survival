@@ -23,13 +23,8 @@ public class ChoiceOutcome : ScriptableObject
     public class EnemyResponseSet
     {
         // Use int-backed property to safely serialize in Unity
-        [SerializeField] private int choiceTypeValue = 0;
-
-        public ChoiceType choiceType
-        {
-            get => (ChoiceType)choiceTypeValue;
-            set => choiceTypeValue = (int)value;
-        }
+        [SerializeField] 
+    public ChoiceType choiceType;
 
         [TextArea]
         public List<string> Responses = new List<string>();

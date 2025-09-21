@@ -13,10 +13,10 @@ public class MasterEvent : ScriptableObject
 
     public Event GetRandomEvent(SpriteRenderer MapIcon)
     {
-        return GetRandomEventFromEvent2Survivor(MapIcon);
+        return GetRandomEventFromEventSurvivor(MapIcon);
     }
 
-    public Event GetRandomEventFromEvent2Survivor(SpriteRenderer MapIcon)
+    public Event GetRandomEventFromEventSurvivor(SpriteRenderer MapIcon)
     {
         MapIcon.sprite = NormalIcon[Random.Range(0, NormalIcon.Count)];
 
@@ -33,6 +33,8 @@ public class MasterEvent : ScriptableObject
         List<GameObject> TempSurvivor = new List<GameObject>(Survivors);
         List<GameObject> SelectedSurvivor = new List<GameObject>();
 
+        //this returns the number of survivor
+        int RandomNumberOfSurvivor = NumberSettings.GetBiasedRandom(0, 5);
         for (int i = 0; i < 2; i++)
         {
             GameObject obj = TempSurvivor[Random.Range(0, TempSurvivor.Count)];

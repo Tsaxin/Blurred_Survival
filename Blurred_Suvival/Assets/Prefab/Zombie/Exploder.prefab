@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 931976320798298275}
   - component: {fileID: 3721028558410621306}
   - component: {fileID: 8479127514649494469}
+  - component: {fileID: 980771746149648028}
   m_Layer: 0
   m_Name: Exploder
   m_TagString: Enemy
@@ -543,7 +544,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileManager: {fileID: 0}
-  currentTileData: {fileID: 0}
   EnemyManager: {fileID: 0}
   characterStats: {fileID: -1332772838664599718}
   trailRenderer: {fileID: 8134275122369187560}
@@ -613,6 +613,19 @@ MonoBehaviour:
     dropChance: 0.01
   - loot: {fileID: 4545915707345495668, guid: f5f2d7f732159764986143bed4b082c1, type: 3}
     dropChance: 0.5
+--- !u!114 &980771746149648028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3736395949588290747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54373c51906d364f954a0b73dff3ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentTileData: {fileID: 0}
 --- !u!1 &3898645699370193098
 GameObject:
   m_ObjectHideFlags: 0

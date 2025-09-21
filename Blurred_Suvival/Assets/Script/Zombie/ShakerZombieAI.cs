@@ -24,13 +24,13 @@ public class ShakerZombieAI : ZombieAIBase
 
             if (moveTile != null)
             {
-                Vector2Int oldPos = GetTileIndices(currentTileData.transform);
+                Vector2Int oldPos = GetTileIndices(GetComponent<Tile>().CurrentTileData.transform);
                 yield return MoveToTile(moveTile);
 
                 if (!hasAttacked && attackTarget != null && !attackTarget.IsDead)
                 {
-                    Vector2Int playerPos = GetTileIndices(attackTarget.GetComponent<CharacterController>().currentTileData.transform);
-                    Vector2Int currentPos = GetTileIndices(currentTileData.transform);
+                    Vector2Int playerPos = GetTileIndices(attackTarget.GetComponent<Tile>().CurrentTileData.transform);
+                    Vector2Int currentPos = GetTileIndices(GetComponent<Tile>().CurrentTileData.transform);
                     int distToPlayer = Mathf.Max(Mathf.Abs(currentPos.x - playerPos.x), Mathf.Abs(currentPos.y - playerPos.y));
 
                     if (distToPlayer <= 1)
@@ -51,7 +51,7 @@ public class ShakerZombieAI : ZombieAIBase
 
     CharacterStats FindAdjacentPlayer()
     {
-        Vector2Int index = GetTileIndices(currentTileData.transform);
+        Vector2Int index = GetTileIndices(GetComponent<Tile>().CurrentTileData.transform);
         int[,] directions = new int[,]
         {
             { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 },
@@ -99,7 +99,7 @@ public class ShakerZombieAI : ZombieAIBase
         _remainingAttacks = Mathf.Max(1, characterStats.AttackCount);
 
         // ✅ Get player's tile
-        TileData targetTile = mainTarget.GetComponent<CharacterController>()?.currentTileData;
+        TileData targetTile = mainTarget.GetComponent<CharacterController>()?.GetComponent<Tile>().CurrentTileData;
         if (targetTile != null)
         {
             // Call base function to face the player
@@ -121,7 +121,7 @@ public class ShakerZombieAI : ZombieAIBase
         List<CharacterStats> affectedTargets = new List<CharacterStats> { _targetStats };
 
         // Find all adjacent players around mainTarget
-        Vector2Int center = GetTileIndices(_targetStats.GetComponent<CharacterController>().currentTileData.transform);
+        Vector2Int center = GetTileIndices(_targetStats.GetComponent<Tile>().CurrentTileData.transform);
         int[,] dirs = new int[,]
         {
         { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 },

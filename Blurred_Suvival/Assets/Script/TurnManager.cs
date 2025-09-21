@@ -201,8 +201,8 @@ public class TurnManager : MonoBehaviour
         // Sort for consistent order
         enemyCharacters.Sort((a, b) =>
         {
-            Vector2Int aIndex = a.GetTileIndices(a.currentTileData.transform);
-            Vector2Int bIndex = b.GetTileIndices(b.currentTileData.transform);
+            Vector2Int aIndex = a.GetTileIndices(a.GetComponent<Tile>().CurrentTileData.transform);
+            Vector2Int bIndex = b.GetTileIndices(b.GetComponent<Tile>().CurrentTileData.transform);
             int colCompare = aIndex.x.CompareTo(bIndex.x);
             return colCompare != 0 ? colCompare : aIndex.y.CompareTo(bIndex.y);
         });
@@ -338,7 +338,7 @@ public class TurnManager : MonoBehaviour
 
     IEnumerator LoadEventTriggerDetails(Event EventData)
     {
-        yield return LoadCanvasGroup("Interaction", "Survivor must make a choice!");
+        yield return LoadCanvasGroup("Interaction", "Survivor interacts first!");
         List<GameObject> enemyChildren = new List<GameObject>();
         for (int i = 0; i < enemyParent.transform.childCount; i++)
         {
@@ -399,7 +399,7 @@ public class TurnManager : MonoBehaviour
         Enemy enemy = enemyParent.GetComponent<Enemy>();
         foreach (GameObject child in enemy.spawnedEnemies)
         {
-            LootMasterManager.Instance.DropRandomLoots(child.GetComponent<ZombieAIBase>().currentTileData);
+            LootMasterManager.Instance.DropRandomLoots(child.GetComponent<ZombieAIBase>().GetComponent<Tile>().CurrentTileData);
             CoroutineRunner.Instance.StartCoroutine(child.GetComponent<CharacterController>().OnRetreatAll(false));
         }
     }

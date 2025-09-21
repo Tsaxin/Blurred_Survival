@@ -475,6 +475,7 @@ GameObject:
   - component: {fileID: 6556793421166142210}
   - component: {fileID: 7783510281087613405}
   - component: {fileID: 6754468949298575231}
+  - component: {fileID: -922957679014844389}
   m_Layer: 0
   m_Name: Bloatii
   m_TagString: Enemy
@@ -512,7 +513,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileManager: {fileID: 0}
-  currentTileData: {fileID: 0}
   EnemyManager: {fileID: 0}
   characterStats: {fileID: -1332772838664599718}
   trailRenderer: {fileID: 6518923659219268843}
@@ -623,6 +623,19 @@ MonoBehaviour:
     dropChance: 0.01
   - loot: {fileID: 4545915707345495668, guid: 92e03f5d79d8a064fb1d0edb2bfc2f53, type: 3}
     dropChance: 0.01
+--- !u!114 &-922957679014844389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3736395949588290747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54373c51906d364f954a0b73dff3ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentTileData: {fileID: 0}
 --- !u!1 &6902403274421299848
 GameObject:
   m_ObjectHideFlags: 0

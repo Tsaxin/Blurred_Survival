@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class CharacterController : MonoBehaviour
 {
-    public TileData currentTileData;
     public SpriteRenderer sr;
     public Color originalColor;
     public TurnManager turnManager;
@@ -154,10 +153,10 @@ public class CharacterController : MonoBehaviour
                     CharacterStats myStats = GetComponent<CharacterStats>();
                     ZombieAIBase enemyAI = clicked.GetComponent<ZombieAIBase>();
 
-                    if (myStats != null && enemyAI != null && currentTileData != null && enemyAI.currentTileData != null)
+                    if (myStats != null && enemyAI != null && GetComponent<Tile>().CurrentTileData != null && enemyAI.GetComponent<Tile>().CurrentTileData != null)
                     {
-                        Vector2Int myTilePos = GetTileIndices(currentTileData.transform);
-                        Vector2Int enemyTilePos = GetTileIndices(enemyAI.currentTileData.transform);
+                        Vector2Int myTilePos = GetTileIndices(GetComponent<Tile>().CurrentTileData.transform);
+                        Vector2Int enemyTilePos = GetTileIndices(enemyAI.GetComponent<Tile>().CurrentTileData.transform);
 
                         int tileDistance = Mathf.Max(Mathf.Abs(myTilePos.x - enemyTilePos.x), Mathf.Abs(myTilePos.y - enemyTilePos.y)); // Chebyshev distance
 
@@ -257,9 +256,9 @@ public class CharacterController : MonoBehaviour
     {
         TileManager.Instance.ClearHighlightedTiles(); // 👈 clear globally
 
-        if (TileManager.Instance == null || currentTileData == null) return;
+        if (TileManager.Instance == null || GetComponent<Tile>().CurrentTileData == null) return;
 
-        Vector2Int currentPos = GetTileIndices(currentTileData.transform);
+        Vector2Int currentPos = GetTileIndices(GetComponent<Tile>().CurrentTileData.transform);
         int moveRange = GetComponent<CharacterStats>()?.MovementRange ?? 1;
 
         for (int dy = -moveRange; dy <= moveRange; dy++)
@@ -328,7 +327,7 @@ public class CharacterController : MonoBehaviour
     {
         SetButtonStatus(false);
 
-        if (hasMoved || isMoving || TileManager.Instance == null || currentTileData == null)
+        if (hasMoved || isMoving || TileManager.Instance == null || GetComponent<Tile>().CurrentTileData == null)
             return;
 
         if (targetTile.IsOccupied)
@@ -337,7 +336,7 @@ public class CharacterController : MonoBehaviour
             return;
         }
 
-        Vector2Int currentPos = GetTileIndices(currentTileData.transform);
+        Vector2Int currentPos = GetTileIndices(GetComponent<Tile>().CurrentTileData.transform);
         Vector2Int targetPos = GetTileIndices(targetTile.transform);
 
         if (targetPos == new Vector2Int(-1, -1))
@@ -368,7 +367,7 @@ public class CharacterController : MonoBehaviour
         isMoving = true;
         GetComponent<Animator>().SetBool("IsMoving", isMoving);
 
-        currentTileData.ClearOccupant();
+        GetComponent<Tile>().CurrentTileData.ClearOccupant();
 
         Vector3 start = transform.position;
         Vector3 end = targetTile.transform.position;
@@ -398,7 +397,7 @@ public class CharacterController : MonoBehaviour
 
         transform.position = end;
         targetTile.AssignOccupant(gameObject);
-        currentTileData = targetTile;
+        GetComponent<Tile>().CurrentTileData = targetTile;
 
         isMoving = false;
         GetComponent<Animator>().SetBool("IsMoving", isMoving);
@@ -422,11 +421,11 @@ public class CharacterController : MonoBehaviour
 
         ZombieAIBase enemyAI = GetEnemyObject(enemyObject).GetComponent<ZombieAIBase>();
 
-        if (currentTileData == null || enemyAI.currentTileData == null)
+        if (GetComponent<Tile>().CurrentTileData == null || enemyAI.GetComponent<Tile>().CurrentTileData == null)
             return;
 
-        Vector2Int myPos = GetTileIndices(currentTileData.transform);
-        Vector2Int enemyPos = GetTileIndices(enemyAI.currentTileData.transform);
+        Vector2Int myPos = GetTileIndices(GetComponent<Tile>().CurrentTileData.transform);
+        Vector2Int enemyPos = GetTileIndices(enemyAI.GetComponent<Tile>().CurrentTileData.transform);
 
         int moveRange = GetComponent<CharacterStats>()?.MovementRange ?? 1;
 
@@ -509,9 +508,9 @@ public class CharacterController : MonoBehaviour
         if (enemyObject.TryGetComponent(out CharacterStats enemyStats))
         {
             // 🧭 Face the enemy before attacking
-            if (enemyObject.TryGetComponent(out ZombieAIBase enemyAI) && enemyAI.currentTileData != null)
+            if (enemyObject.TryGetComponent(out ZombieAIBase enemyAI) && enemyAI.GetComponent<Tile>().CurrentTileData != null)
             {
-                SetScale(enemyAI.currentTileData.transform);
+                SetScale(enemyAI.GetComponent<Tile>().CurrentTileData.transform);
             }
             StartAttack(enemyStats);
         }
@@ -560,12 +559,7 @@ public class CharacterController : MonoBehaviour
     // Called by animation event when swing happens
     public void DealAttackDamage()
     {
-        if (_targetStats == null || _targetStats.IsDead) return;
-
-        int damage = GetComponent<CharacterStats>().attack;
-        _targetStats.TakeDamage(damage, GetComponent<CharacterStats>());
-
-        Debug.Log($"{name} dealt {damage} damage. Remaining: {_remainingAttacks - 1}");
+        _remainingAttacks=GetComponent<Attack>().PerformAttack(GetComponent<CharacterStats>(), _targetStats, _remainingAttacks,GetComponent<GearEquipper>());
     }
 
     // Called by animation event at the END of the animation
@@ -590,9 +584,9 @@ public class CharacterController : MonoBehaviour
     #region Scale
     void SetScale(Transform targetTransform)
     {
-        if (currentTileData == null) return;
+        if (GetComponent<Tile>().CurrentTileData == null) return;
 
-        int ResultScale = TileManager.Instance.GetXDirection(currentTileData.transform, targetTransform);
+        int ResultScale = TileManager.Instance.GetXDirection(GetComponent<Tile>().CurrentTileData.transform, targetTransform);
         transform.localScale = new Vector3(ResultScale, transform.localScale.y, transform.localScale.z);
 
         // also fix UI child scaling (so it doesn’t flip)

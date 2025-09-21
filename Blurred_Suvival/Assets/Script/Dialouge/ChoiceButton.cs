@@ -101,13 +101,14 @@ public class ChoiceButton : MonoBehaviour
         bool hasRunaway = enabledFlags.Contains(ChoiceOutcome.ChoiceType.Runaway);
         bool hasThreaten = enabledFlags.Contains(ChoiceOutcome.ChoiceType.Threaten);
         bool hasFight = enabledFlags.Contains(ChoiceOutcome.ChoiceType.Fight);
+        bool hasJoin = enabledFlags.Contains(ChoiceOutcome.ChoiceType.Join);
+        
+        // Find NPCDecisionMaker in scene
+        NPCDecisionMaker npcDecision = GameObject.FindGameObjectWithTag("NPC Decision Maker")
+                                                     ?.GetComponent<NPCDecisionMaker>();
 
         if (hasRunaway && hasThreaten && hasFight)
         {
-            // Find NPCDecisionMaker in scene
-            NPCDecisionMaker npcDecision = GameObject.FindGameObjectWithTag("NPC Decision Maker")
-                                                     ?.GetComponent<NPCDecisionMaker>();
-
             if (npcDecision != null)
             {
                 int decision = npcDecision.MakeDecision();
@@ -131,6 +132,24 @@ public class ChoiceButton : MonoBehaviour
                     withoutFightThreaten.Remove(ChoiceOutcome.ChoiceType.Threaten);
 
                     return withoutFightThreaten[UnityEngine.Random.Range(0, withoutFightThreaten.Count)];
+                }
+            }
+        }
+        else if (hasJoin)
+        {
+            if (npcDecision != null)
+            {
+                if (npcDecision.MakeJoinDecision())
+                {
+                    return enabledFlags[UnityEngine.Random.Range(0, enabledFlags.Count)];
+                }
+                else {
+                    List<ChoiceOutcome.ChoiceType> withoutJoin =
+                        new List<ChoiceOutcome.ChoiceType>(enabledFlags);
+
+                    withoutJoin.Remove(ChoiceOutcome.ChoiceType.Join);
+
+                    return withoutJoin[UnityEngine.Random.Range(0, withoutJoin.Count)];
                 }
             }
         }

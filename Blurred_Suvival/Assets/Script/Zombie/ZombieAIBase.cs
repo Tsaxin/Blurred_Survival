@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public abstract class ZombieAIBase : MonoBehaviour
 {
     public TileManager tileManager;
-    public TileData currentTileData;
     public abstract IEnumerator TakeTurn();
     public Enemy EnemyManager;
 
@@ -31,11 +30,11 @@ public abstract class ZombieAIBase : MonoBehaviour
     public virtual void Initialize(TileManager manager, TileData startTile)
     {
         tileManager = manager;
-        currentTileData = startTile;
+        GetComponent<Tile>().CurrentTileData = startTile;
 
-        if (currentTileData != null)
+        if (GetComponent<Tile>().CurrentTileData != null)
         {
-            currentTileData.AssignOccupant(gameObject);
+            GetComponent<Tile>().CurrentTileData.AssignOccupant(gameObject);
         }
     }
 
@@ -44,7 +43,7 @@ public abstract class ZombieAIBase : MonoBehaviour
     {
         if (targetTile == null) yield break;
 
-        currentTileData.ClearOccupant();
+        GetComponent<Tile>().CurrentTileData.ClearOccupant();
         ScaleCharacter(targetTile);
 
         Vector3 start = transform.position;
@@ -65,7 +64,7 @@ public abstract class ZombieAIBase : MonoBehaviour
         transform.position = end;
         SortingOrder(targetTile.gameObject);
 
-        currentTileData = targetTile;
+        GetComponent<Tile>().CurrentTileData = targetTile;
         targetTile.AssignOccupant(gameObject);
 
         Debug.Log($"{name} moved to new tile.");
@@ -93,7 +92,7 @@ public abstract class ZombieAIBase : MonoBehaviour
 
     public void ScaleCharacter(TileData targetTile)
     {
-        int ResultScale = TileManager.Instance.GetXDirection(currentTileData.transform, targetTile.transform);
+        int ResultScale = TileManager.Instance.GetXDirection(GetComponent<Tile>().CurrentTileData.transform, targetTile.transform);
         transform.localScale = new Vector3(-1 * ScaleForZombie * ResultScale, transform.localScale.y, transform.localScale.z);
 
         Canvas childCanvas = GetComponentInChildren<Canvas>();
@@ -120,7 +119,7 @@ public abstract class ZombieAIBase : MonoBehaviour
     {
         attackTarget = null;
 
-        Vector2Int myIndex = GetTileIndices(currentTileData.transform);
+        Vector2Int myIndex = GetTileIndices(GetComponent<Tile>().CurrentTileData.transform);
         CharacterStats nearestPlayer = null;
         float minDistance = float.MaxValue;
         Vector2Int playerIndex = Vector2Int.zero;
@@ -130,7 +129,7 @@ public abstract class ZombieAIBase : MonoBehaviour
             CharacterStats stats = obj.GetComponent<CharacterStats>();
             if (stats != null && !stats.IsDead)
             {
-                TileData playerTile = stats.GetComponent<CharacterController>()?.currentTileData;
+                TileData playerTile = stats.GetComponent<CharacterController>()?.GetComponent<Tile>().CurrentTileData;
                 if (playerTile != null)
                 {
                     Vector2Int pIndex = GetTileIndices(playerTile.transform);

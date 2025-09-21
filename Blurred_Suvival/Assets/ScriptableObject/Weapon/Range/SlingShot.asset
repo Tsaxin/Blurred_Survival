@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d691f48cf5a4ec4cb55167ce839dd20, type: 3}
+  m_Name: SlingShot
+  m_EditorClassIdentifier: 
+  itemName: Slingshot
+  itemType: 0
+  itemIcon: {fileID: 21300000, guid: c53697c72af89474e8ded1ee3259e527, type: 3}
+  itemIconIU: {fileID: 21300000, guid: b676e2edd5ea9384da7e79fa0687fe30, type: 3}
+  MaxQuantity: 20
+  lootPrefab: {fileID: 4545915707345495668, guid: 785bb8dcb40ab774d829edc1a2e1d676, type: 3}
+  useSound: {fileID: 0}
+  attackBoost: 0
+  attackCountBoost: 0
+  defenseBoost: 0
+  movementBoost: 0
+  healthBoost: 0
+  rangeBoost: 3
+  criticalBoost: 0
+  evasionBoost: 0
+  AttackSpeed: 1
+  SplashAccuracy: 0
+  SplashDamage: 1
+  attackPattern: 1
+  type: 1
+  audioClip: []

@@ -30,15 +30,15 @@ public class KnockerZombieAI : ZombieAIBase
             if (tileToMove != null)
             {
                 // ✅ Remember the starting tile before moving
-                TileData previousTile = currentTileData;
+                TileData previousTile = GetComponent<Tile>().CurrentTileData;
 
                 yield return StartCoroutine(MoveToTile(tileToMove));
 
                 // ✅ Calculate distance moved after reaching new tile
-                if (previousTile != null && currentTileData != null)
+                if (previousTile != null && GetComponent<Tile>().CurrentTileData != null)
                 {
                     Vector2Int prevPos = GetTileIndices(previousTile.transform);
-                    Vector2Int newPos = GetTileIndices(currentTileData.transform);
+                    Vector2Int newPos = GetTileIndices(GetComponent<Tile>().CurrentTileData.transform);
 
                     lastTilesMoved = Mathf.Max(
                         Mathf.Abs(prevPos.x - newPos.x),
@@ -53,8 +53,8 @@ public class KnockerZombieAI : ZombieAIBase
                 // ✅ Now check attack possibility
                 if (!hasAttacked && chaseTarget != null && !chaseTarget.IsDead)
                 {
-                    Vector2Int playerPos = GetTileIndices(chaseTarget.GetComponent<CharacterController>().currentTileData.transform);
-                    Vector2Int currentPos = GetTileIndices(currentTileData.transform);
+                    Vector2Int playerPos = GetTileIndices(chaseTarget.GetComponent<Tile>().CurrentTileData.transform);
+                    Vector2Int currentPos = GetTileIndices(GetComponent<Tile>().CurrentTileData.transform);
                     int distToPlayer = Mathf.Max(Mathf.Abs(currentPos.x - playerPos.x), Mathf.Abs(currentPos.y - playerPos.y));
 
                     if (distToPlayer <= 1 && characterStats.MovementRange - lastTilesMoved >= 1)
@@ -78,7 +78,7 @@ public class KnockerZombieAI : ZombieAIBase
 
     CharacterStats FindAdjacentPlayer()
     {
-        Vector2Int index = GetTileIndices(currentTileData.transform);
+        Vector2Int index = GetTileIndices(GetComponent<Tile>().CurrentTileData.transform);
         int[,] directions = new int[,]
         {
             { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 },
@@ -115,14 +115,14 @@ public class KnockerZombieAI : ZombieAIBase
         _isKnockingBack = true;
 
         CharacterController controller = target.GetComponent<CharacterController>();
-        if (controller == null || controller.currentTileData == null)
+        if (controller == null || controller.GetComponent<Tile>().CurrentTileData == null)
         {
             _isKnockingBack = false;
             yield break;
         }
 
-        Vector2Int from = GetTileIndices(currentTileData.transform);
-        Vector2Int to = GetTileIndices(controller.currentTileData.transform);
+        Vector2Int from = GetTileIndices(GetComponent<Tile>().CurrentTileData.transform);
+        Vector2Int to = GetTileIndices(controller.GetComponent<Tile>().CurrentTileData.transform);
 
         Vector2Int rawDir = to - from;
         Vector2Int direction = new Vector2Int(
@@ -154,8 +154,8 @@ public class KnockerZombieAI : ZombieAIBase
         {
             Debug.Log($"{target.name} is knocked back to {finalPos}!");
 
-            controller.currentTileData.ClearOccupant();
-            controller.currentTileData = knockTile;
+            controller.GetComponent<Tile>().CurrentTileData.ClearOccupant();
+            controller.GetComponent<Tile>().CurrentTileData = knockTile;
             knockTile.AssignOccupant(target);
 
             Vector3 start = target.transform.position;
@@ -206,7 +206,7 @@ public class KnockerZombieAI : ZombieAIBase
         _remainingAttacks = Mathf.Max(1, characterStats.AttackCount);
 
         // ✅ Face the player
-        TileData targetTile = target.GetComponent<CharacterController>()?.currentTileData;
+        TileData targetTile = target.GetComponent<CharacterController>()?.GetComponent<Tile>().CurrentTileData;
         if (targetTile != null)
             ScaleCharacter(targetTile);
 

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public enum ItemType
@@ -22,8 +23,11 @@ public abstract class ItemData : ScriptableObject
     public Sprite itemIconIU;
 
     public int MaxQuantity = 20;
-    public GameObject lootPrefab; 
+    public GameObject lootPrefab;
     public AudioClip useSound;
+
+    [TextArea]
+    TextMeshProUGUI Description;
 }
 
 [System.Serializable]
