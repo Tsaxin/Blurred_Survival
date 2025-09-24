@@ -138483,6 +138483,7 @@ GameObject:
   - component: {fileID: 630952278}
   - component: {fileID: 630952277}
   - component: {fileID: 630952279}
+  - component: {fileID: 630952280}
   m_Layer: 5
   m_Name: Frame
   m_TagString: Untagged
@@ -138563,6 +138564,19 @@ MonoBehaviour:
   hoverScale: 1.3
   speed: 20
   ScaleToTop: 1
+--- !u!114 &630952280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630952275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9fb553c9682d7d4c8477b85c81c078a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolTipShowSecond: 0
 --- !u!1 &632445783
 GameObject:
   m_ObjectHideFlags: 0
@@ -163928,7 +163942,7 @@ PrefabInstance:
     - target: {fileID: 3532999169455306552, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
       propertyPath: equippedWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: c2438fa7655bdf24396d4d26cb726061, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 3941013934551623844, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
       propertyPath: ToolTipShowSecond
       value: 0
@@ -265027,6 +265041,7 @@ GameObject:
   - component: {fileID: 1135607439}
   - component: {fileID: 1135607440}
   - component: {fileID: 1135607441}
+  - component: {fileID: 1135607442}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -265153,6 +265168,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1795887336}
+--- !u!114 &1135607442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135607434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecedc0752520a7c4880b4ca226f31a23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CampIcon: {fileID: 1313569976}
+  SquadIcon: {fileID: 630952275}
+  squad: {fileID: 1726448801}
+  SquadHolder: {fileID: 1726448800}
 --- !u!1 &1136904583
 GameObject:
   m_ObjectHideFlags: 0
@@ -316097,6 +316128,7 @@ GameObject:
   - component: {fileID: 1313569979}
   - component: {fileID: 1313569978}
   - component: {fileID: 1313569981}
+  - component: {fileID: 1313569982}
   m_Layer: 5
   m_Name: Frame
   m_TagString: Untagged
@@ -316233,6 +316265,19 @@ MonoBehaviour:
   hoverScale: 1.3
   speed: 20
   ScaleToTop: 1
+--- !u!114 &1313569982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313569976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9fb553c9682d7d4c8477b85c81c078a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolTipShowSecond: 0
 --- !u!1001 &1315612560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -373338,7 +373383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootMaster: {fileID: 11400000, guid: a1773eae46184014aae153fa99404289, type: 2}
   LootName:
-  - Slingshot
+  - Bandage
   MinLootColumn: 3
   HasBeenLooted: 0
   tileManager: {fileID: 295308725}
@@ -473479,6 +473524,7 @@ MonoBehaviour:
   EnemyHolder: {fileID: 1058492287}
   CampButton: {fileID: 399943320}
   globalTurnIndicator: {fileID: 268066002}
+  PostBattlePanel: {fileID: 506351148}
 --- !u!60 &2057401163
 PolygonCollider2D:
   m_ObjectHideFlags: 0

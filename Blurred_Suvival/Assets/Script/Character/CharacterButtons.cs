@@ -15,11 +15,21 @@ public class CharacterButtons : MonoBehaviour
 
     void LoadButtonFunction()
     {
+        VerifySkills();
         CharacterUIEvents uiEvents = GetComponent<CharacterUIEvents>();
         Retreat.GetComponent<Button>().onClick.AddListener(uiEvents.Retreat);
         Inventory.GetComponent<Button>().onClick.AddListener(uiEvents.OpenInventory);
         Gear.GetComponent<Button>().onClick.AddListener(uiEvents.OpenGear);
         CharacterStat.GetComponent<Button>().onClick.AddListener(uiEvents.OpenStat);
+    }
+
+    public void VerifySkills()
+    {
+        if (GetComponent<CharacterPassive>().passiveSkills == null || GetComponent<CharacterPassive>().passiveSkills.Count == 0)
+        {
+            PassiveSkill.SetActive(false);
+        }
+        ActiveSkill.SetActive(false);
     }
 
     public void LoadTriggerText()

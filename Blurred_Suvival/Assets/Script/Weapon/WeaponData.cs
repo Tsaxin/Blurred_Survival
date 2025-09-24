@@ -20,6 +20,13 @@ public class WeaponData : ItemData
     public float SplashAccuracy;
     public int SplashDamage;
 
+    [Header("Spread Setting")]
+    public int SpreadCount;
+    public int BulletSpreadDistance;
+
+    [Header("Penetration Setting")]
+    public int BulletPenetrationDistance;
+
     public enum Type
     {
         Melee,
@@ -32,6 +39,9 @@ public class WeaponData : ItemData
         SingleTarget,
         SlingshotSplash,
         // Later: Cone, Line, Pierce, etc.
+        AR,
+        SMG,
+        BoltAction
     }
 
     public AttackPattern attackPattern;

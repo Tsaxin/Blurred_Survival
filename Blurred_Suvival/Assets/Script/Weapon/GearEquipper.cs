@@ -96,7 +96,7 @@ public class GearEquipper : MonoBehaviour
         if (equippedShoe != null) yield return equippedShoe.GetModifier();
     }
 
-        #region WeaponSprite
+    #region WeaponSprite
     public SpriteRenderer Melee, Range, RangeFlash;
     public TrailRenderer TR;
     public void SetWeaponSL(int sortingOrder)
@@ -126,5 +126,48 @@ public class GearEquipper : MonoBehaviour
         Melee.gameObject.SetActive(true);
         Range.gameObject.SetActive(false);
     }
+    #endregion
+
+    #region Unequip
+    public void UnequipItem(WeaponData gearData)
+    {
+        if (stats == null)
+        {
+            Debug.LogWarning("CharacterStats component missing!");
+            return;
+        }
+
+        if (equippedWeapon == gearData)
+        {
+            equippedWeapon = null;
+            LoadWeaponSprite();
+        }
+        else if (equippedHelmet == gearData)
+        {
+            equippedHelmet = null;
+        }
+        else if (equippedVest == gearData)
+        {
+            equippedVest = null;
+        }
+        else if (equippedTrouser == gearData)
+        {
+            equippedTrouser = null;
+        }
+        else if (equippedShoe == gearData)
+        {
+            equippedShoe = null;
+        }
+        else
+        {
+            Debug.LogWarning($"Tried to unequip {gearData.name}, but it wasn’t equipped.");
+            return;
+        }
+
+        // Refresh stats after unequip
+        stats.RecalculateStats();
+    }
+
+
     #endregion
 }

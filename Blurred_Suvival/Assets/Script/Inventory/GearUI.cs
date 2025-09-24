@@ -62,10 +62,30 @@ public class GearUI : MonoBehaviour
         TooltipTrigger trigger = obj.GetComponent<TooltipTrigger>();
         if (trigger != null)
         {
-            trigger.Initialize(gearData.itemName, tooltipText);
+            trigger.Initialize(gearData.itemName, tooltipText + "\n\nClick to unequip this gear.");
         }
 
         obj.GetComponent<Image>().sprite = gearData.itemIconIU;
+
+        // Hook up button click → unequip
+        Button btn = obj.GetComponent<Button>();
+        if (btn != null)
+        {
+            btn.onClick.AddListener(() => UnequipGear(gearData,obj));
+        }
+    }
+
+    public void UnequipGear(WeaponData gearData,GameObject slot)
+    {
+        GearEquipper gearEquipper = TurnManager.Instance.SelectedUnit.GetComponent<GearEquipper>();
+        // Example: Remove equipped weapon and refresh UI
+        if (gearEquipper != null)
+        {
+            gearEquipper.UnequipItem(gearData);
+            PlayerInventory.Instance.AddItem(gearData, 1);
+        }
+
+        Destroy(slot);
     }
 
     private void DestroyAllChildren()

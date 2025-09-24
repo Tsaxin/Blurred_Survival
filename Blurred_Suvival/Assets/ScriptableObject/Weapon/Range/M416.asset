@@ -18,6 +18,7 @@ MonoBehaviour:
   itemIconIU: {fileID: 21300000, guid: 7bead301553573b4597016c0cb34739c, type: 3}
   MaxQuantity: 1
   lootPrefab: {fileID: 4545915707345495668, guid: f5f2d7f732159764986143bed4b082c1, type: 3}
+  useSound: {fileID: 0}
   attackBoost: 4
   attackCountBoost: 3
   defenseBoost: 0
@@ -27,6 +28,12 @@ MonoBehaviour:
   criticalBoost: 15
   evasionBoost: -5
   AttackSpeed: 2
+  SplashAccuracy: 0
+  SplashDamage: 2
+  SpreadCount: 2
+  BulletSpreadDistance: 2
+  BulletPenetrationDistance: 0
+  attackPattern: 2
   type: 1
   audioClip:
   - {fileID: 8300000, guid: d18df86b45c7cfe49b71372434332520, type: 3}

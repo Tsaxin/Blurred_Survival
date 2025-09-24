@@ -137,10 +137,12 @@ public class SquadMover : MonoBehaviour
 
         StopMovementOnEncounter();
     }
-
+    [Header("Post Battle Panel")]
+    public GameObject PostBattlePanel;
     public void InitiateSelfEncounter()
     {
-        EnableEncounter(false,null,true,false);
+        EnableEncounter(false, null, true, false);
+        PostBattlePanel.SetActive(true);
     }
 
     public void ExitEncounter()
