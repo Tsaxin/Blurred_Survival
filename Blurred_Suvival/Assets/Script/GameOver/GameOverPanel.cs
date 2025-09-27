@@ -44,6 +44,7 @@ public class GameOverPanel : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        MusicManager.Instance.PlayAmbientMusic();
         LoadingManager.Instance.LoadScene(0); // Loads the scene at index 0 (your main menu)
     }
 
@@ -55,6 +56,7 @@ public class GameOverPanel : MonoBehaviour
 
     public void Retry()
     {
+        MusicManager.Instance.PlayAmbientMusic();
         LoadingManager.Instance.LoadScene(1);
     }
 }
