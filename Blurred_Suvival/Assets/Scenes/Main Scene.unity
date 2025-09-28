@@ -846,8 +846,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -1418,8 +1416,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -1821,6 +1817,38 @@ Canvas:
   m_SortingLayerID: -1288815727
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &16720188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 16720189}
+  m_Layer: 0
+  m_Name: Save and Load System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &16720189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16720188}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 961.1229, y: 540.92633, z: -0.013149909}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1576706059}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &18906433
 GameObject:
   m_ObjectHideFlags: 0
@@ -18031,8 +18059,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -18351,8 +18377,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -19104,8 +19128,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -25026,8 +25048,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -26602,8 +26622,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -27530,8 +27548,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -29498,8 +29514,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -31133,8 +31147,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -36873,8 +36885,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -43315,8 +43325,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -50431,8 +50439,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -50841,8 +50847,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -52440,8 +52444,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -54204,8 +54206,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -82067,8 +82067,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -84884,8 +84882,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -86169,8 +86165,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -86618,8 +86612,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -88099,8 +88091,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -89099,8 +89089,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -89808,8 +89796,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -90871,8 +90857,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -91224,8 +91208,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -93782,8 +93764,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -106756,8 +106736,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -107590,8 +107568,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -113782,8 +113758,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -115192,8 +115166,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -116159,8 +116131,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -118910,8 +118880,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -128085,8 +128053,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -137529,8 +137495,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -138275,8 +138239,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -139230,8 +139192,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -139557,8 +139517,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -148060,8 +148018,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -159244,8 +159200,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -161923,8 +161877,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -172709,8 +172661,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -178238,8 +178188,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -178563,8 +178511,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -179083,8 +179029,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -179501,8 +179445,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -185386,8 +185328,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -185884,8 +185824,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -198590,8 +198528,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -205174,8 +205110,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -217416,8 +217350,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -223724,8 +223656,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -224652,8 +224582,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -225536,8 +225464,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -227520,8 +227446,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -228231,8 +228155,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -233028,8 +232950,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -233588,8 +233508,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -235886,8 +235804,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -236951,8 +236867,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -237109,8 +237023,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -242625,8 +242537,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -243117,8 +243027,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -243615,8 +243523,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -245153,8 +245059,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -246560,8 +246464,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -246820,8 +246722,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -247290,8 +247190,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -247993,8 +247891,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -273793,8 +273689,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -280499,8 +280393,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -287740,8 +287632,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -289808,8 +289698,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -302413,8 +302301,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -317597,8 +317483,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -318805,8 +318689,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -320065,8 +319947,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -325290,8 +325170,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -325683,8 +325561,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -327160,7 +327036,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4826856590422579189, guid: 1d18831f24a8dcf49bd740a3fbc80d3f, type: 3}
       propertyPath: newEvent.PrimaryChoiceType
-      value: 1
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4826856590422579189, guid: 1d18831f24a8dcf49bd740a3fbc80d3f, type: 3}
       propertyPath: newEvent.dialouge.Array.size
@@ -333372,7 +333248,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 637480063}
         m_TargetAssemblyTypeName: GameOverPanel, Assembly-CSharp
-        m_MethodName: GoToMainMenu
+        m_MethodName: GoToMainMenuAfterGameOver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -334749,8 +334625,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -342280,8 +342154,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -343164,8 +343036,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -343484,8 +343354,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -343898,8 +343766,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -344374,8 +344240,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -357174,8 +357038,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -357592,8 +357454,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -358607,8 +358467,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -361987,6 +361845,59 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!1 &1576706058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1576706059}
+  - component: {fileID: 1576706060}
+  m_Layer: 0
+  m_Name: Save Loader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1576706059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576706058}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 16720189}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1576706060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576706058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd2f53e5e6cae34c952d245e707356f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutsceneManager: {fileID: 1343642523}
+  SquadMover: {fileID: 2057401160}
+  SquadParent: {fileID: 1726448800}
+  EventParent: {fileID: 2051124634}
+  hungerManager: {fileID: 138032272}
+  playerInventory: {fileID: 766322675}
+  masterEvent: {fileID: 11400000, guid: b5fb7ac93825d434f96220cdabdf6bac, type: 2}
+  lootMaster: {fileID: 11400000, guid: a1773eae46184014aae153fa99404289, type: 2}
+  IsGameLoaded: 0
 --- !u!1 &1580770176
 GameObject:
   m_ObjectHideFlags: 0
@@ -363098,8 +363009,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -363554,8 +363463,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -363872,8 +363779,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -364272,8 +364177,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -364450,8 +364353,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -364940,8 +364841,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -373305,8 +373204,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -375903,8 +375800,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -378233,8 +378128,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -379793,8 +379686,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -380632,8 +380523,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -382177,8 +382066,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -384257,8 +384144,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -387469,8 +387354,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -387712,8 +387595,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -398206,8 +398087,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -404578,8 +404457,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -417811,8 +417688,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -423680,8 +423555,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -434485,8 +434358,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -435601,8 +435472,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -439687,8 +439556,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -445749,8 +445616,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -446114,8 +445979,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -457358,8 +457221,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -463639,8 +463500,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -471063,8 +470922,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -471564,8 +471421,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -485843,8 +485698,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 2
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 12
   Level: 1
@@ -487598,8 +487451,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -488699,8 +488550,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -489044,8 +488893,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -490130,8 +489977,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 20
   Level: 1
@@ -499392,3 +499237,4 @@ SceneRoots:
   - {fileID: 1445870650}
   - {fileID: 176593213}
   - {fileID: 1871341452}
+  - {fileID: 16720189}

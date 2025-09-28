@@ -11,6 +11,7 @@ public class CharacterDetail : MonoBehaviour
     }
 
     public Gender gender;
+    public string UniqueID;
 
     public void SetDetail(string CharacterName)
     {
@@ -18,7 +19,14 @@ public class CharacterDetail : MonoBehaviour
         {
             GetComponent<CharacterStats>().CharacterName = CharacterName;
         }
-        
+
         Debug.Log($"Name is {CharacterName}");
+    }
+
+    [ContextMenu("Get Unique ID")]
+
+    public void GetUniqueID()
+    {
+        UniqueID = gameObject.name;
     }
 }

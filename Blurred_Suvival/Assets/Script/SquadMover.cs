@@ -170,6 +170,8 @@ public class SquadMover : MonoBehaviour
         BattleGroundManager.Instance.RemoveMap();
         CampButton.SetActive(true);
         CutsceneManager.Instance.PlayCutsceneByID();
+
+        SaveLoader.Instance.Save();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

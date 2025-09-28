@@ -5,7 +5,7 @@ using UnityEngine;
 public class MasterEvent : ScriptableObject
 {
     public List<Sprite> NormalIcon;
-    public List<GameObject> Survivors;
+    public List<GameObject> Survivors,EventSurvivors;
     public List<GameObject> Vehicles;
     public List<Event> event2survivor = new List<Event>();
 

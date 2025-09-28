@@ -29,8 +29,6 @@ public class CharacterStats : MonoBehaviour
     [Header("Movement")]
     public int MainMovementRange = 1; // Number of tiles the character can move
     public int MovementRange;
-    public float chaseRange = 5f;
-    public int knockTile = 1;
 
     [Header("Experience")]
     public int experience = 0;
@@ -61,7 +59,12 @@ public class CharacterStats : MonoBehaviour
 
     void Awake()
     {
-        _isDead = false;
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+       _isDead = false;
 
         attack = MainAttack;
         range = MainRange;
@@ -78,7 +81,7 @@ public class CharacterStats : MonoBehaviour
 
         UpdateHealthSlider();
 
-        UpdateXPUI();
+        UpdateXPUI(); 
     }
 
     void UpdateHealthSlider()

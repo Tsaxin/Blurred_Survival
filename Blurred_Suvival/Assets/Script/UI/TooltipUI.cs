@@ -65,7 +65,9 @@ public class TooltipUI : MonoBehaviour
 
     public void HideTooltip()
     {
-        TooltipHolder.SetActive(false);
+        if (TooltipHolder!=null) {
+            TooltipHolder.SetActive(false);
+        }
     }
 
     public string GenerateTooltipText(ItemInstance itemInstance)

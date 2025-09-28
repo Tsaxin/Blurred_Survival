@@ -800,6 +800,10 @@ PrefabInstance:
       propertyPath: gender
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5689529075099732248, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
+      propertyPath: UniqueID
+      value: F Ch1
+      objectReference: {fileID: 0}
     - target: {fileID: 7762191638132965037, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.14

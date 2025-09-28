@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4004270932828350228}
   - component: {fileID: 486304165228804541}
   m_Layer: 0
-  m_Name: First aid kit
+  m_Name: First Aid Kit
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 852f8be8be18845409bd88a2b9a6135c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 2a776541a228d824a8016bdf67dee4c1, type: 2}
+  itemData: {fileID: 11400000, guid: 7515ec39ed52d22448402e26c798a22b, type: 2}
 --- !u!95 &4004270932828350228
 Animator:
   serializedVersion: 5

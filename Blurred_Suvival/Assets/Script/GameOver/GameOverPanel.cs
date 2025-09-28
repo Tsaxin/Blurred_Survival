@@ -44,6 +44,13 @@ public class GameOverPanel : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        SaveLoader.Instance.Save();
+        MusicManager.Instance.PlayAmbientMusic();
+        LoadingManager.Instance.LoadScene(0); // Loads the scene at index 0 (your main menu)
+    }
+
+    public void GoToMainMenuAfterGameOver()
+    {
         MusicManager.Instance.PlayAmbientMusic();
         LoadingManager.Instance.LoadScene(0); // Loads the scene at index 0 (your main menu)
     }

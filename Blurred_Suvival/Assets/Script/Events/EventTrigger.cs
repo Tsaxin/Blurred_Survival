@@ -64,7 +64,7 @@ public class EventTrigger : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) // Make sure your squad is tagged as "Player"
+        if (other.CompareTag("Player") && SaveLoader.Instance!=null && SaveLoader.Instance.IsGameLoaded) // Make sure your squad is tagged as "Player"
         {
             var recent = other.GetComponent<EventTriggerData>()?.RecentEventTriggerData;
             if (recent == null || !ReferenceEquals(recent, this.gameObject))

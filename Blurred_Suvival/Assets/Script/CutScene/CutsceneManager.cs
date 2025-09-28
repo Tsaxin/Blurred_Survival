@@ -37,7 +37,6 @@ public class CutsceneManager : MonoBehaviour
             Instance = this;
         }
         originalPosition = displayImage.rectTransform.localPosition;
-        PlayCutsceneByID();
     }
 
     /// <summary>Call this from your UI Button (OnClick)</summary>

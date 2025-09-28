@@ -32,6 +32,15 @@ MonoBehaviour:
   - {fileID: 4432471361555323814, guid: b1a988c7d6962324997e82b89131bcc0, type: 3}
   - {fileID: 5279418514720354316, guid: 5eb933848ef90c4498146bb82657d333, type: 3}
   - {fileID: 3816641826279779961, guid: 71d2c79699aa9964a9969210235f8fd1, type: 3}
+  EventSurvivors:
+  - {fileID: 4536060065368327761, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
+  - {fileID: 9200530703817233753, guid: cb87d32dda97ffc4bb55ce4291e1ffdb, type: 3}
+  - {fileID: 7603693025749048937, guid: bccdcc27446b3e64d8c44893f26d0240, type: 3}
+  - {fileID: 4543795819597959861, guid: 0b0a2ab40f14f174cb494cb64173f505, type: 3}
+  - {fileID: 8710011502957677686, guid: 7ba973e03b558ac489a127a90950564a, type: 3}
+  - {fileID: 2932959252752737315, guid: bfd8009b194684e439eca70f47d2137c, type: 3}
+  - {fileID: 8300768595004691836, guid: e38420df97d61bd46ba7a8d010fb3645, type: 3}
+  - {fileID: 7947856929983301775, guid: 94ef987387839e243bb8d880b39f8576, type: 3}
   Vehicles: []
   event2survivor:
   - SurvivorCount: 2

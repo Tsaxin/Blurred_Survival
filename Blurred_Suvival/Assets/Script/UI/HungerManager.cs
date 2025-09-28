@@ -29,7 +29,7 @@ public class HungerManager : MonoBehaviour
 
     public bool IsPaused;
 
-    void Start()
+    public void Start()
     {
         IsPaused = false;
         if (Instance == null) Instance = this;

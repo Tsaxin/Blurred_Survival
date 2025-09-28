@@ -1289,6 +1289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gender: 0
+  UniqueID: M Ch1
 --- !u!114 &1683625113516199691
 MonoBehaviour:
   m_ObjectHideFlags: 0
