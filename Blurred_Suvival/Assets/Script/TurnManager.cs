@@ -17,7 +17,7 @@ public class TurnManager : MonoBehaviour
 
     [Header("Post-Battle Settings")]
     public GameObject PostBattlePanel;
-    public GameObject CampButton;
+    public GameObject CampButton,ShortCutParent;
 
     public List<CharacterController> activePlayerCharacters = new List<CharacterController>();
 
@@ -68,6 +68,7 @@ public class TurnManager : MonoBehaviour
     public void StartBattle()
     {
         CampButton.SetActive(false);
+        ShortCutParent.SetActive(true);
         InitializeCharacters();
         SetHasMoveState(playerParent.transform,true);
         SetHasMoveState(enemyParent.transform,true);
@@ -331,6 +332,8 @@ public class TurnManager : MonoBehaviour
     #region Event Trigger 
     public void StartEventTrigger(Event EventData)
     {
+        CampButton.SetActive(false);
+        ShortCutParent.SetActive(true);
         SetHasMoveState(playerParent.transform,true);
         SetHasMoveState(enemyParent.transform,true);
         CoroutineRunner.Instance.StartCoroutine(LoadEventTriggerDetails(EventData));

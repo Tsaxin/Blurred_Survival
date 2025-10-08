@@ -63,7 +63,7 @@ public class PlayerInventory : MonoBehaviour
 
                     if (remaining <= 0)
                     {
-                        TextNotification.Instance.EnqueueCollectedText($"{stack.data.itemName} collected.", TextNotification.FloatingTextType.Heal);
+                        TextNotification.Instance?.EnqueueCollectedText($"{stack.data.itemName} collected.", TextNotification.FloatingTextType.Heal);
                         return true;
                     }
                 }
@@ -75,7 +75,7 @@ public class PlayerInventory : MonoBehaviour
         {
             if (collectedItems.Count >= maxInventorySize)
             {
-                TextNotification.Instance.EnqueueCollectedText("Inventory Full!!", TextNotification.FloatingTextType.Damage);
+                TextNotification.Instance?.EnqueueCollectedText("Inventory Full!!", TextNotification.FloatingTextType.Damage);
                 return false; // inventory full, some items not added
             }
 
@@ -83,7 +83,7 @@ public class PlayerInventory : MonoBehaviour
             collectedItems.Add(new ItemInstance(newItem, toAdd));
             remaining -= toAdd;
         }
-        TextNotification.Instance.EnqueueCollectedText($"{newItem.itemName} collected.", TextNotification.FloatingTextType.Heal);
+        TextNotification.Instance?.EnqueueCollectedText($"{newItem.itemName} collected.", TextNotification.FloatingTextType.Heal);
         return true;
     }
 
@@ -91,45 +91,62 @@ public class PlayerInventory : MonoBehaviour
     /// Removes a certain quantity of an item from the inventory.
     /// If quantity is zero or less, removes the whole stack.
     /// </summary>
-    public bool RemoveItem(ItemData item)
+    public bool RemoveItem(ItemData item, bool DropToTile = true)
     {
         ItemInstance instance = collectedItems.Find(i => i.data == item);
         if (instance == null)
         {
-            return false;   
+            return false;
         }
 
         // Remove ALL quantity
         collectedItems.Remove(instance);
 
         // ✅ Drop item back on tile
-        TileData dropTile = TileManager.Instance.GetBestTileForDrop();
-        if (dropTile != null)
+        if (DropToTile && TileManager.Instance!=null)
         {
-            if (item.lootPrefab != null)
+            TileData dropTile = TileManager.Instance.GetBestTileForDrop();
+            if (dropTile != null)
             {
-                GameObject loot = GameObject.Instantiate(item.lootPrefab);
-                if (item.itemType != ItemType.Weapon)
+                if (item.lootPrefab != null)
                 {
-                    TextNotification.Instance.EnqueueCollectedText($"{instance.quantity}x {item.itemName} dropped!", TextNotification.FloatingTextType.Damage);
+                    GameObject loot = GameObject.Instantiate(item.lootPrefab);
+                    if (item.itemType != ItemType.Weapon)
+                    {
+                        TextNotification.Instance.EnqueueCollectedText($"{instance.quantity}x {item.itemName} dropped!", TextNotification.FloatingTextType.Damage);
+                    }
+                    else
+                    {
+                        TextNotification.Instance.EnqueueCollectedText($"{item.itemName} dropped!", TextNotification.FloatingTextType.Damage);
+                    }
+                    dropTile.PlaceLoot(loot);
                 }
                 else
                 {
-                    TextNotification.Instance.EnqueueCollectedText($"{item.itemName} dropped!", TextNotification.FloatingTextType.Damage);
+                    Debug.LogWarning($"Item {item.name} has no loot prefab assigned!");
                 }
-                dropTile.PlaceLoot(loot);
             }
             else
             {
-                Debug.LogWarning($"Item {item.name} has no loot prefab assigned!");
+                Debug.LogWarning("No available tile found for item drop.");
             }
         }
-        else
-        {
-            Debug.LogWarning("No available tile found for item drop.");
-        }
 
-        InventoryUIManager.Instance.RefreshInventory();
+        InventoryUIManager.Instance?.RefreshInventory();
         return true;
     }
+
+    public void RemoveItemWithQuantity(ItemData item, int quantity = 1)
+    {
+        ItemInstance instance = collectedItems.Find(i => i.data == item);
+        if (instance != null)
+        {
+            instance.quantity -= quantity;
+            if (instance.quantity <= 0)
+            {
+                collectedItems.Remove(instance);
+            }
+        }
+    }
+
 }

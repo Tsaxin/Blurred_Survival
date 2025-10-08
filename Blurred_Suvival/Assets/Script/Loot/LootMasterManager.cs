@@ -14,7 +14,7 @@ public class LootMasterManager : MonoBehaviour
     public void DropRandomLoot(LootRarity rarity, TileData tile)
     {
         LootEntry lootEntry = lootMaster.GetRandomLoot(rarity);
-        Debug.Log(lootEntry);
+        //Debug.Log(lootEntry);
 
         if (tile == null || lootMaster == null || lootEntry == null) return;
 

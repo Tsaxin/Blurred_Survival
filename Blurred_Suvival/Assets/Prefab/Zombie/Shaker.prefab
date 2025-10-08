@@ -528,10 +528,8 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
-  xpPerKill: 20
+  xpPerKill: 60
   Level: 1
   xpToLevelUp: 20
   XPSlider: {fileID: 0}

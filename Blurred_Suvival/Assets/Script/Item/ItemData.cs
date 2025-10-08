@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -47,4 +48,11 @@ public class ItemInstance
         else
             durability = -1; // no durability for consumables by default
     }
+}
+
+[System.Serializable]
+public class CraftRequirement
+{
+    public ItemData item;  // now using ScriptableObject instead of string
+    public int quantity;
 }

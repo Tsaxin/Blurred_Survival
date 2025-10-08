@@ -22,7 +22,7 @@ public class InventoryItemClickHandler : MonoBehaviour
     /// <summary>
     /// Handles what happens when an item in the inventory UI is clicked.
     /// </summary>
-    public void OnItemSlotClicked(ItemInstance clickedItem, CharacterController selectedUnit)
+    public void OnItemSlotClicked(ItemInstance clickedItem, CharacterController selectedUnit, bool fromShortcut = false,ShortCutSlot Slot=null)
     {
         if (selectedUnit == null)
         {
@@ -33,55 +33,54 @@ public class InventoryItemClickHandler : MonoBehaviour
         switch (clickedItem.data.itemType)
         {
             case ItemType.Weapon:
-                HandleEquipmentClick(clickedItem, selectedUnit, 
-                    gear => gear.equippedWeapon, 
-                    (gear, data) => gear.EquipWeapon(data));
+                HandleEquipmentClick(clickedItem, selectedUnit,
+                    gear => gear.equippedWeapon,
+                    (gear, data) => gear.EquipWeapon(data), fromShortcut,Slot);
                 break;
 
             case ItemType.Helmet:
                 HandleEquipmentClick(clickedItem, selectedUnit,
                     gear => gear.equippedHelmet,
-                    (gear, data) => gear.EquipHelmet(data));
+                    (gear, data) => gear.EquipHelmet(data), fromShortcut,Slot);
                 break;
-            
+
             case ItemType.Vest:
                 HandleEquipmentClick(clickedItem, selectedUnit,
                     gear => gear.equippedVest,
-                    (gear, data) => gear.EquipVest(data));
+                    (gear, data) => gear.EquipVest(data), fromShortcut,Slot);
                 break;
 
             case ItemType.Trouser:
                 HandleEquipmentClick(clickedItem, selectedUnit,
                     gear => gear.equippedTrouser,
-                    (gear, data) => gear.EquipTrouser(data));
+                    (gear, data) => gear.EquipTrouser(data), fromShortcut,Slot);
                 break;
 
             case ItemType.Shoe:
                 HandleEquipmentClick(clickedItem, selectedUnit,
                     gear => gear.equippedShoe,
-                    (gear, data) => gear.EquipShoe(data));
+                    (gear, data) => gear.EquipShoe(data), fromShortcut,Slot);
                 break;
 
             case ItemType.Consumable:
-                HandleConsumableClick(clickedItem, selectedUnit);
+                HandleConsumableClick(clickedItem, selectedUnit, fromShortcut,Slot);
                 break;
-
-            // More item types can be added here
         }
 
-        // Refresh visuals + end turn
-        InventoryUIManager.Instance.RefreshInventory();
-        selectedUnit.ShowAvailableMoveTiles();
+        if (!fromShortcut) InventoryUIManager.Instance.RefreshInventory();
+        //selectedUnit.ShowAvailableMoveTiles();
         selectedUnit.FinishedTurn();
-        InventoryUIManager.Instance.CloseInventory();
+
+        if (!fromShortcut) InventoryUIManager.Instance.CloseInventory();
     }
+
 
     /// <summary>
     /// Generic handler for equippable items (Weapon, Helmet, etc.)
     /// </summary>
     private void HandleEquipmentClick(ItemInstance clickedItem, CharacterController selectedUnit,
                                       System.Func<GearEquipper, WeaponData> getEquippedItem,
-                                      System.Action<GearEquipper, WeaponData> equipAction)
+                                      System.Action<GearEquipper, WeaponData> equipAction, bool IsFromShortCut,ShortCutSlot Slot=null)
     {
         var gearEquipper = selectedUnit.GetComponent<GearEquipper>();
         if (gearEquipper == null)
@@ -93,27 +92,41 @@ public class InventoryItemClickHandler : MonoBehaviour
         SFXManager.Instance?.PlayEquipSound();
 
         // Remove the clicked item from inventory
-        playerInventory.collectedItems.Remove(clickedItem);
-
-        // Return currently equipped item to inventory (if any)
-        var currentlyEquipped = getEquippedItem(gearEquipper);
-        if (currentlyEquipped != null)
+        if (!IsFromShortCut)
         {
-            playerInventory.collectedItems.Add(new ItemInstance(currentlyEquipped));
+            playerInventory.collectedItems.Remove(clickedItem);
+
+            // Return currently equipped item to inventory (if any)
+            var currentlyEquipped = getEquippedItem(gearEquipper);
+            if (currentlyEquipped != null)
+            {
+                playerInventory.collectedItems.Add(new ItemInstance(currentlyEquipped));
+            }
+        }
+        else
+        {
+            Slot.OnReset();
+
+            // Return currently equipped item to inventory (if any)
+            var currentlyEquipped = getEquippedItem(gearEquipper);
+            if (currentlyEquipped != null)
+            {
+                Slot.SetOnClick(new ItemInstance(currentlyEquipped),selectedUnit);
+            }
         }
 
         // Equip the new item
         equipAction(gearEquipper, (WeaponData)clickedItem.data);
 
         TextNotification.Instance.EnqueueCollectedText(
-            $"{clickedItem.data.itemName} Equipped!", 
+            $"{clickedItem.data.itemName} Equipped!",
             TextNotification.FloatingTextType.Heal);
     }
 
     /// <summary>
     /// Handles consumable use.
     /// </summary>
-    private void HandleConsumableClick(ItemInstance clickedItem, CharacterController selectedUnit)
+    private void HandleConsumableClick(ItemInstance clickedItem, CharacterController selectedUnit, bool fromShortcut,ShortCutSlot Slot=null)
     {
         SFXManager.Instance.PlaySFX(clickedItem.data.useSound);
         var consumableData = (ConsumableData)clickedItem.data;
@@ -124,14 +137,26 @@ public class InventoryItemClickHandler : MonoBehaviour
             return;
         }
 
-        // Heal the character
+        // Heal or apply effect
         characterStats.Heal(consumableData.healthRestoreAmount);
 
         // Reduce quantity or remove item
         clickedItem.quantity--;
+        if (fromShortcut)
+        {
+            if (clickedItem.quantity <= 0)
+            {
+                Slot.OnReset();
+            }
+            else
+            {   
+                Slot.SetDetail(clickedItem);  
+            }
+        }
         if (clickedItem.quantity <= 0)
         {
             playerInventory.collectedItems.Remove(clickedItem);
         }
     }
+
 }

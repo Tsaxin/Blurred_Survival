@@ -25,7 +25,7 @@ public class SquadMover : MonoBehaviour
 
     public static SquadMover Instance;
 
-    public GameObject CampButton;
+    public GameObject CampButton,ShortCutParent;
 
     public GlobalTurnIndicator globalTurnIndicator;
 
@@ -169,6 +169,7 @@ public class SquadMover : MonoBehaviour
         EnemyHolder.GetComponent<Enemy>().DestroyAllChildren();
         BattleGroundManager.Instance.RemoveMap();
         CampButton.SetActive(true);
+        ShortCutParent.SetActive(false);
         CutsceneManager.Instance.PlayCutsceneByID();
 
         SaveLoader.Instance.Save();

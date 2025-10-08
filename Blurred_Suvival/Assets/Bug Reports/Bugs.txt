@@ -1,2 +1,8 @@
--equip sound and pickup sound not working
+-Can select multiple zombies if you are fast enough and this freezes the game. (urgent)
+-On quitting game on battlemode. if loaded later will auto level up the player. (urgent)
 -zombie algorithm lines up all the zombies in straight line
+-Make region specific zombies and reduce the number of non dominant zombie upto 0-1
+-Runner should be squishy.
+-Bloater to be tanky.
+-Exploder trigger criteria from 3 to 2
+-Click + Auto switch the character after action complete.

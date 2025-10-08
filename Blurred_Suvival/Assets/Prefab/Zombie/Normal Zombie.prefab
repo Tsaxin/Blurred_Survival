@@ -709,8 +709,6 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
   xpPerKill: 4
   Level: 1
@@ -740,17 +738,17 @@ MonoBehaviour:
   - loot: {fileID: 4545915707345495668, guid: 6082a785747429e41b63c1f06c6b7cec, type: 3}
     dropChance: 0.25
   - loot: {fileID: 4545915707345495668, guid: ebbad636255d4794abd3ab19a4069b1b, type: 3}
-    dropChance: 0.15
+    dropChance: 0.25
   - loot: {fileID: 4545915707345495668, guid: 72a94a5254a2f6845a6a941e8697f06d, type: 3}
     dropChance: 0.05
   - loot: {fileID: 4545915707345495668, guid: 3ffc687304adf2b4eab545d34313f375, type: 3}
-    dropChance: 0.01
+    dropChance: 0.15
   - loot: {fileID: 4545915707345495668, guid: 0dcfcbc5458e0a341889735a4d5d3af5, type: 3}
-    dropChance: 0.01
+    dropChance: 0.15
   - loot: {fileID: 4545915707345495668, guid: 65dcf6d94ac25b644b0b67401d2b1753, type: 3}
-    dropChance: 0.01
+    dropChance: 0.15
   - loot: {fileID: 4545915707345495668, guid: 92e03f5d79d8a064fb1d0edb2bfc2f53, type: 3}
-    dropChance: 0.01
+    dropChance: 0.15
 --- !u!95 &4624903711036126842
 Animator:
   serializedVersion: 5

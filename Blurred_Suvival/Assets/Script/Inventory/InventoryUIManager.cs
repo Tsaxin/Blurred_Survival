@@ -27,7 +27,7 @@ public class InventoryUIManager : MonoBehaviour
 
         Instance = this;
 
-        RefreshInventory();
+        //RefreshInventory();
     }
 
     public void OpenInventory()

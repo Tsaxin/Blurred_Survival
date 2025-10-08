@@ -34,6 +34,10 @@ public class SaveLoader : MonoBehaviour
         {
             Instance = this;
         }
+        if (GameModeTracker.Instance == null)
+        {
+            return;
+        }
 
         if (CheckData() && GameModeTracker.Instance.GameMode == 1)
         {

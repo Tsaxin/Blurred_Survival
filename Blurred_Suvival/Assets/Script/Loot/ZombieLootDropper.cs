@@ -12,7 +12,7 @@ public class ZombieLootDropper : MonoBehaviour
             float roll = Random.value; // 0 to 1
             if (roll <= entry.dropChance)
             {
-                Debug.Log($"Dropping loot: {entry.loot.GetComponent<ItemPickUp>().itemData.itemName}");
+                //Debug.Log($"Dropping loot: {entry.loot.GetComponent<ItemPickUp>().itemData.itemName}");
 
                 GameObject loot = Instantiate(entry.loot, position, Quaternion.identity);
 

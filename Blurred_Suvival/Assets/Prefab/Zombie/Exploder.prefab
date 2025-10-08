@@ -516,10 +516,8 @@ MonoBehaviour:
   EvasionChance: 0
   MainMovementRange: 1
   MovementRange: 0
-  chaseRange: 5
-  knockTile: 1
   experience: 0
-  xpPerKill: 20
+  xpPerKill: 80
   Level: 1
   xpToLevelUp: 20
   XPSlider: {fileID: 0}
@@ -604,15 +602,15 @@ MonoBehaviour:
   - loot: {fileID: 4545915707345495668, guid: ebbad636255d4794abd3ab19a4069b1b, type: 3}
     dropChance: 0.15
   - loot: {fileID: 4545915707345495668, guid: ed2b20fb3e7c08d479d81bff30e68da6, type: 3}
-    dropChance: 0.01
+    dropChance: 0.15
   - loot: {fileID: 4545915707345495668, guid: 3ffc687304adf2b4eab545d34313f375, type: 3}
-    dropChance: 0.01
+    dropChance: 0.15
   - loot: {fileID: 4545915707345495668, guid: 0dcfcbc5458e0a341889735a4d5d3af5, type: 3}
-    dropChance: 0.01
+    dropChance: 0.15
   - loot: {fileID: 4545915707345495668, guid: 65dcf6d94ac25b644b0b67401d2b1753, type: 3}
-    dropChance: 0.01
+    dropChance: 0.15
   - loot: {fileID: 4545915707345495668, guid: f5f2d7f732159764986143bed4b082c1, type: 3}
-    dropChance: 0.5
+    dropChance: 0.15
 --- !u!114 &980771746149648028
 MonoBehaviour:
   m_ObjectHideFlags: 0

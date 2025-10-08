@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LootMaster", menuName = "Loot/LootMaster")]
@@ -41,6 +42,37 @@ public class LootMaster : ScriptableObject
         return null; // Nothing dropped this roll
     }
 
+    public List<LootEntry> GetAllCraftableLoot()
+    {
+        List<LootEntry> lootEntries = new List<LootEntry>();
+        foreach (LootEntry lootEntry in commonLoot) {
+            if (lootEntry.loot.GetComponent<CraftableItem>() != null)
+            {
+                lootEntries.Add(lootEntry);
+            }
+        }
+        foreach (LootEntry lootEntry in rareLoot) {
+            if (lootEntry.loot.GetComponent<CraftableItem>() != null)
+            {
+                lootEntries.Add(lootEntry);
+            }
+        }
+        foreach (LootEntry lootEntry in epicLoot) {
+            if (lootEntry.loot.GetComponent<CraftableItem>() != null)
+            {
+                lootEntries.Add(lootEntry);
+            }
+        }
+        foreach (LootEntry lootEntry in legendaryLoot) {
+            if (lootEntry.loot.GetComponent<CraftableItem>() != null)
+            {
+                lootEntries.Add(lootEntry);
+            }
+        }
+
+        return lootEntries;
+    }
+
     /// <summary>
     /// Pick a random rarity based on configured weights
     /// </summary>
@@ -78,7 +110,7 @@ public class LootMaster : ScriptableObject
         }
 
         // If no match found
-        Debug.LogWarning($"Loot with name {lootName} not found!");
+        //Debug.LogWarning($"Loot with name {lootName} not found!");
         return null;
     }
 }

@@ -34,10 +34,10 @@ public class TooltipUI : MonoBehaviour
         Vector2 offset = new Vector2(40f, -40f); // 20px right, 20px below
         Vector2 targetPos = mousePos;
 
-        if (targetPos.y - HolderSize.y +offset.y<= 0) // would cut off bottom
+        if (targetPos.y - HolderSize.y + offset.y <= 0) // would cut off bottom
         {
             targetPos.x = mousePos.x + HolderSize.x / 2f + offset.x;
-            targetPos.y =HolderSize.y / 2f - offset.y;
+            targetPos.y = HolderSize.y / 2f - offset.y;
         }
         else
         {
@@ -65,7 +65,8 @@ public class TooltipUI : MonoBehaviour
 
     public void HideTooltip()
     {
-        if (TooltipHolder!=null) {
+        if (TooltipHolder != null)
+        {
             TooltipHolder.SetActive(false);
         }
     }
@@ -94,6 +95,28 @@ public class TooltipUI : MonoBehaviour
         if (itemInstance.quantity > 1)
             desc += $"\n<b>Quantity:</b> {itemInstance.quantity}";
 
+        return desc.TrimEnd();
+    }
+
+    public string GenerateTooltipText(ItemData item)
+    {
+        string desc = "";
+
+        switch (item.itemType)
+        {
+            case ItemType.Weapon:
+            case ItemType.Shoe:
+            case ItemType.Vest:
+            case ItemType.Trouser:
+            case ItemType.Helmet:
+                desc += BuildStatDescription((WeaponData)item);
+                break;
+
+            case ItemType.Consumable:
+                var c = (ConsumableData)item;
+                desc += $"<b>Heals:</b> {c.healthRestoreAmount} HP\n";
+                break;
+        }
         return desc.TrimEnd();
     }
 

@@ -44,6 +44,8 @@ MonoBehaviour:
     dropChance: 0.2
   - loot: {fileID: 4545915707345495668, guid: 6b98e18738352bd43b2b86151523af13, type: 3}
     dropChance: 0.2
+  - loot: {fileID: 4545915707345495668, guid: 631ea59047440f146be9b78029041c7d, type: 3}
+    dropChance: 0.2
   epicLoot:
   - loot: {fileID: 4545915707345495668, guid: d3b983b7d73350a43b8dcc9e5a8a42f1, type: 3}
     dropChance: 0.15
