@@ -37,9 +37,9 @@ public class CharacterController : MonoBehaviour
         ResetEverythingOnRetreat();
     }
 
-    public void OnClicked()
+    public void OnClicked(bool Manual=true)
     {
-        if (UIBlocker.IsPointerOverUI())
+        if (UIBlocker.IsPointerOverUI() && Manual)
             return; // Don't process clicks if the pointer is over UI
 
         // ⛔ Block input if not player's turn
@@ -519,9 +519,12 @@ public class CharacterController : MonoBehaviour
     #region Actual attack Region
     private CharacterStats _targetStats;
     private int _remainingAttacks;
+    private bool isAttacking = false;
 
     public void StartAttack(CharacterStats target)
     {
+        if (isAttacking) return; // BLOCK new attack
+        isAttacking = true;
         _targetStats = target;
 
         _remainingAttacks = GetComponent<CharacterStats>().AttackCount; // e.g., 2 attacks
@@ -540,7 +543,7 @@ public class CharacterController : MonoBehaviour
         Animator anim = GetComponent<Animator>();
         if (GetComponent<GearEquipper>().equippedWeapon != null)
         {
-            anim.speed=GetComponent<GearEquipper>().equippedWeapon.AttackSpeed;
+            anim.speed = GetComponent<GearEquipper>().equippedWeapon.AttackSpeed;
             if (GetComponent<GearEquipper>().equippedWeapon.type == WeaponData.Type.Range)
             {
                 anim.SetTrigger("Range");
@@ -559,7 +562,7 @@ public class CharacterController : MonoBehaviour
     // Called by animation event when swing happens
     public void DealAttackDamage()
     {
-        _remainingAttacks=GetComponent<Attack>().PerformAttack(GetComponent<CharacterStats>(), _targetStats, _remainingAttacks,GetComponent<GearEquipper>());
+        _remainingAttacks = GetComponent<Attack>().PerformAttack(GetComponent<CharacterStats>(), _targetStats, _remainingAttacks, GetComponent<GearEquipper>());
     }
 
     // Called by animation event at the END of the animation
@@ -574,7 +577,7 @@ public class CharacterController : MonoBehaviour
         }
         else
         {
-            Debug.Log($"{name} finished all attacks.");
+            isAttacking = false;
             FinishedTurn();
         }
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
@@ -17,7 +18,7 @@ public class TurnManager : MonoBehaviour
 
     [Header("Post-Battle Settings")]
     public GameObject PostBattlePanel;
-    public GameObject CampButton,ShortCutParent;
+    public GameObject CampButton, ShortCutParent;
 
     public List<CharacterController> activePlayerCharacters = new List<CharacterController>();
 
@@ -67,11 +68,17 @@ public class TurnManager : MonoBehaviour
 
     public void StartBattle()
     {
-        CampButton.SetActive(false);
-        ShortCutParent.SetActive(true);
+        if (CampButton != null)
+        {
+            CampButton.SetActive(false);
+        }
+        if (ShortCutParent != null)
+        {
+            ShortCutParent.SetActive(true);
+        }
         InitializeCharacters();
-        SetHasMoveState(playerParent.transform,true);
-        SetHasMoveState(enemyParent.transform,true);
+        SetHasMoveState(playerParent.transform, true);
+        SetHasMoveState(enemyParent.transform, true);
 
         switch (EncounterMode)
         {
@@ -92,7 +99,7 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    void SetHasMoveState(Transform parent,bool State)
+    void SetHasMoveState(Transform parent, bool State)
     {
         foreach (Transform child in parent)
         {
@@ -125,7 +132,6 @@ public class TurnManager : MonoBehaviour
         // Wait until first player phase fully finishes
         yield return new WaitUntil(() => playerTurn == false);
 
-        Debug.Log("⚡ Extra Preemptive Player Turn!");
         BeginPlayerTurn();
 
         // Wait until second player phase finishes
@@ -153,13 +159,13 @@ public class TurnManager : MonoBehaviour
             pc.BeginTurn();
         }
 
-        Debug.Log($"▶️ Player Turn Begins with {activePlayerCharacters.Count} active characters");
-
         // Skip to enemy turn if no players are alive
         if (activePlayerCharacters.Count == 0)
         {
             return;
         }
+
+        AutoPickCharacter();
     }
 
     public void OnPlayerFinishedMove(CharacterController character)
@@ -168,7 +174,7 @@ public class TurnManager : MonoBehaviour
 
         currentCharacterIndex++;
 
-        Debug.Log($"➡️ Player {currentCharacterIndex}/{activePlayerCharacters.Count} moved.");
+        AutoPickCharacter();
 
         if (currentCharacterIndex >= activePlayerCharacters.Count)
         {
@@ -180,8 +186,19 @@ public class TurnManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("This triggered");
                 CoroutineRunner.Instance.StartCoroutine(BeginEnemyTurn());
+            }
+        }
+    }
+
+    public void AutoPickCharacter()
+    {
+        foreach(CharacterController cc in activePlayerCharacters)
+        {
+            if(!cc.hasMoved && !cc.GetComponent<CharacterStats>().IsDead)
+            {
+                cc.OnClicked(false);
+                return;
             }
         }
     }
@@ -190,12 +207,10 @@ public class TurnManager : MonoBehaviour
     public float delayBeforeEnemyTurn = 0.1f;   // 👈 New field
     IEnumerator BeginEnemyTurn()
     {
-        GetComponent<GlobalTurnIndicator>().GlobalTurnIndicatorState(true,"Enemy's turn");
+        GetComponent<GlobalTurnIndicator>().GlobalTurnIndicatorState(true, "Enemy's turn");
         playerTurn = false;
-        Debug.Log("⏳ Waiting before enemy turn...");
-        yield return new WaitForSeconds(delayBeforeEnemyTurn);
 
-        Debug.Log("🔁 Enemy Turn Begins");
+        yield return new WaitForSeconds(delayBeforeEnemyTurn);
 
         enemyCharacters.RemoveAll(e => e == null);
 
@@ -240,8 +255,6 @@ public class TurnManager : MonoBehaviour
         // Check if all enemies are gone
         if (enemyCharacters.Count == 0)
         {
-            Debug.Log("🎉 All enemies defeated! Preparing to exit encounter...");
-
             // Distribute XP
             if (BattleManager != null)
             {
@@ -269,21 +282,24 @@ public class TurnManager : MonoBehaviour
 
     IEnumerator LoadCanvasGroup(string Type, string Description)
     {
-        EncounterTypeText.text = Type;
-        EncounterDescription.text = Description;
+        bool TestMode = ForceTurnMode.Instance?.TestMode ?? false;
+        if (!TestMode)
+        {
+            EncounterTypeText.text = Type;
+            EncounterDescription.text = Description;
 
-        EncounterModeCanvasGroup.gameObject.SetActive(true);
+            EncounterModeCanvasGroup.gameObject.SetActive(true);
 
-        // Fade in
-        yield return StartCoroutine(FadeCanvasGroup(EncounterModeCanvasGroup, 0f, 1f, EncounterPanelFadeSpeed));
+            // Fade in
+            yield return StartCoroutine(FadeCanvasGroup(EncounterModeCanvasGroup, 0f, 1f, EncounterPanelFadeSpeed));
 
-        // Stay visible for 1 sec
-        yield return new WaitForSeconds(EncounterPanelStaySpeed);
+            // Stay visible for 1 sec
+            yield return new WaitForSeconds(EncounterPanelStaySpeed);
 
-        // Fade out
-        yield return StartCoroutine(FadeCanvasGroup(EncounterModeCanvasGroup, 1f, 0f, EncounterPanelFadeSpeed));
-        EncounterModeCanvasGroup.gameObject.SetActive(false);
-
+            // Fade out
+            yield return StartCoroutine(FadeCanvasGroup(EncounterModeCanvasGroup, 1f, 0f, EncounterPanelFadeSpeed));
+            EncounterModeCanvasGroup.gameObject.SetActive(false);
+        }
     }
     private IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float duration)
     {
@@ -315,15 +331,12 @@ public class TurnManager : MonoBehaviour
             // Adjust currentCharacterIndex if necessary
             if (indexOfRemoved <= currentCharacterIndex && currentCharacterIndex > 0)
                 currentCharacterIndex--;
-
-            Debug.Log($"🗑 Removed {player.name} from squad list.");
         }
 
         // Check if turn should end
         if (currentCharacterIndex >= activePlayerCharacters.Count)
         {
             playerTurn = false; // ends WaitUntil
-            Debug.Log("All remaining players done or dead. Ending player turn.");
         }
     }
 
@@ -334,8 +347,8 @@ public class TurnManager : MonoBehaviour
     {
         CampButton.SetActive(false);
         ShortCutParent.SetActive(true);
-        SetHasMoveState(playerParent.transform,true);
-        SetHasMoveState(enemyParent.transform,true);
+        SetHasMoveState(playerParent.transform, true);
+        SetHasMoveState(enemyParent.transform, true);
         CoroutineRunner.Instance.StartCoroutine(LoadEventTriggerDetails(EventData));
     }
 

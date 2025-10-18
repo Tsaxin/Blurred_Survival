@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1312836593681775614}
   - component: {fileID: 4004270932828350228}
   - component: {fileID: 486304165228804541}
+  - component: {fileID: -1641258096665438927}
   m_Layer: 0
   m_Name: Bandage
   m_TagString: Item
@@ -50,7 +51,7 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: e78cb08183209d44bac4035facaf346b, type: 2}
 --- !u!95 &4004270932828350228
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -64,6 +65,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -83,6 +85,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxScale: 0
   MinScale: 0
+--- !u!114 &-1641258096665438927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4545915707345495668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf310340735fc244cb7ef74540235497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CraftableItem
+  requirements:
+  - item: {fileID: 11400000, guid: e75c3afd8166b744c899f251dd40e5ab, type: 2}
+    quantity: 1
+  - item: {fileID: 11400000, guid: 5859067e25b42bc45917d87a0465c450, type: 2}
+    quantity: 1
 --- !u!1 &8880035418110515907
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +151,11 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -153,6 +177,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -278742559
   m_SortingLayer: 7
   m_SortingOrder: 1

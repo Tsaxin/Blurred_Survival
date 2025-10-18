@@ -42,12 +42,20 @@ public class PlayerInventory : MonoBehaviour
             RationData ration = newItem as RationData;
             HungerManager.Instance.RestoreHunger(ration.RationRestoreAmount);
             TextNotification.Instance.EnqueueCollectedText($"{ration.RationRestoreAmount}x ration collected.", TextNotification.FloatingTextType.Heal);
-
             return true;
         }
 
-        bool isStackable = newItem.itemType != ItemType.Weapon; // Only weapons don't stack
-        int remaining = quantity;
+        // ✅ Try adding to shortcut first
+        int remaining = AddToShortCut(new ItemInstance(newItem, quantity));
+
+        // ✅ If added fully to shortcut — show floating text and exit
+        if (remaining == 0)
+        {
+            TextNotification.Instance?.EnqueueCollectedText($"{newItem.itemName} added to shortcut.", TextNotification.FloatingTextType.Heal);
+            return true;
+        }
+
+        bool isStackable = StackableItem.IsStackable(newItem.itemType);
 
         if (isStackable)
         {
@@ -75,17 +83,29 @@ public class PlayerInventory : MonoBehaviour
         {
             if (collectedItems.Count >= maxInventorySize)
             {
+                // ✅ Try adding to empty shortcut slots as fallback
+                bool AddedToShortcut = AddToNewShortCut(new ItemInstance(newItem, remaining));
+
+                if (AddedToShortcut)
+                {
+                    TextNotification.Instance?.EnqueueCollectedText($"{newItem.itemName} added to shortcut.", TextNotification.FloatingTextType.Heal);
+                    return true;
+                }
+
                 TextNotification.Instance?.EnqueueCollectedText("Inventory Full!!", TextNotification.FloatingTextType.Damage);
-                return false; // inventory full, some items not added
+                return false;
             }
 
             int toAdd = isStackable ? Mathf.Min(remaining, newItem.MaxQuantity) : 1;
             collectedItems.Add(new ItemInstance(newItem, toAdd));
             remaining -= toAdd;
         }
+
+        // ✅ Final catch-all notification
         TextNotification.Instance?.EnqueueCollectedText($"{newItem.itemName} collected.", TextNotification.FloatingTextType.Heal);
         return true;
     }
+
 
     /// <summary>
     /// Removes a certain quantity of an item from the inventory.
@@ -103,7 +123,7 @@ public class PlayerInventory : MonoBehaviour
         collectedItems.Remove(instance);
 
         // ✅ Drop item back on tile
-        if (DropToTile && TileManager.Instance!=null)
+        if (DropToTile && TileManager.Instance != null)
         {
             TileData dropTile = TileManager.Instance.GetBestTileForDrop();
             if (dropTile != null)
@@ -149,4 +169,96 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    #region ShortCutSlots
+    [Header("ShortCut")]
+    public Transform ShortcutParent;
+
+    public void DragAndDropSlot(ShortCutSlot slot, int index, DraggableSlot draggableSlot)
+    {
+        if (slot != null)
+        {
+            var itemInstance = collectedItems[index];
+
+            if (slot.AssignedItem != null)
+            {
+                var slotItem = slot.AssignedItem.data;
+                var slotQty = slot.AssignedItem.quantity;
+
+                if (itemInstance.data.itemName == slotItem.itemName && StackableItem.IsStackable(itemInstance.data.itemType))
+                {
+                    int total = slotQty + itemInstance.quantity;
+                    if (total > 20)
+                    {
+                        int remainder = total - 20;
+                        slot.SetOnClick(new ItemInstance(slotItem, 20), TurnManager.Instance?.SelectedUnit);
+                        collectedItems[index].quantity = remainder;
+                    }
+                    else
+                    {
+                        slot.SetOnClick(new ItemInstance(slotItem, total), TurnManager.Instance?.SelectedUnit);
+                        collectedItems.RemoveAt(index);
+                    }
+                }
+                else
+                {
+                    slot.SetOnClick(itemInstance, TurnManager.Instance?.SelectedUnit);
+                    collectedItems.RemoveAt(index);
+                    AddItem(slotItem, slotQty);
+                }
+            }
+            else
+            {
+                slot.SetOnClick(itemInstance, TurnManager.Instance?.SelectedUnit);
+                collectedItems.RemoveAt(index);
+            }
+
+            InventoryUIManager.Instance.RefreshInventory();
+            Destroy(draggableSlot.gameObject);
+        }
+    }
+
+    public int AddToShortCut(ItemInstance itemInstance)
+    {
+        int remainder = itemInstance.quantity;
+        foreach (Transform child in ShortcutParent)
+        {
+            ShortCutSlot shortCutSlot = child.GetComponent<ShortCutSlot>();
+            if (shortCutSlot.AssignedItem != null && shortCutSlot.AssignedItem.data.itemName == itemInstance.data.itemName && StackableItem.IsStackable(itemInstance.data.itemType))
+            {
+                int total = shortCutSlot.AssignedItem.quantity + remainder;
+                if (total > 20)
+                {
+                    shortCutSlot.AssignedItem.quantity = 20;
+                    remainder = total - 20;
+                    shortCutSlot.SetDetail(shortCutSlot.AssignedItem);
+                }
+                else
+                {
+                    shortCutSlot.AssignedItem.quantity += remainder;
+                    remainder = 0;
+                    shortCutSlot.SetDetail(shortCutSlot.AssignedItem);
+                    return remainder;
+                }
+            }
+        }
+
+        return remainder;
+    }
+
+    public bool AddToNewShortCut(ItemInstance itemInstance)
+    {
+        foreach (Transform child in ShortcutParent)
+        {
+            ShortCutSlot shortCutSlot = child.GetComponent<ShortCutSlot>();
+            if (shortCutSlot.AssignedItem == null)
+            {
+                shortCutSlot.SetOnClick(itemInstance, null);
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+    #endregion
 }

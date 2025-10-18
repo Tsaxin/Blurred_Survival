@@ -10,12 +10,18 @@ public class GlobalTurnIndicator : MonoBehaviour
 
     public void GlobalTurnIndicatorState(bool State, string text = null)
     {
-        if(text!=null)
+        if(text!=null && TurnIndicatorText!=null)
             TurnIndicatorText.text = text;
-        TurnPanel.SetActive(State);
+        if (TurnPanel != null)
+        {
+            TurnPanel.SetActive(State);
+        }
     }
     public void SetTurnIndicatorText(string text)
     {
-        TurnIndicatorText.text = text;
+        if (TurnIndicatorText != null)
+        {
+            TurnIndicatorText.text = text;
+        }
     }
 }

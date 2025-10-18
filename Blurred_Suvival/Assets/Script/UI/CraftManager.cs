@@ -18,8 +18,16 @@ public class CraftManager : MonoBehaviour
     public Slot SelectedSlot;
     public ItemData SelectedItem;
 
+    public static CraftManager Instance;
+
+    [Header("Shortcut Slot")]
+    public Transform ShortcutSlotParent;
     void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
         allCraftableItems = new List<LootEntry>(lootMaster.GetAllCraftableLoot());
     }
 
@@ -45,6 +53,7 @@ public class CraftManager : MonoBehaviour
         CraftButton.SetActive(false);
         CraftPanel.SetActive(false);
     }
+
     #endregion
 
     #region Load & Generate Slots
@@ -55,14 +64,7 @@ public class CraftManager : MonoBehaviour
             Destroy(child.gameObject);
 
         // Populate inventory dictionary
-        Inventory.Clear();
-        foreach (ItemInstance item in playerInventory.collectedItems)
-        {
-            if (Inventory.ContainsKey(item.data))
-                Inventory[item.data] += item.quantity;
-            else
-                Inventory[item.data] = item.quantity;
-        }
+        PopulateInventoryDictionary();
 
         // Keep track if previously selected item is still fully craftable
         bool prevItemStillCraftable = false;
@@ -106,6 +108,42 @@ public class CraftManager : MonoBehaviour
                 SelectedSlot = null;
             }
             CraftButton.SetActive(false);
+        }
+    }
+
+    void PopulateInventoryDictionary()
+    {
+        // Step 1: Clear
+        Inventory.Clear();
+
+        // Step 2: Add items from PlayerInventory
+        foreach (ItemInstance item in playerInventory.collectedItems)
+        {
+            if (item == null || item.data == null) continue;
+
+            if (Inventory.ContainsKey(item.data))
+                Inventory[item.data] += item.quantity;
+            else
+                Inventory[item.data] = item.quantity;
+        }
+
+        // Step 3: Add items from Shortcut Slots
+        if (ShortcutSlotParent != null)
+        {
+            foreach (Transform child in ShortcutSlotParent)
+            {
+                ShortCutSlot slot = child.GetComponent<ShortCutSlot>();
+                if (slot == null || slot.AssignedItem == null || slot.AssignedItem.data == null)
+                    continue;
+
+                ItemData itemData = slot.AssignedItem.data;
+                int quantity = slot.AssignedItem.quantity;
+
+                if (Inventory.ContainsKey(itemData))
+                    Inventory[itemData] += quantity;
+                else
+                    Inventory[itemData] = quantity;
+            }
         }
     }
 
@@ -185,35 +223,109 @@ public class CraftManager : MonoBehaviour
         if (SelectedItem == null) return;
 
         CraftableItem craftItem = SelectedItem.lootPrefab.GetComponent<CraftableItem>();
+        if (craftItem == null) return;
 
-        // Check if player has enough items
+        // Check if player has enough items total (inventory + shortcut)
         bool canCraft = true;
         foreach (CraftRequirement req in craftItem.requirements)
         {
-            Inventory.TryGetValue(req.item, out int owned);
-            if (owned < req.quantity)
+            int totalOwned = GetTotalItemCount(req.item);
+            if (totalOwned < req.quantity)
             {
                 canCraft = false;
                 break;
             }
         }
 
-        if (!canCraft) return;
-
-        // Add crafted item
-        bool CanCraft = playerInventory.AddItem(SelectedItem);
-        if (CanCraft)
+        if (!canCraft)
         {
-            // Remove required items from inventory
-            foreach (CraftRequirement req in craftItem.requirements)
-            {
-                playerInventory.RemoveItemWithQuantity(req.item, req.quantity);
-            }
-
+            Debug.Log("Not enough materials to craft " + SelectedItem.itemName);
+            return;
         }
 
-        // Refresh slots and handle selection
+        // ✅ Add crafted item to inventory
+        bool crafted = playerInventory.AddItem(SelectedItem);
+        if (crafted)
+        {
+            // 🔧 Remove required items from both sources (inventory → shortcuts)
+            foreach (CraftRequirement req in craftItem.requirements)
+            {
+                ConsumeItem(req.item, req.quantity);
+            }
+        }
+
+        // Refresh UI
         LoadCraftableItems();
     }
+
+    int GetTotalItemCount(ItemData item)
+    {
+        int total = 0;
+
+        // Count from inventory
+        foreach (var i in playerInventory.collectedItems)
+        {
+            if (i.data == item)
+                total += i.quantity;
+        }
+
+        // Count from shortcut slots
+        foreach (Transform child in ShortcutSlotParent)
+        {
+            ShortCutSlot slot = child.GetComponent<ShortCutSlot>();
+            if (slot?.AssignedItem != null && slot.AssignedItem.data == item)
+                total += slot.AssignedItem.quantity;
+        }
+
+        return total;
+    }
+
+    void ConsumeItem(ItemData item, int amountNeeded)
+    {
+        // Step 1: Consume from inventory first
+        for (int i = 0; i < playerInventory.collectedItems.Count && amountNeeded > 0; i++)
+        {
+            ItemInstance invItem = playerInventory.collectedItems[i];
+            if (invItem.data == item)
+            {
+                int amountToTake = Mathf.Min(invItem.quantity, amountNeeded);
+                invItem.quantity -= amountToTake;
+                amountNeeded -= amountToTake;
+
+                // Remove empty entries
+                if (invItem.quantity <= 0)
+                {
+                    playerInventory.collectedItems.RemoveAt(i);
+                    i--; // Adjust index after removal
+                }
+            }
+        }
+
+        // Step 2: If still missing, consume from shortcuts
+        if (amountNeeded > 0)
+        {
+            foreach (Transform child in ShortcutSlotParent)
+            {
+                ShortCutSlot slot = child.GetComponent<ShortCutSlot>();
+                if (slot?.AssignedItem == null || slot.AssignedItem.data != item)
+                    continue;
+
+                int amountToTake = Mathf.Min(slot.AssignedItem.quantity, amountNeeded);
+                slot.AssignedItem.quantity -= amountToTake;
+                amountNeeded -= amountToTake;
+
+                // Update UI
+                slot.SetDetail(slot.AssignedItem);
+
+                // Clear slot if empty
+                if (slot.AssignedItem.quantity <= 0)
+                    slot.OnReset();
+
+                if (amountNeeded <= 0)
+                    break;
+            }
+        }
+    }
+
     #endregion
 }

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8de2e008d5b0a6743a524fd9fa50d487, type: 3}
-  m_Name: First aid kit
+  m_Name: First Aid Kit
   m_EditorClassIdentifier: 
-  itemName: First aid kit
+  itemName: First Aid kit
   itemType: 1
   itemIcon: {fileID: 21300000, guid: a18162b0f6bff8e41b21df3b243d505b, type: 3}
   itemIconIU: {fileID: 21300000, guid: a18162b0f6bff8e41b21df3b243d505b, type: 3}

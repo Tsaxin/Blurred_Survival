@@ -44,15 +44,15 @@ public class GameOverPanel : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        SaveLoader.Instance.Save();
-        MusicManager.Instance.PlayAmbientMusic();
-        LoadingManager.Instance.LoadScene(0); // Loads the scene at index 0 (your main menu)
+        SaveLoader.Instance?.Save();
+        MusicManager.Instance?.PlayAmbientMusic();
+        LoadingManager.Instance?.LoadScene(0); // Loads the scene at index 0 (your main menu)
     }
 
     public void GoToMainMenuAfterGameOver()
     {
-        MusicManager.Instance.PlayAmbientMusic();
-        LoadingManager.Instance.LoadScene(0); // Loads the scene at index 0 (your main menu)
+        MusicManager.Instance?.PlayAmbientMusic();
+        LoadingManager.Instance?.LoadScene(0); // Loads the scene at index 0 (your main menu)
     }
 
     public void KeepPlaying()
@@ -63,7 +63,7 @@ public class GameOverPanel : MonoBehaviour
 
     public void Retry()
     {
-        MusicManager.Instance.PlayAmbientMusic();
-        LoadingManager.Instance.LoadScene(1);
+        MusicManager.Instance?.PlayAmbientMusic();
+        LoadingManager.Instance?.LoadScene(1);
     }
 }

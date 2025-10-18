@@ -2,10 +2,19 @@ using UnityEngine;
 
 public class NPCDecisionMaker : MonoBehaviour
 {
-    public Transform Squad, EnemySquad;
+    [Header("References")]
+    public Transform Squad;       // Player's squad
+    public Transform EnemySquad;  // NPC's squad
 
+    [Header("Anomaly Settings")]
     [Range(0f, 1f)]
-    public float anomalyChance = 0.01f; // 1% chance by default
+    public float anomalyChance = 0.01f; // Base anomaly chance (1%)
+
+    [Tooltip("Maximum random fluctuation in anomaly chance each decision (e.g. 0.2 = ±20%)")]
+    [Range(0f, 1f)]
+    public float chaosFactor = 0.2f;
+
+    private float currentChaosMultiplier = 1f; // Tracks how chaos affects chance over time
 
     /// <summary>
     /// Makes a decision for the NPC:
@@ -20,20 +29,24 @@ public class NPCDecisionMaker : MonoBehaviour
         if (squadPower <= 0f) return 0;
 
         float ratio = enemyPower / squadPower;
-
         int decision;
+
         if (ratio >= 1.5f)
             decision = 1; // fight back
         else
             decision = 0; // terrified
 
+        // Apply chaos
+        float adjustedChance = ApplyChaosToAnomaly();
+
         // --- anomaly injection ---
-        if (Random.value < anomalyChance)
+        if (Random.value < adjustedChance)
         {
             decision = decision == 1 ? 0 : 1; // flip decision
-            Debug.Log("⚠️ Anomaly triggered! Decision reversed.");
+            Debug.Log($"⚠️ Anomaly triggered in combat! Decision reversed. (Chance: {adjustedChance:F3})");
         }
 
+        UpdateChaosFactor();
         return decision;
     }
 
@@ -46,8 +59,23 @@ public class NPCDecisionMaker : MonoBehaviour
         int playerHighest = GetHighestLevel(Squad);
         int npcHighest = GetHighestLevel(EnemySquad);
 
-        return npcHighest <= playerHighest;
+        bool decision = npcHighest <= playerHighest;
+
+        // Apply chaos
+        float adjustedChance = ApplyChaosToAnomaly();
+
+        // --- anomaly injection ---
+        if (Random.value < adjustedChance)
+        {
+            decision = !decision; // flip join outcome
+            Debug.Log($"⚠️ Anomaly triggered in recruitment! Join decision reversed. (Chance: {adjustedChance:F3})");
+        }
+
+        UpdateChaosFactor();
+        return decision;
     }
+
+    // ===== Helper Functions =====
 
     private float CalculateSquadPower(Transform squad)
     {
@@ -56,9 +84,7 @@ public class NPCDecisionMaker : MonoBehaviour
         {
             CharacterStats stats = child.GetComponent<CharacterStats>();
             if (stats != null)
-            {
-                total += stats.Level; // Or more complex formula
-            }
+                total += stats.Level; // Add more stats later if needed
         }
         return total;
     }
@@ -70,10 +96,28 @@ public class NPCDecisionMaker : MonoBehaviour
         {
             CharacterStats stats = child.GetComponent<CharacterStats>();
             if (stats != null && stats.Level > highest)
-            {
                 highest = stats.Level;
-            }
         }
         return highest;
+    }
+
+    /// <summary>
+    /// Applies chaos variation to the base anomaly chance.
+    /// </summary>
+    private float ApplyChaosToAnomaly()
+    {
+        float chaosVariation = Random.Range(-chaosFactor, chaosFactor);
+        float adjustedChance = Mathf.Clamp01(anomalyChance * (1f + chaosVariation) * currentChaosMultiplier);
+        return adjustedChance;
+    }
+
+    /// <summary>
+    /// Slowly shifts the chaos multiplier to simulate a dynamic world.
+    /// </summary>
+    private void UpdateChaosFactor()
+    {
+        // Chaos slightly fluctuates after each decision
+        float chaosDrift = Random.Range(-0.05f, 0.05f);
+        currentChaosMultiplier = Mathf.Clamp(currentChaosMultiplier + chaosDrift, 0.8f, 1.2f);
     }
 }

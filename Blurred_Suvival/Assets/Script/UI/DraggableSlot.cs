@@ -36,58 +36,42 @@ public class DraggableSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         canvasGroup.blocksRaycasts = true;
 
-        GameObject hovered = eventData.pointerEnter;
-        if (hovered != null)
-        {// or however you track slots
+        GameObject hovered = eventData.pointerCurrentRaycast.gameObject;
 
-            if (hovered.GetComponent<DeleteRegion>() != null)
+        if (hovered == null || hovered == gameObject)
+        {
+            ReturnToOriginalPosition();
+            return;
+        }
+
+        // Handle DeleteRegion
+        if (hovered.GetComponent<DeleteRegion>() != null)
+        {
+            if (index >= 0 && index < PlayerInventory.Instance.collectedItems.Count)
             {
-                if (index >= 0 && index < PlayerInventory.Instance.collectedItems.Count)
-                {
-                    ItemData itemToRemove = PlayerInventory.Instance.collectedItems[index].data;
-
-                    // ✅ Directly call PlayerInventory
-                    PlayerInventory.Instance.RemoveItem(itemToRemove);
-
-                    // Destroy the UI slot
-                    Destroy(gameObject);
-                }
-            }
-            else if (hovered.GetComponent<ShortCutSlot>() != null)
-            {
-                ShortCutSlot slot = hovered.GetComponent<ShortCutSlot>();
-
-                // If slot already has an item, you can swap or replace
-                if (slot.AssignedItem != null)
-                {
-                    // Option 1: Swap items
-                    ItemData itemData=slot.AssignedItem.data;
-                    int itemQuantity = slot.AssignedItem.quantity;
-                    slot.SetOnClick(PlayerInventory.Instance.collectedItems[index], TurnManager.Instance?.SelectedUnit);
-                    
-                    PlayerInventory.Instance.collectedItems.RemoveAt(index);
-                    // Now, put the old item back in the inventory
-                    PlayerInventory.Instance.AddItem(itemData,itemQuantity);
-                    InventoryUIManager.Instance.RefreshInventory();
-                }
-                else
-                {
-                    // Assign item to empty shortcut
-                    slot.SetOnClick(PlayerInventory.Instance.collectedItems[index], TurnManager.Instance?.SelectedUnit);
-
-                    // Remove from inventory
-                    PlayerInventory.Instance.collectedItems.RemoveAt(index);
-                }
-
-                // Destroy the UI slot
+                ItemData itemToRemove = PlayerInventory.Instance.collectedItems[index].data;
+                PlayerInventory.Instance.RemoveItem(itemToRemove);
                 Destroy(gameObject);
             }
+            return;
         }
-        else
+
+        // Handle ShortCutSlot
+        ShortCutSlot slot = hovered.GetComponent<ShortCutSlot>();
+        if (slot != null)
         {
-            // Return to original position
-            transform.SetParent(originalParent);
-            rectTransform.position = originalPosition;
+            PlayerInventory.Instance?.DragAndDropSlot(slot,index,this);
+            return;
         }
+
+        // Default: return to original
+        ReturnToOriginalPosition();
     }
+
+    private void ReturnToOriginalPosition()
+    {
+        transform.SetParent(originalParent);
+        rectTransform.position = originalPosition;
+    }
+
 }

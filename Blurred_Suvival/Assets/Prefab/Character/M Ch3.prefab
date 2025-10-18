@@ -716,6 +716,10 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[84].y
       value: -1.8749932
       objectReference: {fileID: 0}
+    - target: {fileID: 4265864754060388997, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
+      propertyPath: passiveSkills.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4536060065368327761, guid: 23e27d685fe3eb4468fab7cdc1912a20, type: 3}
       propertyPath: m_Name
       value: M Ch3

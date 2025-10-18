@@ -40,7 +40,10 @@ public class InventoryUIManager : MonoBehaviour
     public void CloseInventory()
     {
         UI.gameObject.SetActive(false);
-        ToolTipPanel.SetActive(false);
+        if (ToolTipPanel != null)
+        {
+            ToolTipPanel.SetActive(false);
+        }
     }
 
     public void RefreshInventory()

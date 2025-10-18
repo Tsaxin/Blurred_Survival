@@ -24,11 +24,13 @@ public class InventoryItemClickHandler : MonoBehaviour
     /// </summary>
     public void OnItemSlotClicked(ItemInstance clickedItem, CharacterController selectedUnit, bool fromShortcut = false,ShortCutSlot Slot=null)
     {
+        selectedUnit = TurnManager.Instance?.SelectedUnit;
         if (selectedUnit == null)
         {
             Debug.LogWarning("No character selected!");
             return;
         }
+        Debug.LogWarning("selected!");
 
         switch (clickedItem.data.itemType)
         {
@@ -118,7 +120,7 @@ public class InventoryItemClickHandler : MonoBehaviour
         // Equip the new item
         equipAction(gearEquipper, (WeaponData)clickedItem.data);
 
-        TextNotification.Instance.EnqueueCollectedText(
+        TextNotification.Instance?.EnqueueCollectedText(
             $"{clickedItem.data.itemName} Equipped!",
             TextNotification.FloatingTextType.Heal);
     }
@@ -128,7 +130,7 @@ public class InventoryItemClickHandler : MonoBehaviour
     /// </summary>
     private void HandleConsumableClick(ItemInstance clickedItem, CharacterController selectedUnit, bool fromShortcut,ShortCutSlot Slot=null)
     {
-        SFXManager.Instance.PlaySFX(clickedItem.data.useSound);
+        SFXManager.Instance?.PlaySFX(clickedItem.data.useSound);
         var consumableData = (ConsumableData)clickedItem.data;
         var characterStats = selectedUnit.GetComponent<CharacterStats>();
         if (characterStats == null)

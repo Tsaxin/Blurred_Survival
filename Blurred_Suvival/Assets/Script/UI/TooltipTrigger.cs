@@ -31,7 +31,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private IEnumerator ShowTooltipWithDelay()
     {
         yield return new WaitForSeconds(ToolTipShowSecond);
-        TooltipUI.Instance.ShowTooltip(itemName, description);
+        TooltipUI.Instance?.ShowTooltip(itemName, description);
     }
 
     public void SetTriggerText(string Name, string Description)
@@ -46,7 +46,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             StopCoroutine(showTooltipCoroutine);
             showTooltipCoroutine = null;
         }
-        TooltipUI.Instance.HideTooltip();
+        TooltipUI.Instance?.HideTooltip();
     }
 
     private void OnDisable()

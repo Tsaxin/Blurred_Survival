@@ -37,7 +37,8 @@ public class Squad : MonoBehaviour
 
     public void SetSquadNumberText()
     {
-        SquadNumberText.text = $"{transform.childCount}/{MaxSurvivorCountInGroup}";
+        if (SquadNumberText != null)
+            SquadNumberText.text = $"{transform.childCount}/{MaxSurvivorCountInGroup}";
     }
 
     #region Battle Initiation
@@ -56,7 +57,7 @@ public class Squad : MonoBehaviour
         CheckCharacterListAnamoly();
         enemy.CheckSpawnListAnamoly();
 
-        region.loadBattleGround(BattleField);
+        region?.loadBattleGround(BattleField);
 
         InitializeCharacters();
         PlaceCharactersInMatrix();
@@ -65,7 +66,7 @@ public class Squad : MonoBehaviour
         {
             MusicManager.Instance?.PlayDramaticMusic();
             RetreatHandler.CanRetreat = eventData.AllowRetreat;
-            region.TrySpawnEventTriggerEnemies(turnManager, eventData.Survivors,eventData);
+            region.TrySpawnEventTriggerEnemies(turnManager, eventData.Survivors, eventData);
             TurnManager.Instance.StartEventTrigger(eventData);
         }
         else
@@ -73,32 +74,41 @@ public class Squad : MonoBehaviour
             EncounterWithEnemy(SelfEncounter);
         }
 
-        battleManager.CalculateTotalXP();
+        battleManager?.CalculateTotalXP();
     }
 
     #endregion
 
     void EncounterWithEnemy(bool SelfEncounter)
     {
+        bool TestMode = ForceTurnMode.Instance?.TestMode ?? false;
         if (!SelfEncounter)
         {
             MusicManager.Instance?.PlayBattleMusic();
             float roll = UnityEngine.Random.Range(0f, 100f);
 
-            if (roll <= AmbushChance)
+            if (!TestMode)
             {
-                turnManager.EncounterMode = 0;
-                region.TrySpawnAmbushEnemies(turnManager);
-            }
-            else if (roll <= (AmbushChance + EncounterChance))
-            {
-                turnManager.EncounterMode = 1;
-                region.TrySpawnEnemies(turnManager);
+                if (roll <= AmbushChance)
+                {
+                    turnManager.EncounterMode = 0;
+                    region.TrySpawnAmbushEnemies(turnManager);
+                }
+                else if (roll <= (AmbushChance + EncounterChance))
+                {
+                    turnManager.EncounterMode = 1;
+                    region.TrySpawnEnemies(turnManager);
+                }
+                else
+                {
+                    turnManager.EncounterMode = 2;
+                    region.TrySpawnPreemptiveEnemies(turnManager);
+                }
             }
             else
             {
-                turnManager.EncounterMode = 2;
-                region.TrySpawnPreemptiveEnemies(turnManager);
+                turnManager.EncounterMode = 0;
+                region?.TrySpawnAmbushEnemies(turnManager);
             }
         }
         else
@@ -161,11 +171,6 @@ public class Squad : MonoBehaviour
                     if (!data.IsOccupied)
                     {
                         validTiles.Add((tile, row));
-                        Debug.Log($"✅ Tile[{row},{col}] added to valid list.");
-                    }
-                    else
-                    {
-                        Debug.Log($"🚫 Tile[{row},{col}] is already occupied.");
                     }
                 }
                 else
@@ -206,7 +211,8 @@ public class Squad : MonoBehaviour
             tilePos.z = -sortingOrder * 0.01f;
             character.transform.position = tilePos;
 
-            character.GetComponent<TurnIndicator>().SetIndicator(false);
+            Debug.Log(character.name);
+            character.GetComponent<TurnIndicator>()?.SetIndicator(false);
             character.SetActive(true);
 
             tile.GetComponent<TileData>()?.AssignOccupant(character);

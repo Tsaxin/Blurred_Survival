@@ -108,15 +108,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -183,6 +185,11 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -204,6 +211,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -465791027
   m_SortingLayer: 6
   m_SortingOrder: 1
@@ -268,6 +276,11 @@ TrailRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -289,6 +302,7 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -278742559
   m_SortingLayer: 7
   m_SortingOrder: 2
@@ -415,6 +429,11 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -436,6 +455,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -278742559
   m_SortingLayer: 7
   m_SortingOrder: 0
@@ -458,6 +478,7 @@ PolygonCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3498123655448660139}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -481,7 +502,8 @@ PolygonCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -735,23 +757,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootTable:
+  - loot: {fileID: 4545915707345495668, guid: 9eb269c7499c1b04ca1ae7a745625518, type: 3}
+    dropChance: 0.25
   - loot: {fileID: 4545915707345495668, guid: 6082a785747429e41b63c1f06c6b7cec, type: 3}
     dropChance: 0.25
-  - loot: {fileID: 4545915707345495668, guid: ebbad636255d4794abd3ab19a4069b1b, type: 3}
+  - loot: {fileID: 4545915707345495668, guid: d9b1f73c47fe9414ead6497b124cbe39, type: 3}
     dropChance: 0.25
+  - loot: {fileID: 4545915707345495668, guid: ebbad636255d4794abd3ab19a4069b1b, type: 3}
+    dropChance: 0.15
   - loot: {fileID: 4545915707345495668, guid: 72a94a5254a2f6845a6a941e8697f06d, type: 3}
     dropChance: 0.05
   - loot: {fileID: 4545915707345495668, guid: 3ffc687304adf2b4eab545d34313f375, type: 3}
-    dropChance: 0.15
+    dropChance: 0.03
   - loot: {fileID: 4545915707345495668, guid: 0dcfcbc5458e0a341889735a4d5d3af5, type: 3}
-    dropChance: 0.15
+    dropChance: 0.02
   - loot: {fileID: 4545915707345495668, guid: 65dcf6d94ac25b644b0b67401d2b1753, type: 3}
-    dropChance: 0.15
+    dropChance: 0.03
   - loot: {fileID: 4545915707345495668, guid: 92e03f5d79d8a064fb1d0edb2bfc2f53, type: 3}
-    dropChance: 0.15
+    dropChance: 0.02
 --- !u!95 &4624903711036126842
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -765,6 +791,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -847,6 +874,11 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -868,6 +900,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -278742559
   m_SortingLayer: 7
   m_SortingOrder: 10

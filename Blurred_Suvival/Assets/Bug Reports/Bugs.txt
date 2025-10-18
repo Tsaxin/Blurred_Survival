@@ -1,8 +1,17 @@
--Can select multiple zombies if you are fast enough and this freezes the game. (urgent)
--On quitting game on battlemode. if loaded later will auto level up the player. (urgent)
--zombie algorithm lines up all the zombies in straight line
+-Can select multiple zombies if you are fast enough and this freezes the game. (urgent) (Updated)
+-On quitting game on battlemode. if loaded later will auto level up the player. (urgent)    (Updated)
+-zombie algorithm lines up all the zombies in straight line (Updated)
 -Make region specific zombies and reduce the number of non dominant zombie upto 0-1
--Runner should be squishy.
--Bloater to be tanky.
--Exploder trigger criteria from 3 to 2
--Click + Auto switch the character after action complete.
+-Runner should be squishy.  (Updated)
+-Bloater to be tanky. (Updated)
+-Exploder trigger criteria from 3 to 2 (Updated)
+-Click + Auto switch the character after action complete. (Updated)
+-XP gain algorithm (Updated)
+-Make craft skill specific (Updated)
+-Balance npc event (Updated)
+-Save and load system for shortcutslots (Updated)
+-Automated pickup for shortcut shortcut (Updated)
+-dirty rag and sanitizer as item and bandage as craftable   (Updated)
+-allow crafting with shortcut items (Updated)
+-Weapons are stackable in shortcutslots (updated)
+-clicking on shortcutslot weapon creates copy in inventory as well. (updated)

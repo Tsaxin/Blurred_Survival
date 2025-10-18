@@ -29,6 +29,14 @@ public class CharacterButtons : MonoBehaviour
         {
             PassiveSkill.SetActive(false);
         }
+        else
+        {
+            PassiveSkill skill = GetComponent<CharacterPassive>().passiveSkills[0].passiveSkill;
+            if(skill is Craftsman)
+            {
+                PassiveSkill.GetComponent<Button>().onClick.AddListener(() => CraftManager.Instance?.OpenCraftPanel());
+            }
+        }
         ActiveSkill.SetActive(false);
     }
 

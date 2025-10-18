@@ -10,15 +10,18 @@ public static class SaveSystem
     private static string HungerFile = Path.Combine(Application.persistentDataPath, "Hunger.dat");
     private static string PlayerDataFile = Path.Combine(Application.persistentDataPath, "PlayerData.dat");
     private static string InventoryDataFile = Path.Combine(Application.persistentDataPath, "InventoryData.dat");
+    private static string ShortcutFilePath = Path.Combine(Application.persistentDataPath, "ShortcutSlot.dat");
 
     // === MASTER SAVE ===
-    public static void Save(Transform player, Transform eventParent, HungerManager hungerManager, Transform PlayerParent,PlayerInventory playerInventory)
+    public static void Save(Transform player, Transform eventParent, HungerManager hungerManager, Transform PlayerParent
+                ,PlayerInventory playerInventory,Transform ShortcutParent)
     {
         SavePlayerLocation(player);
         SaveEventData(eventParent);
         SaveHungerData(hungerManager);
         SavePlayerData(PlayerParent);
         SaveInventoryData(playerInventory);
+        SaveShortCutData(ShortcutParent);
 
         Debug.Log("All game data saved!");
     }
@@ -54,6 +57,12 @@ public static class SaveSystem
         SaveGeneric(data,InventoryDataFile);
     }
 
+    public static void SaveShortCutData(Transform ShortCutParent)
+    {
+        ShortcutSlotsData data = new ShortcutSlotsData(ShortCutParent);
+        SaveGeneric(data,ShortcutFilePath);
+    }
+
     private static void SaveGeneric<T>(T data, string filePath)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -87,6 +96,11 @@ public static class SaveSystem
     public static InventoryData LoadInventoryData()
     {
         return LoadData<InventoryData>(InventoryDataFile);
+    }
+
+    public static ShortcutSlotsData LoadShortcutData()
+    {
+        return LoadData<ShortcutSlotsData>(ShortcutFilePath);
     }
 
     public static T LoadData<T>(string filePath) where T : class
@@ -293,5 +307,48 @@ public class InventoryItem
     {
         ItemName = itemInstance.data.itemName;
         Quantity = itemInstance.quantity;
+    }
+
+    public InventoryItem(string Name,int quantity)
+    {
+        this.ItemName = Name;
+        this.Quantity = quantity;
+    }
+}
+
+[System.Serializable]
+public class ShortcutSlotsData
+{
+    public List<ShortcutData> shortcutData = new List<ShortcutData>();
+
+    public ShortcutSlotsData(Transform Parent)
+    {
+        int index = 0;
+        foreach (Transform child in Parent)
+        {
+            if (child.GetComponent<ShortCutSlot>() != null)
+            {
+                ShortCutSlot shortCutSlot = child.GetComponent<ShortCutSlot>();
+                if(shortCutSlot.AssignedItem!=null)
+                    shortcutData.Add(new ShortcutData(index,new InventoryItem(shortCutSlot.AssignedItem)));
+                else
+                {
+                    shortcutData.Add(new ShortcutData(index,new InventoryItem("",0)));
+                }
+                index++;
+            }
+        }
+    }
+}
+
+[System.Serializable]
+public class ShortcutData
+{
+    public int SlotIndex;
+    public InventoryItem inventoryItem;
+
+    public ShortcutData(int Index, InventoryItem inventoryItem){
+        this.SlotIndex = Index;
+        this.inventoryItem = inventoryItem;
     }
 }

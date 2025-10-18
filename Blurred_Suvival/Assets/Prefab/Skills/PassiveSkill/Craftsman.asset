@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 394e3e99b279e5b4b96f1b8137665cbb, type: 3}
+  m_Name: Craftsman
+  m_EditorClassIdentifier: Assembly-CSharp::Craftsman
+  skillName: Craftsman
+  description: Allows the character to craft Items.
+  icon: {fileID: 646280220929689500, guid: fc31261f996ce2d4aab46791157afde1, type: 3}
+  IsUpgradable: 0

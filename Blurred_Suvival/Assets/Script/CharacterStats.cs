@@ -64,7 +64,7 @@ public class CharacterStats : MonoBehaviour
 
     public void Initialize()
     {
-       _isDead = false;
+        _isDead = false;
 
         attack = MainAttack;
         range = MainRange;
@@ -81,7 +81,7 @@ public class CharacterStats : MonoBehaviour
 
         UpdateHealthSlider();
 
-        UpdateXPUI(); 
+        UpdateXPUI();
     }
 
     void UpdateHealthSlider()
@@ -296,7 +296,7 @@ public class CharacterStats : MonoBehaviour
             }
             // ✅ Handle generic enemies (non-zombie, non-player)
             Debug.Log($"{name} is a generic NPC and is now dead. Destroying.");
-            GetComponent<NPCLootDropper>()?.DropLoot(GetComponent<Tile>()?.CurrentTileData,Level);
+            GetComponent<NPCLootDropper>()?.DropLoot(GetComponent<Tile>()?.CurrentTileData, Level);
         }
 
         Destroy(gameObject);
@@ -356,7 +356,7 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
-    public void ScaleStatsByLevel(int level=0)
+    public void ScaleStatsByLevel(int level = 0)
     {
         if (level != 0)
         {
@@ -381,6 +381,9 @@ public class CharacterStats : MonoBehaviour
         xpPerKill = xpPerKill + (Level - 1) * 5;
         xpToLevelUp = 20 + (Level - 1) * 10;
 
+        if (level <= 1) xpToLevelUp = 20;
+            xpToLevelUp = Mathf.RoundToInt(20 + 3 * Mathf.Pow(level - 1, 1.25f));
+
         levelText.text = $"Lv {Level}";
 
         Debug.Log($"{name} scaled to level {Level}: HP {maxHealth}, ATK {attack}, DEF {Defense}");
@@ -388,7 +391,7 @@ public class CharacterStats : MonoBehaviour
 
     public void RecalculateStats()
     {
-        float debuff = HungerManager.Instance.DebuffAmount;
+        float debuff = HungerManager.Instance?.DebuffAmount ?? 0f;
 
         // Collect total modifiers from all equipped gear
         StatModifier totalModifier = new StatModifier();

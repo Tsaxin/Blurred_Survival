@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8de2e008d5b0a6743a524fd9fa50d487, type: 3}
+  m_Name: Sanitizer
+  m_EditorClassIdentifier: 
+  itemName: Sanitizer
+  itemType: 7
+  itemIcon: {fileID: -5409705973713615582, guid: ebfd060710458a6499db5ee41b297af1, type: 3}
+  itemIconIU: {fileID: -5409705973713615582, guid: ebfd060710458a6499db5ee41b297af1, type: 3}
+  MaxQuantity: 20
+  lootPrefab: {fileID: 4545915707345495668, guid: d9b1f73c47fe9414ead6497b124cbe39, type: 3}
+  useSound: {fileID: 8300000, guid: eb392b1d030415d4c8c81f719969a64a, type: 3}
+  healthRestoreAmount: 0

@@ -4,9 +4,4 @@ using UnityEngine;
 public class ConsumableData : ItemData
 {
     public int healthRestoreAmount;
-
-    private void OnEnable()
-    {
-        itemType = ItemType.Consumable;
-    }
 }

@@ -12,6 +12,8 @@ public enum ItemType
     Vest,
     Trouser,
     Shoe,
+
+    Other
     // Add more types if needed later (e.g. Armor, KeyItems, etc.)
 }
 

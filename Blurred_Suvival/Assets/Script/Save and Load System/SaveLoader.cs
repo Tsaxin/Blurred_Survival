@@ -26,6 +26,9 @@ public class SaveLoader : MonoBehaviour
     public LootMaster lootMaster;
     public static SaveLoader Instance;
     public bool IsGameLoaded;
+
+    [Header("Shortcut Slots")]
+    public Transform ShortcutParent;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +70,7 @@ public class SaveLoader : MonoBehaviour
         LoadHungerData();
         LoadPlayerData();
         LoadInventoryData();
+        LoadShortcutData();
     }
 
     void LoadPlayerLocation()
@@ -174,6 +178,7 @@ public class SaveLoader : MonoBehaviour
             // Runtime values
             stats.Level = characterStatsData.Level;
             stats.experience = characterStatsData.experience;
+            stats.xpToLevelUp = characterStatsData.xpToLevelUp;
             stats.statPoints = characterStatsData.statPoints;
         }
 
@@ -209,7 +214,23 @@ public class SaveLoader : MonoBehaviour
             LootEntry result = SearchItem(inventoryItem.ItemName);
             if (result != null)
             {
-                playerInventory.collectedItems.Add(new ItemInstance(result.loot.GetComponent<ItemPickUp>().itemData,inventoryItem.Quantity));
+                playerInventory.collectedItems.Add(new ItemInstance(result.loot.GetComponent<ItemPickUp>().itemData, inventoryItem.Quantity));
+            }
+        }
+    }
+    
+    void LoadShortcutData()
+    {
+        ShortcutSlotsData Data = SaveSystem.LoadShortcutData();
+        if (Data == null) return;
+
+        for(int i = 0; i <= Data.shortcutData.Count-1; i++)
+        {
+            if (Data.shortcutData[i].inventoryItem.ItemName != "")
+            {
+                LootEntry result = SearchItem(Data.shortcutData[i].inventoryItem.ItemName);
+                ShortcutParent.GetChild(i).GetComponent<ShortCutSlot>().SetOnClick(new ItemInstance(result.loot.GetComponent<ItemPickUp>().itemData
+                    , Data.shortcutData[i].inventoryItem.Quantity), null);
             }
         }
     }
@@ -217,7 +238,7 @@ public class SaveLoader : MonoBehaviour
     #region Save
     public void Save()
     {
-        SaveSystem.Save(SquadMover, EventParent, hungerManager, SquadParent,playerInventory);
+        SaveSystem.Save(SquadMover, EventParent, hungerManager, SquadParent,playerInventory,ShortcutParent);
     }
     #endregion
 }
