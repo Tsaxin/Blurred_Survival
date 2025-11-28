@@ -54,24 +54,44 @@ public class NPCDecisionMaker : MonoBehaviour
     /// Decides if NPCs should join the player's squad.
     /// Returns true if the NPC's highest level <= player's highest level.
     /// </summary>
+    // public bool MakeJoinDecision()
+    // {
+    //     int playerHighest = GetHighestLevel(Squad);
+    //     int npcHighest = GetHighestLevel(EnemySquad);
+
+    //     bool decision = npcHighest <= playerHighest;
+
+    //     // Apply chaos
+    //     float adjustedChance = ApplyChaosToAnomaly();
+
+    //     // --- anomaly injection ---
+    //     if (Random.value < adjustedChance)
+    //     {
+    //         decision = !decision; // flip join outcome
+    //         Debug.Log($"⚠️ Anomaly triggered in recruitment! Join decision reversed. (Chance: {adjustedChance:F3})");
+    //     }
+
+    //     UpdateChaosFactor();
+    //     return decision;
+    // }
+
     public bool MakeJoinDecision()
     {
         int playerHighest = GetHighestLevel(Squad);
         int npcHighest = GetHighestLevel(EnemySquad);
 
-        bool decision = npcHighest <= playerHighest;
+        // --- Base join chance ---
+        // 80% base, modified slightly by level difference
+        float levelDifference = playerHighest - npcHighest;
+        float baseJoinChance = 0.8f; // 80% default success rate
 
-        // Apply chaos
-        float adjustedChance = ApplyChaosToAnomaly();
+        // ±5% per level difference (player stronger = higher chance)
+        baseJoinChance += levelDifference * 0.05f;
+        baseJoinChance = Mathf.Clamp01(baseJoinChance); // ensure within 0–1
 
-        // --- anomaly injection ---
-        if (Random.value < adjustedChance)
-        {
-            decision = !decision; // flip join outcome
-            Debug.Log($"⚠️ Anomaly triggered in recruitment! Join decision reversed. (Chance: {adjustedChance:F3})");
-        }
+        bool decision = Random.value < baseJoinChance;
 
-        UpdateChaosFactor();
+        Debug.Log($"Recruitment decision: {(decision ? "✅ Success" : "❌ Fail")} | BaseChance={baseJoinChance:P0}");
         return decision;
     }
 

@@ -63,7 +63,7 @@ public class CharacterButtons : MonoBehaviour
             PassiveSkill PS = CC.GetComponent<CharacterPassive>().passiveSkills[0].passiveSkill;
             PassiveSkill.GetComponent<Image>().sprite = PS.icon;
 
-            PassiveSkill.GetComponent<TooltipTrigger>().SetTriggerText(PS.skillName, PS.description);
+            PassiveSkill.GetComponent<TooltipTrigger>().SetTriggerText("Skill: "+PS.skillName, PS.description);
         }
         else
         {

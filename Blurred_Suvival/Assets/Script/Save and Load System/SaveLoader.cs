@@ -39,6 +39,8 @@ public class SaveLoader : MonoBehaviour
         }
         if (GameModeTracker.Instance == null)
         {
+            cutsceneManager.cutsceneID = "0";
+            IsGameLoaded = true;
             return;
         }
 
@@ -218,27 +220,55 @@ public class SaveLoader : MonoBehaviour
             }
         }
     }
-    
+
     void LoadShortcutData()
     {
         ShortcutSlotsData Data = SaveSystem.LoadShortcutData();
         if (Data == null) return;
 
-        for(int i = 0; i <= Data.shortcutData.Count-1; i++)
+        for (int i = 0; i < Data.shortcutData.Count; i++)
         {
-            if (Data.shortcutData[i].inventoryItem.ItemName != "")
+            var saved = Data.shortcutData[i];
+            if (string.IsNullOrEmpty(saved.inventoryItem.ItemName))
+                continue;
+
+            LootEntry result = SearchItem(saved.inventoryItem.ItemName);
+            if (result == null)
             {
-                LootEntry result = SearchItem(Data.shortcutData[i].inventoryItem.ItemName);
-                ShortcutParent.GetChild(i).GetComponent<ShortCutSlot>().SetOnClick(new ItemInstance(result.loot.GetComponent<ItemPickUp>().itemData
-                    , Data.shortcutData[i].inventoryItem.Quantity), null);
+                Debug.LogWarning($"Saved shortcut item not found in database: {saved.inventoryItem.ItemName}");
+                continue;
+            }
+
+            // Find the child slot that has the matching SlotIndex
+            Transform targetSlotTransform = null;
+            for (int c = 0; c < ShortcutParent.childCount; c++)
+            {
+                var child = ShortcutParent.GetChild(c);
+                var slotComp = child.GetComponent<ShortCutSlot>();
+                if (slotComp != null && slotComp.SlotIndex == saved.SlotIndex)
+                {
+                    targetSlotTransform = child;
+                    break;
+                }
+            }
+
+            if (targetSlotTransform != null)
+            {
+                var slotComp = targetSlotTransform.GetComponent<ShortCutSlot>();
+                slotComp.SetOnClick(new ItemInstance(result.loot.GetComponent<ItemPickUp>().itemData, saved.inventoryItem.Quantity), null);
+            }
+            else
+            {
+                Debug.LogWarning($"No shortcut slot found for saved SlotIndex {saved.SlotIndex}");
             }
         }
     }
 
+
     #region Save
     public void Save()
     {
-        SaveSystem.Save(SquadMover, EventParent, hungerManager, SquadParent,playerInventory,ShortcutParent);
+        SaveSystem.Save(SquadMover, EventParent, hungerManager, SquadParent, playerInventory, ShortcutParent);
     }
     #endregion
 }

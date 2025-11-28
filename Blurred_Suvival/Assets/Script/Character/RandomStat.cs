@@ -8,7 +8,8 @@ public class RandomStat : MonoBehaviour
 
     public void GenerateRandomStat(int Level)
     {
-        characterStats.Level=Level;
+        characterStats.Level = Level;
+        characterStats.CalculateXPToLevelUp();
         // Give stat points equal to level - 1
         characterStats.statPoints = Level - 1;
 

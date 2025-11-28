@@ -19,4 +19,5 @@ MonoBehaviour:
   MaxQuantity: 20
   lootPrefab: {fileID: 4545915707345495668, guid: d9b1f73c47fe9414ead6497b124cbe39, type: 3}
   useSound: {fileID: 8300000, guid: eb392b1d030415d4c8c81f719969a64a, type: 3}
+  Description: Can be used to craft health items.
   healthRestoreAmount: 0

@@ -66,7 +66,7 @@ public class CutsceneManager : MonoBehaviour
         {
             this.EventAfterCutScene = EventAfterCutScene;
         }
-
+        
         Cutscene cutscene = cutsceneDatabase.GetCutsceneByID(cutsceneID);
         if (cutscene != null)
             StartCoroutine(PlayCutscene(cutscene.entries));

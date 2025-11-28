@@ -30,6 +30,13 @@ public class TileData : MonoBehaviour
         occupant = character;
     }
 
+    public void ShowSelectedColor()
+    {
+        // ✅ Display green tint for selected tile
+        sr.color = new Color(0.3f, 1f, 0.3f, 0.7f); // light green with transparency
+    }
+
+
     public void ClearOccupant()
     {
         occupant = null;
@@ -60,7 +67,7 @@ public class TileData : MonoBehaviour
 
     public bool HasLoot => lootOnTile.Count > 0;
 
-    public void PlaceLoot(GameObject loot,Transform parent=null)
+    public void PlaceLoot(GameObject loot, Transform parent = null)
     {
         lootOnTile.Add(loot);
         if (parent == null)

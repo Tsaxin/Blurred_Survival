@@ -15,3 +15,12 @@
 -allow crafting with shortcut items (Updated)
 -Weapons are stackable in shortcutslots (updated)
 -clicking on shortcutslot weapon creates copy in inventory as well. (updated)
+-Shortcut doesnot generate tips
+-Loot Dropper Logic
+-Loot Dropper Prefab Count
+-Make Shortcut Slot draggable
+-Make Music Better
+-If tile out of range. hides the button. which should not be the case
+-After character joins the squad the xp is som -200k value.
+-if you managed to kill the enemy and press the tile quick enough. it will kill the enemy and move the character to that place.
+-Have to remind

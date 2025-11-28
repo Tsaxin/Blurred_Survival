@@ -14,7 +14,7 @@ public static class SaveSystem
 
     // === MASTER SAVE ===
     public static void Save(Transform player, Transform eventParent, HungerManager hungerManager, Transform PlayerParent
-                ,PlayerInventory playerInventory,Transform ShortcutParent)
+                , PlayerInventory playerInventory, Transform ShortcutParent)
     {
         SavePlayerLocation(player);
         SaveEventData(eventParent);
@@ -54,13 +54,13 @@ public static class SaveSystem
     public static void SaveInventoryData(PlayerInventory playerInventory)
     {
         InventoryData data = new InventoryData(playerInventory);
-        SaveGeneric(data,InventoryDataFile);
+        SaveGeneric(data, InventoryDataFile);
     }
 
     public static void SaveShortCutData(Transform ShortCutParent)
     {
         ShortcutSlotsData data = new ShortcutSlotsData(ShortCutParent);
-        SaveGeneric(data,ShortcutFilePath);
+        SaveGeneric(data, ShortcutFilePath);
     }
 
     private static void SaveGeneric<T>(T data, string filePath)
@@ -192,7 +192,7 @@ public class HungerData
 [System.Serializable]
 public class PlayerData
 {
-    public List<CharacterData> characterData=new List<CharacterData>();
+    public List<CharacterData> characterData = new List<CharacterData>();
 
     public PlayerData(Transform parent)
     {
@@ -309,7 +309,7 @@ public class InventoryItem
         Quantity = itemInstance.quantity;
     }
 
-    public InventoryItem(string Name,int quantity)
+    public InventoryItem(string Name, int quantity)
     {
         this.ItemName = Name;
         this.Quantity = quantity;
@@ -323,22 +323,20 @@ public class ShortcutSlotsData
 
     public ShortcutSlotsData(Transform Parent)
     {
-        int index = 0;
         foreach (Transform child in Parent)
         {
-            if (child.GetComponent<ShortCutSlot>() != null)
-            {
-                ShortCutSlot shortCutSlot = child.GetComponent<ShortCutSlot>();
-                if(shortCutSlot.AssignedItem!=null)
-                    shortcutData.Add(new ShortcutData(index,new InventoryItem(shortCutSlot.AssignedItem)));
-                else
-                {
-                    shortcutData.Add(new ShortcutData(index,new InventoryItem("",0)));
-                }
-                index++;
-            }
+            ShortCutSlot shortCutSlot = child.GetComponent<ShortCutSlot>();
+            if (shortCutSlot == null) continue;
+
+            int slotIndex = shortCutSlot.SlotIndex;
+
+            if (shortCutSlot.AssignedItem != null)
+                shortcutData.Add(new ShortcutData(slotIndex, new InventoryItem(shortCutSlot.AssignedItem)));
+            else
+                shortcutData.Add(new ShortcutData(slotIndex, new InventoryItem("", 0)));
         }
     }
+
 }
 
 [System.Serializable]
@@ -347,7 +345,8 @@ public class ShortcutData
     public int SlotIndex;
     public InventoryItem inventoryItem;
 
-    public ShortcutData(int Index, InventoryItem inventoryItem){
+    public ShortcutData(int Index, InventoryItem inventoryItem)
+    {
         this.SlotIndex = Index;
         this.inventoryItem = inventoryItem;
     }

@@ -208,7 +208,7 @@ public abstract class ZombieAIBase : MonoBehaviour
             Vector2Int pos = GetTileIndices(tile.transform);
             int cheb = Mathf.Max(Mathf.Abs(pos.x - playerX), Mathf.Abs(pos.y - playerY));
             int man = Mathf.Abs(pos.x - playerX) + Mathf.Abs(pos.y - playerY);
-            float sqrEuc = (pos - playerIndex).sqrMagnitude; // use squared euclid for tie-breaker
+            float sqrEuc = (pos - playerIndex).sqrMagnitude;
 
             if (cheb < bestChebyshev)
             {

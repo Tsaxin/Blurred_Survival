@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class ShortCutSlot : MonoBehaviour
 {
+    [Tooltip("Stable ID for this shortcut slot (set in inspector). Used for save/load.")]
+    public int SlotIndex = 0;
+
     public Image SpriteIcon;
     public TextMeshProUGUI Quantity;
 
@@ -13,7 +16,7 @@ public class ShortCutSlot : MonoBehaviour
     // Holds the currently assigned item
     public ItemInstance AssignedItem { get; private set; }
 
-    public void SetDetail(ItemInstance item=null)
+    public void SetDetail(ItemInstance item = null)
     {
         if (item != null)
         {
@@ -23,6 +26,13 @@ public class ShortCutSlot : MonoBehaviour
         SpriteIcon.gameObject.SetActive(true);
         Quantity.text = item.quantity.ToString();
         QuantityHolder.gameObject.SetActive(StackableItem.IsStackable(item.data.itemType));
+
+        gameObject.AddComponent<TooltipTrigger>();
+        TooltipTrigger trigger =GetComponent<TooltipTrigger>();
+        trigger.ToolTipShowSecond = 0;
+        string name = item.data.itemName;
+        string desc = TooltipUI.Instance.GenerateTooltipText(item);
+        trigger.Initialize(name, desc);
     }
 
     public void SetOnClick(ItemInstance clickedItem, CharacterController selectedUnit)
@@ -53,5 +63,6 @@ public class ShortCutSlot : MonoBehaviour
         GetComponent<Button>().onClick.RemoveAllListeners();
         QuantityHolder.gameObject.SetActive(false);
         SpriteIcon.gameObject.SetActive(false);
+        Destroy(GetComponent<TooltipTrigger>());
     }
 }

@@ -758,11 +758,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootTable:
   - loot: {fileID: 4545915707345495668, guid: 9eb269c7499c1b04ca1ae7a745625518, type: 3}
-    dropChance: 0.25
+    dropChance: 0.2
   - loot: {fileID: 4545915707345495668, guid: 6082a785747429e41b63c1f06c6b7cec, type: 3}
-    dropChance: 0.25
+    dropChance: 0.2
   - loot: {fileID: 4545915707345495668, guid: d9b1f73c47fe9414ead6497b124cbe39, type: 3}
-    dropChance: 0.25
+    dropChance: 0.2
   - loot: {fileID: 4545915707345495668, guid: ebbad636255d4794abd3ab19a4069b1b, type: 3}
     dropChance: 0.15
   - loot: {fileID: 4545915707345495668, guid: 72a94a5254a2f6845a6a941e8697f06d, type: 3}
@@ -775,6 +775,7 @@ MonoBehaviour:
     dropChance: 0.03
   - loot: {fileID: 4545915707345495668, guid: 92e03f5d79d8a064fb1d0edb2bfc2f53, type: 3}
     dropChance: 0.02
+  lootCount: 1
 --- !u!95 &4624903711036126842
 Animator:
   serializedVersion: 7

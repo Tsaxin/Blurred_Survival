@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -28,9 +29,7 @@ public abstract class ItemData : ScriptableObject
     public int MaxQuantity = 20;
     public GameObject lootPrefab;
     public AudioClip useSound;
-
-    [TextArea]
-    TextMeshProUGUI Description;
+    public String Description;
 }
 
 [System.Serializable]

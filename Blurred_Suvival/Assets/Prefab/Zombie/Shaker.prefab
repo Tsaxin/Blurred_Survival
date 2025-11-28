@@ -625,22 +625,27 @@ MonoBehaviour:
   lootTable:
   - loot: {fileID: 4545915707345495668, guid: 63d64fe196995dd4d99c3dd7c1e6ee0a, type: 3}
     dropChance: 0.25
-  - loot: {fileID: 4545915707345495668, guid: ebbad636255d4794abd3ab19a4069b1b, type: 3}
-    dropChance: 0.25
-  - loot: {fileID: 4545915707345495668, guid: 7821f171f0475ba4187c624bbd7439d9, type: 3}
-    dropChance: 0.01
+  - loot: {fileID: 4545915707345495668, guid: d615b30dce5328f4a93e5f322e30d437, type: 3}
+    dropChance: 0.1
   - loot: {fileID: 4545915707345495668, guid: 9eb269c7499c1b04ca1ae7a745625518, type: 3}
     dropChance: 0.2
   - loot: {fileID: 4545915707345495668, guid: d9b1f73c47fe9414ead6497b124cbe39, type: 3}
-    dropChance: 0.25
+    dropChance: 0.05
+  - loot: {fileID: 4545915707345495668, guid: 0be33655334a1c14587875361cb403b8, type: 3}
+    dropChance: 0.05
+  - loot: {fileID: 4545915707345495668, guid: 92e03f5d79d8a064fb1d0edb2bfc2f53, type: 3}
+    dropChance: 0.05
   - loot: {fileID: 4545915707345495668, guid: fd855fcd2d81a9a4e902ee4b9b228ad5, type: 3}
     dropChance: 0.01
   - loot: {fileID: 4545915707345495668, guid: 3f3ef55251f1da74087d7eecaf510859, type: 3}
     dropChance: 0.01
   - loot: {fileID: 4545915707345495668, guid: 3a9e2df856db5c54296bc922cdbadfe3, type: 3}
     dropChance: 0.01
-  - loot: {fileID: 4545915707345495668, guid: 92e03f5d79d8a064fb1d0edb2bfc2f53, type: 3}
+  - loot: {fileID: 4545915707345495668, guid: 7821f171f0475ba4187c624bbd7439d9, type: 3}
     dropChance: 0.01
+  - loot: {fileID: 4545915707345495668, guid: 7821f171f0475ba4187c624bbd7439d9, type: 3}
+    dropChance: 0.01
+  lootCount: 1
 --- !u!114 &1032419949792054069
 MonoBehaviour:
   m_ObjectHideFlags: 0

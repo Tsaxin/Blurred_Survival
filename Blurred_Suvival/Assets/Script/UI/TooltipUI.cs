@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TooltipUI : MonoBehaviour
@@ -31,7 +32,7 @@ public class TooltipUI : MonoBehaviour
         float screenHeight = Screen.height;
 
         // Optional offset so tooltip is not exactly on top of the cursor
-        Vector2 offset = new Vector2(40f, -40f); // 20px right, 20px below
+        Vector2 offset = new Vector2(20f, -20f); // 20px right, 20px below
         Vector2 targetPos = mousePos;
 
         if (targetPos.y - HolderSize.y + offset.y <= 0) // would cut off bottom
@@ -74,28 +75,7 @@ public class TooltipUI : MonoBehaviour
     public string GenerateTooltipText(ItemInstance itemInstance)
     {
         var item = itemInstance.data;
-        string desc = "";
-
-        switch (item.itemType)
-        {
-            case ItemType.Weapon:
-            case ItemType.Shoe:
-            case ItemType.Vest:
-            case ItemType.Trouser:
-            case ItemType.Helmet:
-                desc += BuildStatDescription((WeaponData)item);
-                break;
-
-            case ItemType.Consumable:
-                var c = (ConsumableData)item;
-                desc += $"<b>Heals:</b> {c.healthRestoreAmount} HP\n";
-                break;
-        }
-
-        if (itemInstance.quantity > 1)
-            desc += $"\n<b>Quantity:</b> {itemInstance.quantity}";
-
-        return desc.TrimEnd();
+        return GenerateTooltipText(item);
     }
 
     public string GenerateTooltipText(ItemData item)
@@ -115,8 +95,10 @@ public class TooltipUI : MonoBehaviour
             case ItemType.Consumable:
                 var c = (ConsumableData)item;
                 desc += $"<b>Heals:</b> {c.healthRestoreAmount} HP\n";
+                desc += item.Description;
                 break;
         }
+        desc += item.Description;
         return desc.TrimEnd();
     }
 

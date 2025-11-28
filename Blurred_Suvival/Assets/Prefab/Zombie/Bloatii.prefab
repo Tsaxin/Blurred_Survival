@@ -549,14 +549,14 @@ MonoBehaviour:
   MainMaxHealth: 10
   MainAttack: 2
   MainRange: 1
-  MainDefense: 25
+  MainDefense: 50
   MainAttackCount: 1
   MainCriticalChance: 1
   MainEvasionChance: 1
   attack: 0
   range: 0
   maxHealth: 10
-  Defense: 0
+  Defense: 50
   AttackCount: 1
   CriticalChance: 0
   EvasionChance: 0
@@ -626,12 +626,12 @@ MonoBehaviour:
   lootTable:
   - loot: {fileID: 4545915707345495668, guid: f3d79bd8e30d5524a8aa88d7b8dfeb25, type: 3}
     dropChance: 0.25
-  - loot: {fileID: 4545915707345495668, guid: d615b30dce5328f4a93e5f322e30d437, type: 3}
-    dropChance: 0.15
   - loot: {fileID: 4545915707345495668, guid: 9eb269c7499c1b04ca1ae7a745625518, type: 3}
-    dropChance: 0.2
+    dropChance: 0.1
+  - loot: {fileID: 4545915707345495668, guid: d615b30dce5328f4a93e5f322e30d437, type: 3}
+    dropChance: 0.1
   - loot: {fileID: 4545915707345495668, guid: d9b1f73c47fe9414ead6497b124cbe39, type: 3}
-    dropChance: 0.25
+    dropChance: 0.1
   - loot: {fileID: 4545915707345495668, guid: 728031350833c014ba00d35f1be396b5, type: 3}
     dropChance: 0.02
   - loot: {fileID: 4545915707345495668, guid: 26ae5b2078ca0f546a6dd08046bb18cb, type: 3}
@@ -641,7 +641,8 @@ MonoBehaviour:
   - loot: {fileID: 4545915707345495668, guid: e6cc25a1dc9dee04fba85e5041a9dcfa, type: 3}
     dropChance: 0.02
   - loot: {fileID: 4545915707345495668, guid: 92e03f5d79d8a064fb1d0edb2bfc2f53, type: 3}
-    dropChance: 0.02
+    dropChance: 0.03
+  lootCount: 1
 --- !u!114 &-922957679014844389
 MonoBehaviour:
   m_ObjectHideFlags: 0

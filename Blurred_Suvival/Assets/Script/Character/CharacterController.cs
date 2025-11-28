@@ -14,9 +14,6 @@ public class CharacterController : MonoBehaviour
 
     private bool isMoving = false;
     public bool hasMoved = false;
-
-    private List<TileData> highlightedTiles = new List<TileData>();
-
     private GearEquipper weaponEquipper;
 
     private void Start()
@@ -28,8 +25,8 @@ public class CharacterController : MonoBehaviour
             originalColor = sr.color;
 
         weaponEquipper = GetComponent<GearEquipper>();
-        if (weaponEquipper == null)
-            Debug.LogWarning("⚠️ No WeaponType found on character.");
+        //if (weaponEquipper == null)
+        //Debug.LogWarning("⚠️ No WeaponType found on character.");
     }
 
     void OnDisable()
@@ -37,7 +34,7 @@ public class CharacterController : MonoBehaviour
         ResetEverythingOnRetreat();
     }
 
-    public void OnClicked(bool Manual=true)
+    public void OnClicked(bool Manual = true)
     {
         if (UIBlocker.IsPointerOverUI() && Manual)
             return; // Don't process clicks if the pointer is over UI
@@ -165,14 +162,13 @@ public class CharacterController : MonoBehaviour
 
                         if (tileDistance <= effectiveRange)
                         {
-                            Debug.Log("🏹 Enemy in **ranged** range! Performing ranged attack.");
                             PerformAttack(clicked);
                             Deselect();
                             return;
                         }
                         else
                         {
-                            Debug.Log("❌ Enemy is out of range.");
+                            //Debug.Log("❌ Enemy is out of range.");
                         }
 
                     }
@@ -191,7 +187,7 @@ public class CharacterController : MonoBehaviour
 
     private void Update()
     {
-        if (selectedCharacter != this || isMoving)
+        if (selectedCharacter != this || isMoving || isAttacking)
             return;
 
         if (selectionJustHappened)
@@ -256,9 +252,17 @@ public class CharacterController : MonoBehaviour
     {
         TileManager.Instance.ClearHighlightedTiles(); // 👈 clear globally
 
-        if (TileManager.Instance == null || GetComponent<Tile>().CurrentTileData == null) return;
+        if (TileManager.Instance == null || GetComponent<Tile>().CurrentTileData == null)
+            return;
 
-        Vector2Int currentPos = GetTileIndices(GetComponent<Tile>().CurrentTileData.transform);
+        // ✅ Highlight the tile underneath the current character in GREEN
+        TileData currentTile = GetComponent<Tile>().CurrentTileData;
+        if (currentTile != null)
+        {
+            TileManager.Instance.HighlightTile(currentTile, isRange: false, isSelectedTile: true);
+        }
+
+        Vector2Int currentPos = GetTileIndices(currentTile.transform);
         int moveRange = GetComponent<CharacterStats>()?.MovementRange ?? 1;
 
         for (int dy = -moveRange; dy <= moveRange; dy++)
@@ -289,6 +293,7 @@ public class CharacterController : MonoBehaviour
             ShowRangedAttackTiles(currentPos, moveRange, weaponEquipper.equippedWeapon.rangeBoost);
         }
     }
+
 
     void ShowRangedAttackTiles(Vector2Int origin, int moveRange, float rangeBoost)
     {
@@ -325,14 +330,12 @@ public class CharacterController : MonoBehaviour
 
     void TryMoveToTile(TileData targetTile)
     {
-        SetButtonStatus(false);
-
         if (hasMoved || isMoving || TileManager.Instance == null || GetComponent<Tile>().CurrentTileData == null)
             return;
 
         if (targetTile.IsOccupied)
         {
-            Debug.Log("❌ Tile occupied.");
+            //Debug.Log("❌ Tile occupied.");
             return;
         }
 
@@ -341,7 +344,7 @@ public class CharacterController : MonoBehaviour
 
         if (targetPos == new Vector2Int(-1, -1))
         {
-            Debug.LogError("❌ Invalid target tile.");
+            //Debug.LogError("❌ Invalid target tile.");
             return;
         }
 
@@ -351,11 +354,11 @@ public class CharacterController : MonoBehaviour
 
         if (Mathf.Max(dx, dy) > range)
         {
-            Debug.Log("❌ Tile out of range.");
+            //Debug.Log("❌ Tile out of range.");
             return;
         }
 
-
+        SetButtonStatus(false);
         StartCoroutine(MoveToTile(targetTile, targetPos));
     }
 
@@ -435,7 +438,6 @@ public class CharacterController : MonoBehaviour
         // Only allow move+attack if enemy is within movement range (including adjacent)
         if (distToEnemy > moveRange)
         {
-            Debug.Log("❌ Enemy is out of movement range. Cannot move + attack.");
             return;
         }
 
@@ -479,7 +481,7 @@ public class CharacterController : MonoBehaviour
         }
         else
         {
-            Debug.Log("❌ Cannot reach a tile adjacent to enemy within movement range.");
+            //Debug.Log("❌ Cannot reach a tile adjacent to enemy within movement range.");
         }
     }
 
@@ -535,7 +537,7 @@ public class CharacterController : MonoBehaviour
     {
         if (_targetStats == null || _targetStats.IsDead)
         {
-            Debug.Log("❌ No valid target to attack.");
+            //Debug.Log("❌ No valid target to attack.");
             FinishedTurn();
             return;
         }
@@ -572,7 +574,6 @@ public class CharacterController : MonoBehaviour
 
         if (_remainingAttacks > 0 && _targetStats != null && !_targetStats.IsDead)
         {
-            Debug.Log($"{name} is chaining another attack. {_remainingAttacks} left.");
             PlayAttackAnimation(); // replay animation
         }
         else

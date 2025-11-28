@@ -39,16 +39,28 @@ public class TileManager : MonoBehaviour
 
     private List<TileData> highlightedTiles = new List<TileData>();
 
-    public void HighlightTile(TileData tile, bool isRange = false)
+    public void HighlightTile(TileData tile, bool isRange = false, bool isSelectedTile = false)
     {
-        if (isRange)
+        if (tile == null) return;
+
+        if (isSelectedTile)
+        {
+            // ✅ Green highlight for selected character's tile
+            tile.ShowSelectedColor();
+        }
+        else if (isRange)
+        {
             tile.ShowRangeColor();
+        }
         else
+        {
             tile.ShowAsPossibleMove();
+        }
 
         if (!highlightedTiles.Contains(tile))
             highlightedTiles.Add(tile);
     }
+
 
     public void ClearHighlightedTiles()
     {

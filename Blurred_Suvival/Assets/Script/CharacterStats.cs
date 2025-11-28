@@ -321,7 +321,7 @@ public class CharacterStats : MonoBehaviour
     private void LevelUp()
     {
         Level++;
-        xpToLevelUp = 20 + (Level - 1) * 10;
+        CalculateXPToLevelUp();
 
         // Instead of auto-increasing stats, give 1 point to spend
         statPoints++;
@@ -379,14 +379,18 @@ public class CharacterStats : MonoBehaviour
             UpdateHealthBarVisibility();
         }
         xpPerKill = xpPerKill + (Level - 1) * 5;
-        xpToLevelUp = 20 + (Level - 1) * 10;
-
-        if (level <= 1) xpToLevelUp = 20;
-            xpToLevelUp = Mathf.RoundToInt(20 + 3 * Mathf.Pow(level - 1, 1.25f));
 
         levelText.text = $"Lv {Level}";
 
         Debug.Log($"{name} scaled to level {Level}: HP {maxHealth}, ATK {attack}, DEF {Defense}");
+    }
+
+    public void CalculateXPToLevelUp()
+    {
+        if (Level <= 1)
+            xpToLevelUp = 20;
+        else
+            xpToLevelUp=Mathf.RoundToInt(20 + 3 * Mathf.Pow(Level - 1, 1.25f));
     }
 
     public void RecalculateStats()
